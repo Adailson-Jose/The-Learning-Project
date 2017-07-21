@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">The Learning Project</string>
+    <string name="usuario">Usuário</string>
+    <string name="nome">Nome</string>
+    <string name="senha">Senha</string>
+    <string name="login">Login</string>
+    <string name="logout">Logout</string>
+    <string name="email">E-mail</string>
+    <string name="cadastrar">Cadastrar novo Usuário</string>
+</resources>
