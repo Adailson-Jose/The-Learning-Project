@@ -8,4 +8,9 @@ public class UsuarioException extends Exception {
     public UsuarioException(String erro){
         super(erro);
     }
+
+    public UsuarioException(String erro, Throwable causa){
+        super(erro,causa);
+    }
+
 }

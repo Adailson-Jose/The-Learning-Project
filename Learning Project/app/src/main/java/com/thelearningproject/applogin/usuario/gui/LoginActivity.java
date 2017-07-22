@@ -13,6 +13,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.regex.Pattern;
 
 /**
  * Created by Ebony Marques on 17/07/2017.
@@ -26,7 +29,6 @@ public class LoginActivity extends Activity {
     private EditText tSenha;
     private Button btLogin;
     private Button btCadastro;
-    private TextView alerta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +41,12 @@ public class LoginActivity extends Activity {
         tSenha = (EditText) findViewById(R.id.tSenha);
         btLogin = (Button) findViewById(R.id.btLogin);
         btCadastro = (Button) findViewById(R.id.cadastroID);
-        alerta = (TextView) findViewById(R.id.AvisoID);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-
-                String email = tLogin.getText().toString();
-                String senha = tSenha.getText().toString();
-
-                try{
-                    UsuarioServices negocio = UsuarioServices.getsInstance(getBaseContext());
-                    Usuario user = negocio.validaLogin(email, senha);
-
-                    if (user != null) {
-
-                        session.iniciaSessao(user.getNome());
-
-                        Intent principal = new Intent(LoginActivity.this, MainActivity.class);
-                        principal.addFlags(principal.FLAG_ACTIVITY_CLEAR_TOP);
-                        principal.setFlags(principal.FLAG_ACTIVITY_NEW_TASK);
-
-                        startActivity(principal);
-                        finish();
-                    } else {
-                        alerta.setText("Usuario ou senha incorreto");
-                    }
-                }catch (UsuarioException e){
-                    alerta.setText(e.getMessage());
-                }
+                logar(v);
             }
         });
 
@@ -79,6 +57,58 @@ public class LoginActivity extends Activity {
                 startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
             }
         });
+
+    }
+    private void logar(View view){
+        Usuario usuario = new Usuario();
+        String email = tLogin.getText().toString();
+        String senha = tSenha.getText().toString();
+
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+
+        try{
+            if(validaLogin(usuario)){
+                UsuarioServices negocio = UsuarioServices.getsInstance(getBaseContext());
+                Usuario user = negocio.login(usuario);
+
+                if (user != null) {
+
+                    session.iniciaSessao(user.getNome());
+
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    finish();
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Usuario ou senha incorretos", Toast.LENGTH_LONG).show();
+
+                }
+            }
+        }catch (UsuarioException e){
+            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private boolean validaLogin(Usuario usuario){
+        Boolean validacao = true;
+        StringBuilder erro = new StringBuilder();
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !Pattern.matches("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$",usuario.getEmail().toUpperCase())) {
+            erro.append("E-mail inválido\n");
+            tLogin.setError("E-mail inválido");
+            validacao = false;
+
+        }
+        if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
+            erro.append("Senha inválida\n");
+            tSenha.setError("Senha inválida");
+            validacao = false;
+        }
+        String resultado = (erro.toString().trim());
+        if (resultado!= "") {
+            Toast.makeText(LoginActivity.this, resultado, Toast.LENGTH_LONG).show();
+        }
+        return validacao;
 
     }
 

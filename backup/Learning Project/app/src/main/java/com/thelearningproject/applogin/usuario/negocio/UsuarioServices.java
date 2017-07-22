@@ -3,9 +3,8 @@ package com.thelearningproject.applogin.usuario.negocio;
 import android.content.Context;
 
 import com.thelearningproject.applogin.infra.UsuarioException;
-import com.thelearningproject.applogin.usuario.persistencia.Banco;
-import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.persistencia.UsuarioDAO;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -19,12 +18,10 @@ import java.util.regex.Pattern;
 public class UsuarioServices {
 
     private static UsuarioServices sInstance;
-    private UsuarioDAO dao2;
-    private Banco banco;
+    private UsuarioDAO banco;
 
     public UsuarioServices(Context context){
-        this.banco = Banco.getInstance(context);
-        this.dao2 = UsuarioDAO.getInstance(context);
+        this.banco = UsuarioDAO.getInstance(context);
     }
 
     public static UsuarioServices getsInstance(Context context){
@@ -34,28 +31,38 @@ public class UsuarioServices {
         return sInstance;
     }
 
-
-
-
-    private void verificaEmailExistente(String email) throws UsuarioException{
-        if (dao2.consultaUsuarioEmail(email)){
-            throw new UsuarioException("E-mail já cadastrado");
+    private void verificarDados(Usuario usuario) throws UsuarioException{
+        StringBuilder erro = new StringBuilder();
+        if (usuario == null) {
+            erro.append("Usuário não pode ser vazio\n");
         }
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !Pattern.matches("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$",usuario.getEmail().toUpperCase())) {
+            erro.append("Email inválido\n");
+        }
+        if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
+            erro.append("Senha inválida\n");
+        }
+        if (erro.length()>0) {
+            throw new UsuarioException(erro.toString().trim());
+        }
+
     }
 
-    public Usuario login(Usuario usuario) throws UsuarioException {
-        usuario.setEmail(usuario.getEmail());
-        usuario.setSenha(usuario.getSenha());
-        usuario = dao2.retornaUsuario(usuario.getEmail(), returnSenha(usuario.getSenha()));
+    public Usuario validaLogin(String email, String senha) throws UsuarioException {
+        Usuario usuario = new Usuario();
+        usuario.setEmail(email);
+        usuario.setSenha(senha);
+        verificarDados(usuario);
+        usuario = banco.retornaUsuario(email, returnSenha(senha));
         return usuario;
     }
 
 
-
-    public void inserirUsuario(Usuario usuario) throws UsuarioException {
+    public Usuario inserirUsuario(Usuario usuario) throws UsuarioException{
+        verificarDados(usuario);
         usuario.setSenha(returnSenha(usuario.getSenha()));
-        verificaEmailExistente(usuario.getEmail());
-        dao2.inserir(usuario);
+        banco.inserir(usuario);
+        return usuario;
     }
 
     private String returnSenha(String senha){
