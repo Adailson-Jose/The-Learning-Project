@@ -27,7 +27,7 @@ public class UsuarioServices {
         this.dao2 = UsuarioDAO.getInstance(context);
     }
 
-    public static UsuarioServices getsInstance(Context context){
+    public static UsuarioServices getInstance(Context context){
         if(sInstance == null){
             sInstance = new UsuarioServices(context);
         }

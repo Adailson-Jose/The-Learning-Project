@@ -15,6 +15,7 @@ import com.thelearningproject.applogin.infra.UsuarioException;
 import com.thelearningproject.applogin.usuario.negocio.SessionController;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CadastroActivity extends Activity {
@@ -24,6 +25,7 @@ public class CadastroActivity extends Activity {
     private EditText entradaNome;
     private EditText entradaEmail;
     private EditText entradaSenha;
+    private Pattern pattern;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class CadastroActivity extends Activity {
         entradaEmail = (EditText) findViewById(R.id.emailEntradaID);
         entradaSenha = (EditText) findViewById(R.id.senhaEntradaID);
 
+
         btCadastro.setOnClickListener( new View.OnClickListener(){
 
             @Override
@@ -49,7 +52,7 @@ public class CadastroActivity extends Activity {
 
     }
     private void cadastrar(View view){
-        UsuarioServices negocio = UsuarioServices.getsInstance(getBaseContext());
+        UsuarioServices negocio = UsuarioServices.getInstance(getBaseContext());
         String nome = entradaNome.getText().toString();
         String email = entradaEmail.getText().toString();
         String senha = entradaSenha.getText().toString();
@@ -71,25 +74,21 @@ public class CadastroActivity extends Activity {
             }
 
         }catch(UsuarioException e){
-            Toast.makeText(CadastroActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-            entradaEmail.setError("E-mail já cadastrado");
+            entradaEmail.setError("Email já cadastrado");
         }
     }
     private Boolean validaCadastro(Usuario usuario){
         Boolean validacao=true;
         StringBuilder erro = new StringBuilder();
         if (usuario.getNome() == null || usuario.getNome().trim().length() == 0) {
-            erro.append("Nome inválido\n");
             entradaNome.setError("Nome inválido");
             validacao = false;
         }
-        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !Pattern.matches("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$",usuario.getEmail().toUpperCase())) {
-            erro.append("E-mail inválido\n");
-            entradaEmail.setError("E-mail inválido");
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !aplicandoPattern(usuario.getEmail().toUpperCase())) {
+            entradaEmail.setError("Email inválido");
             validacao = false;
         }
         if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
-            erro.append("Senha inválida\n");
             entradaSenha.setError("Senha inválida");
             validacao = false;
         }
@@ -98,6 +97,14 @@ public class CadastroActivity extends Activity {
             Toast.makeText(CadastroActivity.this, resultado, Toast.LENGTH_LONG).show();
         }
         return validacao;
+
+    }
+    private Boolean aplicandoPattern (String email){
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$");
+        Matcher m = pattern.matcher(email);
+        Boolean resultado = m.matches();
+
+        return  resultado;
 
     }
 }
