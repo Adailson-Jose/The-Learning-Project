@@ -9,7 +9,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
-    private Boolean ativado;
+    private Boolean desativado;
 
     public Usuario() {
     }
@@ -38,12 +38,12 @@ public class Usuario {
         return senha;
     }
 
-    public Boolean getAtivado() {
-        return ativado;
+    public Boolean getDesativado() {
+        return desativado;
     }
 
-    public void setAtivado(Boolean ativado) {
-        this.ativado = ativado;
+    public void setDesativado(Boolean desativado) {
+        this.desativado = desativado;
     }
 
     public void setSenha(String senha) {

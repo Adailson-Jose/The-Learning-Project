@@ -83,7 +83,7 @@ public class UsuarioDAO {
 
     }
     void deletaUsuario(Usuario usuario){
-        usuario.setAtivado(false);
+        usuario.setDesativado(false);
         alterarUsuario(usuario);
 
 
@@ -116,7 +116,7 @@ public class UsuarioDAO {
         values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
-        values.put(DESATIVADO, usuario.getAtivado());
+        values.put(DESATIVADO, usuario.getDesativado());
 
         db.update(TABELA, values, ID + " = ?",
                 new String[]{String.valueOf(usuario.getId())});
