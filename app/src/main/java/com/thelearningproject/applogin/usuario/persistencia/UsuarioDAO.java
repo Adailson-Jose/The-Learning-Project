@@ -83,7 +83,8 @@ public class UsuarioDAO {
 
     }
     void deletaUsuario(Usuario usuario){
-        alterarUsuario(usuario, 1);
+        usuario.setAtivado(false);
+        alterarUsuario(usuario);
 
 
     }
@@ -108,15 +109,14 @@ public class UsuarioDAO {
         return usuario;
 
     }
-    public void alterarUsuario(Usuario usuario, int i){
-        int desativado = i;
+    public void alterarUsuario(Usuario usuario){
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
-        values.put(DESATIVADO, desativado);
+        values.put(DESATIVADO, usuario.getAtivado());
 
         db.update(TABELA, values, ID + " = ?",
                 new String[]{String.valueOf(usuario.getId())});

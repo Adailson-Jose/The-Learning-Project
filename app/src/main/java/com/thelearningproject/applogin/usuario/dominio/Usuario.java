@@ -9,6 +9,7 @@ public class Usuario {
     private String nome;
     private String email;
     private String senha;
+    private Boolean ativado;
 
     public Usuario() {
     }
@@ -35,6 +36,14 @@ public class Usuario {
 
     public String getSenha() {
         return senha;
+    }
+
+    public Boolean getAtivado() {
+        return ativado;
+    }
+
+    public void setAtivado(Boolean ativado) {
+        this.ativado = ativado;
     }
 
     public void setSenha(String senha) {
