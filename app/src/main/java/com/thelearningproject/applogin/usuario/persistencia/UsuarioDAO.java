@@ -143,5 +143,4 @@ public class UsuarioDAO {
         return listaUsuarios;
     }
 
-
 }
