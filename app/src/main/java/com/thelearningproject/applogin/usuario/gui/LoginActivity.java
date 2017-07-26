@@ -1,9 +1,10 @@
 package com.thelearningproject.applogin.usuario.gui;
 
+import com.thelearningproject.applogin.infra.MainActivity;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;
-import com.thelearningproject.applogin.usuario.negocio.SessionController;
+import com.thelearningproject.applogin.infra.SessionController;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 import android.app.Activity;
@@ -12,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
@@ -70,12 +70,13 @@ public class LoginActivity extends Activity {
 
         try{
             if(validaLogin(usuario)){
-                UsuarioServices negocio = UsuarioServices.getInstance(getBaseContext());
+                UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
                 Usuario user = negocio.login(usuario);
 
                 if (user != null) {
-
-                    session.iniciaSessao(user.getNome());
+                    session.encerraSessao();
+                    session.defineSessao(user.getNome(), user.getEmail());
+                    session.iniciaSessao();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

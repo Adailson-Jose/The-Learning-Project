@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".usuario.gui.MainActivity"
+        <activity
+            android:name=".infra.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,6 +20,8 @@
         </activity>
         <activity android:name=".usuario.gui.LoginActivity" />
         <activity android:name=".usuario.gui.CadastroActivity" />
+        <activity android:name=".perfil.gui.TermosActivity" />
+        <activity android:name=".perfil.gui.HabilidadeActivity"></activity>
     </application>
 
 </manifest>

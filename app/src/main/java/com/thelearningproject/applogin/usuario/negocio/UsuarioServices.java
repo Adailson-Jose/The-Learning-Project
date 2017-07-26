@@ -9,7 +9,6 @@ import com.thelearningproject.applogin.usuario.persistencia.UsuarioDAO;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.regex.Pattern;
 
 
 /**
@@ -19,26 +18,23 @@ import java.util.regex.Pattern;
 public class UsuarioServices {
 
     private static UsuarioServices sInstance;
-    private UsuarioDAO dao2;
+    private UsuarioDAO persistencia;
     private Banco banco;
 
     public UsuarioServices(Context context){
         this.banco = Banco.getInstance(context);
-        this.dao2 = UsuarioDAO.getInstance(context);
+        this.persistencia = UsuarioDAO.getInstance(context);
     }
 
-    public static UsuarioServices getInstance(Context context){
+    public static UsuarioServices getInstancia(Context context){
         if(sInstance == null){
             sInstance = new UsuarioServices(context);
         }
         return sInstance;
     }
 
-
-
-
     private void verificaEmailExistente(String email) throws UsuarioException{
-        if (dao2.consultaUsuarioEmail(email)){
+        if (persistencia.consultaUsuarioEmail(email)){
             throw new UsuarioException("E-mail já cadastrado");
         }
     }
@@ -46,16 +42,14 @@ public class UsuarioServices {
     public Usuario login(Usuario usuario) throws UsuarioException {
         usuario.setEmail(usuario.getEmail());
         usuario.setSenha(usuario.getSenha());
-        usuario = dao2.retornaUsuario(usuario.getEmail(), returnSenha(usuario.getSenha()));
+        usuario = persistencia.retornaUsuario(usuario.getEmail(), returnSenha(usuario.getSenha()));
         return usuario;
     }
-
-
 
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(returnSenha(usuario.getSenha()));
         verificaEmailExistente(usuario.getEmail());
-        dao2.inserir(usuario);
+        persistencia.inserir(usuario);
     }
 
     private String returnSenha(String senha){
@@ -78,6 +72,12 @@ public class UsuarioServices {
         }
         String senha1 = hexString.toString();
         return senha1;
+    }
+
+    public Usuario retornaUsuario(String email) {
+        Usuario usuario = persistencia.retornaUsuarioPorEmail(email);
+
+        return usuario;
     }
 
 

@@ -6,5 +6,15 @@
     <string name="login">Login</string>
     <string name="logout">Logout</string>
     <string name="email">E-mail</string>
-    <string name="cadastrar">Cadastrar novo Usuário</string>
+    <string name="cadastrar">Criar conta</string>
+    <string name="texto">Somos uma plataforma de\n aprendizagem mútua.\n\n
+        Aqui, todos são mestres em alguma coisa. Você vai aprender o que\n precisa e ensinar o que sabe.\n\n
+        Vamos começar definindo\n as suas habilidades.</string>
+    <string name="continuar">Continuar</string>
+    <string name="descricao">Descrição</string>
+    <string name="habilidade">Habilidade</string>
+    <string name="dica1">Matemática, português, etc.</string>
+    <string name="dica2">Descreva essa habilidade.</string>
+    <string name="dica3">Onde estuda? O que cursar?</string>
+    <string name="descricaoperfil">Descrição</string>
 </resources>

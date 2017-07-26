@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.thelearningproject.applogin.perfil.gui.TermosActivity;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;
-import com.thelearningproject.applogin.usuario.negocio.SessionController;
+import com.thelearningproject.applogin.infra.SessionController;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 import java.util.regex.Matcher;
@@ -52,7 +52,7 @@ public class CadastroActivity extends Activity {
 
     }
     private void cadastrar(View view){
-        UsuarioServices negocio = UsuarioServices.getInstance(getBaseContext());
+        UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
         String nome = entradaNome.getText().toString();
         String email = entradaEmail.getText().toString();
         String senha = entradaSenha.getText().toString();
@@ -60,16 +60,17 @@ public class CadastroActivity extends Activity {
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSenha(senha);
+
         try {
             if(validaCadastro(usuario)){
                 negocio.inserirUsuario(usuario);
 
-                Intent intent = new Intent(CadastroActivity.this, MainActivity.class);
-                session.iniciaSessao(usuario.getNome());
+                Intent entidade = new Intent(CadastroActivity.this, TermosActivity.class);
+                session.defineSessao(usuario.getNome(), usuario.getEmail());
 
-                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                entidade.setFlags(entidade.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-                startActivity(intent);
+                startActivity(entidade);
                 finish();
             }
 

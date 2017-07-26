@@ -50,6 +50,20 @@ public class UsuarioDAO {
         return cursor.moveToFirst();
     }
 
+    public Usuario retornaUsuarioPorEmail(String email) {
+        String[] colunas = {ID, NOME, EMAIL};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, "email = ?", new String[] {email}, null, null, null);
+        Usuario usuario = null;
+
+        if (cursor.moveToFirst()) {
+            usuario = new Usuario();
+            usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+            usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
+            usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
+        }
+
+        return usuario;
+    }
 
     public Usuario retornaUsuario(String email,String senha) {
         String[] colunas = {ID, NOME, EMAIL, SENHA};
@@ -74,7 +88,7 @@ public class UsuarioDAO {
 
     }
     //diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
-    Usuario pesquisarUsuario(int codigo){
+    public Usuario pesquisarUsuario(int codigo){
 
         SQLiteDatabase db = banco.getReadableDatabase();
         Cursor cursor = db.query(TABELA, new String[]{ID, NOME,
