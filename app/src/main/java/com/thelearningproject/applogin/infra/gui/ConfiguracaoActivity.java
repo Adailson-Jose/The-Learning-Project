@@ -39,7 +39,7 @@ public class ConfiguracaoActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracao);
 
-        session = new SessionController(getApplicationContext());
+        session = SessionController.getInstance(this.getApplicationContext());
 
         alterarnome = (EditText) findViewById(R.id.nomeID);
         alteraremail = (EditText) findViewById(R.id.emailID);

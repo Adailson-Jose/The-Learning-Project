@@ -33,7 +33,7 @@ public class CadastroActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
-        session = new SessionController(getApplicationContext());
+        session = SessionController.getInstance(this.getApplicationContext());
 
         btCadastro = (Button) findViewById(R.id.botaoCadastroID);
         entradaNome = (EditText) findViewById(R.id.nomeEntradaID);

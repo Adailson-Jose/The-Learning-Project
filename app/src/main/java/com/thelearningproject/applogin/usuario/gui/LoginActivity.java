@@ -1,6 +1,7 @@
 package com.thelearningproject.applogin.usuario.gui;
 
 import com.thelearningproject.applogin.infra.gui.MainActivity;
+import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;
@@ -36,7 +37,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        session = new SessionController(getApplicationContext());
+        session = SessionController.getInstance(this.getApplicationContext());
 
         tLogin = (EditText) findViewById(R.id.tLogin);
         tSenha = (EditText) findViewById(R.id.tSenha);
@@ -60,6 +61,7 @@ public class LoginActivity extends Activity {
         });
 
     }
+
     private void logar(View view){
         Usuario usuario = new Usuario();
         String email = tLogin.getText().toString();
@@ -71,6 +73,7 @@ public class LoginActivity extends Activity {
         try{
             if(validaLogin(usuario)){
                 UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
+                PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
                 Usuario user = negocio.login(usuario);
 
                 if (user != null) {

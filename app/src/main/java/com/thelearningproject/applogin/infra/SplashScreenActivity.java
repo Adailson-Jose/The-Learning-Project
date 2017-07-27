@@ -1,10 +1,11 @@
-package com.thelearningproject.applogin;
+package com.thelearningproject.applogin.infra;
 
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.gui.MainActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {

@@ -6,6 +6,8 @@ import android.database.Cursor;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
+import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 /**
  * Created by Ebony Marques on 26/07/2017.
@@ -14,17 +16,14 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 public class PerfilDAO {
     private static Banco banco;
     private static PerfilDAO instancia;
-    private static final String BANCO = "BDPerfil";
     private static final String TABELA = "perfis";
-    private static final int VERSAO = 1;
 
     private static final String ID = "id";
     private static final String USUARIO = "usuario";
     private static final String DESCRICAO = "descricao";
-    private static final String HABILIDADES = "habilidade";
 
-    public static synchronized PerfilDAO getInstance(Context contexto){
-        if(instancia == null){
+    public static synchronized PerfilDAO getInstance(Context contexto) {
+        if (instancia == null) {
             instancia = new PerfilDAO(contexto.getApplicationContext());
         }
         return instancia;
@@ -36,27 +35,32 @@ public class PerfilDAO {
 
     public void inserir(Perfil perfil) {
         ContentValues valores = new ContentValues();
-        valores.put(USUARIO, perfil.getUsuario());
-        valores.put(HABILIDADES, "habilidades");
+        valores.put(USUARIO, perfil.getUsuarioID());
 
         banco.getWritableDatabase().insert(TABELA, null, valores);
     }
 
-    public Perfil retornaPerfil(String id){
-        String[] colunas = {ID, USUARIO, HABILIDADES};
-        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, "usuario = ?", new String[] {id}, null, null, null);
+    public Perfil retornaPerfil(int id_usuario) {
+        String[] colunas = {ID, USUARIO};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, USUARIO + " = ?", new String[]{Integer.toString(id_usuario)}, null, null, null);
         Perfil perfil = null;
 
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
             perfil.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            perfil.setUsuario(cursor.getInt(cursor.getColumnIndex(USUARIO)));
+            perfil.setUsuarioID(cursor.getInt(cursor.getColumnIndex(USUARIO)));
+        }
+        return perfil;
+    }
 
-            Materia habilidade = new Materia();
-            habilidade.setId(cursor.getInt(cursor.getColumnIndex(HABILIDADES)));
-            perfil.addHabilidade(habilidade);
-
-            //Precisamos setar nome e descrição da habilidade, mas Nicollas nos dirá onde e como fazer.
+    public Perfil consultar(int id) {
+        String[] colunas = {ID, USUARIO};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?", new String[]{Integer.toString(id)}, null, null, null);
+        Perfil perfil = null;
+        if (cursor.moveToFirst()) {
+            perfil = new Perfil();
+            perfil.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+            perfil.setUsuarioID(cursor.getInt(cursor.getColumnIndex(USUARIO)));
         }
 
         return perfil;
