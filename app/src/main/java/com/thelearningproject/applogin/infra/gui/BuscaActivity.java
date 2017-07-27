@@ -17,7 +17,6 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class BuscaActivity extends AppCompatActivity {
 
@@ -36,7 +35,6 @@ public class BuscaActivity extends AppCompatActivity {
         entradaBusca = (EditText) findViewById(R.id.editTextBuscaID);
         botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
 
-
         botaoBusca.setOnClickListener(new View.OnClickListener(){
 
             @Override
@@ -45,11 +43,6 @@ public class BuscaActivity extends AppCompatActivity {
             }
 
         });
-
-
-
-
-
     }
 
     private void listar(View v){
@@ -60,7 +53,6 @@ public class BuscaActivity extends AppCompatActivity {
         PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
         materia = materiaServices.cadastraMateria(materia);
         ArrayList<Perfil> lista_perfil = perfilServices.listarPerfil(materia);
-        lista_perfil.removeAll(Collections.singleton(null));
         if (lista_perfil.size() > 0) {
             ArrayAdapter<Perfil> adaptador = new ArrayAdapter<>(
                     getApplicationContext(),

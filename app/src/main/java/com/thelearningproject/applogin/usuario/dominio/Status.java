@@ -9,7 +9,7 @@ public enum Status {
 
     private int valor;
 
-    private Status(int i){
+    Status(int i){
         this.valor = i;
     }
     public int getValor(){

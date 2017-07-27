@@ -70,7 +70,7 @@ public class CadastroActivity extends Activity {
                 Intent entidade = new Intent(CadastroActivity.this, TermosActivity.class);
                 session.defineSessao(usuario.getNome(), usuario.getEmail());
 
-                entidade.setFlags(entidade.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 startActivity(entidade);
                 finish();

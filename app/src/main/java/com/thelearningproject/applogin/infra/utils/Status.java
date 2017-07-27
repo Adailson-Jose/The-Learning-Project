@@ -5,5 +5,5 @@ package com.thelearningproject.applogin.infra.utils;
  */
 
 public enum Status {
-    ATIVA, INATIVA;
+    ATIVA, INATIVA
 }

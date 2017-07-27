@@ -49,7 +49,6 @@ public class CadastroMateriaActivity extends AppCompatActivity {
         materia = materiaServices.cadastraMateria(materia);
         try {
             perfilServices.insereHabilidade(sessao.getPerfil(), materia);
-            Toast.makeText(this.getApplicationContext(),sessao.getPerfil().getId()+"  "+materia.getId(), Toast.LENGTH_LONG).show();
         }catch (UsuarioException e){
             Toast.makeText(this.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }

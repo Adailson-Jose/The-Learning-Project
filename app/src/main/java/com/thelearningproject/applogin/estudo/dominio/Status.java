@@ -5,6 +5,6 @@ package com.thelearningproject.applogin.estudo.dominio;
  */
 
 public enum Status {
-    ATIVA, INATIVA;
+    ATIVA, INATIVA
 }
 

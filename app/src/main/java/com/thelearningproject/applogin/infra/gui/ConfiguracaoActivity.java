@@ -88,7 +88,7 @@ public class ConfiguracaoActivity extends Activity{
                 Intent intent = new Intent(ConfiguracaoActivity.this, MainActivity.class);
                 session.defineSessao(nome,email);
 
-                intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
                 startActivity(intent);
                 finish();

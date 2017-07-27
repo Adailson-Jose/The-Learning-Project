@@ -27,7 +27,7 @@ public class PerfilDAO {
     }
 
     public PerfilDAO(Context contexto) {
-        this.banco = Banco.getInstancia(contexto);
+        banco = Banco.getInstancia(contexto);
     }
 
     public void inserir(Perfil perfil) {

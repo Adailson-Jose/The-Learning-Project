@@ -83,7 +83,7 @@ public class LoginActivity extends Activity {
                     session.iniciaSessao();
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                    intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     finish();
                     startActivity(intent);
                 } else {
