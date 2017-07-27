@@ -51,11 +51,9 @@ public class Perfil {
     public ArrayList<Materia> getHabilidades() {
         return habilidades;
     }
-
     public void addHabilidade(Materia nova) {
         habilidades.add(nova);
     }
-
 
     @Override
     public String toString(){

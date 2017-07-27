@@ -1,7 +1,7 @@
 package com.thelearningproject.applogin.infra.gui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,8 +10,8 @@ import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
-import com.thelearningproject.applogin.infra.SessionController;
-import com.thelearningproject.applogin.infra.UsuarioException;
+import com.thelearningproject.applogin.infra.utils.SessionController;
+import com.thelearningproject.applogin.infra.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 public class CadastroMateriaActivity extends AppCompatActivity {

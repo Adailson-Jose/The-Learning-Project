@@ -4,13 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import com.thelearningproject.applogin.estudo.dominio.Materia;
 
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by Pichau on 26/07/2017.

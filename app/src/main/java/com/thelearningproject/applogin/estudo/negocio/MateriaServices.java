@@ -4,13 +4,6 @@ import android.content.Context;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.persistencia.MateriaDAO;
-import com.thelearningproject.applogin.perfil.persistencia.ConexaoHabilidade;
-import com.thelearningproject.applogin.perfil.persistencia.ConexaoNecessidades;
-import com.thelearningproject.applogin.estudo.persistencia.TipoConexao;
-import com.thelearningproject.applogin.infra.UsuarioException;
-import com.thelearningproject.applogin.perfil.dominio.Perfil;
-
-import java.util.ArrayList;
 
 /**
  * Created by Pichau on 26/07/2017.

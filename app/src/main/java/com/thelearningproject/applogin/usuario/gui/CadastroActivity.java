@@ -8,12 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infra.utils.SessionController;
+import com.thelearningproject.applogin.infra.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.gui.TermosActivity;
 import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
-import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.infra.UsuarioException;
-import com.thelearningproject.applogin.infra.SessionController;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 import java.util.regex.Matcher;

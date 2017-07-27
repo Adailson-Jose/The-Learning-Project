@@ -4,10 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 
-import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
-import com.thelearningproject.applogin.usuario.dominio.Usuario;
-import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 /**
  * Created by Ebony Marques on 26/07/2017.

@@ -2,9 +2,8 @@ package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
 
-import com.thelearningproject.applogin.infra.UsuarioException;
+import com.thelearningproject.applogin.infra.utils.UsuarioException;
 import com.thelearningproject.applogin.usuario.dominio.Status;
-import com.thelearningproject.applogin.usuario.persistencia.Banco;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.persistencia.UsuarioDAO;
 

@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".infra.SplashScreenActivity"
+        <activity android:name=".infra.gui.SplashScreenActivity"
                   android:theme="@style/AppCompat.FullScreen">
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />

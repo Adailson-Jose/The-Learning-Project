@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infra;
+package com.thelearningproject.applogin.infra.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
-import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.gui.LoginActivity;
 
 /**

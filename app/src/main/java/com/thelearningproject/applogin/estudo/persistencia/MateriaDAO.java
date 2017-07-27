@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
-import com.thelearningproject.applogin.perfil.persistencia.BancoNecessidade;
 
 /**
  * Created by Pichau on 25/07/2017.

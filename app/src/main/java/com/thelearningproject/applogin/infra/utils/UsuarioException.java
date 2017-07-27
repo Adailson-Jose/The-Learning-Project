@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infra;
+package com.thelearningproject.applogin.infra.utils;
 
 /**
  * Created by Pichau on 20/07/2017.
