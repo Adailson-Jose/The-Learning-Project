@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SplashScreenActivity"
-            android:theme="@style/AppCompat.FullScreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".infra.SplashScreenActivity"
+                  android:theme="@style/AppCompat.FullScreen">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+    </activity>
         <activity
             android:name=".infra.gui.MainActivity"
             android:windowSoftInputMode="stateHidden">
@@ -34,6 +34,8 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".infra.gui.ConfiguracaoActivity" />
         <activity android:name=".infra.gui.HomeActivity" />
+        <activity android:name=".infra.gui.CadastroMateriaActivity"/>
+        <activity android:name=".infra.gui.BuscaActivity"/>
     </application>
 
 </manifest>

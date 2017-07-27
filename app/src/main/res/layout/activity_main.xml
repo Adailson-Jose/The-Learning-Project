@@ -10,8 +10,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/logout"
-        android:layout_marginBottom="84dp"
-        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="61dp"
+        android:layout_above="@+id/configID"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -42,11 +42,27 @@
         android:id="@+id/configID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/config"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/LogoutID"
-        android:layout_alignStart="@+id/LogoutID" />
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/botaoBuscaID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="21dp"
+        android:text="Buscar"
+        android:layout_above="@+id/LogoutID"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/BotaoCadastraMateriaID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/configID"
+        android:layout_centerHorizontal="true"
+        android:text="Inserir Materia" />
 
     <Button
         android:id="@+id/btnChamar"

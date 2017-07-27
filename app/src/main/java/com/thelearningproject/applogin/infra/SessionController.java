@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.gui.LoginActivity;
 
 /**
@@ -12,19 +14,38 @@ import com.thelearningproject.applogin.usuario.gui.LoginActivity;
  */
 
 public class SessionController {
+
+    private static SessionController sInstance;
     private SharedPreferences preferences;
     private Editor editor;
     private Context context;
+    private Perfil perfil;
+
 
     private static final String PREFERENCIA = "Sessao";
     private static final String USUARIO_LOGADO = "Logado";
     public static final String NOME = "nome";
     public static final String EMAIL = "email";
 
-    public SessionController(Context context){
+    public static synchronized SessionController getInstance(Context context){
+        if(sInstance == null){
+            sInstance = new SessionController(context.getApplicationContext());
+        }
+        return sInstance;
+    }
+
+    private SessionController(Context context){
         this.context = context;
         preferences = this.context.getSharedPreferences(PREFERENCIA,Context.MODE_PRIVATE);
         editor = preferences.edit();
+    }
+
+    public Perfil getPerfil() {
+        return perfil;
+    }
+
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public void iniciaSessao(){

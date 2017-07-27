@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Button botaologout;
     private Button botaoconfig;
+    private Button botaoBusca;
+    private Button botaoInsereMateria;
     private TextView apresentacao;
 
     private Button btnAbrir;
@@ -33,11 +35,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sessao = new SessionController(getApplicationContext());
+        sessao = SessionController.getInstance(this.getApplicationContext());
 
         apresentacao = (TextView) findViewById(R.id.apresentacaoID);
         botaologout = (Button) findViewById(R.id.LogoutID);
         botaoconfig = (Button) findViewById(R.id.configID);
+        botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
+        botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
 
         btnAbrir = (Button) findViewById(R.id.btnChamar);
 
@@ -54,6 +58,14 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        botaoBusca.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, BuscaActivity.class));
+            }
+            });
+
         botaoconfig.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
@@ -65,6 +77,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
+            }
+        });
+
+        botaoInsereMateria.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, CadastroMateriaActivity.class));
             }
         });
     }
@@ -79,12 +98,13 @@ public class MainActivity extends AppCompatActivity {
         negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
         Usuario usuario = negociousuario.retornaUsuario(sessao.getEmail());
-        //Perfil perfil = negocioperfil.retornaPerfil(""+usuario.getId());
+        Perfil perfil = negocioperfil.retornaPerfil(usuario.getId());
+        perfil.setUsuario(usuario);
+        sessao.setPerfil(perfil);
 
-        //Materia habilidadeprincipal = perfil.getHabilidadePrincipal();
 
-        //String mensagem = "Oi, " + usuario.getNome() + ". \nEsta é a descrição de sua\nhabilidade principal, " +
-         //       habilidadeprincipal.getNome() + ":\n\n" + habilidadeprincipal.getDescricao();
+//        String mensagem = "Oi, " + usuario.getNome() + ". \nEsta é a sua\nhabilidade principal: " +
+//                perfil.getHabilidadePrincipal();
 
         //apresentacao.setText(mensagem);
 

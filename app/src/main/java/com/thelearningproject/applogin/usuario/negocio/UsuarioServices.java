@@ -19,10 +19,8 @@ public class UsuarioServices {
 
     private static UsuarioServices sInstance;
     private UsuarioDAO persistencia;
-    private Banco banco;
 
     public UsuarioServices(Context context){
-        this.banco = Banco.getInstance(context);
         this.persistencia = UsuarioDAO.getInstance(context);
     }
 
