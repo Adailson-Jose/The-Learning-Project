@@ -9,27 +9,31 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".infra.gui.MainActivity"
-            android:windowSoftInputMode="stateHidden">
+        <activity android:name=".SplashScreenActivity"
+            android:theme="@style/AppCompat.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".usuario.gui.LoginActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".usuario.gui.CadastroActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".perfil.gui.TermosActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-        <activity android:name=".perfil.gui.HabilidadeActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
-
-        <activity android:name=".infra.gui.ConfiguracaoActivity"/>
-        <activity android:name=".infra.gui.HomeActivity"/>
+        <activity
+            android:name=".infra.gui.MainActivity"
+            android:windowSoftInputMode="stateHidden">
+        </activity>
+        <activity
+            android:name=".usuario.gui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".usuario.gui.CadastroActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".perfil.gui.TermosActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".perfil.gui.HabilidadeActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".infra.gui.ConfiguracaoActivity" />
+        <activity android:name=".infra.gui.HomeActivity" />
     </application>
 
 </manifest>
