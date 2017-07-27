@@ -18,11 +18,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".usuario.gui.LoginActivity" />
-        <activity android:name=".usuario.gui.CadastroActivity" />
-        <activity android:name=".perfil.gui.TermosActivity" />
-        <activity android:name=".perfil.gui.HabilidadeActivity"></activity>
-        <activity android:name=".infra.gui.ConfiguracaoActivity"></activity>
+
+        <activity android:name=".usuario.gui.LoginActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".usuario.gui.CadastroActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".perfil.gui.TermosActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:name=".perfil.gui.HabilidadeActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+
+        <activity android:name=".infra.gui.ConfiguracaoActivity"/>
+        <activity android:name=".infra.gui.HomeActivity"/>
     </application>
 
 </manifest>

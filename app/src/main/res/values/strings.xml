@@ -21,5 +21,8 @@
     <string name="deletar">Deletar</string>
     <string name="voltar">Voltar</string>
     <string name="config">Configuração</string>
+    <string name="bottom_nav_title1">Home</string>
+    <string name="bottom_nav_title2">Buscar</string>
+    <string name="bottom_nav_title3">Perfil</string>
 
 </resources>

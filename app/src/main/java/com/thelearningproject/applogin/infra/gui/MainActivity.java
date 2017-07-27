@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private Button botaoconfig;
     private TextView apresentacao;
 
+    private Button btnAbrir;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         botaologout = (Button) findViewById(R.id.LogoutID);
         botaoconfig = (Button) findViewById(R.id.configID);
 
+        btnAbrir = (Button) findViewById(R.id.btnChamar);
 
         if(sessao.verificaLogin()) {
             finish();
@@ -55,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 startActivity(new Intent(MainActivity.this, ConfiguracaoActivity.class));
+            }
+        });
+
+        btnAbrir.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, HomeActivity.class));
             }
         });
     }

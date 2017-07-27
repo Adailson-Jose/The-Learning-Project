@@ -48,4 +48,18 @@
         android:layout_alignLeft="@+id/LogoutID"
         android:layout_alignStart="@+id/LogoutID" />
 
+    <Button
+        android:id="@+id/btnChamar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abrir"
+        android:backgroundTint="@android:color/holo_purple"
+        android:textColor="@color/textWhite"
+        android:layout_marginRight="21dp"
+        android:layout_marginEnd="21dp"
+        android:layout_above="@+id/LogoutID"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="26dp" />
+
 </RelativeLayout>
