@@ -7,6 +7,7 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;
 import com.thelearningproject.applogin.infra.SessionController;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
+import com.thelearningproject.applogin.usuario.dominio.Status;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -36,6 +37,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
 
         session = SessionController.getInstance(this.getApplicationContext());
 

@@ -13,13 +13,13 @@ public class Banco extends SQLiteOpenHelper {
     private static Banco sInstance;
 
     private static final String NOME_BANCO = "BDUsuario";
-    private static final int VERSION = 6;
+    private static final int VERSION = 8;
     private static final String TABELA = "usuarios";
     private static final String ID = "id";
     private static final String NOME = "nome";
     private static final String EMAIL = "email";
     private static final String SENHA = "senha";
-    private static final String DESATIVADO = "desativado";
+    private static final String STATUS = "status";
 
 
 
@@ -41,7 +41,7 @@ public class Banco extends SQLiteOpenHelper {
                 NOME + " TEXT, " +
                 EMAIL + " TEXT, " +
                 SENHA + " TEXT, " +
-                DESATIVADO + " TEXT)";
+                STATUS + " INTEGER)";
 
         db.execSQL(sql);
     }

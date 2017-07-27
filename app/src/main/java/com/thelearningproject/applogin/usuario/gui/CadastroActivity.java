@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.perfil.gui.TermosActivity;
+import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;
@@ -60,6 +61,7 @@ public class CadastroActivity extends Activity {
         usuario.setEmail(email);
         usuario.setNome(nome);
         usuario.setSenha(senha);
+        usuario.setStatus(Status.ATIVADO);
 
         try {
             if(validaCadastro(usuario)){

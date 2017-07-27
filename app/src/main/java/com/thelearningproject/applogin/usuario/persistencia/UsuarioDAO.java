@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
@@ -23,8 +24,10 @@ public class UsuarioDAO {
     private static final String NOME = "nome";
     private static final String EMAIL = "email";
     private static final String SENHA = "senha";
-    private static final String DESATIVADO = "desativado";
+    private static final String STATUS = "status";
     private SQLiteOpenHelper banco;
+    private Status[] valores = Status.values();
+
 
     public static synchronized UsuarioDAO getInstance(Context context){
         if(sInstance == null){
@@ -42,7 +45,7 @@ public class UsuarioDAO {
         values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
-        values.put(DESATIVADO, usuario.getDesativado());
+        values.put(STATUS,usuario.getStatus().getValor());
         banco.getWritableDatabase().insert(TABELA, null, values);
 
     }
@@ -62,13 +65,14 @@ public class UsuarioDAO {
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
+
         }
 
         return usuario;
     }
 
     public Usuario retornaUsuario(String email,String senha) {
-        String[] colunas = {ID, NOME, EMAIL, SENHA, DESATIVADO};
+        String[] colunas = {ID, NOME, EMAIL, SENHA, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA,colunas,"email = ? AND senha = ?",new String[]{email, senha},null,null,null);
         Usuario usuario = null;
         if(cursor.moveToFirst()) {
@@ -78,7 +82,7 @@ public class UsuarioDAO {
             usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
-            usuario.setDesativado(cursor.getInt(cursor.getColumnIndex(DESATIVADO))>0);
+            usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
 
         }
 
@@ -86,7 +90,7 @@ public class UsuarioDAO {
 
     }
     public void deletaUsuario(Usuario usuario){
-        usuario.setDesativado(true);
+        usuario.setStatus(Status.DESATIVADO);
         alterarUsuario(usuario);
 
 
@@ -96,7 +100,7 @@ public class UsuarioDAO {
 
         SQLiteDatabase db = banco.getReadableDatabase();
         Cursor cursor = db.query(TABELA, new String[]{ID, NOME,
-                        EMAIL, SENHA}, ID + " = ?",
+                        EMAIL, SENHA, STATUS}, ID + " = ?",
                 new String[]{String.valueOf(codigo)}, null, null, null, null);
 
         if (cursor != null){
@@ -108,6 +112,7 @@ public class UsuarioDAO {
         usuario.setNome(cursor.getString(1));
         usuario.setEmail(cursor.getString(2));
         usuario.setSenha(cursor.getString(3));
+        usuario.setStatus(valores[(cursor.getInt(4))]);
         db.close();
         return usuario;
 
@@ -119,7 +124,7 @@ public class UsuarioDAO {
         values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
-        values.put(DESATIVADO, usuario.getDesativado());
+        values.put(STATUS, usuario.getStatus().getValor());
 
         db.update(TABELA, values, ID + " = ?",
                 new String[]{String.valueOf(usuario.getId())});
