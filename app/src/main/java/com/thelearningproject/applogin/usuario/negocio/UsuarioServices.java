@@ -32,10 +32,22 @@ public class UsuarioServices {
         return sInstance;
     }
 
-    private void verificaEmailExistente(String email) throws UsuarioException{
+    private Boolean verificaEmailExistente(String email){
+        Boolean resultado = false;
         if (persistencia.consultaUsuarioEmail(email)){
-            throw new UsuarioException("E-mail já cadastrado");
+            resultado = true;
+
         }
+        return resultado;
+    }
+
+    private Boolean verificaEmailExistenteStatus(String email){
+        Boolean resultado = false;
+        if (persistencia.consultaUsuarioEmailStatus(email,"1")){
+            resultado = true;
+
+        }
+        return resultado;
     }
 
     public Usuario login(Usuario usuario) throws UsuarioException {
@@ -46,8 +58,19 @@ public class UsuarioServices {
 
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(returnSenha(usuario.getSenha()));
-        verificaEmailExistente(usuario.getEmail());
-        persistencia.inserir(usuario);
+        if(verificaEmailExistenteStatus(usuario.getEmail())){
+            Usuario user = persistencia.retornaUsuarioPorEmail(usuario.getEmail());
+            user.setEmail(usuario.getEmail());
+            user.setNome(usuario.getNome());
+            user.setSenha(usuario.getSenha());
+            user.setStatus(Status.ATIVADO);
+            persistencia.alterarUsuario(user);
+        }else if(verificaEmailExistente(usuario.getEmail())){
+            throw new UsuarioException("E-mail já cadastrado");
+        }else{
+            persistencia.inserir(usuario);
+        }
+
     }
 
     public void alterarUsuario(Usuario usuario) throws UsuarioException {

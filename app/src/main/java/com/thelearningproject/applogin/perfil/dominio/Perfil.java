@@ -56,9 +56,6 @@ public class Perfil {
         habilidades.add(nova);
     }
 
-    public Materia getHabilidadePrincipal() {
-        return habilidades.get(0);
-    }
 
     @Override
     public String toString(){

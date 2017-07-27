@@ -102,11 +102,9 @@ public class MainActivity extends AppCompatActivity {
         perfil.setUsuario(usuario);
         sessao.setPerfil(perfil);
 
+        String mensagem = "Oi, " + usuario.getNome() + ".";
 
-//        String mensagem = "Oi, " + usuario.getNome() + ". \nEsta é a sua\nhabilidade principal: " +
-//                perfil.getHabilidadePrincipal();
-
-        //apresentacao.setText(mensagem);
+        apresentacao.setText(mensagem);
 
 
     }

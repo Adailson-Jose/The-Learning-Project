@@ -52,11 +52,18 @@ public class UsuarioDAO {
 
     public Boolean consultaUsuarioEmail(String email){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,null,"email = ?",new String[]{email},null,null,null);
+
+        return cursor.moveToFirst();
+    }
+    public Boolean consultaUsuarioEmailStatus(String email, String status){
+        Cursor cursor = banco.getReadableDatabase().query(TABELA,null,"email = ? AND status = ?",new String[]{email, status},null,null,null);
         return cursor.moveToFirst();
     }
 
+
+
     public Usuario retornaUsuarioPorEmail(String email) {
-        String[] colunas = {ID, NOME, EMAIL};
+        String[] colunas = {ID, NOME, EMAIL, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, "email = ?", new String[] {email}, null, null, null);
         Usuario usuario = null;
 
@@ -65,6 +72,7 @@ public class UsuarioDAO {
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
+            usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
 
         }
 
@@ -83,7 +91,6 @@ public class UsuarioDAO {
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
-
         }
 
         return usuario;
@@ -131,24 +138,5 @@ public class UsuarioDAO {
         db.close();
     }
 
-    public List<Usuario> listarTodosUsuarios(){
-        List<Usuario> listaUsuarios = new ArrayList<Usuario>();
-        SQLiteDatabase db = banco.getReadableDatabase();
-
-        String query =  "SELECT * FROM "+ TABELA;
-        Cursor cursor = db.rawQuery(query, null);
-        if (cursor.moveToFirst()){
-            do{
-                Usuario usuario = new Usuario();
-                usuario.setId(Integer.parseInt(cursor.getString(0)));
-                usuario.setNome(cursor.getString(1));
-                usuario.setEmail(cursor.getString(2));
-                usuario.setSenha(cursor.getString(3));
-
-                listaUsuarios.add(usuario);
-            }while(cursor.moveToNext());
-        }
-        return listaUsuarios;
-    }
 
 }
