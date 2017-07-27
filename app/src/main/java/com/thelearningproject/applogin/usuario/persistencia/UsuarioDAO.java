@@ -36,11 +36,13 @@ public class UsuarioDAO {
     public UsuarioDAO(Context context) {
         this.banco = Banco.getInstance(context);
     }
+
     public void inserir(Usuario usuario) {
         ContentValues values = new ContentValues();
         values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
+        values.put(DESATIVADO, usuario.getDesativado());
         banco.getWritableDatabase().insert(TABELA, null, values);
 
     }
@@ -66,7 +68,7 @@ public class UsuarioDAO {
     }
 
     public Usuario retornaUsuario(String email,String senha) {
-        String[] colunas = {ID, NOME, EMAIL, SENHA};
+        String[] colunas = {ID, NOME, EMAIL, SENHA, DESATIVADO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA,colunas,"email = ? AND senha = ?",new String[]{email, senha},null,null,null);
         Usuario usuario = null;
         if(cursor.moveToFirst()) {
@@ -76,14 +78,15 @@ public class UsuarioDAO {
             usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
+            usuario.setDesativado(cursor.getInt(cursor.getColumnIndex(DESATIVADO))>0);
 
         }
 
         return usuario;
 
     }
-    void deletaUsuario(Usuario usuario){
-        usuario.setDesativado(false);
+    public void deletaUsuario(Usuario usuario){
+        usuario.setDesativado(true);
         alterarUsuario(usuario);
 
 

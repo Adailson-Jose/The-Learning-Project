@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/alterarID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alterar"
+        android:layout_marginTop="36dp"
+        android:layout_below="@+id/senhaID"
+        android:layout_toRightOf="@+id/voltarID"
+        android:layout_toEndOf="@+id/voltarID" />
+
+    <Button
+        android:id="@+id/deletarID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/deletar"
+        android:layout_marginRight="43dp"
+        android:layout_marginEnd="43dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="29dp" />
+
+    <EditText
+        android:id="@+id/nomeID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="53dp"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:hint="@string/nome"
+        android:inputType="textPersonName"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/emailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        android:layout_below="@+id/nomeID"
+        android:layout_alignLeft="@+id/nomeID"
+        android:layout_alignStart="@+id/nomeID" />
+
+    <EditText
+        android:id="@+id/senhaID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/senha"
+        android:inputType="textPassword"
+        android:layout_below="@+id/emailID"
+        android:layout_alignLeft="@+id/emailID"
+        android:layout_alignStart="@+id/emailID"
+        android:layout_marginTop="13dp" />
+
+    <Button
+        android:id="@+id/voltarID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/voltar"
+        android:layout_marginLeft="26dp"
+        android:layout_marginStart="26dp"
+        android:layout_alignBaseline="@+id/deletarID"
+        android:layout_alignBottom="@+id/deletarID"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

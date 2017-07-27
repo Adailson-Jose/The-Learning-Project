@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".infra.MainActivity"
+            android:name=".infra.gui.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +22,7 @@
         <activity android:name=".usuario.gui.CadastroActivity" />
         <activity android:name=".perfil.gui.TermosActivity" />
         <activity android:name=".perfil.gui.HabilidadeActivity"></activity>
+        <activity android:name=".infra.gui.ConfiguracaoActivity"></activity>
     </application>
 
 </manifest>

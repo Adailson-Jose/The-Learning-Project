@@ -1,6 +1,6 @@
 package com.thelearningproject.applogin.usuario.gui;
 
-import com.thelearningproject.applogin.infra.MainActivity;
+import com.thelearningproject.applogin.infra.gui.MainActivity;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.UsuarioException;

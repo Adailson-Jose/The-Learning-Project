@@ -40,9 +40,8 @@ public class UsuarioServices {
     }
 
     public Usuario login(Usuario usuario) throws UsuarioException {
-        usuario.setEmail(usuario.getEmail());
-        usuario.setSenha(usuario.getSenha());
         usuario = persistencia.retornaUsuario(usuario.getEmail(), returnSenha(usuario.getSenha()));
+        usuarioAtivo(usuario);
         return usuario;
     }
 
@@ -50,6 +49,17 @@ public class UsuarioServices {
         usuario.setSenha(returnSenha(usuario.getSenha()));
         verificaEmailExistente(usuario.getEmail());
         persistencia.inserir(usuario);
+    }
+
+    public void alterarUsuario(Usuario usuario) throws UsuarioException {
+        usuario.setSenha(returnSenha(usuario.getSenha()));
+        verificaEmailExistente(usuario.getEmail());
+        persistencia.alterarUsuario(usuario);
+    }
+
+    public void deletarUsuario(String email){
+        Usuario usuario = retornaUsuario(email);
+        persistencia.deletaUsuario(usuario);
     }
 
     private String returnSenha(String senha){
@@ -78,6 +88,15 @@ public class UsuarioServices {
         Usuario usuario = persistencia.retornaUsuarioPorEmail(email);
 
         return usuario;
+    }
+
+    private void usuarioAtivo(Usuario usuario) throws UsuarioException{
+        if (usuario != null){
+            if (usuario.getDesativado()){
+                throw new UsuarioException("usuario-desativado");
+
+            }
+        }
     }
 
 

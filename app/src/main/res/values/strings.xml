@@ -17,4 +17,9 @@
     <string name="dica2">Descreva essa habilidade.</string>
     <string name="dica3">Onde estuda? O que cursar?</string>
     <string name="descricaoperfil">Descrição</string>
+    <string name="alterar">Alterar</string>
+    <string name="deletar">Deletar</string>
+    <string name="voltar">Voltar</string>
+    <string name="config">Configuração</string>
+
 </resources>

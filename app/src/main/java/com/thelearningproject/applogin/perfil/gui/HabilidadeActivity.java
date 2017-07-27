@@ -14,7 +14,7 @@ import com.thelearningproject.applogin.infra.SessionController;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
-import com.thelearningproject.applogin.infra.MainActivity;
+import com.thelearningproject.applogin.infra.gui.MainActivity;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class HabilidadeActivity extends AppCompatActivity {

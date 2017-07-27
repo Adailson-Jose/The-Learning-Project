@@ -41,7 +41,7 @@ public class Banco extends SQLiteOpenHelper {
                 NOME + " TEXT, " +
                 EMAIL + " TEXT, " +
                 SENHA + " TEXT, " +
-                DESATIVADO + " BOOLEAN)";
+                DESATIVADO + " TEXT)";
 
         db.execSQL(sql);
     }
