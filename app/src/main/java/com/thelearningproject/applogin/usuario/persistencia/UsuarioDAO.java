@@ -109,21 +109,20 @@ public class UsuarioDAO {
         Cursor cursor = db.query(TABELA, new String[]{ID, NOME,
                         EMAIL, SENHA, STATUS}, ID + " = ?",
                 new String[]{String.valueOf(codigo)}, null, null, null, null);
-
-        if (cursor != null){
-            cursor.moveToFirst();
+        Usuario usuario = null;
+        if (cursor.moveToFirst()) {
+            usuario = new Usuario();
+            usuario.setId(Integer.parseInt(cursor.getString(0)));
+            usuario.setNome(cursor.getString(1));
+            usuario.setEmail(cursor.getString(2));
+            usuario.setSenha(cursor.getString(3));
+            usuario.setStatus(valores[(cursor.getInt(4))]);
+            db.close();
         }
-
-        Usuario usuario = new Usuario();
-        usuario.setId(Integer.parseInt(cursor.getString(0)));
-        usuario.setNome(cursor.getString(1));
-        usuario.setEmail(cursor.getString(2));
-        usuario.setSenha(cursor.getString(3));
-        usuario.setStatus(valores[(cursor.getInt(4))]);
-        db.close();
         return usuario;
-
     }
+
+
     public void alterarUsuario(Usuario usuario){
         SQLiteDatabase db = banco.getWritableDatabase();
 

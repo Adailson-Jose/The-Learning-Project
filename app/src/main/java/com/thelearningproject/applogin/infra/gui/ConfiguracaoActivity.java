@@ -102,7 +102,7 @@ public class ConfiguracaoActivity extends Activity{
 
     private void desativar(View view){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-        negocio.deletarUsuario(session.getUsuario().getEmail());
+        negocio.deletarUsuario(session.getUsuario());
         finish();
         session.encerraSessao();
     }

@@ -42,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         btnAbrir = (Button) findViewById(R.id.btnChamar);
 
-        if(sessao.verificaLogin()) {
+        if(sessao.verificarConectado()) {
+            resumir();
+        }
+        if(sessao.verificaLogin()){
             finish();
-        } else {
+        }else {
             exibir();
         }
 
@@ -90,16 +93,21 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    public void exibir() {
+    private void resumir(){
         negociousuario = UsuarioServices.getInstancia(getBaseContext());
+        Usuario usuario = negociousuario.consulta(sessao.retornaID());
+        sessao.iniciaSessao();
+        sessao.setUsuario(usuario);
+    }
+
+    private void exibir() {
         negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
-        Usuario usuario = sessao.getUsuario();
-        Perfil perfil = negocioperfil.retornaPerfil(usuario.getId());
-        perfil.setUsuario(usuario);
+        Perfil perfil = negocioperfil.retornaPerfil(sessao.getUsuario().getId());
+        perfil.setUsuario(sessao.getUsuario());
         sessao.setPerfil(perfil);
 
-        String mensagem = "Oi, " + usuario.getNome() + ".";
+        String mensagem = "Oi, " + sessao.getUsuario().getNome() + ".";
 
         apresentacao.setText(mensagem);
 

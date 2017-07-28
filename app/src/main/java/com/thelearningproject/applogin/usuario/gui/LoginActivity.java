@@ -82,12 +82,11 @@ public class LoginActivity extends Activity {
 
                 if (user != null) {
                     session.encerraSessao();
-                    Toast.makeText(LoginActivity.this, "Oiieee222", Toast.LENGTH_LONG).show();
-                    if (swConectado.isChecked()) {
-                        Toast.makeText(LoginActivity.this, "Oiieee", Toast.LENGTH_LONG).show();
-                        session.iniciaSessao();
-                    }
                     session.setUsuario(user);
+                    session.iniciaSessao();
+                    if (swConectado.isChecked()) {
+                        session.salvaSessao();
+                    }
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     finish();

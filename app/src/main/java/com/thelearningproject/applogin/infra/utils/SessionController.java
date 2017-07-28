@@ -26,6 +26,7 @@ public class SessionController {
 
     private static final String PREFERENCIA = "Sessao";
     private static final String USUARIO_LOGADO = "Logado";
+    private static final String ID_USUARIO = "id_usuario";
 
     public static synchronized SessionController getInstance(Context context){
         if(sInstance == null){
@@ -41,17 +42,22 @@ public class SessionController {
         editor = preferences.edit();
     }
 
+    public void salvaSessao(){
+        editor.putBoolean(USUARIO_LOGADO,true);
+        editor.putInt(ID_USUARIO,usuario.getId());
+        editor.commit();
+    }
+
+    public void iniciaSessao(){
+        this.sessaoAtiva = true;
+    }
+
     public Perfil getPerfil() {
         return perfil;
     }
 
     public void setPerfil(Perfil perfil) {
         this.perfil = perfil;
-    }
-
-    public void iniciaSessao(){
-        editor.putBoolean(USUARIO_LOGADO,true);
-        editor.commit();
     }
 
     public Usuario getUsuario(){
@@ -63,7 +69,7 @@ public class SessionController {
     }
 
     public boolean verificaLogin(){
-        if(!verificarConectado()){
+        if(!verificaSessao()){
             Intent intent = new Intent(context, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -86,11 +92,15 @@ public class SessionController {
         context.startActivity(intent);
     }
 
-    private boolean verificaSessao() {
+    public boolean verificaSessao() {
         return this.sessaoAtiva;
     }
 
-    private boolean verificarConectado() {
+    public int retornaID(){
+        return preferences.getInt(ID_USUARIO, 0);
+    }
+
+    public boolean verificarConectado() {
         return preferences.getBoolean(USUARIO_LOGADO, false);
     }
 }

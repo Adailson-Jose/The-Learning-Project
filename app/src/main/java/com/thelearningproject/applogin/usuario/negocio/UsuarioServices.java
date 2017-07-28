@@ -44,9 +44,13 @@ public class UsuarioServices {
         Boolean resultado = false;
         if (persistencia.consultaUsuarioEmailStatus(email,"1")){
             resultado = true;
-
         }
         return resultado;
+    }
+
+    public Usuario consulta(int id){
+        Usuario usuario = persistencia.pesquisarUsuario(id);
+        return usuario;
     }
 
     public Usuario login(Usuario usuario) throws UsuarioException {
@@ -78,8 +82,7 @@ public class UsuarioServices {
         persistencia.alterarUsuario(usuario);
     }
 
-    public void deletarUsuario(String email){
-        Usuario usuario = retornaUsuario(email);
+    public void deletarUsuario(Usuario usuario){
         persistencia.deletaUsuario(usuario);
     }
 
