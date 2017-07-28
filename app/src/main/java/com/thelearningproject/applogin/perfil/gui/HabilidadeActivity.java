@@ -77,8 +77,8 @@ public class HabilidadeActivity extends AppCompatActivity {
                 Intent entidade = new Intent(HabilidadeActivity.this, MainActivity.class);
                 entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
                 finish();
+                startActivity(entidade);
             }
 
         } catch (UsuarioException e){

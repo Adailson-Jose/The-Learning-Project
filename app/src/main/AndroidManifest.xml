@@ -27,7 +27,7 @@
             android:name=".usuario.gui.CadastroActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".perfil.gui.TermosActivity"
+            android:name=".infra.gui.TermosActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".perfil.gui.HabilidadeActivity"

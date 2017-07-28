@@ -121,11 +121,9 @@ public class LoginActivity extends Activity {
 
     }
     private Boolean aplicandoPattern (String email){
-        Pattern pattern = Pattern.compile("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$");
+        Pattern pattern = Pattern.compile("^[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
         Matcher m = pattern.matcher(email);
-        Boolean resultado = m.matches();
-
-        return  resultado;
+        return m.matches();
 
     }
 }

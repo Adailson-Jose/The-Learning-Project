@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.perfil.gui;
+package com.thelearningproject.applogin.infra.gui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.perfil.gui.HabilidadeActivity;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -55,5 +56,6 @@ public class TermosActivity extends AppCompatActivity {
         entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(entidade);
+        finish();
     }
 }

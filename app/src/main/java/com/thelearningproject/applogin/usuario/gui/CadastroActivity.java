@@ -3,17 +3,15 @@ package com.thelearningproject.applogin.usuario.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infra.utils.SessionController;
 import com.thelearningproject.applogin.infra.utils.UsuarioException;
-import com.thelearningproject.applogin.perfil.gui.TermosActivity;
+import com.thelearningproject.applogin.infra.gui.TermosActivity;
 import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
