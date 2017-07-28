@@ -68,7 +68,7 @@ public class CadastroActivity extends Activity {
                 negocio.inserirUsuario(usuario);
 
                 Intent entidade = new Intent(CadastroActivity.this, TermosActivity.class);
-                session.defineSessao(usuario.getNome(), usuario.getEmail());
+                session.setUsuario(negocio.retornaUsuario(usuario.getEmail()));
 
                 entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 

@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
@@ -31,6 +33,7 @@ public class LoginActivity extends Activity {
     private EditText tSenha;
     private Button btLogin;
     private Button btCadastro;
+    private Switch swConectado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +47,7 @@ public class LoginActivity extends Activity {
         tSenha = (EditText) findViewById(R.id.tSenha);
         btLogin = (Button) findViewById(R.id.btLogin);
         btCadastro = (Button) findViewById(R.id.cadastroID);
+        swConectado = (Switch) findViewById(R.id.manterSwitch);
 
         btLogin.setOnClickListener(new View.OnClickListener() {
 
@@ -74,14 +78,16 @@ public class LoginActivity extends Activity {
         try{
             if(validaLogin(usuario)){
                 UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-                PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
                 Usuario user = negocio.login(usuario);
 
                 if (user != null) {
                     session.encerraSessao();
-                    session.defineSessao(user.getNome(), user.getEmail());
-                    session.iniciaSessao();
-
+                    Toast.makeText(LoginActivity.this, "Oiieee222", Toast.LENGTH_LONG).show();
+                    if (swConectado.isChecked()) {
+                        Toast.makeText(LoginActivity.this, "Oiieee", Toast.LENGTH_LONG).show();
+                        session.iniciaSessao();
+                    }
+                    session.setUsuario(user);
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     finish();

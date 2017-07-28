@@ -24,5 +24,6 @@
     <string name="bottom_nav_title1">Home</string>
     <string name="bottom_nav_title2">Buscar</string>
     <string name="bottom_nav_title3">Perfil</string>
+    <string name="manterConectado">Manter conectado</string>
 
 </resources>

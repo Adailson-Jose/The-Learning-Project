@@ -50,7 +50,7 @@ public class HabilidadeActivity extends AppCompatActivity {
 
         String habilidade = entradahabilidade.getText().toString();
 
-        Usuario usuario = negociousuario.retornaUsuario(sessao.getEmail());
+        Usuario usuario = negociousuario.retornaUsuario(sessao.getUsuario().getEmail());
         try {
             Materia materia = new Materia();
             materia.setNome(habilidade);

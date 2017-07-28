@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
         negociousuario = UsuarioServices.getInstancia(getBaseContext());
         negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
-        Usuario usuario = negociousuario.retornaUsuario(sessao.getEmail());
+        Usuario usuario = sessao.getUsuario();
         Perfil perfil = negocioperfil.retornaPerfil(usuario.getId());
         perfil.setUsuario(usuario);
         sessao.setPerfil(perfil);

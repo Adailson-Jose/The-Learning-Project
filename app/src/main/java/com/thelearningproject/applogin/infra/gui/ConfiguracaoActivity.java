@@ -74,9 +74,9 @@ public class ConfiguracaoActivity extends Activity{
         String email = alteraremail.getText().toString();
         String senha = alterarsenha.getText().toString();
 
-        Usuario usuario = negocio.retornaUsuario(session.getEmail());
-        int id = usuario.getId();
-        usuario.setId(id);
+        Usuario usuario = session.getUsuario();
+//        int id = usuario.getId();
+//        usuario.setId(id);
         usuario.setNome(nome);
         usuario.setEmail(email);
         usuario.setSenha(senha);
@@ -86,7 +86,7 @@ public class ConfiguracaoActivity extends Activity{
                 negocio.alterarUsuario(usuario);
 
                 Intent intent = new Intent(ConfiguracaoActivity.this, MainActivity.class);
-                session.defineSessao(nome,email);
+                session.setUsuario(usuario);
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -102,7 +102,7 @@ public class ConfiguracaoActivity extends Activity{
 
     private void desativar(View view){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-        negocio.deletarUsuario(session.getEmail());
+        negocio.deletarUsuario(session.getUsuario().getEmail());
         finish();
         session.encerraSessao();
     }
