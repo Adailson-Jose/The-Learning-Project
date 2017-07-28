@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thelearningproject.applogin.infra.gui.BuscaActivity">
+    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.BuscaActivity">
 
     <!-- A CardView that contains a TextView -->
 

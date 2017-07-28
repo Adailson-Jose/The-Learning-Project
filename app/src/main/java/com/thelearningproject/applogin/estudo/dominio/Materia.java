@@ -1,7 +1,5 @@
 package com.thelearningproject.applogin.estudo.dominio;
 
-import com.thelearningproject.applogin.infra.utils.Status;
-
 /**
  * Created by Ebony Marques on 26/07/2017.
  */

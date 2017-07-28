@@ -11,17 +11,17 @@ import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
-import com.thelearningproject.applogin.infra.gui.MainActivity;
-import com.thelearningproject.applogin.infra.utils.Auxiliar;
-import com.thelearningproject.applogin.infra.utils.SessionController;
-import com.thelearningproject.applogin.infra.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.gui.MainActivity;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
+import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class HabilidadeActivity extends AppCompatActivity {
-    private SessionController sessao;
+    private ControladorSessao sessao;
     private EditText entradahabilidade;
     private EditText entradadescricao;
     private Button botaocriar;
@@ -31,7 +31,7 @@ public class HabilidadeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habilidade);
 
-        sessao = SessionController.getInstance(this.getApplicationContext());
+        sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         entradahabilidade = (EditText) findViewById(R.id.habilidadeentrada);
         entradadescricao = (EditText) findViewById(R.id.descricaoentrada);
 

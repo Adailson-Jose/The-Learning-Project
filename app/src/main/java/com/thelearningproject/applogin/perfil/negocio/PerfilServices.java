@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
-import com.thelearningproject.applogin.infra.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.persistencia.ConexaoHabilidade;
 import com.thelearningproject.applogin.perfil.persistencia.PerfilDAO;

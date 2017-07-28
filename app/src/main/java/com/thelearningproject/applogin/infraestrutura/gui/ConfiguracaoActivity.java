@@ -1,6 +1,5 @@
-package com.thelearningproject.applogin.infra.gui;
+package com.thelearningproject.applogin.infraestrutura.gui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +9,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.infra.utils.Auxiliar;
-import com.thelearningproject.applogin.infra.utils.SessionController;
-import com.thelearningproject.applogin.infra.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
+import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -32,7 +31,7 @@ public class ConfiguracaoActivity extends AppCompatActivity{
     private Button btDesativar;
     private Button btLogout;
 
-    private SessionController session;
+    private ControladorSessao session;
 
 
     @Override
@@ -41,7 +40,7 @@ public class ConfiguracaoActivity extends AppCompatActivity{
         setContentView(R.layout.activity_configuracao);
         setTitle("Configurações");
 
-        session = SessionController.getInstance(this.getApplicationContext());
+        session = ControladorSessao.getInstancia(this.getApplicationContext());
 
         alterarNome = (EditText) findViewById(R.id.nomeID);
         alterarEmail = (EditText) findViewById(R.id.emailID);

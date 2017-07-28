@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/gradient"
-    tools:context="com.thelearningproject.applogin.infra.gui.SplashScreenActivity">
+    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.SplashScreenActivity">
 
     <ImageView
         android:layout_width="200dp"

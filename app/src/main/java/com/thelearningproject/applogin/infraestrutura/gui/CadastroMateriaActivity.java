@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infra.gui;
+package com.thelearningproject.applogin.infraestrutura.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,12 +10,12 @@ import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
-import com.thelearningproject.applogin.infra.utils.SessionController;
-import com.thelearningproject.applogin.infra.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 public class CadastroMateriaActivity extends AppCompatActivity {
-    private SessionController sessao;
+    private ControladorSessao sessao;
     private Button botaoCadastro;
     private EditText entradaMateria;
 
@@ -24,7 +24,7 @@ public class CadastroMateriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_materia);
 
-        sessao = SessionController.getInstance(this.getApplicationContext());
+        sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         botaoCadastro = (Button) findViewById(R.id.BotaoCadastraMateriaID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
 

@@ -1,23 +1,19 @@
 package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
-
-import com.thelearningproject.applogin.infra.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.persistencia.UsuarioDAO;
-
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 
 /**
  * Created by Ebony Marques on 18/07/2017.
  */
 
 public class UsuarioServices {
-
-    private static UsuarioServices sInstance;
+    private static UsuarioServices instancia;
     private UsuarioDAO persistencia;
 
     public UsuarioServices(Context context){
@@ -25,26 +21,28 @@ public class UsuarioServices {
     }
 
     public static UsuarioServices getInstancia(Context context){
-        if(sInstance == null){
-            sInstance = new UsuarioServices(context);
-        }
-        return sInstance;
+        if(instancia == null){
+            instancia = new UsuarioServices(context);
+        } return instancia;
     }
 
     private Boolean verificaEmailExistente(String email){
         Boolean resultado = false;
+
         if (persistencia.consultaUsuarioEmail(email)){
             resultado = true;
-
         }
+
         return resultado;
     }
 
     private Boolean verificaEmailExistenteStatus(String email){
         Boolean resultado = false;
+
         if (persistencia.consultaUsuarioEmailStatus(email,"1")){
             resultado = true;
         }
+
         return resultado;
     }
 
@@ -53,14 +51,15 @@ public class UsuarioServices {
         return usuario;
     }
 
-    public Usuario login(Usuario usuario) throws UsuarioException {
-        usuario = persistencia.retornaUsuario(usuario.getEmail(), returnSenha(usuario.getSenha()));
+    public Usuario logar(Usuario usuario) throws UsuarioException {
+        usuario = persistencia.retornaUsuario(usuario.getEmail(), retornaSenhaCriptografada(usuario.getSenha()));
         usuarioAtivo(usuario);
         return usuario;
     }
 
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
-        usuario.setSenha(returnSenha(usuario.getSenha()));
+        usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
+
         if(verificaEmailExistenteStatus(usuario.getEmail())){
             Usuario user = persistencia.retornaUsuarioPorEmail(usuario.getEmail());
             user.setEmail(usuario.getEmail());
@@ -77,7 +76,7 @@ public class UsuarioServices {
     }
 
     public void alterarUsuario(Usuario usuario) throws UsuarioException {
-        usuario.setSenha(returnSenha(usuario.getSenha()));
+        usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
         verificaEmailExistente(usuario.getEmail());
         persistencia.alterarUsuario(usuario);
     }
@@ -86,7 +85,7 @@ public class UsuarioServices {
         persistencia.deletaUsuario(usuario);
     }
 
-    private String returnSenha(String senha){
+    private String retornaSenhaCriptografada(String senha){
         String criptografado  = null;
         try {
             criptografado = criptografaSenha(senha);

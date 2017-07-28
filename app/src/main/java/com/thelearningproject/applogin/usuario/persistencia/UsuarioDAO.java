@@ -100,8 +100,8 @@ public class UsuarioDAO {
         usuario.setStatus(Status.DESATIVADO);
         alterarUsuario(usuario);
 
-
     }
+
     //diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
     public Usuario pesquisarUsuario(int codigo){
 
@@ -122,7 +122,6 @@ public class UsuarioDAO {
         return usuario;
     }
 
-
     public void alterarUsuario(Usuario usuario){
         SQLiteDatabase db = banco.getWritableDatabase();
 
@@ -136,6 +135,4 @@ public class UsuarioDAO {
                 new String[]{String.valueOf(usuario.getId())});
         db.close();
     }
-
-
 }

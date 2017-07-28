@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infra.gui;
+package com.thelearningproject.applogin.infraestrutura.gui;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
