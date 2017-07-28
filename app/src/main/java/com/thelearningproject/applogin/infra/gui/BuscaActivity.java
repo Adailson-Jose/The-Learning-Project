@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
+import com.thelearningproject.applogin.infra.utils.Auxiliar;
 import com.thelearningproject.applogin.infra.utils.SessionController;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
@@ -40,6 +41,7 @@ public class BuscaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 listar(v);
+                Auxiliar.esconderTeclado(BuscaActivity.this);
             }
 
         });
@@ -61,7 +63,8 @@ public class BuscaActivity extends AppCompatActivity {
                     lista_perfil
             );
             listaUsuarios.setAdapter(adaptador);
-        }else{
+        }else {
+            listaUsuarios.setAdapter(null);
             Toast.makeText(this, "Sem resultados", Toast.LENGTH_LONG).show();
         }
     }

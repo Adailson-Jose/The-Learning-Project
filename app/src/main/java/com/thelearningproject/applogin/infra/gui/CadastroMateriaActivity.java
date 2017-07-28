@@ -33,7 +33,6 @@ public class CadastroMateriaActivity extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 cadastrarMateria(v);
-                finish();
             }
 
         });
@@ -48,9 +47,28 @@ public class CadastroMateriaActivity extends AppCompatActivity {
         materia.setNome(nome);
         materia = materiaServices.cadastraMateria(materia);
         try {
-            perfilServices.insereHabilidade(sessao.getPerfil(), materia);
+            if (validaCadastro(materia)) {
+                perfilServices.insereHabilidade(sessao.getPerfil(), materia);
+
+                Toast.makeText(CadastroMateriaActivity.this, "Habilidade cadastrada com sucesso!", Toast.LENGTH_LONG).show();
+                finish();
+            }
         }catch (UsuarioException e){
             Toast.makeText(this.getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private Boolean validaCadastro(Materia materia){
+        Boolean validacao=true;
+        StringBuilder erro = new StringBuilder();
+        if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
+            entradaMateria.setError("Habilidade inválida");
+            validacao = false;
+        }
+        String resultado = (erro.toString().trim());
+        if (resultado!= "") {
+            Toast.makeText(CadastroMateriaActivity.this, resultado, Toast.LENGTH_LONG).show();
+        }
+        return validacao;
     }
 }

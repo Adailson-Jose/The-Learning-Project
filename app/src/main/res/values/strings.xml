@@ -18,9 +18,9 @@
     <string name="dica3">Onde estuda? O que cursar?</string>
     <string name="descricaoperfil">Descrição</string>
     <string name="alterar">Alterar</string>
-    <string name="deletar">Deletar</string>
+    <string name="excluir">Excluir Conta</string>
     <string name="voltar">Voltar</string>
-    <string name="config">Configuração</string>
+    <string name="config">Configurações</string>
     <string name="bottom_nav_title1">Home</string>
     <string name="bottom_nav_title2">Buscar</string>
     <string name="bottom_nav_title3">Perfil</string>

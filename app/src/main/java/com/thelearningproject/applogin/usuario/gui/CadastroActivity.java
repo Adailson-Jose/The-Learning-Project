@@ -29,8 +29,6 @@ public class CadastroActivity extends Activity {
     private EditText entradaEmail;
     private EditText entradaSenha;
     private Pattern pattern;
-    private TextView linkLearning;
-    private Pattern pTheLearningProject = Pattern.compile("The Learning Project");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,24 +42,6 @@ public class CadastroActivity extends Activity {
         entradaNome = (EditText) findViewById(R.id.nomeEntradaID);
         entradaEmail = (EditText) findViewById(R.id.emailEntradaID);
         entradaSenha = (EditText) findViewById(R.id.senhaEntradaID);
-
-        linkLearning = (TextView) findViewById(R.id.theLearnProjectId);
-
-        Linkify.TransformFilter tf = new Linkify.TransformFilter(){
-            @Override
-            public String transformUrl(Matcher match, String url) {
-                return ("");
-            }
-        };
-
-        Linkify.MatchFilter mf = new Linkify.MatchFilter(){
-            @Override
-            public boolean acceptMatch(CharSequence s, int start, int end) {
-                return(true);
-            }
-        };
-
-        Linkify.addLinks(linkLearning, pTheLearningProject, "http://learnbsiproject.000webhostapp.com/",mf,tf);
 
         btCadastro.setOnClickListener( new View.OnClickListener(){
 

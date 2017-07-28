@@ -81,12 +81,6 @@
 		android:text="@string/cadastrar"
 		android:layout_marginTop="40dp" />
 
-	<TextView
-		android:id="@+id/theLearnProjectId"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="The Learning Project"
-		android:textAlignment="center" />
 </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

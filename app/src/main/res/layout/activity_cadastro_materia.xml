@@ -10,11 +10,10 @@
         android:id="@+id/BotaoCadastraMateriaID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cadastrar"
+        android:text="Inserir"
         tools:layout_editor_absoluteX="140dp"
         tools:layout_editor_absoluteY="189dp"
-        android:layout_marginTop="74dp"
-        android:layout_below="@+id/entradaMateriaID"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
     <EditText
@@ -23,10 +22,11 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Nome Materia"
+        android:hint="Insira nova habilidade"
         tools:layout_editor_absoluteX="84dp"
         tools:layout_editor_absoluteY="92dp"
-        android:layout_marginTop="106dp"
+        android:layout_marginTop="157dp"
+        android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

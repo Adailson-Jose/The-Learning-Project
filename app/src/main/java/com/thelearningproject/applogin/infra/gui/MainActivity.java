@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     private UsuarioServices negociousuario;
     private PerfilServices negocioperfil;
 
-    private Button botaologout;
     private Button botaoconfig;
     private Button botaoBusca;
     private Button botaoInsereMateria;
@@ -35,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
         sessao = SessionController.getInstance(this.getApplicationContext());
 
         apresentacao = (TextView) findViewById(R.id.apresentacaoID);
-        botaologout = (Button) findViewById(R.id.LogoutID);
         botaoconfig = (Button) findViewById(R.id.configID);
         botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
         botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
@@ -50,14 +48,6 @@ public class MainActivity extends AppCompatActivity {
         }else {
             exibir();
         }
-
-        botaologout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sessao.encerraSessao();
-                finish();
-            }
-        });
 
         botaoBusca.setOnClickListener(new View.OnClickListener() {
             @Override

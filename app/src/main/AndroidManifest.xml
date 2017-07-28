@@ -32,10 +32,22 @@
         <activity
             android:name=".perfil.gui.HabilidadeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".infra.gui.ConfiguracaoActivity" />
+        <activity android:name=".infra.gui.ConfiguracaoActivity">
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".infra.gui.MainActivity"/>
+        </activity>
         <activity android:name=".infra.gui.HomeActivity" />
-        <activity android:name=".infra.gui.CadastroMateriaActivity"/>
-        <activity android:name=".infra.gui.BuscaActivity"/>
+        <activity android:name=".infra.gui.CadastroMateriaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infra.gui.MainActivity"/>
+        </activity>
+        <activity android:name=".infra.gui.BuscaActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infra.gui.MainActivity"/>
+        </activity>
     </application>
 
 </manifest>

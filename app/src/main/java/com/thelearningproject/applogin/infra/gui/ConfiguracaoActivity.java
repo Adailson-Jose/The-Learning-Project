@@ -3,12 +3,14 @@ package com.thelearningproject.applogin.infra.gui;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infra.utils.Auxiliar;
 import com.thelearningproject.applogin.infra.utils.SessionController;
 import com.thelearningproject.applogin.infra.utils.UsuarioException;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
@@ -21,14 +23,14 @@ import java.util.regex.Pattern;
  * Created by Heitor on 25/07/2017.
  */
 
-public class ConfiguracaoActivity extends Activity{
+public class ConfiguracaoActivity extends AppCompatActivity{
 
-    private EditText alterarnome;
-    private EditText alteraremail;
-    private EditText alterarsenha;
+    private EditText alterarNome;
+    private EditText alterarEmail;
+    private EditText alterarSenha;
     private Button btAlterar;
     private Button btDesativar;
-    private Button btVoltar;
+    private Button btLogout;
 
     private SessionController session;
 
@@ -37,20 +39,22 @@ public class ConfiguracaoActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracao);
+        setTitle("Configurações");
 
         session = SessionController.getInstance(this.getApplicationContext());
 
-        alterarnome = (EditText) findViewById(R.id.nomeID);
-        alteraremail = (EditText) findViewById(R.id.emailID);
-        alterarsenha = (EditText) findViewById(R.id.senhaID);
+        alterarNome = (EditText) findViewById(R.id.nomeID);
+        alterarEmail = (EditText) findViewById(R.id.emailID);
+        alterarSenha = (EditText) findViewById(R.id.senhaID);
         btAlterar = (Button) findViewById(R.id.alterarID);
         btDesativar = (Button) findViewById(R.id.deletarID);
-        btVoltar = (Button) findViewById(R.id.voltarID);
+        btLogout = (Button) findViewById(R.id.LogoutID);
 
         btAlterar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 alterar(v);
+                Auxiliar.esconderTeclado(ConfiguracaoActivity.this);
             }
 
         });
@@ -60,19 +64,25 @@ public class ConfiguracaoActivity extends Activity{
                 desativar(v);
             }
         });
-        btVoltar.setOnClickListener(new View.OnClickListener(){
+
+        btLogout.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                startActivity(new Intent(ConfiguracaoActivity.this,MainActivity.class));
+            public void onClick(View v) {
+                session.encerraSessao();
+                Toast.makeText(ConfiguracaoActivity.this, "Logout efetuado com sucesso", Toast.LENGTH_LONG).show();
+                finish();
             }
         });
+
+        alterarNome.setText(session.getUsuario().getNome());
+        alterarEmail.setText(session.getUsuario().getEmail());
     }
 
     private void alterar(View view){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-        String nome = alterarnome.getText().toString();
-        String email = alteraremail.getText().toString();
-        String senha = alterarsenha.getText().toString();
+        String nome = alterarNome.getText().toString();
+        String email = alterarEmail.getText().toString();
+        String senha = alterarSenha.getText().toString();
 
         Usuario usuario = session.getUsuario();
 //        int id = usuario.getId();
@@ -90,19 +100,21 @@ public class ConfiguracaoActivity extends Activity{
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
+                Toast.makeText(this.getApplicationContext(), "Dados atualizados com sucesso", Toast.LENGTH_LONG).show();
                 startActivity(intent);
                 finish();
 
             }
 
         } catch (UsuarioException e){
-            alteraremail.setError("Email ja cadastrado");
+            alterarEmail.setError("E-mail já cadastrado");
         }
     }
 
     private void desativar(View view){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
         negocio.deletarUsuario(session.getUsuario());
+        Toast.makeText(ConfiguracaoActivity.this, "Usuário desativado com sucesso", Toast.LENGTH_LONG).show();
         finish();
         session.encerraSessao();
     }
@@ -111,15 +123,15 @@ public class ConfiguracaoActivity extends Activity{
         Boolean validacao=true;
         StringBuilder erro = new StringBuilder();
         if (usuario.getNome() == null || usuario.getNome().trim().length() == 0) {
-            alterarnome.setError("Nome inválido");
+            alterarNome.setError("Nome inválido");
             validacao = false;
         }
         if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !aplicandoPattern(usuario.getEmail().toUpperCase())) {
-            alteraremail.setError("Email inválido");
+            alterarEmail.setError("E-mail inválido");
             validacao = false;
         }
         if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
-            alterarsenha.setError("Senha inválida");
+            alterarSenha.setError("Senha inválida");
             validacao = false;
         }
         String resultado = (erro.toString().trim());

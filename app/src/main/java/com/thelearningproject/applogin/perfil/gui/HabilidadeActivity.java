@@ -12,6 +12,7 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infra.gui.MainActivity;
+import com.thelearningproject.applogin.infra.utils.Auxiliar;
 import com.thelearningproject.applogin.infra.utils.SessionController;
 import com.thelearningproject.applogin.infra.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -39,6 +40,7 @@ public class HabilidadeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 criarPerfil(view);
+                Auxiliar.esconderTeclado(HabilidadeActivity.this);
             }
         });
     }
@@ -51,34 +53,51 @@ public class HabilidadeActivity extends AppCompatActivity {
         String habilidade = entradahabilidade.getText().toString();
 
         Usuario usuario = negociousuario.retornaUsuario(sessao.getUsuario().getEmail());
+
         try {
             Materia materia = new Materia();
             materia.setNome(habilidade);
-            materia = materiaServices.cadastraMateria(materia);
 
-            Perfil perfil = new Perfil();
-            perfil.setUsuarioID(usuario.getId());
-            perfil.addHabilidade(materia);
-            negocioperfil.inserirPerfil(perfil);
-            perfil = negocioperfil.retornaPerfil(usuario.getId());
-            negocioperfil.insereHabilidade(perfil, materia);
-            Toast.makeText(this, "Cadastro efetuado com sucesso.", Toast.LENGTH_LONG).show();
-            sessao.setPerfil(perfil);
-            sessao.iniciaSessao();
+            if(validaHabilidade(materia)) {
+                materia = materiaServices.cadastraMateria(materia);
 
-            Intent entidade = new Intent(HabilidadeActivity.this, MainActivity.class);
-            entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(entidade);
+                Perfil perfil = new Perfil();
+                perfil.setUsuarioID(usuario.getId());
+                perfil.addHabilidade(materia);
 
-            finish();
+                negocioperfil.inserirPerfil(perfil);
+                perfil = negocioperfil.retornaPerfil(usuario.getId());
+                negocioperfil.insereHabilidade(perfil, materia);
+
+                Toast.makeText(this, "Cadastro efetuado com sucesso.", Toast.LENGTH_LONG).show();
+
+                sessao.setPerfil(perfil);
+                sessao.iniciaSessao();
+
+                Intent entidade = new Intent(HabilidadeActivity.this, MainActivity.class);
+                entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade);
+                finish();
+            }
 
         } catch (UsuarioException e){
             Toast.makeText(this, "Materia já cadastrada", Toast.LENGTH_LONG).show();
         }
 
+    }
 
-
-
+    private Boolean validaHabilidade(Materia materia){
+        Boolean validacao=true;
+        StringBuilder erro = new StringBuilder();
+        if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
+            entradahabilidade.setError("Habilidade inválida");
+            validacao = false;
+        }
+        String resultado = (erro.toString().trim());
+        if (resultado!= "") {
+            Toast.makeText(HabilidadeActivity.this, resultado, Toast.LENGTH_LONG).show();
+        }
+        return validacao;
     }
 }

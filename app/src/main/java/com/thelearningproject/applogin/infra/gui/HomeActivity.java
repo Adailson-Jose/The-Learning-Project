@@ -58,17 +58,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    @Override
-    public void onBackPressed() {
-        MenuItem homeItem = mBottomNav.getMenu().getItem(0);
-        if (mSelectedItem != homeItem.getItemId()) {
-            // select home item
-            selectFragment(homeItem);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
     private void selectFragment(MenuItem item) {
         Fragment frag = null;
         // init corresponding fragment

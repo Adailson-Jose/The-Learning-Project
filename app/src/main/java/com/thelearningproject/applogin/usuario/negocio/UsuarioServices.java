@@ -117,7 +117,7 @@ public class UsuarioServices {
     private void usuarioAtivo(Usuario usuario) throws UsuarioException{
         if (usuario != null){
             if (Status.DESATIVADO.equals(usuario.getStatus())){
-                throw new UsuarioException("usuario-desativado");
+                throw new UsuarioException("Usuário ou senha incorretos");
 
             }
         }
