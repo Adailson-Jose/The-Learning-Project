@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class TermosActivity extends AppCompatActivity {
     private Button botaocontinuar;
     private TextView linkLearning;
-    private Pattern pTheLearningProject = Pattern.compile("The Learning Project");
+    private Pattern pTheLearningProject = Pattern.compile("The Learning © Project 2017");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
