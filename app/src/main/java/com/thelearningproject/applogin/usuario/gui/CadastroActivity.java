@@ -12,6 +12,8 @@ import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.infraestrutura.gui.TermosActivity;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
 import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
@@ -43,21 +45,21 @@ public class CadastroActivity extends Activity {
         });
     }
 
-    private boolean validaCampos(Usuario usuario){
+    private boolean validaCampos(Pessoa pessoa){
         boolean validacao = true;
         StringBuilder erro = new StringBuilder();
 
-        if (usuario.getNome() == null || usuario.getNome().trim().length() == 0) {
+        if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
             entradaNome.setError("Nome inválido");
             validacao = false;
         }
 
-        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
+        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
             entradaEmail.setError("Email inválido");
             validacao = false;
         }
 
-        if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
+        if (pessoa.getUsuario().getSenha() == null || pessoa.getUsuario().getSenha().trim().length() == 0) {
             entradaSenha.setError("Senha inválida");
             validacao = false;
         }
@@ -78,28 +80,38 @@ public class CadastroActivity extends Activity {
         String senha = entradaSenha.getText().toString();
 
         Usuario usuario = new Usuario();
-        usuario.setNome(nome);
         usuario.setEmail(email);
         usuario.setSenha(senha);
         usuario.setStatus(Status.ATIVADO);
 
+        Pessoa pessoa = new Pessoa();
+        pessoa.setNome(nome);
+        pessoa.setUsuario(usuario);
+
         try {
-            executarCadastro(usuario);
+            executarCadastro(pessoa);
 
         } catch (UsuarioException e){
             entradaEmail.setError("Email já cadastrado");
         }
     }
 
-    private void executarCadastro(Usuario usuario) throws UsuarioException{
-        if (validaCampos(usuario)) {
-            UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-            negocio.inserirUsuario(usuario);
+    private void executarCadastro(Pessoa pessoa) throws UsuarioException{
+        if (validaCampos(pessoa)) {
+            UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
+            negocioUsuario.inserirUsuario(pessoa.getUsuario());
+
+            pessoa.setUsuarioID(negocioUsuario.retornaUsuario(pessoa.getUsuario().getEmail()).getId());
+            PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
+            negocioPessoa.inserirPessoa(pessoa);
 
             Intent entidade = new Intent(CadastroActivity.this, TermosActivity.class);
             entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            sessao.setUsuario(negocio.retornaUsuario(usuario.getEmail()));
+            sessao.setUsuario(negocioUsuario.retornaUsuario(pessoa.getUsuario().getEmail()));
+            Pessoa pessoa2 = negocioPessoa.retornaPessoa(pessoa.getUsuarioID());
+            pessoa2.setUsuario(sessao.getUsuario());
+            sessao.setPessoa(pessoa2);
             sessao.salvaSessao();
             sessao.iniciaSessao();
 

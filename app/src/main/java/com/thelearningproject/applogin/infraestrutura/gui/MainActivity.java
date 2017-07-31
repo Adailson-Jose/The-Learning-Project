@@ -11,6 +11,8 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -77,20 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
     private void resumir(){
         UsuarioServices negociousuario = UsuarioServices.getInstancia(getBaseContext());
+        PessoaServiços negociopessoa = PessoaServiços.getInstancia(getBaseContext());
 
-        Usuario usuario = negociousuario.consulta(sessao.retornaID());
+        Usuario usuario = negociousuario.consulta(sessao.retornaIdUsuario());
+        Pessoa pessoa = negociopessoa.consulta(sessao.retornaIdPessoa());
+        pessoa.setUsuario(usuario);
+
         sessao.iniciaSessao();
         sessao.setUsuario(usuario);
+        sessao.setPessoa(pessoa);
     }
 
     private void exibir() {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
-        Perfil perfil = negocioperfil.retornaPerfil(sessao.getUsuario().getId());
-        perfil.setUsuario(sessao.getUsuario());
+        Perfil perfil = negocioperfil.retornaPerfil(sessao.getPessoa().getId());
+        perfil.setPessoa(sessao.getPessoa());
         sessao.setPerfil(perfil);
 
-        String mensagem = "Oi, " + sessao.getUsuario().getNome() + ".";
+        String mensagem = "Oi, " + sessao.getPessoa().getNome() + ".";
 
         apresentacao.setText(mensagem);
 

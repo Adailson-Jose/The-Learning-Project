@@ -1,4 +1,8 @@
-package com.thelearningproject.applogin.perfil.persistencia;
+package com.thelearningproject.applogin.pessoa.persistencia;
+
+/**
+ * Created by nicolas on 30/07/2017.
+ */
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,20 +14,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Banco extends SQLiteOpenHelper {
     private static Banco instancia;
-    private static final String BANCO = "BDPerfil";
-    private static final String TABELA = "perfis";
-    private static final int VERSAO = 4;
+    private static final String BANCO = "BDPessoa";
+    private static final String TABELA = "pessoas";
+    private static final int VERSAO = 2;
 
     private static final String ID = "id";
-    private static final String PESSOA = "pessoa";
-    private static final String DESCRICAO = "descricao";
-    private static final String HABILIDADES = "habilidade";
+    private static final String NOME = "nome";
+    private static final String USUARIO = "usuario";
 
     public static synchronized Banco getInstancia(Context contexto) {
         if(instancia == null) {
             instancia = new Banco(contexto.getApplicationContext());
         }
-
         return instancia;
     }
 
@@ -34,9 +36,8 @@ public class Banco extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase banco) {
         String sql = "CREATE TABLE " + TABELA + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                PESSOA + " INTEGER, " +
-                DESCRICAO + " TEXT, " +
-                HABILIDADES + " INTEGER)";
+                NOME + " TEXT, " +
+                USUARIO + " INTEGER)";
 
         banco.execSQL(sql);
     }

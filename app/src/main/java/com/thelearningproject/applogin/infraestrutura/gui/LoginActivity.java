@@ -12,6 +12,8 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.gui.CadastroActivity;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
@@ -95,12 +97,17 @@ public class LoginActivity extends Activity {
 
     private void executarLogin(Usuario usuario) throws UsuarioException {
         if (validaCampos(usuario)) {
-            UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-            Usuario logado = negocio.logar(usuario);
+            UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
+            PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
+
+            Usuario logado = negocioUsuario.logar(usuario);
 
             if (logado != null) {
+                Pessoa pessoaLogada = negocioPessoa.retornaPessoa(logado.getId());
                 sessao.encerraSessao();
                 sessao.setUsuario(logado);
+                pessoaLogada.setUsuario(logado);
+                sessao.setPessoa(pessoaLogada);
                 sessao.iniciaSessao();
 
                 if (switchConectado.isChecked()) {

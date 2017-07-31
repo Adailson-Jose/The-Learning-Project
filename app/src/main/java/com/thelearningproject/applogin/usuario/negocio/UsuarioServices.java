@@ -57,13 +57,13 @@ public class UsuarioServices {
         return usuario;
     }
 
+
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
 
         if(verificaEmailExistenteStatus(usuario.getEmail())){
             Usuario user = persistencia.retornaUsuarioPorEmail(usuario.getEmail());
             user.setEmail(usuario.getEmail());
-            user.setNome(usuario.getNome());
             user.setSenha(usuario.getSenha());
             user.setStatus(Status.ATIVADO);
             persistencia.alterarUsuario(user);
@@ -77,7 +77,9 @@ public class UsuarioServices {
 
     public void alterarUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
-        verificaEmailExistente(usuario.getEmail());
+        if(verificaEmailExistente(usuario.getEmail())) {
+            throw new UsuarioException("E-mail já cadastrado");
+        }
         persistencia.alterarUsuario(usuario);
     }
 

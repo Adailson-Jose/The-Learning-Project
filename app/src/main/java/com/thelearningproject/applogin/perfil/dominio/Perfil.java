@@ -1,6 +1,7 @@
 package com.thelearningproject.applogin.perfil.dominio;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
@@ -11,8 +12,8 @@ import java.util.ArrayList;
 
 public class Perfil {
     private int id;
-    private Usuario usuario;
-    private int usuarioID;
+    private Pessoa pessoa;
+    private int pessoaID;
     private String descricao;
     private ArrayList<Materia> habilidades = new ArrayList<Materia>();
 
@@ -24,20 +25,20 @@ public class Perfil {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Pessoa getPessoa() {
+        return pessoa;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setPessoa(Pessoa pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public int getUsuarioID() {
-        return usuarioID;
+    public int getPessoaID() {
+        return pessoaID;
     }
 
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
+    public void setPessoaID(int pessoaID) {
+        this.pessoaID = pessoaID;
     }
 
     public String getDescricao() {

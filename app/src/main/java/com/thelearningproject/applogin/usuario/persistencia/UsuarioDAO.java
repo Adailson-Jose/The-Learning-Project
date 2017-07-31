@@ -9,19 +9,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.thelearningproject.applogin.usuario.dominio.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by nicolas on 22/07/2017.
  */
 
 public class UsuarioDAO {
-    private static UsuarioDAO sInstance;
+    private static UsuarioDAO instancia;
 
     private static final String TABELA = "usuarios";
     private static final String ID = "id";
-    private static final String NOME = "nome";
     private static final String EMAIL = "email";
     private static final String SENHA = "senha";
     private static final String STATUS = "status";
@@ -30,10 +26,10 @@ public class UsuarioDAO {
 
 
     public static synchronized UsuarioDAO getInstance(Context context){
-        if(sInstance == null){
-            sInstance = new UsuarioDAO(context.getApplicationContext());
+        if(instancia == null){
+            instancia = new UsuarioDAO(context.getApplicationContext());
         }
-        return sInstance;
+        return instancia;
     }
 
     public UsuarioDAO(Context context) {
@@ -42,7 +38,6 @@ public class UsuarioDAO {
 
     public void inserir(Usuario usuario) {
         ContentValues values = new ContentValues();
-        values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
         values.put(STATUS,usuario.getStatus().getValor());
@@ -63,14 +58,13 @@ public class UsuarioDAO {
 
 
     public Usuario retornaUsuarioPorEmail(String email) {
-        String[] colunas = {ID, NOME, EMAIL, STATUS};
+        String[] colunas = {ID, EMAIL, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, "email = ?", new String[] {email}, null, null, null);
         Usuario usuario = null;
 
         if (cursor.moveToFirst()) {
             usuario = new Usuario();
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
 
@@ -80,14 +74,13 @@ public class UsuarioDAO {
     }
 
     public Usuario retornaUsuario(String email,String senha) {
-        String[] colunas = {ID, NOME, EMAIL, SENHA, STATUS};
+        String[] colunas = {ID, EMAIL, SENHA, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA,colunas,"email = ? AND senha = ?",new String[]{email, senha},null,null,null);
         Usuario usuario = null;
         if(cursor.moveToFirst()) {
 
             usuario = new Usuario();
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
-            usuario.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
@@ -104,19 +97,18 @@ public class UsuarioDAO {
 
     //diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
     public Usuario pesquisarUsuario(int codigo){
-
+        String[] colunas = {ID, EMAIL, SENHA, STATUS};
         SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor cursor = db.query(TABELA, new String[]{ID, NOME,
-                        EMAIL, SENHA, STATUS}, ID + " = ?",
+        Cursor cursor = db.query(TABELA, colunas, ID + " = ?",
                 new String[]{String.valueOf(codigo)}, null, null, null, null);
         Usuario usuario = null;
+
         if (cursor.moveToFirst()) {
             usuario = new Usuario();
-            usuario.setId(Integer.parseInt(cursor.getString(0)));
-            usuario.setNome(cursor.getString(1));
-            usuario.setEmail(cursor.getString(2));
-            usuario.setSenha(cursor.getString(3));
-            usuario.setStatus(valores[(cursor.getInt(4))]);
+            usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+            usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
+            usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
+            usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
             db.close();
         }
         return usuario;
@@ -126,7 +118,6 @@ public class UsuarioDAO {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(NOME, usuario.getNome());
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
         values.put(STATUS, usuario.getStatus().getValor());

@@ -39,8 +39,8 @@ public class PerfilServices {
         persistencia.inserir(perfil);
     }
 
-    public Perfil retornaPerfil(int id_usuario) {
-        Perfil perfil = persistencia.retornaPerfil(id_usuario);
+    public Perfil retornaPerfil(int idPessoa) {
+        Perfil perfil = persistencia.retornaPerfil(idPessoa);
         ArrayList<Integer> materia_id = conexaoHabilidade.retornaMateria(perfil.getId());
         for(int i:materia_id){
             perfil.addHabilidade(materiaServices.consultar(i));
@@ -48,7 +48,7 @@ public class PerfilServices {
         return perfil;
     }
 
-    public Perfil consultar(int id){
+    public Perfil consulta(int id){
         Perfil perfil = persistencia.consultar(id);
         ArrayList<Integer> materia_id = conexaoHabilidade.retornaMateria(perfil.getId());
         for(int i:materia_id){
@@ -66,7 +66,7 @@ public class PerfilServices {
         ArrayList<Perfil> usuarios = new ArrayList<Perfil>();
         ArrayList<Integer> lista_ids = conexaoHabilidade.retornaUsuarios(materia.getId());
         for (int id:lista_ids){
-            usuarios.add(consultar(id));
+            usuarios.add(consulta(id));
         }
         return usuarios;
     }

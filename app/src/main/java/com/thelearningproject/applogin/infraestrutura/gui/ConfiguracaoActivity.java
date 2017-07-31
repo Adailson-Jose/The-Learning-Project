@@ -12,6 +12,8 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -73,29 +75,35 @@ public class ConfiguracaoActivity extends AppCompatActivity{
             }
         });
 
-        alterarNome.setText(session.getUsuario().getNome());
+        alterarNome.setText(session.getPessoa().getNome());
         alterarEmail.setText(session.getUsuario().getEmail());
     }
 
     private void alterar(View view){
-        UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
+        UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
+        PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
+
         String nome = alterarNome.getText().toString();
         String email = alterarEmail.getText().toString();
         String senha = alterarSenha.getText().toString();
 
         Usuario usuario = session.getUsuario();
-//        int id = usuario.getId();
-//        usuario.setId(id);
-        usuario.setNome(nome);
+        Pessoa pessoa = session.getPessoa();
+
+        pessoa.setNome(nome);
         usuario.setEmail(email);
         usuario.setSenha(senha);
+        pessoa.setUsuario(usuario);
 
         try {
-            if(validaAlterar(usuario)){
-                negocio.alterarUsuario(usuario);
+            if(validaAlterar(pessoa)){
+                negocioUsuario.alterarUsuario(pessoa.getUsuario());
+                negocioPessoa.alterarPessoa(pessoa);
 
                 Intent intent = new Intent(ConfiguracaoActivity.this, MainActivity.class);
                 session.setUsuario(usuario);
+                session.setPessoa(pessoa);
+
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
@@ -118,18 +126,18 @@ public class ConfiguracaoActivity extends AppCompatActivity{
         session.encerraSessao();
     }
 
-    private Boolean validaAlterar(Usuario usuario){
+    private Boolean validaAlterar(Pessoa pessoa){
         Boolean validacao=true;
         StringBuilder erro = new StringBuilder();
-        if (usuario.getNome() == null || usuario.getNome().trim().length() == 0) {
+        if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
             alterarNome.setError("Nome inválido");
             validacao = false;
         }
-        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !aplicandoPattern(usuario.getEmail().toUpperCase())) {
+        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !aplicandoPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
             alterarEmail.setError("E-mail inválido");
             validacao = false;
         }
-        if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
+        if (pessoa.getUsuario().getSenha() == null || pessoa.getUsuario().getSenha().trim().length() == 0) {
             alterarSenha.setError("Senha inválida");
             validacao = false;
         }

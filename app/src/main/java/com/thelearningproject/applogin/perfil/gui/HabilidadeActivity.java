@@ -17,6 +17,8 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -32,6 +34,7 @@ public class HabilidadeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_habilidade);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
+
         entradahabilidade = (EditText) findViewById(R.id.habilidadeentrada);
         entradadescricao = (EditText) findViewById(R.id.descricaoentrada);
 
@@ -47,12 +50,15 @@ public class HabilidadeActivity extends AppCompatActivity {
 
     private void criarPerfil(View view) {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
-        UsuarioServices negociousuario = UsuarioServices.getInstancia(getBaseContext());
+        UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
+        PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
         MateriaServices materiaServices = MateriaServices.getInstancia(getBaseContext());
 
         String habilidade = entradahabilidade.getText().toString();
 
-        Usuario usuario = negociousuario.retornaUsuario(sessao.getUsuario().getEmail());
+        Usuario usuario = negocioUsuario.retornaUsuario(sessao.getUsuario().getEmail());
+        Pessoa pessoa = negocioPessoa.retornaPessoa(sessao.getUsuario().getId());
+
 
         try {
             Materia materia = new Materia();
@@ -62,14 +68,16 @@ public class HabilidadeActivity extends AppCompatActivity {
                 materia = materiaServices.cadastraMateria(materia);
 
                 Perfil perfil = new Perfil();
-                perfil.setUsuarioID(usuario.getId());
+                perfil.setPessoaID(pessoa.getId());
                 perfil.addHabilidade(materia);
 
                 negocioperfil.inserirPerfil(perfil);
-                perfil = negocioperfil.retornaPerfil(usuario.getId());
+                perfil = negocioperfil.retornaPerfil(pessoa.getId());
+                perfil.setPessoa(pessoa);
                 negocioperfil.insereHabilidade(perfil, materia);
 
                 Toast.makeText(this, "Cadastro efetuado com sucesso.", Toast.LENGTH_LONG).show();
+
 
                 sessao.setPerfil(perfil);
                 sessao.iniciaSessao();
@@ -84,6 +92,7 @@ public class HabilidadeActivity extends AppCompatActivity {
         } catch (UsuarioException e){
             Toast.makeText(this, "Materia já cadastrada", Toast.LENGTH_LONG).show();
         }
+
 
     }
 

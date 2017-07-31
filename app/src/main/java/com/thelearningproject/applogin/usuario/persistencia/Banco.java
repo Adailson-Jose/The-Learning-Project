@@ -10,13 +10,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Banco extends SQLiteOpenHelper {
 
-    private static Banco sInstance;
+    private static Banco instancia;
 
     private static final String NOME_BANCO = "BDUsuario";
-    private static final int VERSION = 9;
+    private static final int VERSION = 11;
     private static final String TABELA = "usuarios";
     private static final String ID = "id";
-    private static final String NOME = "nome";
     private static final String EMAIL = "email";
     private static final String SENHA = "senha";
     private static final String STATUS = "status";
@@ -24,10 +23,10 @@ public class Banco extends SQLiteOpenHelper {
 
 
     public static synchronized Banco getInstance(Context context){
-        if(sInstance == null){
-            sInstance = new Banco(context.getApplicationContext());
+        if(instancia == null){
+            instancia = new Banco(context.getApplicationContext());
         }
-        return sInstance;
+        return instancia;
     }
 
     public Banco(Context context) {
@@ -38,7 +37,6 @@ public class Banco extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABELA + "(" +
                 ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                NOME + " TEXT, " +
                 EMAIL + " TEXT, " +
                 SENHA + " TEXT, " +
                 STATUS + " INTEGER)";
