@@ -19,7 +19,7 @@ import com.thelearningproject.applogin.usuario.gui.CriarContaActivity;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 /**
- * Created by Ebony Marques on 17/07/2017.
+ * Criado por Ebony Marques em 17/07/2017.
  */
 
 public class LoginActivity extends Activity {
@@ -43,7 +43,7 @@ public class LoginActivity extends Activity {
         botaoLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                processoLogin(view);
+                processoLogin();
             }
         });
 
@@ -79,7 +79,7 @@ public class LoginActivity extends Activity {
         return validacao;
     }
 
-    private void processoLogin(View view){
+    private void processoLogin(){
         String email = entradaLogin.getText().toString();
         String senha = entradaSenha.getText().toString();
 

@@ -9,11 +9,11 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
- * Created by nicolas on 30/07/2017.
+ * Criado por nicolas em 30/07/2017.
  */
 
 public class PessoaDAO {
-    private static Banco banco;
+    private Banco banco;
     private static PessoaDAO instancia;
     private static final String TABELA = "pessoas";
 
@@ -28,7 +28,7 @@ public class PessoaDAO {
         return instancia;
     }
 
-    public PessoaDAO(Context contexto) {
+    private PessoaDAO(Context contexto) {
         banco = Banco.getInstancia(contexto);
     }
 
@@ -44,7 +44,7 @@ public class PessoaDAO {
         String[] colunas = {ID, NOME, USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, USUARIO + " = ?", new String[]{Integer.toString(idUsuario)}, null, null, null);
         Pessoa pessoa = null;
-        Usuario usuario = null;
+        Usuario usuario;
 
         if (cursor.moveToFirst()) {
             pessoa = new Pessoa();
@@ -55,6 +55,7 @@ public class PessoaDAO {
             pessoa.setUsuario(usuario);
         }
 
+        cursor.close();
         return pessoa;
     }
 
@@ -62,7 +63,7 @@ public class PessoaDAO {
         String[] colunas = {ID, NOME, USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Pessoa pessoa = null;
-        Usuario usuario = null;
+        Usuario usuario;
         if (cursor.moveToFirst()) {
             pessoa = new Pessoa();
             usuario = new Usuario();
@@ -72,6 +73,7 @@ public class PessoaDAO {
             pessoa.setUsuario(usuario);
         }
 
+        cursor.close();
         return pessoa;
     }
 

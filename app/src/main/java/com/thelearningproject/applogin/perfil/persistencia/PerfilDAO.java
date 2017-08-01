@@ -9,11 +9,11 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 
 /**
- * Created by Ebony Marques on 26/07/2017.
+ * Criado por Ebony Marques em 26/07/2017.
  */
 
 public class PerfilDAO {
-    private static Banco banco;
+    private Banco banco;
     private static PerfilDAO instancia;
     private static final String TABELA = "perfis";
 
@@ -28,7 +28,7 @@ public class PerfilDAO {
         return instancia;
     }
 
-    public PerfilDAO(Context contexto) {
+    private PerfilDAO(Context contexto) {
         banco = Banco.getInstancia(contexto);
     }
 
@@ -43,7 +43,7 @@ public class PerfilDAO {
         String[] colunas = {ID, PESSOA};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, PESSOA + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
         Perfil perfil = null;
-        Pessoa pessoa = null;
+        Pessoa pessoa;
 
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
@@ -52,6 +52,8 @@ public class PerfilDAO {
             perfil.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             perfil.setPessoa(pessoa);
         }
+
+        cursor.close();
         return perfil;
     }
 
@@ -59,7 +61,7 @@ public class PerfilDAO {
         String[] colunas = {ID, PESSOA};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Perfil perfil = null;
-        Pessoa pessoa = null;
+        Pessoa pessoa;
 
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
@@ -69,6 +71,7 @@ public class PerfilDAO {
             perfil.setPessoa(pessoa);
         }
 
+        cursor.close();
         return perfil;
     }
 

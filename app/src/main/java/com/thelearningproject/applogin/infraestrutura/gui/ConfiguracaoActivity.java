@@ -7,9 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.estudo.dominio.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
@@ -18,23 +16,16 @@ import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
- * Created by Heitor on 25/07/2017.
+ * Criado por Heitor em 25/07/2017.
  */
 
 public class ConfiguracaoActivity extends AppCompatActivity{
+    private ControladorSessao session;
+    private Auxiliar auxiliar = new Auxiliar();
     private EditText alterarNome;
     private EditText alterarEmail;
     private EditText alterarSenha;
-    private Button btAlterar;
-    private Button btDesativar;
-    private Button btLogout;
-
-    private ControladorSessao session;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -47,26 +38,32 @@ public class ConfiguracaoActivity extends AppCompatActivity{
         alterarNome = (EditText) findViewById(R.id.nomeID);
         alterarEmail = (EditText) findViewById(R.id.emailID);
         alterarSenha = (EditText) findViewById(R.id.senhaID);
-        btAlterar = (Button) findViewById(R.id.alterarID);
-        btDesativar = (Button) findViewById(R.id.deletarID);
-        btLogout = (Button) findViewById(R.id.LogoutID);
 
-        btAlterar.setOnClickListener(new View.OnClickListener(){
+        Button botaoAlterar = (Button) findViewById(R.id.alterarID);
+        Button botaoDesativar = (Button) findViewById(R.id.deletarID);
+        Button botaoLogout = (Button) findViewById(R.id.LogoutID);
+
+        botaoAlterar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                alterar(v);
+                processoAlterar();
                 Auxiliar.esconderTeclado(ConfiguracaoActivity.this);
+
+                Intent entidade = new Intent(ConfiguracaoActivity.this, MainActivity.class);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(entidade);
+                finish();
             }
 
         });
-        btDesativar.setOnClickListener(new View.OnClickListener(){
+        botaoDesativar.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 desativar(v);
             }
         });
 
-        btLogout.setOnClickListener(new View.OnClickListener() {
+        botaoLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 session.encerraSessao();
@@ -79,10 +76,20 @@ public class ConfiguracaoActivity extends AppCompatActivity{
         alterarEmail.setText(session.getUsuario().getEmail());
     }
 
-    private void alterar(View view){
+    private void executarAlterar(Pessoa pessoa) throws UsuarioException {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
+        negocioUsuario.alterarUsuario(pessoa.getUsuario());
+        negocioPessoa.alterarPessoa(pessoa);
+
+        session.setUsuario(pessoa.getUsuario());
+        session.setPessoa(pessoa);
+
+        Toast.makeText(this.getApplicationContext(), "Dados atualizados com sucesso", Toast.LENGTH_LONG).show();
+    }
+
+    private void processoAlterar(){
         String nome = alterarNome.getText().toString();
         String email = alterarEmail.getText().toString();
         String senha = alterarSenha.getText().toString();
@@ -98,20 +105,7 @@ public class ConfiguracaoActivity extends AppCompatActivity{
 
         try {
             if(validaAlterar(pessoa)){
-                negocioUsuario.alterarUsuario(pessoa.getUsuario());
-                negocioPessoa.alterarPessoa(pessoa);
-
-                Intent intent = new Intent(ConfiguracaoActivity.this, MainActivity.class);
-                session.setUsuario(usuario);
-                session.setPessoa(pessoa);
-
-
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-
-                Toast.makeText(this.getApplicationContext(), "Dados atualizados com sucesso", Toast.LENGTH_LONG).show();
-                startActivity(intent);
-                finish();
-
+                executarAlterar(pessoa);
             }
 
         } catch (UsuarioException e){
@@ -128,13 +122,14 @@ public class ConfiguracaoActivity extends AppCompatActivity{
     }
 
     private Boolean validaAlterar(Pessoa pessoa){
-        Boolean validacao=true;
+        Boolean validacao = true;
         StringBuilder erro = new StringBuilder();
+
         if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
             alterarNome.setError("Nome inválido");
             validacao = false;
         }
-        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !aplicandoPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
+        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
             alterarEmail.setError("E-mail inválido");
             validacao = false;
         }
@@ -142,19 +137,13 @@ public class ConfiguracaoActivity extends AppCompatActivity{
             alterarSenha.setError("Senha inválida");
             validacao = false;
         }
+
         String resultado = (erro.toString().trim());
-        if (resultado!= "") {
+
+        if (!resultado.equals("")) {
             Toast.makeText(ConfiguracaoActivity.this, resultado, Toast.LENGTH_LONG).show();
         }
         return validacao;
     }
 
-    private Boolean aplicandoPattern (String email){
-        Pattern pattern = Pattern.compile("^[A-Z0-9._%-]+@[A-Z0-9.-]+.[A-Z]{2,4}$");
-        Matcher m = pattern.matcher(email);
-        Boolean resultado = m.matches();
-
-        return  resultado;
-
-    }
 }

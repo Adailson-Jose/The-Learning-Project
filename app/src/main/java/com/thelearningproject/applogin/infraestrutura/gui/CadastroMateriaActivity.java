@@ -16,7 +16,6 @@ import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 public class CadastroMateriaActivity extends AppCompatActivity {
     private ControladorSessao sessao;
-    private Button botaoCadastro;
     private EditText entradaMateria;
 
     @Override
@@ -25,7 +24,7 @@ public class CadastroMateriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cadastro_materia);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        botaoCadastro = (Button) findViewById(R.id.BotaoCadastraMateriaID);
+        Button botaoCadastro = (Button) findViewById(R.id.BotaoCadastraMateriaID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
 
         botaoCadastro.setOnClickListener(new View.OnClickListener(){
@@ -61,12 +60,15 @@ public class CadastroMateriaActivity extends AppCompatActivity {
     private Boolean validaCadastro(Materia materia){
         Boolean validacao=true;
         StringBuilder erro = new StringBuilder();
+
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
             entradaMateria.setError("Habilidade inválida");
             validacao = false;
         }
+
         String resultado = (erro.toString().trim());
-        if (resultado!= "") {
+
+        if (!resultado.equals("")) {
             Toast.makeText(CadastroMateriaActivity.this, resultado, Toast.LENGTH_LONG).show();
         }
         return validacao;
