@@ -18,7 +18,8 @@
             android:layout_height="150dp"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            android:contentDescription="@string/app_name"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_email"
@@ -57,7 +58,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:colorControlActivated="@color/colorAccent"
             android:text="@string/manterConectado" />
 
         <Button
@@ -67,11 +67,10 @@
             android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@color/colorPrimary"
             android:text="@string/login"
             android:layout_marginTop="30dp" />
 
-        <View style="@style/Divider"></View>
+        <View style="@style/Divider"/>
 
         <Button
             android:id="@+id/cadastroID"
