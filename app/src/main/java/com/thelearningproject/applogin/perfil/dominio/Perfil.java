@@ -13,9 +13,9 @@ import java.util.ArrayList;
 public class Perfil {
     private int id;
     private Pessoa pessoa;
-    private int pessoaID;
     private String descricao;
     private ArrayList<Materia> habilidades = new ArrayList<Materia>();
+    private ArrayList<Materia> necessidades = new ArrayList<Materia>();
 
     public int getId() {
         return id;
@@ -33,14 +33,6 @@ public class Perfil {
         this.pessoa = pessoa;
     }
 
-    public int getPessoaID() {
-        return pessoaID;
-    }
-
-    public void setPessoaID(int pessoaID) {
-        this.pessoaID = pessoaID;
-    }
-
     public String getDescricao() {
         return descricao;
     }
@@ -52,12 +44,12 @@ public class Perfil {
     public ArrayList<Materia> getHabilidades() {
         return habilidades;
     }
+
     public void addHabilidade(Materia nova) {
         habilidades.add(nova);
     }
 
-    @Override
-    public String toString(){
-        return "ID do Perfil: " + this.getId();
-    }
+    public ArrayList<Materia> getNecessidades() { return necessidades; }
+
+    public void addNecessidade(Materia nova) { necessidades.add(nova); }
 }

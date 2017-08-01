@@ -9,11 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.estudo.dominio.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -25,7 +26,6 @@ import java.util.regex.Pattern;
  */
 
 public class ConfiguracaoActivity extends AppCompatActivity{
-
     private EditText alterarNome;
     private EditText alterarEmail;
     private EditText alterarSenha;
@@ -81,18 +81,19 @@ public class ConfiguracaoActivity extends AppCompatActivity{
 
     private void alterar(View view){
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-        PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
+        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
         String nome = alterarNome.getText().toString();
         String email = alterarEmail.getText().toString();
         String senha = alterarSenha.getText().toString();
 
-        Usuario usuario = session.getUsuario();
+        Usuario usuario = session.getPessoa().getUsuario();
         Pessoa pessoa = session.getPessoa();
 
         pessoa.setNome(nome);
         usuario.setEmail(email);
         usuario.setSenha(senha);
+        usuario.setStatus(com.thelearningproject.applogin.infraestrutura.utils.Status.ATIVADO);
         pessoa.setUsuario(usuario);
 
         try {

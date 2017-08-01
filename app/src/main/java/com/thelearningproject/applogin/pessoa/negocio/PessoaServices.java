@@ -11,17 +11,17 @@ import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
  * Created by nicolas on 30/07/2017.
  */
 
-public class PessoaServiços {
-    private static PessoaServiços instancia;
+public class PessoaServices {
+    private static PessoaServices instancia;
     private PessoaDAO persistencia;
 
-    public PessoaServiços(Context contexto) {
+    public PessoaServices(Context contexto) {
         this.persistencia = PessoaDAO.getInstance(contexto);
     }
 
-    public static PessoaServiços getInstancia(Context contexto) {
+    public static PessoaServices getInstancia(Context contexto) {
         if (instancia == null) {
-            instancia = new PessoaServiços(contexto);
+            instancia = new PessoaServices(contexto);
         }
 
         return instancia;
@@ -29,6 +29,7 @@ public class PessoaServiços {
 
     public void inserirPessoa(Pessoa pessoa) {
         persistencia.inserir(pessoa);
+
     }
 
     public void alterarPessoa(Pessoa pessoa) throws UsuarioException {

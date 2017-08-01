@@ -7,6 +7,7 @@ import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.persistencia.ConexaoHabilidade;
+import com.thelearningproject.applogin.perfil.persistencia.ConexaoNecessidade;
 import com.thelearningproject.applogin.perfil.persistencia.PerfilDAO;
 
 import java.util.ArrayList;
@@ -20,9 +21,11 @@ public class PerfilServices {
     private PerfilDAO persistencia;
     private MateriaServices materiaServices;
     private ConexaoHabilidade conexaoHabilidade;
+    private ConexaoNecessidade conexaoNecessidade;
 
     public PerfilServices(Context contexto) {
-        this.conexaoHabilidade = ConexaoHabilidade.getInstance(contexto);
+        this.conexaoHabilidade = ConexaoHabilidade.getInstancia(contexto);
+        this.conexaoNecessidade = ConexaoNecessidade.getInstancia(contexto);
         this.persistencia = PerfilDAO.getInstance(contexto);
         this.materiaServices = MateriaServices.getInstancia(contexto);
     }
@@ -48,6 +51,10 @@ public class PerfilServices {
         return perfil;
     }
 
+    public void alterarPerfil(Perfil perfil) {
+        persistencia.alterarPerfil(perfil);
+    }
+
     public Perfil consulta(int id){
         Perfil perfil = persistencia.consultar(id);
         ArrayList<Integer> materia_id = conexaoHabilidade.retornaMateria(perfil.getId());
@@ -62,6 +69,11 @@ public class PerfilServices {
         conexaoHabilidade.insereConexao(perfil.getId(),materia.getId());
     }
 
+    public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+        verificaExistencia(perfil.getId(),materia.getId());
+        conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
+    }
+
     public ArrayList<Perfil> listarPerfil(Materia materia){
         ArrayList<Perfil> usuarios = new ArrayList<Perfil>();
         ArrayList<Integer> lista_ids = conexaoHabilidade.retornaUsuarios(materia.getId());
@@ -72,8 +84,7 @@ public class PerfilServices {
     }
 
     public ArrayList<Integer> listarMateria(Perfil perfil){
-        ArrayList<Integer> lista_ids = conexaoHabilidade.retornaMateria(perfil.getId());
-        return lista_ids;
+        return conexaoHabilidade.retornaMateria(perfil.getId());
     }
 
     private void verificaExistencia(int id_perfil, int id_materia) throws UsuarioException{

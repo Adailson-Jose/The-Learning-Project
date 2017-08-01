@@ -12,21 +12,21 @@ import java.util.ArrayList;
  */
 
 public class ConexaoHabilidade {
-    private static ConexaoHabilidade sInstance;
+    private static ConexaoHabilidade instancia;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "usuario_materia";
     private static final String IDPERFIL = "id_perfil";
     private static final String IDMATERIA = "id_materia";
 
-    public static synchronized ConexaoHabilidade getInstance(Context context){
-        if(sInstance == null){
-            sInstance = new ConexaoHabilidade(context.getApplicationContext());
+    public static synchronized ConexaoHabilidade getInstancia(Context context){
+        if(instancia == null){
+            instancia = new ConexaoHabilidade(context.getApplicationContext());
         }
-        return sInstance;
+        return instancia;
     }
 
     public ConexaoHabilidade(Context context){
-        this.banco = BancoHabilidade.getInstance(context);
+        this.banco = BancoHabilidade.getInstancia(context);
     }
 
     public boolean verificatupla(int id_perfil, int id_materia){

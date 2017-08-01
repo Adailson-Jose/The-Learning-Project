@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
  * Created by nicolas on 30/07/2017.
@@ -34,7 +35,7 @@ public class PessoaDAO {
     public void inserir(Pessoa pessoa) {
         ContentValues valores = new ContentValues();
         valores.put(NOME, pessoa.getNome());
-        valores.put(USUARIO, pessoa.getUsuarioID());
+        valores.put(USUARIO, pessoa.getUsuario().getId());
 
         banco.getWritableDatabase().insert(TABELA, null, valores);
     }
@@ -43,13 +44,17 @@ public class PessoaDAO {
         String[] colunas = {ID, NOME, USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, USUARIO + " = ?", new String[]{Integer.toString(idUsuario)}, null, null, null);
         Pessoa pessoa = null;
+        Usuario usuario = null;
 
         if (cursor.moveToFirst()) {
             pessoa = new Pessoa();
+            usuario = new Usuario();
+            usuario.setId(cursor.getInt(cursor.getColumnIndex(USUARIO)));
             pessoa.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             pessoa.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
-            pessoa.setUsuarioID(cursor.getInt(cursor.getColumnIndex(USUARIO)));
+            pessoa.setUsuario(usuario);
         }
+
         return pessoa;
     }
 
@@ -57,11 +62,14 @@ public class PessoaDAO {
         String[] colunas = {ID, NOME, USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Pessoa pessoa = null;
+        Usuario usuario = null;
         if (cursor.moveToFirst()) {
             pessoa = new Pessoa();
+            usuario = new Usuario();
+            usuario.setId(cursor.getInt(cursor.getColumnIndex(USUARIO)));
             pessoa.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             pessoa.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
-            pessoa.setUsuarioID(cursor.getInt(cursor.getColumnIndex(USUARIO)));
+            pessoa.setUsuario(usuario);
         }
 
         return pessoa;

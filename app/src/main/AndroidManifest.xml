@@ -9,22 +9,23 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".infraestrutura.gui.SplashScreenActivity"
-                  android:theme="@style/AppCompat.FullScreen">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-    </activity>
+        <activity
+            android:name=".infraestrutura.gui.SplashScreenActivity"
+            android:theme="@style/AppCompat.FullScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".infraestrutura.gui.MainActivity"
-            android:windowSoftInputMode="stateHidden">
-        </activity>
+            android:windowSoftInputMode="stateHidden"></activity>
         <activity
             android:name=".infraestrutura.gui.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".usuario.gui.CadastroActivity"
+            android:name=".usuario.gui.CriarContaActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".infraestrutura.gui.TermosActivity"
@@ -33,21 +34,22 @@
             android:name=".perfil.gui.HabilidadeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".infraestrutura.gui.ConfiguracaoActivity">
-        <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value=".infraestrutura.gui.MainActivity"/>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infraestrutura.gui.MainActivity" />
         </activity>
         <activity android:name=".infraestrutura.gui.HomeActivity" />
         <activity android:name=".infraestrutura.gui.CadastroMateriaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity"/>
+                android:value=".infraestrutura.gui.MainActivity" />
         </activity>
         <activity android:name=".infraestrutura.gui.BuscaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity"/>
+                android:value=".infraestrutura.gui.MainActivity" />
         </activity>
+        <activity android:name=".perfil.gui.NecessidadeActivity"></activity>
     </application>
 
 </manifest>

@@ -19,11 +19,12 @@ public class ControladorSessao {
     private SharedPreferences preferencias;
     private Editor editor;
     private Context contexto;
+
     private Perfil perfil;
     private Pessoa pessoa;
     private Usuario usuario;
 
-    private static final String PREFERENCIA = "Sessao", USUARIO_LOGADO = "Logado", ID_USUARIO = "ID_Usuario", ID_PESSOA = "ID_Pessoa";
+    private static final String PREFERENCIA = "Sessao", USUARIO_LOGADO = "Logado", ID_USUARIO = "ID_Usuario";
     private boolean sessaoAtiva;
 
     public static synchronized ControladorSessao getInstancia(Context context){
@@ -31,7 +32,6 @@ public class ControladorSessao {
             instancia = new ControladorSessao(context.getApplicationContext());
         } return instancia;
     }
-
 
     public boolean verificaLogin(){
         if(!verificaSessao()){
@@ -45,11 +45,12 @@ public class ControladorSessao {
         return false;
     }
 
-
     public void encerraSessao(){
         editor.clear();
         editor.putBoolean(USUARIO_LOGADO, false);
         editor.commit();
+
+        this.sessaoAtiva = false;
 
         Intent intent = new Intent(contexto, LoginActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -65,10 +66,9 @@ public class ControladorSessao {
         editor = preferencias.edit();
     }
 
-    public void salvaSessao(){
+    public void salvarSessao(){
         editor.putBoolean(USUARIO_LOGADO,true);
         editor.putInt(ID_USUARIO,usuario.getId());
-        editor.putInt(ID_PESSOA,pessoa.getId());
         editor.commit();
     }
 
@@ -106,10 +106,6 @@ public class ControladorSessao {
 
     public int retornaIdUsuario(){
         return preferencias.getInt(ID_USUARIO, 0);
-    }
-
-    public int retornaIdPessoa(){
-        return preferencias.getInt(ID_PESSOA, 0);
     }
 
     public boolean verificaConexao() {

@@ -18,7 +18,7 @@
         android:layout_centerHorizontal="true" />
 
     <EditText
-        android:id="@+id/habilidadeentrada"
+        android:id="@+id/necessidadeentrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="12"
@@ -26,11 +26,11 @@
         android:hint="@string/dica1"
         android:textColorHint="@color/textWhite"
         android:gravity="center"
-        android:layout_below="@+id/habilidade"
+        android:layout_below="@+id/necessidade"
         android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/botaoContinuar2"
+        android:id="@+id/botaoContinuar3"
         style="@style/btn_white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,15 +40,15 @@
         android:textColor="@color/colorPrimary"
         android:text="@string/continuar"
         android:layout_marginTop="47dp"
-        android:layout_below="@+id/habilidadeentrada"
+        android:layout_below="@+id/necessidadeentrada"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:id="@+id/habilidade"
+        android:id="@+id/necessidade"
         style="@style/camposTexto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/habilidade"
+        android:text="@string/necessidade"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true" />

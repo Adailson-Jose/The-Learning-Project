@@ -13,9 +13,9 @@ import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
-import com.thelearningproject.applogin.usuario.gui.CadastroActivity;
+import com.thelearningproject.applogin.usuario.gui.CriarContaActivity;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 /**
@@ -50,7 +50,7 @@ public class LoginActivity extends Activity {
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
-                startActivity(new Intent(LoginActivity.this, CadastroActivity.class));
+                startActivity(new Intent(LoginActivity.this, CriarContaActivity.class));
             }
         });
 
@@ -88,7 +88,9 @@ public class LoginActivity extends Activity {
         usuario.setSenha(senha);
 
         try{
-            executarLogin(usuario);
+            if (validaCampos(usuario)) {
+                executarLogin(usuario);
+            }
 
         } catch (UsuarioException e){
             Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -96,35 +98,35 @@ public class LoginActivity extends Activity {
     }
 
     private void executarLogin(Usuario usuario) throws UsuarioException {
-        if (validaCampos(usuario)) {
-            UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-            PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
+        UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
+        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
-            Usuario logado = negocioUsuario.logar(usuario);
+        Usuario logado = negocioUsuario.logar(usuario);
 
-            if (logado != null) {
-                Pessoa pessoaLogada = negocioPessoa.retornaPessoa(logado.getId());
-                sessao.encerraSessao();
-                sessao.setUsuario(logado);
-                pessoaLogada.setUsuario(logado);
-                sessao.setPessoa(pessoaLogada);
-                sessao.iniciaSessao();
+        if (logado != null) {
+            Pessoa pessoaLogada = negocioPessoa.retornaPessoa(logado.getId());
+            sessao.encerraSessao();
 
-                if (switchConectado.isChecked()) {
-                    sessao.salvaSessao();
-                }
+            sessao.setUsuario(logado);
+            pessoaLogada.setUsuario(logado);
+            sessao.setPessoa(pessoaLogada);
+            sessao.iniciaSessao();
 
-                Intent entidade = new Intent(LoginActivity.this, MainActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                finish();
-
-                startActivity(entidade);
-
-            } else {
-                Toast.makeText(LoginActivity.this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
-
+            if (switchConectado.isChecked()) {
+                sessao.salvarSessao();
             }
+
+            Intent entidade = new Intent(LoginActivity.this, MainActivity.class);
+            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //finish();
+
+            startActivity(entidade);
+
+        } else {
+            Toast.makeText(LoginActivity.this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
+
         }
     }
+
 
 }

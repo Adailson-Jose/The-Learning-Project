@@ -10,26 +10,6 @@ public class Pessoa {
     private int id;
     private String nome;
     private Usuario usuario;
-    private int usuarioID;
-
-    public Pessoa() {
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
-
-    public int getUsuarioID() {
-        return usuarioID;
-    }
-
-    public void setUsuarioID(int usuarioID) {
-        this.usuarioID = usuarioID;
-    }
 
     public int getId() {
         return id;
@@ -47,8 +27,12 @@ public class Pessoa {
         this.nome = nome;
     }
 
-    @Override
-    public String toString() {
-        return nome.toString();
+    public Usuario getUsuario() {
+        return usuario;
     }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
 }

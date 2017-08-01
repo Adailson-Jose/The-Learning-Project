@@ -2,7 +2,7 @@ package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
-import com.thelearningproject.applogin.usuario.dominio.Status;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.persistencia.UsuarioDAO;
 import java.security.MessageDigest;
@@ -52,11 +52,16 @@ public class UsuarioServices {
     }
 
     public Usuario logar(Usuario usuario) throws UsuarioException {
-        usuario = persistencia.retornaUsuario(usuario.getEmail(), retornaSenhaCriptografada(usuario.getSenha()));
-        usuarioAtivo(usuario);
-        return usuario;
+        Usuario logado = persistencia.retornaUsuario(usuario.getEmail(), retornaSenhaCriptografada(usuario.getSenha()));
+        usuarioAtivo(logado);
+        return logado;
     }
 
+    public int retornaUsuarioID(String email) {
+        int id = persistencia.retornaUsuarioID(email);
+
+        return id;
+    }
 
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));

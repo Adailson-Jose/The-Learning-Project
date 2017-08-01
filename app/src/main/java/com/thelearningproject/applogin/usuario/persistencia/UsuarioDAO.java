@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.thelearningproject.applogin.usuario.dominio.Status;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
@@ -55,8 +55,6 @@ public class UsuarioDAO {
         return cursor.moveToFirst();
     }
 
-
-
     public Usuario retornaUsuarioPorEmail(String email) {
         String[] colunas = {ID, EMAIL, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, "email = ?", new String[] {email}, null, null, null);
@@ -73,12 +71,25 @@ public class UsuarioDAO {
         return usuario;
     }
 
+    public int retornaUsuarioID(String email) {
+        String[] colunas = {ID, EMAIL, SENHA, STATUS};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA,colunas,"email = ? ",new String[]{email},null,null,null);
+
+        int id = -1;
+
+        if(cursor.moveToFirst()) {
+            id = cursor.getInt(cursor.getColumnIndex(ID));
+        }
+
+        return id;
+    }
+
     public Usuario retornaUsuario(String email,String senha) {
         String[] colunas = {ID, EMAIL, SENHA, STATUS};
         Cursor cursor = banco.getReadableDatabase().query(TABELA,colunas,"email = ? AND senha = ?",new String[]{email, senha},null,null,null);
         Usuario usuario = null;
-        if(cursor.moveToFirst()) {
 
+        if(cursor.moveToFirst()) {
             usuario = new Usuario();
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));

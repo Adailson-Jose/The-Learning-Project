@@ -10,7 +10,7 @@ import com.thelearningproject.applogin.estudo.persistencia.MateriaDAO;
  */
 
 public class MateriaServices {
-    private static MateriaServices sInstance;
+    private static MateriaServices instancia;
     private MateriaDAO persistencia;
 
     public MateriaServices(Context context){
@@ -18,10 +18,10 @@ public class MateriaServices {
     }
 
     public static MateriaServices getInstancia(Context context){
-        if(sInstance == null){
-            sInstance = new MateriaServices(context);
+        if(instancia == null){
+            instancia = new MateriaServices(context);
         }
-        return sInstance;
+        return instancia;
     }
 
     private Materia inserirMateria(Materia materia){

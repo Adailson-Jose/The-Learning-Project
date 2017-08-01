@@ -1,9 +1,19 @@
 package com.thelearningproject.applogin.infraestrutura.utils;
 
 /**
- * Created by Ebony Marques on 26/07/2017.
+ * Created by nicolas on 27/07/2017.
  */
 
 public enum Status {
-    ATIVA, INATIVA
+    ATIVADO(0), DESATIVADO(1);
+
+    private int valor;
+
+    Status(int i){
+        this.valor = i;
+    }
+    public int getValor(){
+        return this.valor;
+    }
+
 }

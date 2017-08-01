@@ -5,31 +5,31 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Created by Pichau on 25/07/2017.
  */
 
-public class BancoHabilidade extends SQLiteOpenHelper{
-    private static BancoHabilidade instancia;
+public class BancoNecessidade extends SQLiteOpenHelper {
+    private static BancoNecessidade sInstance;
     private static final String NOME_BANCO = "RelacaoUsuarioMateria";
     private static final int VERSION = 2;
     private static final String TABELA = "usuario_materia";
     private static final String IDPERFIL = "id_perfil";
     private static final String IDMATERIA = "id_materia";
 
-    public static synchronized BancoHabilidade getInstancia(Context context) {
-        if (instancia == null) {
-            instancia = new BancoHabilidade(context.getApplicationContext());
+    public static synchronized BancoNecessidade getInstancia(Context context) {
+        if (sInstance == null) {
+            sInstance = new BancoNecessidade(context.getApplicationContext());
         }
-        return instancia;
+        return sInstance;
     }
 
-    BancoHabilidade(Context context) {
+    BancoNecessidade(Context context) {
         super(context, NOME_BANCO, null, VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " + TABELA + " (" +
+        String sql = "CREATE TABLE " + TABELA + "(" +
                 IDPERFIL + " INTEGER, " +
                 IDMATERIA + " INTEGER, " +
                 "PRIMARY KEY(" +IDPERFIL +", "+IDMATERIA+"))";

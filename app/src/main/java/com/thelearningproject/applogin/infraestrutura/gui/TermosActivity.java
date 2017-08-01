@@ -7,15 +7,19 @@ import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.gui.HabilidadeActivity;
+import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TermosActivity extends AppCompatActivity {
-    private Button botaocontinuar;
+    private ControladorSessao sessao;
     private TextView linkLearning;
     private Pattern pTheLearningProject = Pattern.compile("The Learning © Project 2017");
 
@@ -24,6 +28,7 @@ public class TermosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termos);
 
+        sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         linkLearning = (TextView) findViewById(R.id.theLearnProjectId);
 
         Linkify.TransformFilter tf = new Linkify.TransformFilter(){
@@ -40,9 +45,9 @@ public class TermosActivity extends AppCompatActivity {
             }
         };
 
-        Linkify.addLinks(linkLearning, pTheLearningProject, "http://learnbsiproject.000webhostapp.com/",mf,tf);
+        Linkify.addLinks(linkLearning, pTheLearningProject, "http://learnbsiproject.000webhostapp.com/", mf, tf);
 
-        botaocontinuar = (Button) findViewById(R.id.botaoContinuar1);
+        Button botaocontinuar = (Button) findViewById(R.id.botaoContinuar1);
         botaocontinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,10 +57,23 @@ public class TermosActivity extends AppCompatActivity {
     }
 
     private void continuar(View view) {
+        criarPerfil();
+
         Intent entidade = new Intent(TermosActivity.this, HabilidadeActivity.class);
         entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(entidade);
         finish();
+    }
+
+    private void criarPerfil() {
+        PerfilServices negocioPerfil = PerfilServices.getInstancia(getBaseContext());
+        Perfil perfil = new Perfil();
+
+        perfil.setPessoa(sessao.getPessoa());
+        negocioPerfil.inserirPerfil(perfil);
+        sessao.setPerfil(negocioPerfil.retornaPerfil(sessao.getPessoa().getId()));
+
+        Toast.makeText(this, "Perfil cadastrado com sucesso.", Toast.LENGTH_LONG).show();
     }
 }

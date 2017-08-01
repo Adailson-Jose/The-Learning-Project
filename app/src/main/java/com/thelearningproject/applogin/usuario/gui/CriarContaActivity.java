@@ -13,12 +13,12 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.infraestrutura.gui.TermosActivity;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
-import com.thelearningproject.applogin.usuario.dominio.Status;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
-public class CadastroActivity extends Activity {
+public class CriarContaActivity extends Activity {
     private ControladorSessao sessao;
     private Auxiliar auxiliar = new Auxiliar();
     private EditText entradaNome;
@@ -34,9 +34,9 @@ public class CadastroActivity extends Activity {
         entradaNome = (EditText) findViewById(R.id.nomeEntradaID);
         entradaEmail = (EditText) findViewById(R.id.emailEntradaID);
         entradaSenha = (EditText) findViewById(R.id.senhaEntradaID);
-        Button botaoCadastrar = (Button) findViewById(R.id.botaoCadastroID);
+        Button botaoContinuar = (Button) findViewById(R.id.botaoCadastroID);
 
-        botaoCadastrar.setOnClickListener( new View.OnClickListener(){
+        botaoContinuar.setOnClickListener( new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
@@ -67,7 +67,7 @@ public class CadastroActivity extends Activity {
         String resultado = (erro.toString().trim());
 
         if (!resultado.equals("")) {
-            Toast.makeText(CadastroActivity.this, resultado, Toast.LENGTH_LONG).show();
+            Toast.makeText(CriarContaActivity.this, resultado, Toast.LENGTH_LONG).show();
         }
 
         return validacao;
@@ -89,35 +89,37 @@ public class CadastroActivity extends Activity {
         pessoa.setUsuario(usuario);
 
         try {
-            executarCadastro(pessoa);
+            if (validaCampos(pessoa)) {
+                executarCadastro(pessoa);
+            }
 
         } catch (UsuarioException e){
-            entradaEmail.setError("Email já cadastrado");
+            entradaEmail.setError("E-mail já cadastrado");
         }
     }
 
     private void executarCadastro(Pessoa pessoa) throws UsuarioException{
-        if (validaCampos(pessoa)) {
-            UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-            negocioUsuario.inserirUsuario(pessoa.getUsuario());
+        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
+        UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
 
-            pessoa.setUsuarioID(negocioUsuario.retornaUsuario(pessoa.getUsuario().getEmail()).getId());
-            PessoaServiços negocioPessoa = PessoaServiços.getInstancia(getBaseContext());
-            negocioPessoa.inserirPessoa(pessoa);
+        negocioUsuario.inserirUsuario(pessoa.getUsuario());
+        int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail()); //isso é importante
+        pessoa.getUsuario().setId(usuarioid);
+        negocioPessoa.inserirPessoa(pessoa);
 
-            Intent entidade = new Intent(CadastroActivity.this, TermosActivity.class);
-            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        int pessoaid = negocioPessoa.retornaPessoa(usuarioid).getId();
+        pessoa.setId(pessoaid);
 
-            sessao.setUsuario(negocioUsuario.retornaUsuario(pessoa.getUsuario().getEmail()));
-            Pessoa pessoa2 = negocioPessoa.retornaPessoa(pessoa.getUsuarioID());
-            pessoa2.setUsuario(sessao.getUsuario());
-            sessao.setPessoa(pessoa2);
-            sessao.salvaSessao();
-            sessao.iniciaSessao();
+        Intent entidade = new Intent(CriarContaActivity.this, TermosActivity.class);
+        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-            startActivity(entidade);
-            finish();
-        }
+        sessao.setPessoa(pessoa);
+        sessao.setUsuario(pessoa.getUsuario());
+        sessao.salvarSessao();
+        sessao.iniciaSessao();
+
+        startActivity(entidade);
+        finish();
     }
 
 

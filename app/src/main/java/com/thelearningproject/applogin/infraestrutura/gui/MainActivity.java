@@ -6,19 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServiços;
+import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class MainActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private TextView apresentacao;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         Button botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
         Button botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
         Button botaoabrir = (Button) findViewById(R.id.btnChamar);
+
 
         if(sessao.verificaConexao()) {
             resumir();
@@ -78,16 +81,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resumir(){
-        UsuarioServices negociousuario = UsuarioServices.getInstancia(getBaseContext());
-        PessoaServiços negociopessoa = PessoaServiços.getInstancia(getBaseContext());
+        PessoaServices negocioPessoa = PessoaServices.getInstancia(getApplicationContext());
 
-        Usuario usuario = negociousuario.consulta(sessao.retornaIdUsuario());
-        Pessoa pessoa = negociopessoa.consulta(sessao.retornaIdPessoa());
+        Pessoa pessoa = negocioPessoa.retornaPessoa(sessao.retornaIdUsuario());
+        Usuario usuario = pessoa.getUsuario();
+
         pessoa.setUsuario(usuario);
-
         sessao.iniciaSessao();
         sessao.setUsuario(usuario);
         sessao.setPessoa(pessoa);
+
     }
 
     private void exibir() {
