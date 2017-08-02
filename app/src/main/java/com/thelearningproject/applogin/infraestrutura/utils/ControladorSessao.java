@@ -96,8 +96,8 @@ public class ControladorSessao {
         return this.usuario;
     }
 
-    public void setUsuario(Usuario user){
-        this.usuario = user;
+    public void setUsuario(Usuario usuario){
+        this.usuario = usuario;
     }
 
     public boolean verificaSessao() {

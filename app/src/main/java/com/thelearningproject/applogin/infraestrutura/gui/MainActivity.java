@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
@@ -32,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         Button botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
         Button botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
         Button botaoabrir = (Button) findViewById(R.id.btnChamar);
+
+        Auxiliar.criarToast(this, sessao.getUsuario().getEmail());
 
 
         if(sessao.verificaConexao()) {

@@ -27,6 +27,9 @@
     <string name="bottom_nav_title2">Buscar</string>
     <string name="bottom_nav_title3">Perfil</string>
     <string name="manterConectado">Manter conectado</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="ok">Ok</string>
     <string name="alterarNome">Alterar Nome</string>
     <string name="alterarEmail">Alterar E-mail</string>
     <string name="alterarSenha">Alterar Senha</string>
