@@ -20,7 +20,7 @@
         </activity>
         <activity
             android:name=".infraestrutura.gui.MainActivity"
-            android:windowSoftInputMode="stateHidden"></activity>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".infraestrutura.gui.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
@@ -49,7 +49,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".perfil.gui.NecessidadeActivity"></activity>
+        <activity android:name=".perfil.gui.NecessidadeActivity" />
+        <activity android:name=".infraestrutura.gui.AlterarNomeActivity" />
+        <activity android:name=".infraestrutura.gui.AlterarEmailActivity" />
+        <activity android:name=".infraestrutura.gui.AlterarSenhaActivity" />
     </application>
 
 </manifest>

@@ -80,11 +80,14 @@ public class UsuarioServices {
 
     }
 
-    public void alterarUsuario(Usuario usuario) throws UsuarioException {
-        usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
+    public void alterarEmailUsuario(Usuario usuario) throws UsuarioException {
         if(verificaEmailExistente(usuario.getEmail())) {
             throw new UsuarioException("E-mail já cadastrado");
         }
+        persistencia.alterarUsuario(usuario);
+    }
+    public void alterarSenhaUsuario(Usuario usuario){
+        usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
         persistencia.alterarUsuario(usuario);
     }
 

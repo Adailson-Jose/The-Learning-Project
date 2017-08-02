@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -82,9 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void resumir(){
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getApplicationContext());
+        UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getApplicationContext());
 
         Pessoa pessoa = negocioPessoa.retornaPessoa(sessao.retornaIdUsuario());
-        Usuario usuario = pessoa.getUsuario();
+        Usuario usuario = negocioUsuario.consulta(sessao.retornaIdUsuario());
 
         pessoa.setUsuario(usuario);
         sessao.iniciaSessao();

@@ -32,7 +32,7 @@ public class PessoaServices {
 
     }
 
-    public void alterarPessoa(Pessoa pessoa) throws UsuarioException {
+    public void alterarPessoa(Pessoa pessoa) {
         persistencia.alterarPessoa(pessoa);
     }
 
@@ -44,7 +44,7 @@ public class PessoaServices {
 
     public Pessoa consulta(int id){
         Pessoa pessoa = persistencia.consultar(id);
-        return pessoa;
+        return persistencia.consultar(id);
     }
 
 }

@@ -12,22 +12,18 @@
         android:text="Alterar dados"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="24dp"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/deletarID"
-        android:layout_alignStart="@+id/deletarID" />
+        android:layout_centerHorizontal="true" />
 
     <Button
-        android:id="@+id/alterarID"
+        android:id="@+id/alterarNomeID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/alterar"
-        android:layout_below="@+id/senhaID"
-        android:layout_alignLeft="@+id/senhaID"
-        android:layout_alignStart="@+id/senhaID"
-        android:layout_marginTop="31dp"
-        android:layout_alignRight="@+id/senhaID"
-        android:layout_alignEnd="@+id/senhaID" />
+        android:text="@string/alterarNome"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/op1"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/deletarID"
@@ -36,10 +32,12 @@
         android:text="@string/excluir"
         android:backgroundTint="@android:color/holo_red_dark"
         android:textColor="@color/textWhite"
-        android:layout_marginBottom="51dp"
+        android:layout_marginBottom="61dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/alterarID"
-        android:layout_alignStart="@+id/alterarID" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp" />
 
     <Button
         android:id="@+id/LogoutID"
@@ -48,45 +46,12 @@
         android:text="@string/logout"
         android:backgroundTint="@android:color/secondary_text_light"
         android:textColor="@color/textWhite"
+        android:layout_marginRight="18dp"
+        android:layout_marginEnd="18dp"
         android:layout_alignBaseline="@+id/deletarID"
         android:layout_alignBottom="@+id/deletarID"
-        android:layout_alignRight="@+id/alterarID"
-        android:layout_alignEnd="@+id/alterarID" />
-
-    <EditText
-        android:id="@+id/nomeID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:ems="14"
-        android:hint="@string/nome"
-        android:inputType="textPersonName"
-        android:layout_below="@+id/op1"
-        android:layout_centerHorizontal="true" />
-
-    <EditText
-        android:id="@+id/emailID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:ems="14"
-        android:hint="@string/email"
-        android:inputType="textEmailAddress"
-        android:layout_below="@+id/nomeID"
-        android:layout_alignLeft="@+id/nomeID"
-        android:layout_alignStart="@+id/nomeID" />
-
-    <EditText
-        android:id="@+id/senhaID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="14"
-        android:hint="@string/senha"
-        android:inputType="textPassword"
-        android:layout_below="@+id/emailID"
-        android:layout_alignLeft="@+id/emailID"
-        android:layout_alignStart="@+id/emailID"
-        android:layout_marginTop="17dp" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/op2"
@@ -95,9 +60,29 @@
         android:text="Outras opções"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_marginBottom="28dp"
         android:layout_above="@+id/deletarID"
-        android:layout_alignLeft="@+id/deletarID"
-        android:layout_alignStart="@+id/deletarID"
-        android:layout_marginBottom="13dp" />
+        android:layout_alignRight="@+id/deletarID"
+        android:layout_alignEnd="@+id/deletarID" />
+
+    <Button
+        android:id="@+id/alterarEmailID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alterarEmail"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/alterarNomeID"
+        android:layout_alignLeft="@+id/alterarNomeID"
+        android:layout_alignStart="@+id/alterarNomeID" />
+
+    <Button
+        android:id="@+id/alterarSenhaID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alterarSenha"
+        android:layout_marginTop="43dp"
+        android:layout_below="@+id/alterarEmailID"
+        android:layout_alignLeft="@+id/alterarEmailID"
+        android:layout_alignStart="@+id/alterarEmailID" />
 
 </RelativeLayout>
