@@ -34,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
         Button botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
         Button botaoabrir = (Button) findViewById(R.id.btnChamar);
 
-        Auxiliar.criarToast(this, sessao.getUsuario().getEmail());
-
-
         if(sessao.verificaConexao()) {
             resumir();
         }
