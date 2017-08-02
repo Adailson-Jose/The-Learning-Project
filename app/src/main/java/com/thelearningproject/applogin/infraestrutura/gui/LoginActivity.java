@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
-import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -73,7 +72,7 @@ public class LoginActivity extends Activity {
         String resultado = (erro.toString().trim());
 
         if (!resultado.equals("")) {
-            Toast.makeText(LoginActivity.this, resultado, Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, resultado);
         }
 
         return validacao;
@@ -93,7 +92,7 @@ public class LoginActivity extends Activity {
             }
 
         } catch (UsuarioException e){
-            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, e.getMessage());
         }
     }
 
@@ -123,7 +122,7 @@ public class LoginActivity extends Activity {
             startActivity(entidade);
 
         } else {
-            Toast.makeText(LoginActivity.this, "Usuário ou senha incorretos", Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, "Usuário ou senha incorretos");
 
         }
     }

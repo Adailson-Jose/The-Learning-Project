@@ -36,5 +36,6 @@
     <string name="novaSenha">Nova Senha</string>
     <string name="confirmarNovaSenha">Confirmar Nova Senha</string>
     <string name="cancelar">Cancelar</string>
+    <string name="copyright">The Learning © Project 2017</string>
 
 </resources>

@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
@@ -59,7 +58,7 @@ public class AlterarNomeActivity extends AppCompatActivity {
 
         sessao.setPessoa(pessoa);
 
-        Toast.makeText(this.getApplicationContext(), "Dados atualizados com sucesso", Toast.LENGTH_LONG).show();
+        Auxiliar.criarToast(this, "Dados atualizados com sucesso");
 
         Intent entidade = new Intent(AlterarNomeActivity.this, ConfiguracaoActivity.class);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

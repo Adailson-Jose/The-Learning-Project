@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 
 /**
- * Created by gabri on 26/07/2017.
+ * Criado por gabri on 26/07/2017.
  */
 
 public class HomeActivity extends AppCompatActivity {
@@ -45,7 +45,6 @@ public class HomeActivity extends AppCompatActivity {
             mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 0);
             selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
         } else {
-
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);

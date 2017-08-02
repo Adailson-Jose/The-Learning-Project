@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
@@ -17,8 +16,6 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
-import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class NecessidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
@@ -61,7 +58,7 @@ public class NecessidadeActivity extends AppCompatActivity {
         String resultado = (erro.toString().trim());
 
         if (!resultado.equals("")) {
-            Toast.makeText(NecessidadeActivity.this, resultado, Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, resultado);
         }
 
         return validacao;
@@ -79,7 +76,7 @@ public class NecessidadeActivity extends AppCompatActivity {
             }
 
         } catch (UsuarioException e){
-            Toast.makeText(this, "Matéria já cadastrada", Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, "Matéria já cadastrada");
         }
     }
 
@@ -92,8 +89,6 @@ public class NecessidadeActivity extends AppCompatActivity {
         negocioperfil.insereNecessidade(perfil, materia);
         perfil.addNecessidade(materia);
 
-        Toast.makeText(this, "Necessidade cadastrada com sucesso.", Toast.LENGTH_LONG).show();
-
-
+        Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso");
     }
 }

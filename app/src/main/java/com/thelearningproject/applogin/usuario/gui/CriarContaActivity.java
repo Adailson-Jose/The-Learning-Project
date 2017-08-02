@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -67,7 +66,7 @@ public class CriarContaActivity extends Activity {
         String resultado = (erro.toString().trim());
 
         if (!resultado.equals("")) {
-            Toast.makeText(CriarContaActivity.this, resultado, Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, resultado);
         }
 
         return validacao;

@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
@@ -40,14 +39,14 @@ public class BuscaActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v){
-                listar(v);
+                listar();
                 Auxiliar.esconderTeclado(BuscaActivity.this);
             }
 
         });
     }
 
-    private void listar(View v){
+    private void listar(){
         String nome = entradaBusca.getText().toString();
         Materia materia = new Materia();
         materia.setNome(nome);
@@ -65,7 +64,7 @@ public class BuscaActivity extends AppCompatActivity {
             listaUsuarios.setAdapter(adaptador);
         }else {
             listaUsuarios.setAdapter(null);
-            Toast.makeText(this, "Sem resultados", Toast.LENGTH_LONG).show();
+            Auxiliar.criarToast(this, "Sem Resultados");
         }
     }
 

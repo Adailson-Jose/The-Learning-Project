@@ -7,9 +7,9 @@ import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.gui.HabilidadeActivity;
@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class TermosActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private TextView linkLearning;
-    private Pattern pTheLearningProject = Pattern.compile("The Learning © Project 2017");
+    private Pattern pTheLearningProject = Pattern.compile(String.valueOf(R.string.copyright));
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +51,12 @@ public class TermosActivity extends AppCompatActivity {
         botaocontinuar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                continuar(view);
+                continuar();
             }
         });
     }
 
-    private void continuar(View view) {
+    private void continuar() {
         criarPerfil();
 
         Intent entidade = new Intent(TermosActivity.this, HabilidadeActivity.class);
@@ -74,6 +74,6 @@ public class TermosActivity extends AppCompatActivity {
         negocioPerfil.inserirPerfil(perfil);
         sessao.setPerfil(negocioPerfil.retornaPerfil(sessao.getPessoa().getId()));
 
-        Toast.makeText(this, "Perfil cadastrado com sucesso.", Toast.LENGTH_LONG).show();
+        Auxiliar.criarToast(this, "Perfil cadastrado com sucesso");
     }
 }
