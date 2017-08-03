@@ -3,7 +3,7 @@ package com.thelearningproject.applogin.pessoa.dominio;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
- * Created by nicolas on 30/07/2017.
+ * Criado por Nícolas on 30/07/2017.
  */
 
 public class Pessoa {

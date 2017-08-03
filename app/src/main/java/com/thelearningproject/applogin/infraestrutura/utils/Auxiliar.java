@@ -18,7 +18,9 @@ import java.util.regex.Pattern;
 public class Auxiliar {
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        if (activity.getCurrentFocus().getWindowToken() != null) {
+            inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
     public boolean aplicaPattern(String email){

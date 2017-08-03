@@ -13,7 +13,7 @@ import com.thelearningproject.applogin.perfil.persistencia.PerfilDAO;
 import java.util.ArrayList;
 
 /**
- * Created by Ebony Marques on 26/07/2017.
+ * Criado por Ebony Marques on 26/07/2017.
  */
 
 public class PerfilServices {
@@ -75,7 +75,7 @@ public class PerfilServices {
     }
 
     public ArrayList<Perfil> listarPerfil(Materia materia){
-        ArrayList<Perfil> usuarios = new ArrayList<Perfil>();
+        ArrayList<Perfil> usuarios = new ArrayList<>();
         ArrayList<Integer> lista_ids = conexaoHabilidade.retornaUsuarios(materia.getId());
         for (int id:lista_ids){
             usuarios.add(consulta(id));

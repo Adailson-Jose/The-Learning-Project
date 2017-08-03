@@ -1,15 +1,11 @@
 package com.thelearningproject.applogin.pessoa.persistencia;
 
-/**
- * Created by nicolas on 30/07/2017.
- */
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Ebony Marques on 26/07/2017.
+ * Criado por Nícolas on 30/07/2017.
  */
 
 public class Banco extends SQLiteOpenHelper {

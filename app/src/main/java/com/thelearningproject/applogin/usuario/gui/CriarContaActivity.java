@@ -46,31 +46,21 @@ public class CriarContaActivity extends Activity {
 
     private boolean validaCampos(Pessoa pessoa){
         boolean validacao = true;
-        StringBuilder erro = new StringBuilder();
 
         if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
             entradaNome.setError("Nome inválido");
             validacao = false;
         }
-
         if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
             entradaEmail.setError("Email inválido");
             validacao = false;
         }
-
         if (pessoa.getUsuario().getSenha() == null || pessoa.getUsuario().getSenha().trim().length() == 0) {
             entradaSenha.setError("Senha inválida");
             validacao = false;
         }
 
-        String resultado = (erro.toString().trim());
-
-        if (!resultado.equals("")) {
-            Auxiliar.criarToast(this, resultado);
-        }
-
         return validacao;
-
     }
 
     private void processoCadastro(){

@@ -12,7 +12,7 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
-import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+//import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
@@ -23,14 +23,14 @@ public class BuscaActivity extends AppCompatActivity {
     private ListView listaUsuarios;
     private EditText entradaBusca;
     private Button botaoBusca;
-    private ControladorSessao sessao;
+    //private ControladorSessao sessao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
 
-        sessao = ControladorSessao.getInstancia(this.getApplicationContext());
+        //sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         entradaBusca = (EditText) findViewById(R.id.editTextBuscaID);
         botaoBusca = (Button) findViewById(R.id.botaoBuscaID);

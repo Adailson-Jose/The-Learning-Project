@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Pichau on 26/07/2017.
  */
 
 public class ConexaoNecessidade {
@@ -38,34 +38,38 @@ public class ConexaoNecessidade {
 
     public boolean verificatupla(int id_perfil, int id_materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{Integer.toString(id_perfil),Integer.toString(id_materia)},null,null,null);
-        return cursor.moveToFirst();
+        boolean resultado = cursor.moveToFirst();
+        cursor.close();
+        return resultado;
     }
 
     //Retorna todos os usuarios que buscaram a matéria de id = id_materia
     public ArrayList<Integer> retornaUsuarios(int id_materia){
-        ArrayList<Integer> usuarios = new ArrayList<Integer>();
+        ArrayList<Integer> usuarios = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDMATERIA+" = ?",new String[]{Integer.toString(id_materia)},null,null,null );
 
         while(cursor.moveToNext()){
             usuarios.add(cursor.getColumnIndex(IDPERFIL));
         }
+        cursor.close();
         return usuarios;
     }
 
     //Retorna todas as materias buscadas pelo usuario de id = id_perfil
     public ArrayList<Integer> retornaMaterias(int id_perfil){
-        ArrayList<Integer> materias = new ArrayList<Integer>();
+        ArrayList<Integer> materias = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDMATERIA},IDPERFIL+" = ?",new String[]{Integer.toString(id_perfil)},null,null,null );
 
         while(cursor.moveToNext()){
             materias.add(cursor.getColumnIndex(IDPERFIL));
         }
+        cursor.close();
         return materias;
     }
 
     public ArrayList<Integer> retornaFrequencia(int id_materia){
         String subtabela = "SELECT " + IDPERFIL+ " FROM "+ TABELA + " WHERE " + IDMATERIA + " = " + id_materia;
-        ArrayList<Integer> usuarios = new ArrayList<Integer>();
+        ArrayList<Integer> usuarios = new ArrayList<>();
 
         Cursor cursor = banco.getReadableDatabase().rawQuery(
                 "SELECT " +IDMATERIA+ ", count(" +IDMATERIA+ ")" +
@@ -77,7 +81,7 @@ public class ConexaoNecessidade {
         while(cursor.moveToNext()){
             usuarios.add(cursor.getColumnIndex(IDPERFIL));
         }
-
+        cursor.close();
         return usuarios;
     }
 

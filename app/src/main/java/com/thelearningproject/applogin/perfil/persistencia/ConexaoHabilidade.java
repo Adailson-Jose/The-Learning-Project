@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Pichau on 26/07/2017.
  */
 
 public class ConexaoHabilidade {
@@ -31,7 +31,9 @@ public class ConexaoHabilidade {
 
     public boolean verificatupla(int id_perfil, int id_materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(id_perfil),Integer.toString(id_materia)},null,null,null);
-        return cursor.moveToFirst();
+        boolean resultado = cursor.moveToFirst();
+        cursor.close();
+        return resultado;
     }
 
     public void insereConexao(int id_perfil, int id_materia){
@@ -42,20 +44,22 @@ public class ConexaoHabilidade {
     }
 
     public ArrayList<Integer> retornaUsuarios(int id_materia){
-        ArrayList<Integer> usuarios = new ArrayList<Integer>();
+        ArrayList<Integer> usuarios = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDMATERIA + " = ?",new String[]{String.valueOf(id_materia)},null,null,null);
         while (cursor.moveToNext()){
             usuarios.add(cursor.getInt(cursor.getColumnIndex(IDPERFIL)));
         }
+        cursor.close();
         return usuarios;
     }
 
     public ArrayList<Integer> retornaMateria(int id_perfil){
-        ArrayList<Integer> materias = new ArrayList<Integer>();
+        ArrayList<Integer> materias = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDMATERIA},IDPERFIL + " = ?",new String[]{String.valueOf(id_perfil)},null,null,null);
         while (cursor.moveToNext()){
             materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA)));
         }
+        cursor.close();
         return materias;
     }
 

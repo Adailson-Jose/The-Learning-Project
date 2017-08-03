@@ -11,7 +11,7 @@ import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.infraestrutura.gui.LoginActivity;
 
 /**
- * Created by Pichau on 20/07/2017.
+ * Criado por Nicollas on 20/07/2017.
  */
 
 public class ControladorSessao {
@@ -64,6 +64,7 @@ public class ControladorSessao {
         this.sessaoAtiva = false;
         preferencias = this.contexto.getSharedPreferences(PREFERENCIA,Context.MODE_PRIVATE);
         editor = preferencias.edit();
+        editor.apply();
     }
 
     public void salvarSessao(){
@@ -100,7 +101,7 @@ public class ControladorSessao {
         this.usuario = usuario;
     }
 
-    public boolean verificaSessao() {
+    private boolean verificaSessao() {
         return this.sessaoAtiva;
     }
 

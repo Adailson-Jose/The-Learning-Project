@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 
 /**
- * Created by Pichau on 25/07/2017.
+ * Criado por Nicollas on 25/07/2017.
  */
 
 public class MateriaDAO {
@@ -45,6 +45,7 @@ public class MateriaDAO {
             materia.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             materia.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
         }
+        cursor.close();
         return materia;
     }
 
@@ -56,6 +57,7 @@ public class MateriaDAO {
             materia.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             materia.setNome(cursor.getString(cursor.getColumnIndex(NOME)));
         }
+        cursor.close();
         return materia;
     }
 }

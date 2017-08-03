@@ -2,20 +2,19 @@ package com.thelearningproject.applogin.perfil.dominio;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 import java.util.ArrayList;
 
 /**
- * Created by Ebony Marques on 26/07/2017.
+ * Criado por Ebony Marques on 26/07/2017.
  */
 
 public class Perfil {
     private int id;
     private Pessoa pessoa;
     private String descricao;
-    private ArrayList<Materia> habilidades = new ArrayList<Materia>();
-    private ArrayList<Materia> necessidades = new ArrayList<Materia>();
+    private ArrayList<Materia> habilidades = new ArrayList<>();
+    private ArrayList<Materia> necessidades = new ArrayList<>();
 
     public int getId() {
         return id;

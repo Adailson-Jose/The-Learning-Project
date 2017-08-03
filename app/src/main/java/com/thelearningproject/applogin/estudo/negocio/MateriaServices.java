@@ -6,7 +6,7 @@ import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.persistencia.MateriaDAO;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Nicollas on 26/07/2017.
  */
 
 public class MateriaServices {
@@ -31,7 +31,7 @@ public class MateriaServices {
 
     public Materia cadastraMateria(Materia materia){
         Materia novamateria = persistencia.consultaNome(materia.getNome());
-        if (novamateria== null){
+        if (novamateria == null){
             novamateria = inserirMateria(materia);
         }
         return novamateria;

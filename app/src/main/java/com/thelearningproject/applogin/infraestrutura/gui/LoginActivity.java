@@ -57,22 +57,14 @@ public class LoginActivity extends Activity {
 
     private boolean validaCampos(Usuario usuario){
         boolean validacao = true;
-        StringBuilder erro = new StringBuilder();
 
         if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
             entradaLogin.setError("Email inválido");
             validacao = false;
-
         }
         if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
             entradaSenha.setError("Senha inválida");
             validacao = false;
-        }
-
-        String resultado = (erro.toString().trim());
-
-        if (!resultado.equals("")) {
-            Auxiliar.criarToast(this, resultado);
         }
 
         return validacao;

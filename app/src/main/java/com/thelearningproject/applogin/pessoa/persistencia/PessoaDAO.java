@@ -9,7 +9,7 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
- * Criado por nicolas em 30/07/2017.
+ * Criado por Nícolas em 30/07/2017.
  */
 
 public class PessoaDAO {

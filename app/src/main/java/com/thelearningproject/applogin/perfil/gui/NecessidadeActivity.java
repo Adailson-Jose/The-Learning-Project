@@ -47,18 +47,11 @@ public class NecessidadeActivity extends AppCompatActivity {
     }
 
     private Boolean validaNecessidade(Materia materia){
-        Boolean validacao=true;
-        StringBuilder erro = new StringBuilder();
+        Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
             entradaNecessidade.setError("Habilidade inválida");
             validacao = false;
-        }
-
-        String resultado = (erro.toString().trim());
-
-        if (!resultado.equals("")) {
-            Auxiliar.criarToast(this, resultado);
         }
 
         return validacao;

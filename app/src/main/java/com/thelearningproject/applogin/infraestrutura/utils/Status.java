@@ -1,7 +1,7 @@
 package com.thelearningproject.applogin.infraestrutura.utils;
 
 /**
- * Created by nicolas on 27/07/2017.
+ * Criado por Nícolas on 27/07/2017.
  */
 
 public enum Status {

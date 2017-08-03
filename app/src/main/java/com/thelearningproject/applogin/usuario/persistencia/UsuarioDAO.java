@@ -10,7 +10,7 @@ import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 
 /**
- * Created by nicolas on 22/07/2017.
+ * Criado por Nícolas on 22/07/2017.
  */
 
 public class UsuarioDAO {
@@ -47,12 +47,15 @@ public class UsuarioDAO {
 
     public Boolean consultaUsuarioEmail(String email){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,null,"email = ?",new String[]{email},null,null,null);
-
-        return cursor.moveToFirst();
+        boolean resultado = cursor.moveToFirst();
+        cursor.close();
+        return resultado;
     }
     public Boolean consultaUsuarioEmailStatus(String email, String status){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,null,"email = ? AND status = ?",new String[]{email, status},null,null,null);
-        return cursor.moveToFirst();
+        boolean resultado = cursor.moveToFirst();
+        cursor.close();
+        return resultado;
     }
 
     public Usuario retornaUsuarioPorEmail(String email) {
@@ -65,9 +68,9 @@ public class UsuarioDAO {
             usuario.setId(cursor.getInt(cursor.getColumnIndex(ID)));
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
-
         }
 
+        cursor.close();
         return usuario;
     }
 
@@ -81,6 +84,7 @@ public class UsuarioDAO {
             id = cursor.getInt(cursor.getColumnIndex(ID));
         }
 
+        cursor.close();
         return id;
     }
 
@@ -97,9 +101,10 @@ public class UsuarioDAO {
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
         }
 
+        cursor.close();
         return usuario;
-
     }
+
     public void deletaUsuario(Usuario usuario){
         usuario.setStatus(Status.DESATIVADO);
         alterarUsuario(usuario);
@@ -122,6 +127,7 @@ public class UsuarioDAO {
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
             db.close();
         }
+        cursor.close();
         return usuario;
     }
 

@@ -9,7 +9,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Ebony Marques on 18/07/2017.
+ * Criado por Ebony Marques on 18/07/2017.
  */
 
 public class UsuarioServices {
@@ -47,8 +47,7 @@ public class UsuarioServices {
     }
 
     public Usuario consulta(int id){
-        Usuario usuario = persistencia.pesquisarUsuario(id);
-        return usuario;
+        return persistencia.pesquisarUsuario(id);
     }
 
     public Usuario logar(Usuario usuario) throws UsuarioException {
@@ -58,9 +57,7 @@ public class UsuarioServices {
     }
 
     public int retornaUsuarioID(String email) {
-        int id = persistencia.retornaUsuarioID(email);
-
-        return id;
+        return persistencia.retornaUsuarioID(email);
     }
 
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
@@ -113,24 +110,19 @@ public class UsuarioServices {
         for (byte b : messageDigest) {
             hexString.append(String.format("%02X", 0xFF & b));
         }
-        String senha1 = hexString.toString();
-        return senha1;
+        return hexString.toString();
     }
 
     public Usuario retornaUsuario(String email) {
-        Usuario usuario = persistencia.retornaUsuarioPorEmail(email);
-
-        return usuario;
+        return persistencia.retornaUsuarioPorEmail(email);
     }
 
     private void usuarioAtivo(Usuario usuario) throws UsuarioException{
         if (usuario != null){
             if (Status.DESATIVADO.equals(usuario.getStatus())){
                 throw new UsuarioException("Usuário ou senha incorretos");
-
             }
         }
     }
-
 
 }

@@ -3,7 +3,7 @@ package com.thelearningproject.applogin.usuario.dominio;
 import com.thelearningproject.applogin.infraestrutura.utils.Status;
 
 /**
- * Created by Ebony Marques on 17/07/2017.
+ * Criado por Ebony Marques on 17/07/2017.
  */
 
 public class Usuario {

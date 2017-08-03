@@ -59,18 +59,12 @@ public class CadastroMateriaActivity extends AppCompatActivity {
 
     private Boolean validaCadastro(Materia materia){
         Boolean validacao = true;
-        StringBuilder erro = new StringBuilder();
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
             entradaMateria.setError("Habilidade inválida");
             validacao = false;
         }
 
-        String resultado = (erro.toString().trim());
-
-        if (!resultado.equals("")) {
-            Auxiliar.criarToast(this, resultado);
-        }
         return validacao;
     }
 }

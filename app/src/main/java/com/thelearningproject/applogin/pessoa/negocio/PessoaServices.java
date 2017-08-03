@@ -4,11 +4,10 @@ import android.content.Context;
 
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.persistencia.PessoaDAO;
-import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 
 
 /**
- * Created by nicolas on 30/07/2017.
+ * Criado por Nícolas on 30/07/2017.
  */
 
 public class PessoaServices {
@@ -37,13 +36,10 @@ public class PessoaServices {
     }
 
     public Pessoa retornaPessoa(int idUsuario) {
-        Pessoa pessoa = persistencia.retornaPessoa(idUsuario);
-
-        return pessoa;
+        return persistencia.retornaPessoa(idUsuario);
     }
 
     public Pessoa consulta(int id){
-        Pessoa pessoa = persistencia.consultar(id);
         return persistencia.consultar(id);
     }
 

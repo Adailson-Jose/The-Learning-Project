@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Pichau on 25/07/2017.
+ * Criado por Pichau on 25/07/2017.
  */
 
 public class BancoNecessidade extends SQLiteOpenHelper {
