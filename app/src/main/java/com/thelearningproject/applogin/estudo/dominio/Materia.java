@@ -24,4 +24,19 @@ public class Materia {
         this.nome = nome;
     }
 
+    @Override
+    public boolean equals(Object o){
+        boolean r = false;
+        if(o instanceof Materia){
+            Materia that = (Materia) o;
+            r = (this.getId() == that.getId());
+        }
+        return r;
+    }
+
+    @Override
+    public int hashCode(){
+        return (""+this.getId()).hashCode();
+    }
+
 }

@@ -51,4 +51,19 @@ public class Perfil {
     public ArrayList<Materia> getNecessidades() { return necessidades; }
 
     public void addNecessidade(Materia nova) { necessidades.add(nova); }
+
+    @Override
+    public boolean equals(Object o){
+        boolean r = false;
+        if(o instanceof Perfil){
+            Perfil that = (Perfil) o;
+            r = (this.getId() == that.getId());
+        }
+        return r;
+    }
+
+    @Override
+    public int hashCode(){
+        return (""+this.getId()).hashCode();
+    }
 }

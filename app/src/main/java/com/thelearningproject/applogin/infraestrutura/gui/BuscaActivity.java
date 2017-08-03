@@ -74,11 +74,8 @@ public class BuscaActivity extends AppCompatActivity {
         }
 
         //remove o perfil do usuario ativo da lista de busca
-        for (Perfil p : listaPerfil){
-            if(p.getId() == sessao.getPerfil().getId()){
-                listaPerfil.remove(p);
-                break;
-            }
+        if(listaPerfil.contains(sessao.getPerfil())){
+            listaPerfil.remove(sessao.getPerfil());
         }
 
         ArrayAdapter adaptador = new PerfilAdapter(getApplicationContext(), listaPerfil);
