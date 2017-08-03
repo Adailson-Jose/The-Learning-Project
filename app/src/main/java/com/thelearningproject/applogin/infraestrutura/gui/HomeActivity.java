@@ -1,33 +1,45 @@
 package com.thelearningproject.applogin.infraestrutura.gui;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+
+import layout.MainBuscaFragment;
+import layout.MainPerfilFragment;
+import layout.MainRecomendacoesFragment;
 
 /**
  * Criado por gabri on 26/07/2017.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
     private static final String SELECTED_ITEM = "arg_selected_item";
-
+    FragmentManager fm = getSupportFragmentManager();
     private BottomNavigationView mBottomNav;
     private int mSelectedItem;
+    private ControladorSessao session;
+
+    public ControladorSessao getSessao(){
+        return this.session;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        session = ControladorSessao.getInstancia(this.getApplicationContext());
+
 
         mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
 
@@ -45,6 +57,10 @@ public class HomeActivity extends AppCompatActivity {
             mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 0);
             selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
         } else {
+            MainPerfilFragment frag1 = new MainPerfilFragment();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.container,frag1);
+            ft.commit();
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);
@@ -58,39 +74,33 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void selectFragment(MenuItem item) {
-        Fragment frag = null;
-        // init corresponding fragment
+        FragmentTransaction ft = fm.beginTransaction();
+
         switch (item.getItemId()) {
-            case R.id.menu_home:
-                frag = MenuFragment.newInstance(getString(R.string.bottom_nav_title1),
-                        getColorFromRes(R.color.colorPrimary));
+            case R.id.menu_recomendacoes:
+                MainRecomendacoesFragment frag1 = new MainRecomendacoesFragment();
+                ft.replace(R.id.container, frag1, "frag1");
+                ft.addToBackStack("pilha");
+                ft.commit();
                 break;
             case R.id.menu_buscar:
-                frag = MenuFragment.newInstance(getString(R.string.bottom_nav_title2),
-                        getColorFromRes(R.color.colorAccent));
+                MainBuscaFragment frag2 = new MainBuscaFragment();
+                ft.replace(R.id.container, frag2, "frag2");
+                ft.addToBackStack("pilha");
+                ft.commit();
                 break;
             case R.id.menu_perfil:
-                frag = MenuFragment.newInstance(getString(R.string.bottom_nav_title3),
-                        getColorFromRes(R.color.colorSecondary));
+                MainPerfilFragment frag3 = new MainPerfilFragment();
+                ft.replace(R.id.container, frag3, "frag3");
+                ft.addToBackStack("pilha");
+                ft.commit();
                 break;
         }
 
         // update selected item
         mSelectedItem = item.getItemId();
 
-        // uncheck the other items.
-//        for (int i = 0; i< mBottomNav.getMenu().size(); i++) {
-//            MenuItem menuItem = mBottomNav.getMenu().getItem(i);
-//            menuItem.setChecked(menuItem.getItemId() == item.getItemId());
-//        }
-
         updateToolbarText(item.getTitle());
-
-        if (frag != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(R.id.container, frag, frag.getTag());
-            ft.commit();
-        }
     }
 
     private void updateToolbarText(CharSequence text) {
@@ -100,7 +110,8 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private int getColorFromRes(@ColorRes int resId) {
-        return ContextCompat.getColor(this, resId);
+    @Override
+    public void onClick(DialogInterface dialog, int which) {
+
     }
 }

@@ -23,7 +23,7 @@
     <string name="excluir">Excluir Conta</string>
     <string name="voltar">Voltar</string>
     <string name="config">Configurações</string>
-    <string name="bottom_nav_title1">Home</string>
+    <string name="bottom_nav_title1">Recomendações</string>
     <string name="bottom_nav_title2">Buscar</string>
     <string name="bottom_nav_title3">Perfil</string>
     <string name="manterConectado">Manter conectado</string>
@@ -37,5 +37,8 @@
     <string name="confirmarNovaSenha">Confirmar Nova Senha</string>
     <string name="cancelar">Cancelar</string>
     <string name="copyright">The Learning © Project 2017</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
