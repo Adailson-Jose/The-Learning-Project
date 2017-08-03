@@ -1,29 +1,29 @@
-package com.thelearningproject.applogin.perfil.persistencia;
+package com.thelearningproject.applogin.registrobusca.persistencia;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Criado por Pichau on 26/07/2017.
+ * Created by Pichau on 26/07/2017.
  */
 
-public class BancoHabilidade extends SQLiteOpenHelper{
-    private static BancoHabilidade instancia;
-    private static final String NOME_BANCO = "ConexaoHabilidade";
+public class Banco extends SQLiteOpenHelper{
+    private static Banco instancia;
+    private static final String NOME_BANCO = "DadosBusca";
     private static final int VERSION = 1;
-    private static final String TABELA = "conexaohabilidade";
+    private static final String TABELA = "dadosbusca";
     private static final String IDPERFIL = "perfil";
-    private static final String IDMATERIA = "materia";
+    private static final String MATERIA = "materia";
 
-    public static synchronized BancoHabilidade getInstancia(Context context) {
+    public static synchronized Banco getInstancia(Context context) {
         if (instancia == null) {
-            instancia = new BancoHabilidade(context.getApplicationContext());
+            instancia = new Banco(context.getApplicationContext());
         }
         return instancia;
     }
 
-    private BancoHabilidade(Context context) {
+    private Banco(Context context) {
         super(context, NOME_BANCO, null, VERSION);
     }
 
@@ -31,8 +31,8 @@ public class BancoHabilidade extends SQLiteOpenHelper{
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE " + TABELA + " (" +
                 IDPERFIL + " INTEGER, " +
-                IDMATERIA + " INTEGER, " +
-                "PRIMARY KEY(" +IDPERFIL +", "+IDMATERIA+"))";
+                MATERIA + " VARCHAR, " +
+                "PRIMARY KEY(" +IDPERFIL +", "+MATERIA+"))";
 
         db.execSQL(sql);
     }
@@ -44,3 +44,4 @@ public class BancoHabilidade extends SQLiteOpenHelper{
         onCreate(db);
     }
 }
+

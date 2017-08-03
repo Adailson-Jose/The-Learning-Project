@@ -14,17 +14,17 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
-public class CadastroMateriaActivity extends AppCompatActivity {
+public class CadastroHabilidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private EditText entradaMateria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cadastro_materia);
+        setContentView(R.layout.activity_cadastro_habilidade);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        Button botaoCadastro = (Button) findViewById(R.id.BotaoCadastraMateriaID);
+        Button botaoCadastro = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
 
         botaoCadastro.setOnClickListener(new View.OnClickListener(){

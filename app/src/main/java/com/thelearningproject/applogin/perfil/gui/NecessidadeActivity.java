@@ -39,8 +39,8 @@ public class NecessidadeActivity extends AppCompatActivity {
                 Intent entidade = new Intent(NecessidadeActivity.this, MainActivity.class);
                 entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                finish();
                 startActivity(entidade);
+                finish();
             }
         });
 
@@ -77,10 +77,10 @@ public class NecessidadeActivity extends AppCompatActivity {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
         MateriaServices materiaServices = MateriaServices.getInstancia(getBaseContext());
 
-        Perfil perfil = negocioperfil.retornaPerfil(sessao.getPessoa().getId());
-        materia = materiaServices.cadastraMateria(materia);
-        negocioperfil.insereNecessidade(perfil, materia);
-        perfil.addNecessidade(materia);
+        Perfil perfil = sessao.getPerfil();
+        Materia novaMateria = materiaServices.cadastraMateria(materia);
+        negocioperfil.insereNecessidade(perfil, novaMateria);
+        perfil.addNecessidade(novaMateria);
 
         Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso");
     }

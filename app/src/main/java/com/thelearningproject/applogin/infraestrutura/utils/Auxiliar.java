@@ -2,6 +2,7 @@ package com.thelearningproject.applogin.infraestrutura.utils;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ public class Auxiliar {
         return m.matches();
 
     }
-    public static void criarToast(Activity activity, String msg) {
-        Toast.makeText(activity,msg, Toast.LENGTH_LONG).show();
+    public static void criarToast(Context context, String msg) {
+        Toast.makeText(context,msg, Toast.LENGTH_LONG).show();
     }
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo) {
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);

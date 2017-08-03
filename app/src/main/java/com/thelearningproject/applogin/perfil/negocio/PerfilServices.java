@@ -9,6 +9,8 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.persistencia.ConexaoHabilidade;
 import com.thelearningproject.applogin.perfil.persistencia.ConexaoNecessidade;
 import com.thelearningproject.applogin.perfil.persistencia.PerfilDAO;
+import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.persistencia.PessoaDAO;
 
 import java.util.ArrayList;
 
@@ -19,15 +21,17 @@ import java.util.ArrayList;
 public class PerfilServices {
     private static PerfilServices instancia;
     private PerfilDAO persistencia;
+    private PessoaDAO pessoaDAO;
     private MateriaServices materiaServices;
     private ConexaoHabilidade conexaoHabilidade;
     private ConexaoNecessidade conexaoNecessidade;
 
-    public PerfilServices(Context contexto) {
+    private PerfilServices(Context contexto) {
         this.conexaoHabilidade = ConexaoHabilidade.getInstancia(contexto);
         this.conexaoNecessidade = ConexaoNecessidade.getInstancia(contexto);
         this.persistencia = PerfilDAO.getInstance(contexto);
         this.materiaServices = MateriaServices.getInstancia(contexto);
+        this.pessoaDAO = PessoaDAO.getInstance(contexto);
     }
 
     public static PerfilServices getInstancia(Context contexto) {
@@ -44,9 +48,13 @@ public class PerfilServices {
 
     public Perfil retornaPerfil(int idPessoa) {
         Perfil perfil = persistencia.retornaPerfil(idPessoa);
-        ArrayList<Integer> materia_id = conexaoHabilidade.retornaMateria(perfil.getId());
-        for(int i:materia_id){
+        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
+        for(int i:habilidadeId){
             perfil.addHabilidade(materiaServices.consultar(i));
+        }
+        for(int j:necessidadeId){
+            perfil.addNecessidade(materiaServices.consultar(j));
         }
         return perfil;
     }
@@ -55,29 +63,35 @@ public class PerfilServices {
         persistencia.alterarPerfil(perfil);
     }
 
-    public Perfil consulta(int id){
+    private Perfil consulta(int id){
         Perfil perfil = persistencia.consultar(id);
-        ArrayList<Integer> materia_id = conexaoHabilidade.retornaMateria(perfil.getId());
-        for(int i:materia_id){
+        Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
+        perfil.setPessoa(pessoa);
+        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
+        for(int i:habilidadeId){
             perfil.addHabilidade(materiaServices.consultar(i));
+        }
+        for(int j:necessidadeId){
+            perfil.addNecessidade(materiaServices.consultar(j));
         }
         return perfil;
     }
 
     public void insereHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
-        verificaExistencia(perfil.getId(),materia.getId());
+        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.HABILIDADE);
         conexaoHabilidade.insereConexao(perfil.getId(),materia.getId());
     }
 
     public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
-        verificaExistencia(perfil.getId(),materia.getId());
+        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
         conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
     }
 
     public ArrayList<Perfil> listarPerfil(Materia materia){
         ArrayList<Perfil> usuarios = new ArrayList<>();
-        ArrayList<Integer> lista_ids = conexaoHabilidade.retornaUsuarios(materia.getId());
-        for (int id:lista_ids){
+        ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());
+        for (int id:listaIds){
             usuarios.add(consulta(id));
         }
         return usuarios;
@@ -87,9 +101,15 @@ public class PerfilServices {
         return conexaoHabilidade.retornaMateria(perfil.getId());
     }
 
-    private void verificaExistencia(int id_perfil, int id_materia) throws UsuarioException{
-        if (conexaoHabilidade.verificatupla(id_perfil,id_materia)){
-            throw new UsuarioException("Você já cadastrou essa Habilidade");
+    private void verificaExistencia(int perfil, int materia, tipoConexao tipo) throws UsuarioException{
+        if (tipo == tipoConexao.HABILIDADE){
+            if (conexaoHabilidade.verificatupla(perfil,materia)){
+                throw new UsuarioException("Você já cadastrou essa Habilidade");
+            }
+        }else{
+            if (conexaoNecessidade.verificatupla(perfil, materia)) {
+                throw new UsuarioException("Você já cadastrou essa Necessidade");
+            }
         }
     }
 

@@ -10,11 +10,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class BancoNecessidade extends SQLiteOpenHelper {
     private static BancoNecessidade sInstance;
-    private static final String NOME_BANCO = "RelacaoUsuarioMateria";
-    private static final int VERSION = 2;
-    private static final String TABELA = "usuario_materia";
-    private static final String IDPERFIL = "id_perfil";
-    private static final String IDMATERIA = "id_materia";
+    private static final String NOME_BANCO = "ConexaoNecessidade";
+    private static final int VERSION = 1;
+    private static final String TABELA = "conexaonecessidade";
+    private static final String IDPERFIL = "perfil";
+    private static final String IDMATERIA = "materia";
 
     public static synchronized BancoNecessidade getInstancia(Context context) {
         if (sInstance == null) {
@@ -29,7 +29,7 @@ public class BancoNecessidade extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE " + TABELA + "(" +
+        String sql = "CREATE TABLE " + TABELA + " (" +
                 IDPERFIL + " INTEGER, " +
                 IDMATERIA + " INTEGER, " +
                 "PRIMARY KEY(" +IDPERFIL +", "+IDMATERIA+"))";

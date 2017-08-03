@@ -1,6 +1,9 @@
 package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
+
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
@@ -9,14 +12,14 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Criado por Ebony Marques on 18/07/2017.
+ * Created by Ebony Marques on 18/07/2017.
  */
 
 public class UsuarioServices {
     private static UsuarioServices instancia;
     private UsuarioDAO persistencia;
 
-    public UsuarioServices(Context context){
+    private UsuarioServices(Context context){
         this.persistencia = UsuarioDAO.getInstance(context);
     }
 
@@ -36,6 +39,7 @@ public class UsuarioServices {
         return resultado;
     }
 
+    //Retorna Verdadeiro se o usuario estiver desativo
     private Boolean verificaEmailExistenteStatus(String email){
         Boolean resultado = false;
 
@@ -97,7 +101,7 @@ public class UsuarioServices {
         try {
             criptografado = criptografaSenha(senha);
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
+            Log.e("UsuarioServices","Algoritmo de criptografia não encontrado");
         }
         return criptografado;
     }
@@ -118,11 +122,11 @@ public class UsuarioServices {
     }
 
     private void usuarioAtivo(Usuario usuario) throws UsuarioException{
-        if (usuario != null){
-            if (Status.DESATIVADO.equals(usuario.getStatus())){
-                throw new UsuarioException("Usuário ou senha incorretos");
-            }
+        if (usuario != null && Status.DESATIVADO.equals(usuario.getStatus())){
+            throw new UsuarioException("Usuário ou senha incorretos");
+
         }
     }
+
 
 }

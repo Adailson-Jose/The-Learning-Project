@@ -39,7 +39,7 @@
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
         <activity android:name=".infraestrutura.gui.HomeActivity" />
-        <activity android:name=".infraestrutura.gui.CadastroMateriaActivity">
+        <activity android:name=".infraestrutura.gui.CadastroHabilidadeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
@@ -53,6 +53,7 @@
         <activity android:name=".infraestrutura.gui.AlterarNomeActivity" />
         <activity android:name=".infraestrutura.gui.AlterarEmailActivity" />
         <activity android:name=".infraestrutura.gui.AlterarSenhaActivity" />
+        <activity android:name=".infraestrutura.gui.CadastroNecessidadeActivity"></activity>
     </application>
 
 </manifest>

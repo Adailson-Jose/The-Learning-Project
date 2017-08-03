@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public class ConexaoHabilidade {
     private static ConexaoHabilidade instancia;
     private SQLiteOpenHelper banco;
-    private static final String TABELA = "usuario_materia";
-    private static final String IDPERFIL = "id_perfil";
-    private static final String IDMATERIA = "id_materia";
+    private static final String TABELA = "conexaohabilidade";
+    private static final String IDPERFIL = "perfil";
+    private static final String IDMATERIA = "materia";
 
     public static synchronized ConexaoHabilidade getInstancia(Context context){
         if(instancia == null){
@@ -25,27 +25,27 @@ public class ConexaoHabilidade {
         return instancia;
     }
 
-    public ConexaoHabilidade(Context context){
+    private ConexaoHabilidade(Context context){
         this.banco = BancoHabilidade.getInstancia(context);
     }
 
-    public boolean verificatupla(int id_perfil, int id_materia){
-        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(id_perfil),Integer.toString(id_materia)},null,null,null);
+    public boolean verificatupla(int perfil, int materia){
+        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)},null,null,null);
         boolean resultado = cursor.moveToFirst();
         cursor.close();
         return resultado;
     }
 
-    public void insereConexao(int id_perfil, int id_materia){
+    public void insereConexao(int perfil, int materia){
         ContentValues values = new ContentValues();
-        values.put(IDPERFIL, id_perfil);
-        values.put(IDMATERIA, id_materia);
+        values.put(IDPERFIL, perfil);
+        values.put(IDMATERIA, materia);
         banco.getWritableDatabase().insert(TABELA, null, values);
     }
 
-    public ArrayList<Integer> retornaUsuarios(int id_materia){
+    public ArrayList<Integer> retornaUsuarios(int materia){
         ArrayList<Integer> usuarios = new ArrayList<>();
-        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDMATERIA + " = ?",new String[]{String.valueOf(id_materia)},null,null,null);
+        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDMATERIA + " = ?",new String[]{String.valueOf(materia)},null,null,null);
         while (cursor.moveToNext()){
             usuarios.add(cursor.getInt(cursor.getColumnIndex(IDPERFIL)));
         }
@@ -53,9 +53,9 @@ public class ConexaoHabilidade {
         return usuarios;
     }
 
-    public ArrayList<Integer> retornaMateria(int id_perfil){
+    public ArrayList<Integer> retornaMateria(int perfil){
         ArrayList<Integer> materias = new ArrayList<>();
-        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDMATERIA},IDPERFIL + " = ?",new String[]{String.valueOf(id_perfil)},null,null,null);
+        Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDMATERIA},IDPERFIL + " = ?",new String[]{String.valueOf(perfil)},null,null,null);
         while (cursor.moveToNext()){
             materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA)));
         }

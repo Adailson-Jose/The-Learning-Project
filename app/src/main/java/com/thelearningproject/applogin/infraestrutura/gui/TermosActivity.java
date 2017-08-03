@@ -67,7 +67,7 @@ public class TermosActivity extends AppCompatActivity {
     }
 
     private void criarPerfil() {
-        PerfilServices negocioPerfil = PerfilServices.getInstancia(getBaseContext());
+        PerfilServices negocioPerfil = PerfilServices.getInstancia(getApplicationContext());
         Perfil perfil = new Perfil();
 
         perfil.setPessoa(sessao.getPessoa());

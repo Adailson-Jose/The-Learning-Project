@@ -30,7 +30,8 @@ public class MainActivity extends AppCompatActivity {
         apresentacao = (TextView) findViewById(R.id.apresentacaoID);
         Button botaoconfig = (Button) findViewById(R.id.configID);
         Button botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
-        Button botaoInsereMateria = (Button) findViewById(R.id.BotaoCadastraMateriaID);
+        Button botaoInsereHabilidade = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
+        Button botaoInsereNecessidade = (Button) findViewById(R.id.BotaoInsereNecessidadeID);
         Button botaoabrir = (Button) findViewById(R.id.btnChamar);
 
         if(sessao.verificaConexao()) {
@@ -65,10 +66,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        botaoInsereMateria.setOnClickListener(new View.OnClickListener(){
+        botaoInsereHabilidade.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                startActivity(new Intent(MainActivity.this, CadastroMateriaActivity.class));
+                startActivity(new Intent(MainActivity.this, CadastroHabilidadeActivity.class));
+            }
+        });
+
+        botaoInsereNecessidade.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                startActivity(new Intent(MainActivity.this, CadastroNecessidadeActivity.class));
             }
         });
     }

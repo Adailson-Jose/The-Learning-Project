@@ -38,8 +38,8 @@ public class HabilidadeActivity extends AppCompatActivity {
                 Intent entidade = new Intent(HabilidadeActivity.this, NecessidadeActivity.class);
                 entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                finish();
                 startActivity(entidade);
+                finish();
             }
         });
     }
@@ -75,10 +75,10 @@ public class HabilidadeActivity extends AppCompatActivity {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
         MateriaServices materiaServices = MateriaServices.getInstancia(getBaseContext());
 
-        Perfil perfil = negocioperfil.retornaPerfil(sessao.getPessoa().getId());
-        materia = materiaServices.cadastraMateria(materia);
-        negocioperfil.insereHabilidade(perfil, materia);
-        perfil.addHabilidade(materia);
+        Perfil perfil = sessao.getPerfil();
+        Materia novaMateria = materiaServices.cadastraMateria(materia);
+        negocioperfil.insereHabilidade(perfil, novaMateria);
+        perfil.addHabilidade(novaMateria);
 
         Auxiliar.criarToast(this, "Habilidade cadastrada com sucesso");
     }
