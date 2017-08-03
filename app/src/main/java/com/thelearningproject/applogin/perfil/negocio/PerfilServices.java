@@ -80,6 +80,16 @@ public class PerfilServices {
         conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
     }
 
+    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
+        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.HABILIDADE);
+        conexaoHabilidade.removerConexao(perfil.getId(),materia.getId());
+    }
+
+    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
+        conexaoNecessidade.removerConexao(perfil.getId(),materia.getId());
+    }
+
     public ArrayList<Perfil> listarPerfil(Materia materia){
         ArrayList<Perfil> usuarios = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());

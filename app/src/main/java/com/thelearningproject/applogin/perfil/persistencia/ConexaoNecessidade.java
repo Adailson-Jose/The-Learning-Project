@@ -3,7 +3,9 @@ package com.thelearningproject.applogin.perfil.persistencia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 
 import java.util.ArrayList;
 
@@ -30,10 +32,27 @@ public class ConexaoNecessidade {
     }
 
     public void insereConexao(int perfil, int materia){
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(IDPERFIL, perfil);
         values.put(IDMATERIA, materia);
-        banco.getWritableDatabase().insert(TABELA, null, values);
+        db.insert(TABELA, null, values);
+        db.close();
+    }
+
+    private void updateConexao(int perfil, int materia){
+        SQLiteDatabase db = banco.getWritableDatabase();
+        if (verificatupla(perfil, materia)){
+            ContentValues values = new ContentValues();
+            values.put(IDPERFIL, perfil);
+            values.put(IDMATERIA, materia);
+            db.update(TABELA,values,IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)});
+            db.close();
+        }
+    }
+
+    public void removerConexao(int perfil, int materia){
+        updateConexao(perfil,materia);
     }
 
     public boolean verificatupla(int perfil, int materia){

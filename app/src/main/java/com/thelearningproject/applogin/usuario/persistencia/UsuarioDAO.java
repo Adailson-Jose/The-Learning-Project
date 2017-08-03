@@ -32,16 +32,18 @@ public class UsuarioDAO {
         return instancia;
     }
 
-    public UsuarioDAO(Context context) {
+    private UsuarioDAO(Context context) {
         this.banco = Banco.getInstance(context);
     }
 
     public void inserir(Usuario usuario) {
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(EMAIL, usuario.getEmail());
         values.put(SENHA, usuario.getSenha());
         values.put(STATUS,usuario.getStatus().getValor());
-        banco.getWritableDatabase().insert(TABELA, null, values);
+        db.insert(TABELA, null, values);
+        db.close();
 
     }
 
@@ -114,8 +116,7 @@ public class UsuarioDAO {
     //diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
     public Usuario pesquisarUsuario(int codigo){
         String[] colunas = {ID, EMAIL, SENHA, STATUS};
-        SQLiteDatabase db = banco.getReadableDatabase();
-        Cursor cursor = db.query(TABELA, colunas, ID + " = ?",
+        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?",
                 new String[]{String.valueOf(codigo)}, null, null, null, null);
         Usuario usuario = null;
 
@@ -125,7 +126,6 @@ public class UsuarioDAO {
             usuario.setEmail(cursor.getString(cursor.getColumnIndex(EMAIL)));
             usuario.setSenha(cursor.getString(cursor.getColumnIndex(SENHA)));
             usuario.setStatus(valores[(cursor.getInt(cursor.getColumnIndex(STATUS)))]);
-            db.close();
         }
         cursor.close();
         return usuario;

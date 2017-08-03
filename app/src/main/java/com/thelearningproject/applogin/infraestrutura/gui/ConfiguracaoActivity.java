@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -96,7 +95,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
     private void desativar(){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
         negocio.deletarUsuario(session.getUsuario());
-        Toast.makeText(ConfiguracaoActivity.this, "Usuário desativado com sucesso", Toast.LENGTH_LONG).show();
+        Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário desativado com sucesso");
         finish();
         session.encerraSessao();
     }

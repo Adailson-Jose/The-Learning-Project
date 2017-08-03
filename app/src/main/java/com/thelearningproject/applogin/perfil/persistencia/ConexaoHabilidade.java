@@ -3,6 +3,7 @@ package com.thelearningproject.applogin.perfil.persistencia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -37,10 +38,18 @@ public class ConexaoHabilidade {
     }
 
     public void insereConexao(int perfil, int materia){
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(IDPERFIL, perfil);
         values.put(IDMATERIA, materia);
-        banco.getWritableDatabase().insert(TABELA, null, values);
+        db.insert(TABELA, null, values);
+        db.close();
+    }
+
+    public void removerConexao(int perfil, int materia){
+        SQLiteDatabase db = banco.getWritableDatabase();
+        db.delete(TABELA,IDPERFIL + " = ? AND "+IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)});
+        db.close();
     }
 
     public ArrayList<Integer> retornaUsuarios(int materia){

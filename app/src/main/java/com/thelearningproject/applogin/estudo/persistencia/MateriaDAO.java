@@ -3,6 +3,7 @@ package com.thelearningproject.applogin.estudo.persistencia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
@@ -26,14 +27,16 @@ public class MateriaDAO {
         return sInstance;
     }
 
-    public MateriaDAO(Context context) {
+    private MateriaDAO(Context context) {
         this.banco = Banco.getInstance(context);
     }
 
     public void inserir(Materia materia) {
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NOME, materia.getNome());
-        banco.getWritableDatabase().insert(TABELA, null, values);
+        db.insert(TABELA, null, values);
+        db.close();
 
     }
 

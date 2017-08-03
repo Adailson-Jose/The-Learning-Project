@@ -33,10 +33,12 @@ public class PerfilDAO {
     }
 
     public void inserir(Perfil perfil) {
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(PESSOA, perfil.getPessoa().getId());
 
-        banco.getWritableDatabase().insert(TABELA, null, valores);
+        db.insert(TABELA, null, valores);
+        db.close();
     }
 
     public Perfil retornaPerfil(int idPessoa) {

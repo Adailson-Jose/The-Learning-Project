@@ -33,11 +33,13 @@ public class PessoaDAO {
     }
 
     public void inserir(Pessoa pessoa) {
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(NOME, pessoa.getNome());
         valores.put(USUARIO, pessoa.getUsuario().getId());
 
-        banco.getWritableDatabase().insert(TABELA, null, valores);
+        db.insert(TABELA, null, valores);
+        db.close();
     }
 
     public Pessoa retornaPessoa(int idUsuario) {

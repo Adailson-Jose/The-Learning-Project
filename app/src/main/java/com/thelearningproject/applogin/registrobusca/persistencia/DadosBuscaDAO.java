@@ -3,6 +3,7 @@ package com.thelearningproject.applogin.registrobusca.persistencia;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.util.ArrayList;
@@ -31,10 +32,12 @@ public class DadosBuscaDAO {
     }
 
     public void insereBusca(int perfil, String materia){
+        SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(IDPERFIL, perfil);
         values.put(MATERIA, materia);
-        banco.getWritableDatabase().insert(TABELA, null, values);
+        db.insert(TABELA, null, values);
+        db.close();
     }
 
     public boolean verificaExistencia(int perfil, String materia){
