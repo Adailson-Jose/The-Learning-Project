@@ -50,12 +50,8 @@ public class PerfilServices {
         Perfil perfil = persistencia.retornaPerfil(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
-        for(int i:habilidadeId){
-            perfil.addHabilidade(materiaServices.consultar(i));
-        }
-        for(int j:necessidadeId){
-            perfil.addNecessidade(materiaServices.consultar(j));
-        }
+        retornaListaHabilidades(perfil, habilidadeId);
+        retornaListaNecessidades(perfil, necessidadeId);
         return perfil;
     }
 
@@ -69,12 +65,8 @@ public class PerfilServices {
         perfil.setPessoa(pessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
-        for(int i:habilidadeId){
-            perfil.addHabilidade(materiaServices.consultar(i));
-        }
-        for(int j:necessidadeId){
-            perfil.addNecessidade(materiaServices.consultar(j));
-        }
+        retornaListaHabilidades(perfil, habilidadeId);
+        retornaListaNecessidades(perfil, necessidadeId);
         return perfil;
     }
 
@@ -111,6 +103,46 @@ public class PerfilServices {
                 throw new UsuarioException("Você já cadastrou essa Necessidade");
             }
         }
+    }
+
+    private void retornaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {
+        for(int i:habilidadeId){
+            perfil.addHabilidade(materiaServices.consultar(i));
+        }
+    }
+
+    private void retornaListaNecessidades(Perfil perfil, ArrayList<Integer> necessidadeId) {
+        for(int j:necessidadeId){
+            perfil.addNecessidade(materiaServices.consultar(j));
+        }
+    }
+
+    public String retornaStringListaHabilidades(int id) {
+        Perfil perfil = this.consulta(id);
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<Materia> lista = perfil.getHabilidades();
+
+        for (Materia mat: lista) {
+            sb.append(mat.getNome());
+            sb.append(", ");
+        }
+        sb.append("h");
+        return sb.toString();
+    }
+
+    public String retornaStringListaNecessidades(int id) {
+        Perfil perfil = this.consulta(id);
+        StringBuilder sb = new StringBuilder();
+
+        ArrayList<Materia> lista = perfil.getNecessidades();
+
+        for (Materia mat: lista) {
+            sb.append(mat.getNome());
+            sb.append(", ");
+        }
+        sb.append("n");
+        return sb.toString();
     }
 
 }

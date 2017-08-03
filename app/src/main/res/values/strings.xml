@@ -3,8 +3,8 @@
     <string name="usuario">Usuário</string>
     <string name="nome">Nome</string>
     <string name="senha">Senha</string>
-    <string name="login">Login</string>
-    <string name="logout">Logout</string>
+    <string name="login">Entrar</string>
+    <string name="logout">Sair</string>
     <string name="email">E-mail</string>
     <string name="cadastrar">Criar nova conta</string>
     <string name="texto">Somos uma plataforma de\n aprendizagem mútua.\n\n
@@ -13,8 +13,8 @@
     <string name="continuar">Continuar</string>
     <string name="finalizar">Finalizar</string>
     <string name="descricao">Descrição</string>
-    <string name="habilidade">Habilidade</string>
-    <string name="necessidade">Necessidade</string>
+    <string name="habilidades">Habilidades</string>
+    <string name="necessidades">Necessidades</string>
     <string name="dica1">Matemática, português, etc.</string>
     <string name="dica2">Descreva essa habilidade.</string>
     <string name="dica3">Onde estuda? O que cursar?</string>
@@ -37,6 +37,7 @@
     <string name="confirmarNovaSenha">Confirmar Nova Senha</string>
     <string name="cancelar">Cancelar</string>
     <string name="copyright">The Learning © Project 2017</string>
+    <string name="conta">Conta</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

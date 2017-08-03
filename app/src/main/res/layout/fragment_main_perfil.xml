@@ -27,12 +27,12 @@
         android:background="@color/colorSecondary">
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/nomeUsuarioID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             style="@style/camposTexto"
-            android:text="Gabriel Lourenço" />
+            android:text="@string/nome" />
 
     </RelativeLayout>
 
@@ -50,17 +50,17 @@
                 style="@style/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Materias" />
+                android:text="@string/habilidades" />
 
             <View style="@style/DividerBlack"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="110dp"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
                 <ListView
-                    android:id="@+id/listaPerfil"
+                    android:id="@+id/listaPerfilHabilidades"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="@color/transparent" />
@@ -68,17 +68,38 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/textView4"
                 style="@style/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Conta" />
+                android:text="@string/necessidades" />
 
             <View style="@style/DividerBlack"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listaPerfilNecessidades"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/transparent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/conta" />
+
+            <View style="@style/DividerBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
                 android:orientation="horizontal">
 
                 <ListView

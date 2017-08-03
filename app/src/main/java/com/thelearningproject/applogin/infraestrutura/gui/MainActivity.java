@@ -110,7 +110,5 @@ public class MainActivity extends AppCompatActivity {
         String mensagem = "Oi, " + sessao.getPessoa().getNome() + ".";
 
         apresentacao.setText(mensagem);
-
-
     }
 }
