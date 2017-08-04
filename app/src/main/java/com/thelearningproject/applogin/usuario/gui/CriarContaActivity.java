@@ -94,7 +94,7 @@ public class CriarContaActivity extends Activity {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
 
         negocioUsuario.inserirUsuario(pessoa.getUsuario());
-        int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail()); //isso é importante
+        int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail());
         pessoa.getUsuario().setId(usuarioid);
         negocioPessoa.inserirPessoa(pessoa);
 

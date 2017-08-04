@@ -35,12 +35,6 @@ public class NecessidadeActivity extends AppCompatActivity {
             public void onClick(View v) {
                 processoCadastroNecessidade();
                 Auxiliar.esconderTeclado(NecessidadeActivity.this);
-
-                Intent entidade = new Intent(NecessidadeActivity.this, MainActivity.class);
-                entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
-                finish();
             }
         });
 
@@ -69,7 +63,7 @@ public class NecessidadeActivity extends AppCompatActivity {
             }
 
         } catch (UsuarioException e){
-            Auxiliar.criarToast(this, "Matéria já cadastrada");
+            Auxiliar.criarToast(this, e.getMessage());
         }
     }
 
@@ -83,5 +77,11 @@ public class NecessidadeActivity extends AppCompatActivity {
         perfil.addNecessidade(novaMateria);
 
         Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso");
+
+        Intent entidade = new Intent(NecessidadeActivity.this, MainActivity.class);
+        entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(entidade);
+        finish();
     }
 }

@@ -34,12 +34,6 @@ public class HabilidadeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 processoCadastroHabilidade();
                 Auxiliar.esconderTeclado(HabilidadeActivity.this);
-
-                Intent entidade = new Intent(HabilidadeActivity.this, NecessidadeActivity.class);
-                entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
-                finish();
             }
         });
     }
@@ -67,7 +61,7 @@ public class HabilidadeActivity extends AppCompatActivity {
             }
 
         } catch (UsuarioException e){
-            Auxiliar.criarToast(this, "Matéria já cadastrada");
+            Auxiliar.criarToast(this, e.getMessage());
         }
     }
 
@@ -81,6 +75,11 @@ public class HabilidadeActivity extends AppCompatActivity {
         perfil.addHabilidade(novaMateria);
 
         Auxiliar.criarToast(this, "Habilidade cadastrada com sucesso");
+        Intent entidade = new Intent(HabilidadeActivity.this, NecessidadeActivity.class);
+        entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(entidade);
+        finish();
     }
 
 }

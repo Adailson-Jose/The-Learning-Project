@@ -33,6 +33,7 @@ public class BuscaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
+        setTitle("Buscar");
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         listaUsuarios = (ListView) findViewById(R.id.listViewID);

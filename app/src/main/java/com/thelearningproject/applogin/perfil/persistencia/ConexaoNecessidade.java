@@ -46,13 +46,16 @@ public class ConexaoNecessidade {
             ContentValues values = new ContentValues();
             values.put(IDPERFIL, perfil);
             values.put(IDMATERIA, materia);
-            db.update(TABELA,values,IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)});
+            db.update(TABELA,values,IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",
+                    new String[]{String.valueOf(perfil),Integer.toString(materia)});
             db.close();
         }
     }
 
     public void removerConexao(int perfil, int materia){
-        updateConexao(perfil,materia);
+        SQLiteDatabase db = banco.getWritableDatabase();
+        db.delete(TABELA,IDPERFIL + " = ? AND "+IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)});
+        db.close();
     }
 
     public boolean verificatupla(int perfil, int materia){

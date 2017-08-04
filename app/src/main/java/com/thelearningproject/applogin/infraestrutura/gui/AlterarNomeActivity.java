@@ -62,7 +62,7 @@ public class AlterarNomeActivity extends AppCompatActivity {
         Auxiliar.criarToast(this, "Dados atualizados com sucesso");
 
         Intent entidade = new Intent(AlterarNomeActivity.this, ConfiguracaoActivity.class);
-        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(entidade);
     }
 

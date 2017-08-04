@@ -50,8 +50,8 @@ public class PerfilServices {
         Perfil perfil = persistencia.retornaPerfil(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
-        retornaListaHabilidades(perfil, habilidadeId);
-        retornaListaNecessidades(perfil, necessidadeId);
+        montaListaHabilidades(perfil, habilidadeId);
+        montaListaNecessidades(perfil, necessidadeId);
         return perfil;
     }
 
@@ -65,8 +65,8 @@ public class PerfilServices {
         perfil.setPessoa(pessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
-        retornaListaHabilidades(perfil, habilidadeId);
-        retornaListaNecessidades(perfil, necessidadeId);
+        montaListaHabilidades(perfil, habilidadeId);
+        montaListaNecessidades(perfil, necessidadeId);
         return perfil;
     }
 
@@ -81,12 +81,10 @@ public class PerfilServices {
     }
 
     public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
-        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.HABILIDADE);
         conexaoHabilidade.removerConexao(perfil.getId(),materia.getId());
     }
 
     public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
-        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
         conexaoNecessidade.removerConexao(perfil.getId(),materia.getId());
     }
 
@@ -99,29 +97,48 @@ public class PerfilServices {
         return usuarios;
     }
 
-    public ArrayList<Integer> listarMateria(Perfil perfil){
-        return conexaoHabilidade.retornaMateria(perfil.getId());
+    public ArrayList<Materia> listarHabilidade(Perfil perfil){
+        ArrayList<Materia> listaMateria = new ArrayList<>();
+        ArrayList<Integer> lista = conexaoHabilidade.retornaMateria(perfil.getId());
+
+        if (!lista.isEmpty()) {
+            for(int id:lista){
+                listaMateria.add(materiaServices.consultar(id));
+            }
+        }
+        return listaMateria;
+    }
+    public ArrayList<Materia> listarNecessidade(Perfil perfil){
+        ArrayList<Materia> listaNecessidade = new ArrayList<>();
+        ArrayList<Integer> lista = conexaoNecessidade.retornaMateria(perfil.getId());
+
+        if (!lista.isEmpty()) {
+            for(int id:lista){
+                listaNecessidade.add(materiaServices.consultar(id));
+            }
+        }
+        return listaNecessidade;
     }
 
     private void verificaExistencia(int perfil, int materia, tipoConexao tipo) throws UsuarioException{
         if (tipo == tipoConexao.HABILIDADE){
             if (conexaoHabilidade.verificatupla(perfil,materia)){
-                throw new UsuarioException("Você já cadastrou essa Habilidade");
+                throw new UsuarioException("Você já cadastrou essa habilidade");
             }
         }else{
             if (conexaoNecessidade.verificatupla(perfil, materia)) {
-                throw new UsuarioException("Você já cadastrou essa Necessidade");
+                throw new UsuarioException("Você já cadastrou essa necessidade");
             }
         }
     }
 
-    private void retornaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {
+    private void montaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {
         for(int i:habilidadeId){
             perfil.addHabilidade(materiaServices.consultar(i));
         }
     }
 
-    private void retornaListaNecessidades(Perfil perfil, ArrayList<Integer> necessidadeId) {
+    private void montaListaNecessidades(Perfil perfil, ArrayList<Integer> necessidadeId) {
         for(int j:necessidadeId){
             perfil.addNecessidade(materiaServices.consultar(j));
         }

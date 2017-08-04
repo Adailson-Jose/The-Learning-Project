@@ -12,21 +12,19 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.infraestrutura.gui.ConfiguracaoActivity;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.ListarHabilidadesActivity;
+import com.thelearningproject.applogin.perfil.gui.ListarNecessidadesActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
-
-import java.util.ArrayList;
 
 /**
  * Createdd by gabri on 02/08/2017.
@@ -40,15 +38,24 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private String todasHabilidades;
     private String todasNecessidades;
 
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_main_perfil, container, false);
+        return inflater.inflate(R.layout.fragment_main_perfil, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        todasHabilidades = "";
+        todasNecessidades = "";
 
         activity = getActivity();
         sessao = ControladorSessao.getInstancia(activity);
 
-        donoConta = (TextView) view.findViewById(R.id.nomeUsuarioID);
+        donoConta = (TextView) getActivity().findViewById(R.id.nomeUsuarioID);
 
         todasHabilidades = perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId());
         todasNecessidades = perfilServices.retornaStringListaNecessidades(sessao.getPerfil().getId());
@@ -57,20 +64,18 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         String[] listaNecessidades = {todasNecessidades};
         String[] listaConfig = {activity.getString(R.string.config), activity.getString(R.string.logout)};
 
-        ListView listView1 = (ListView) view.findViewById(R.id.listaPerfilHabilidades);
-        ListView listView2 = (ListView) view.findViewById(R.id.listaPerfilNecessidades);
-        ListView listView3 = (ListView) view.findViewById(R.id.listaPerfilConfiguracoes);
+        ListView listView1 = (ListView) getActivity().findViewById(R.id.listaPerfilHabilidades);
+        ListView listView2 = (ListView) getActivity().findViewById(R.id.listaPerfilNecessidades);
+        ListView listView3 = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
 
         ArrayAdapter<String> adapterOpcoesHabilidade = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_list_item_1,
                 listaHabilidades);
-
         ArrayAdapter<String> adapterOpcoesNecessidade = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_list_item_1,
                 listaNecessidades);
-
         ArrayAdapter<String> adapterOpcoesConfig = new ArrayAdapter<>(
                 activity,
                 android.R.layout.simple_list_item_1,
@@ -94,9 +99,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         } else {
             exibir();
         }
-
-
-        return view;
     }
 
     @Override
@@ -106,7 +108,9 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         switch (opcao) {
             case "Configurações":
-                startActivity(new Intent(activity, ConfiguracaoActivity.class));
+                Intent entidade = new Intent(activity, ConfiguracaoActivity.class);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade);
                 break;
             case "Sair":
                 sessao.encerraSessao();
@@ -116,10 +120,14 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         }
         switch (tipo){
             case "h":
-                Auxiliar.criarToast(activity, "habilidade");
+                Intent entidade = new Intent(activity, ListarHabilidadesActivity.class);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade);
                 break;
             case "n":
-                Auxiliar.criarToast(activity, "necessidade");
+                Intent entidade2 = new Intent(activity, ListarNecessidadesActivity.class);
+                entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade2);
         }
     }
 

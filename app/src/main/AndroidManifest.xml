@@ -53,7 +53,9 @@
         <activity android:name=".infraestrutura.gui.AlterarNomeActivity" />
         <activity android:name=".infraestrutura.gui.AlterarEmailActivity" />
         <activity android:name=".infraestrutura.gui.AlterarSenhaActivity" />
-        <activity android:name=".infraestrutura.gui.CadastroNecessidadeActivity"></activity>
+        <activity android:name=".infraestrutura.gui.CadastroNecessidadeActivity" />
+        <activity android:name=".perfil.gui.ListarHabilidadesActivity" />
+        <activity android:name=".perfil.gui.ListarNecessidadesActivity"></activity>
     </application>
 
 </manifest>
