@@ -53,7 +53,7 @@ public class MateriaDAO {
     }
 
     public Materia consultaNome(String nome){
-        Cursor cursor = banco.getReadableDatabase().query(TABELA, null, "UPPER("+NOME+") = ?", new String[]{nome.toUpperCase()},null,null,null);
+        Cursor cursor = banco.getReadableDatabase().query(TABELA, null, NOME+" = ?", new String[]{nome},null,null,null);
         Materia materia = null;
         if (cursor.moveToFirst()) {
             materia = new Materia();
