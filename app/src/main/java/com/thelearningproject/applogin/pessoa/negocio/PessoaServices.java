@@ -27,8 +27,22 @@ public class PessoaServices {
     }
 
     public void inserirPessoa(Pessoa pessoa) {
-        persistencia.inserir(pessoa);
+        if(validaAlterarPessoa(pessoa.getUsuario().getId())){
+            Pessoa pessoaAntiga = retornaPessoa(pessoa.getUsuario().getId());
+            pessoaAntiga.setNome(pessoa.getNome());
+            alterarPessoa(pessoaAntiga);
+        }else{
+            persistencia.inserir(pessoa);
+        }
 
+    }
+    private boolean validaAlterarPessoa(int usuarioId){
+        Boolean validacao = false;
+        if(retornaPessoa(usuarioId)!= null){
+            validacao = true;
+
+        }
+        return  validacao;
     }
 
     public void alterarPessoa(Pessoa pessoa) {
