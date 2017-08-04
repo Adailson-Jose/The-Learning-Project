@@ -47,6 +47,7 @@ public class AlterarEmailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AlterarEmailActivity.this,ConfiguracaoActivity.class));
+                finish();
             }
         });
 

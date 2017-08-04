@@ -5,6 +5,83 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:contexto=".infraestrutura.gui.ConfiguracaoActivity">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/bottom_nav_title3" />
+
+            <View style="@style/DividerBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listaConfigPerfil"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/transparent" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView4"
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/conta" />
+
+            <View style="@style/DividerBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listaConfigConta"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/transparent" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView3"
+                style="@style/headerText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/outrasOpcoes" />
+
+            <View style="@style/DividerBlack"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ListView
+                    android:id="@+id/listaConfigOpcoes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:divider="@color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+<!--
     <TextView
         android:id="@+id/op1"
         android:layout_width="wrap_content"
@@ -84,5 +161,5 @@
         android:layout_below="@+id/alterarEmailID"
         android:layout_alignLeft="@+id/alterarEmailID"
         android:layout_alignStart="@+id/alterarEmailID" />
-
+-->
 </RelativeLayout>

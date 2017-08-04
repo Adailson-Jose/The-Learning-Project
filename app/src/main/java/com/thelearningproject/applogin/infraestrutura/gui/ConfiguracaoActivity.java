@@ -1,12 +1,17 @@
 package com.thelearningproject.applogin.infraestrutura.gui;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -16,7 +21,7 @@ import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
  * Criado por Heitor em 25/07/2017.
  */
 
-public class ConfiguracaoActivity extends AppCompatActivity implements DialogInterface.OnClickListener {
+public class ConfiguracaoActivity extends AppCompatActivity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
     private ControladorSessao session;
     private AlertDialog alertExclusao;
 
@@ -26,58 +31,40 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         setContentView(R.layout.activity_configuracao);
         setTitle("Configurações");
 
-        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Deseja realmente excluir sua conta?");
-
         session = ControladorSessao.getInstancia(this.getApplicationContext());
 
-        Button botaoAlterarNome = (Button) findViewById(R.id.alterarNomeID);
-        Button botaoAlterarEmail = (Button) findViewById(R.id.alterarEmailID);
-        Button botaoAlterarSenha = (Button) findViewById(R.id.alterarSenhaID);
-        Button botaoDesativar = (Button) findViewById(R.id.deletarID);
-        Button botaoLogout = (Button) findViewById(R.id.LogoutID);
+        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Deseja realmente excluir sua conta?");
 
-        botaoAlterarNome.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarNomeActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(entidade);
-            }
+        String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome)};
+        String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail),getApplicationContext().getString(R.string.alterarSenha)};
+        String[] listaOpOutras = {getApplicationContext().getString(R.string.excluir)};
 
-        });
-        botaoAlterarEmail.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(entidade);
-            }
+        ListView listView1 = (ListView) findViewById(R.id.listaConfigPerfil);
+        ListView listView2 = (ListView) findViewById(R.id.listaConfigConta);
+        ListView listView3 = (ListView) findViewById(R.id.listaConfigOpcoes);
 
-        });
-        botaoAlterarSenha.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(entidade);
-            }
+        ArrayAdapter<String> adapterOpcoesPerfil = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                listaOpPerfil);
 
-        });
-        botaoDesativar.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                alertExclusao.show();
-            }
-        });
+        ArrayAdapter<String> adapterOpcoesConta = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                listaOpConta);
 
-        botaoLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                session.encerraSessao();
-                Auxiliar.criarToast(ConfiguracaoActivity.this, "Logout efetuado com sucesso");
-                finish();
-            }
-        });
+        ArrayAdapter<String> adapterOpcoesOutras = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                listaOpOutras);
+
+        listView1.setAdapter(adapterOpcoesPerfil);
+        listView2.setAdapter(adapterOpcoesConta);
+        listView3.setAdapter(adapterOpcoesOutras);
+
+        listView1.setOnItemClickListener(this);
+        listView2.setOnItemClickListener(this);
+        listView3.setOnItemClickListener(this);
     }
 
     @Override
@@ -100,4 +87,28 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         session.encerraSessao();
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        String opcao = String.valueOf(parent.getAdapter().getItem(position));
+        switch (opcao) {
+            case "Alterar Nome":
+                Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarNomeActivity.class);
+                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade);
+                break;
+            case "Alterar E-mail":
+                Intent entidade1 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
+                entidade1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade1);
+                break;
+            case "Alterar Senha":
+                Intent entidade2 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
+                entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade2);
+                break;
+            case "Excluir Conta":
+                alertExclusao.show();
+                break;
+        }
+    }
 }

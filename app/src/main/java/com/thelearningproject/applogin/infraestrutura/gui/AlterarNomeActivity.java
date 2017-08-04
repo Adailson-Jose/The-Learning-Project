@@ -45,6 +45,7 @@ public class AlterarNomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(AlterarNomeActivity.this,ConfiguracaoActivity.class));
+                finish();
             }
         });
 
