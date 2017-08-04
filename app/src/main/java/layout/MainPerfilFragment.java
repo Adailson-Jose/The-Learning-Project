@@ -14,7 +14,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.infraestrutura.gui.ConfiguracaoActivity;
+import com.thelearningproject.applogin.pessoa.gui.ConfiguracaoActivity;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -26,6 +26,7 @@ import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
+
 /**
  * Createdd by gabri on 02/08/2017.
  */
@@ -35,13 +36,19 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private ControladorSessao sessao;
     private TextView donoConta;
     private PerfilServices perfilServices = PerfilServices.getInstancia(activity);
-    private String todasHabilidades;
-    private String todasNecessidades;
-
+    private ListView listViewHabilidades;
+    private ListView listViewNecessidades;
+    private ListView listViewConfiguracao;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        activity = this.getActivity();
+        sessao = ControladorSessao.getInstancia(activity);
+        donoConta = (TextView) getActivity().findViewById(R.id.nomeUsuarioID);
+
+
         return inflater.inflate(R.layout.fragment_main_perfil, container, false);
     }
 
@@ -49,24 +56,18 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     public void onResume() {
         super.onResume();
 
-        todasHabilidades = "";
-        todasNecessidades = "";
-
         activity = getActivity();
         sessao = ControladorSessao.getInstancia(activity);
 
         donoConta = (TextView) getActivity().findViewById(R.id.nomeUsuarioID);
 
-        todasHabilidades = perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId());
-        todasNecessidades = perfilServices.retornaStringListaNecessidades(sessao.getPerfil().getId());
-
-        String[] listaHabilidades = {todasHabilidades};
-        String[] listaNecessidades = {todasNecessidades};
+        String[] listaHabilidades = {perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId())};
+        String[] listaNecessidades = {perfilServices.retornaStringListaNecessidades(sessao.getPerfil().getId())};
         String[] listaConfig = {activity.getString(R.string.config), activity.getString(R.string.logout)};
 
-        ListView listView1 = (ListView) getActivity().findViewById(R.id.listaPerfilHabilidades);
-        ListView listView2 = (ListView) getActivity().findViewById(R.id.listaPerfilNecessidades);
-        ListView listView3 = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
+        listViewHabilidades = (ListView) getActivity().findViewById(R.id.listaPerfilHabilidades);
+        listViewNecessidades = (ListView) getActivity().findViewById(R.id.listaPerfilNecessidades);
+        listViewConfiguracao = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
 
         ArrayAdapter<String> adapterOpcoesHabilidade = new ArrayAdapter<>(
                 activity,
@@ -81,13 +82,13 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
                 android.R.layout.simple_list_item_1,
                 listaConfig);
 
-        listView1.setAdapter(adapterOpcoesHabilidade);
-        listView2.setAdapter(adapterOpcoesNecessidade);
-        listView3.setAdapter(adapterOpcoesConfig);
+        listViewHabilidades.setAdapter(adapterOpcoesHabilidade);
+        listViewNecessidades.setAdapter(adapterOpcoesNecessidade);
+        listViewConfiguracao.setAdapter(adapterOpcoesConfig);
 
-        listView1.setOnItemClickListener(this);
-        listView2.setOnItemClickListener(this);
-        listView3.setOnItemClickListener(this);
+        listViewHabilidades.setOnItemClickListener(this);
+        listViewNecessidades.setOnItemClickListener(this);
+        listViewConfiguracao.setOnItemClickListener(this);
 
         if(sessao.verificaConexao()) {
             resumir();
@@ -103,31 +104,28 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        String opcao = String.valueOf(parent.getAdapter().getItem(position));
-        String tipo = opcao.substring(opcao.length() - 1);
-
-        switch (opcao) {
-            case "Configurações":
-                Intent entidade = new Intent(activity, ConfiguracaoActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
-                break;
-            case "Sair":
-                sessao.encerraSessao();
-                Auxiliar.criarToast(activity, "Logout efetuado com sucesso");
-                activity.finish();
-                break;
-        }
-        switch (tipo){
-            case "h":
-                Intent entidade = new Intent(activity, ListarHabilidadesActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
-                break;
-            case "n":
-                Intent entidade2 = new Intent(activity, ListarNecessidadesActivity.class);
-                entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade2);
+        if (parent.getAdapter().equals(listViewHabilidades.getAdapter())){
+            Intent entidade = new Intent(activity, ListarHabilidadesActivity.class);
+            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(entidade);
+        }else if(parent.getAdapter().equals(listViewNecessidades.getAdapter())){
+            Intent entidade2 = new Intent(activity, ListarNecessidadesActivity.class);
+            entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(entidade2);
+        }else{
+            String opcao = String.valueOf(parent.getAdapter().getItem(position));
+            switch (opcao) {
+                case "Configurações":
+                    Intent entidade = new Intent(activity, ConfiguracaoActivity.class);
+                    entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(entidade);
+                    break;
+                case "Sair":
+                    sessao.encerraSessao();
+                    Auxiliar.criarToast(activity, "Logout efetuado com sucesso");
+                    activity.finish();
+                    break;
+            }
         }
     }
 
@@ -152,8 +150,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         perfil.setPessoa(sessao.getPessoa());
         sessao.setPerfil(perfil);
 
-        String mensagem = "Oi, " + sessao.getPessoa().getNome() + ".";
-
-        donoConta.setText(mensagem);
+        donoConta.setText(sessao.getPessoa().getNome());
     }
 }

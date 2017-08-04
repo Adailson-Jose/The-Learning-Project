@@ -12,12 +12,12 @@ import android.widget.TextView;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
-import com.thelearningproject.applogin.registrobusca.negocio.DadosServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
+import com.thelearningproject.applogin.registrobusca.negocio.DadosServices;
 
 import java.util.ArrayList;
 
@@ -41,10 +41,10 @@ public class BuscaActivity extends AppCompatActivity {
         botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
 
-        botaoBusca.setOnClickListener(new View.OnClickListener(){
+        botaoBusca.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 listar();
                 Auxiliar.esconderTeclado(BuscaActivity.this);
             }
@@ -52,7 +52,7 @@ public class BuscaActivity extends AppCompatActivity {
         });
     }
 
-    private void listar(){
+    private void listar() {
         informacaoResultado.setText("");
         String nome = entradaBusca.getText().toString();
 
@@ -60,30 +60,31 @@ public class BuscaActivity extends AppCompatActivity {
         PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
         DadosServices dadosServices = DadosServices.getInstancia(this.getApplicationContext());
 
-        dadosServices.cadastraBusca(sessao.getPerfil(),nome);
+        dadosServices.cadastraBusca(sessao.getPerfil(), nome);
         Materia materia = materiaServices.consultarNome(nome);
         ArrayList<Perfil> listaPerfil = new ArrayList<>();
-        if (materia!= null) {
+        if (materia != null) {
             listaPerfil = perfilServices.listarPerfil(materia);
         }
         if (listaPerfil.isEmpty()) {
-            listaPerfil = dadosServices.recomendaMateria(sessao.getPerfil(),nome);
-            if(!listaPerfil.isEmpty()){
-                informacaoResultado.setText("Sem resultados para " +nome+ "\nMas estes usuarios podem lhe ajudar com algo relacionado:");
+            listaPerfil = dadosServices.recomendaMateria(sessao.getPerfil(), nome);
+            if (!listaPerfil.isEmpty()) {
+                informacaoResultado.setText("Sem resultados para " + nome + "\nMas estes usuarios podem lhe ajudar com algo relacionado:");
                 informacaoResultado.getHeight();
             }
         }
 
         //remove o perfil do usuario ativo da lista de busca
-        if(listaPerfil.contains(sessao.getPerfil())){
+        if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
         }
 
         ArrayAdapter adaptador = new PerfilAdapter(getApplicationContext(), listaPerfil);
 
-        if(listaPerfil.isEmpty()) {
+        if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(this, "Sem Resultados");
         }
+        adaptador.notifyDataSetChanged();
         listaUsuarios.setAdapter(adaptador);
     }
 

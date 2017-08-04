@@ -1,6 +1,5 @@
 package com.thelearningproject.applogin.infraestrutura.gui;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -28,7 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     private int mSelectedItem;
     private ControladorSessao session;
 
-    public ControladorSessao getSessao(){
+    public ControladorSessao getSessao() {
         return this.session;
     }
 
@@ -57,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
         } else {
             MainPerfilFragment frag1 = new MainPerfilFragment();
             FragmentTransaction ft = fm.beginTransaction();
-            ft.add(R.id.container,frag1);
+            ft.add(R.id.container, frag1);
             ft.commit();
             selectedItem = mBottomNav.getMenu().getItem(0);
         }

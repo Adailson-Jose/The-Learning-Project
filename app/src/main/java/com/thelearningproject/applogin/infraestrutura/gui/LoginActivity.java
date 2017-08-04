@@ -7,14 +7,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.gui.CriarContaActivity;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
-import com.thelearningproject.applogin.usuario.gui.CriarContaActivity;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 /**
@@ -48,14 +49,14 @@ public class LoginActivity extends Activity {
 
         botaoCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, CriarContaActivity.class));
             }
         });
 
     }
 
-    private boolean validaCampos(Usuario usuario){
+    private boolean validaCampos(Usuario usuario) {
         boolean validacao = true;
 
         if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
@@ -70,7 +71,7 @@ public class LoginActivity extends Activity {
         return validacao;
     }
 
-    private void processoLogin(){
+    private void processoLogin() {
         String email = entradaLogin.getText().toString();
         String senha = entradaSenha.getText().toString();
 
@@ -78,12 +79,12 @@ public class LoginActivity extends Activity {
         usuario.setEmail(email);
         usuario.setSenha(senha);
 
-        try{
+        try {
             if (validaCampos(usuario)) {
                 executarLogin(usuario);
             }
 
-        } catch (UsuarioException e){
+        } catch (UsuarioException e) {
             Auxiliar.criarToast(this, e.getMessage());
         }
     }

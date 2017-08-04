@@ -150,11 +150,12 @@ public class PerfilServices {
 
         ArrayList<Materia> lista = perfil.getHabilidades();
 
+        String prefix = "";
         for (Materia mat: lista) {
+            sb.append(prefix);
+            prefix = ", ";
             sb.append(mat.getNome());
-            sb.append(", ");
         }
-        sb.append("h");
         return sb.toString();
     }
 
@@ -164,11 +165,12 @@ public class PerfilServices {
 
         ArrayList<Materia> lista = perfil.getNecessidades();
 
+        String prefix = "";
         for (Materia mat: lista) {
+            sb.append(prefix);
+            prefix = ", ";
             sb.append(mat.getNome());
-            sb.append(", ");
         }
-        sb.append("n");
         return sb.toString();
     }
 

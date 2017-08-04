@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infraestrutura.gui;
+package com.thelearningproject.applogin.perfil.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -27,10 +27,10 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
         Button botaoCadastro = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
 
-        botaoCadastro.setOnClickListener(new View.OnClickListener(){
+        botaoCadastro.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 cadastrarMateria();
             }
 
@@ -38,7 +38,7 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
 
     }
 
-    private void cadastrarMateria(){
+    private void cadastrarMateria() {
         String nome = entradaMateria.getText().toString();
         MateriaServices materiaServices = MateriaServices.getInstancia(this.getApplicationContext());
         PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
@@ -52,12 +52,12 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
                 Auxiliar.criarToast(this, "Habilidade cadastrada com sucesso!");
                 finish();
             }
-        }catch (UsuarioException e){
+        } catch (UsuarioException e) {
             Auxiliar.criarToast(this, e.getMessage());
         }
     }
 
-    private Boolean validaCadastro(Materia materia){
+    private Boolean validaCadastro(Materia materia) {
         Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {

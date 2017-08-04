@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.CadastroHabilidadeActivity">
+    tools:contexto="com.thelearningproject.applogin.perfil.gui.CadastroHabilidadeActivity">
 
     <Button
         android:id="@+id/BotaoInsereHabilidadeID"
