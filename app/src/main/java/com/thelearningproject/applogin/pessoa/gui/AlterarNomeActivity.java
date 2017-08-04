@@ -1,4 +1,4 @@
-package com.thelearningproject.applogin.infraestrutura.gui;
+package com.thelearningproject.applogin.pessoa.gui;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -64,6 +64,7 @@ public class AlterarNomeActivity extends AppCompatActivity {
         Intent entidade = new Intent(AlterarNomeActivity.this, ConfiguracaoActivity.class);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(entidade);
+        finish();
     }
 
     public void alterar(View view){

@@ -1,7 +1,7 @@
-package com.thelearningproject.applogin.infraestrutura.gui;
+package com.thelearningproject.applogin.perfil.gui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,10 +27,10 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
         Button botaoCadastro = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
 
-        botaoCadastro.setOnClickListener(new View.OnClickListener(){
+        botaoCadastro.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 cadastrarMateria();
             }
 
@@ -38,7 +38,7 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
 
     }
 
-    private void cadastrarMateria(){
+    private void cadastrarMateria() {
         String nome = entradaMateria.getText().toString();
         MateriaServices materiaServices = MateriaServices.getInstancia(this.getApplicationContext());
         PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
@@ -52,12 +52,12 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
                 Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso!");
                 finish();
             }
-        }catch (UsuarioException e){
+        } catch (UsuarioException e) {
             Auxiliar.criarToast(this, e.getMessage());
         }
     }
 
-    private Boolean validaCadastro(Materia materia){
+    private Boolean validaCadastro(Materia materia) {
         Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {

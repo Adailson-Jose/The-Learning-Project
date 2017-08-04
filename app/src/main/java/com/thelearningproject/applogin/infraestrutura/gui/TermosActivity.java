@@ -31,17 +31,17 @@ public class TermosActivity extends AppCompatActivity {
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         linkLearning = (TextView) findViewById(R.id.theLearnProjectId);
 
-        Linkify.TransformFilter tf = new Linkify.TransformFilter(){
+        Linkify.TransformFilter tf = new Linkify.TransformFilter() {
             @Override
             public String transformUrl(Matcher match, String url) {
                 return ("");
             }
         };
 
-        Linkify.MatchFilter mf = new Linkify.MatchFilter(){
+        Linkify.MatchFilter mf = new Linkify.MatchFilter() {
             @Override
             public boolean acceptMatch(CharSequence s, int start, int end) {
-                return(true);
+                return (true);
             }
         };
 

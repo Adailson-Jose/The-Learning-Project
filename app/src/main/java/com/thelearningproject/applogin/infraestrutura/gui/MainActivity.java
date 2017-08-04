@@ -10,8 +10,11 @@ import android.widget.TextView;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.CadastroHabilidadeActivity;
+import com.thelearningproject.applogin.perfil.gui.CadastroNecessidadeActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
+import com.thelearningproject.applogin.pessoa.gui.ConfiguracaoActivity;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
@@ -34,11 +37,11 @@ public class MainActivity extends AppCompatActivity {
         Button botaoInsereNecessidade = (Button) findViewById(R.id.BotaoInsereNecessidadeID);
         Button botaoabrir = (Button) findViewById(R.id.btnChamar);
 
-        if(sessao.verificaConexao()) {
+        if (sessao.verificaConexao()) {
             resumir();
         }
 
-        if(sessao.verificaLogin()){
+        if (sessao.verificaLogin()) {
             finish();
 
         } else {
@@ -50,32 +53,32 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, BuscaActivity.class));
             }
-            });
+        });
 
-        botaoconfig.setOnClickListener(new View.OnClickListener(){
+        botaoconfig.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ConfiguracaoActivity.class));
             }
         });
 
-        botaoabrir.setOnClickListener(new View.OnClickListener(){
+        botaoabrir.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, HomeActivity.class));
             }
         });
 
-        botaoInsereHabilidade.setOnClickListener(new View.OnClickListener(){
+        botaoInsereHabilidade.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CadastroHabilidadeActivity.class));
             }
         });
 
-        botaoInsereNecessidade.setOnClickListener(new View.OnClickListener(){
+        botaoInsereNecessidade.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CadastroNecessidadeActivity.class));
             }
         });
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
     }
 
-    private void resumir(){
+    private void resumir() {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getApplicationContext());
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getApplicationContext());
 

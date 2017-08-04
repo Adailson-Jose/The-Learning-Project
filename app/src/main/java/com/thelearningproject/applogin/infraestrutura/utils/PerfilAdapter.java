@@ -27,9 +27,9 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = null;
+        View view;
 
-        LayoutInflater inflater = (LayoutInflater) contexto.getSystemService(contexto.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         view = inflater.inflate(R.layout.lista_perfil, parent, false);
 
