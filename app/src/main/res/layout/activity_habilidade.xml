@@ -21,13 +21,13 @@
         android:id="@+id/habilidadeentrada"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="12"
-        android:inputType="text"
-        android:hint="@string/dica1"
-        android:textColorHint="@color/textWhite"
-        android:gravity="center"
         android:layout_below="@+id/habilidade"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:ems="12"
+        android:gravity="center"
+        android:hint="@string/dica1"
+        android:inputType="text"
+        android:textColorHint="@color/textgray" />
 
     <Button
         android:id="@+id/botaoContinuar2"
