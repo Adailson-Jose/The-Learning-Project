@@ -32,19 +32,18 @@ public class NecessidadeActivity extends AppCompatActivity {
         Button botaoFinalizar = (Button) findViewById(R.id.botaoContinuar3);
         botaoFinalizar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 processoCadastroNecessidade();
                 Auxiliar.esconderTeclado(NecessidadeActivity.this);
             }
         });
-
     }
 
     private Boolean validaNecessidade(Materia materia){
         Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
-            entradaNecessidade.setError("Habilidade inválida");
+            entradaNecessidade.setError("Necessidade inválida");
             validacao = false;
         }
 
@@ -77,7 +76,6 @@ public class NecessidadeActivity extends AppCompatActivity {
         perfil.addNecessidade(novaMateria);
 
         Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso");
-
         Intent entidade = new Intent(NecessidadeActivity.this, MainActivity.class);
         entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

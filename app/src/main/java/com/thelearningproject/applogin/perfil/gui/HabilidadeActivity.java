@@ -81,5 +81,4 @@ public class HabilidadeActivity extends AppCompatActivity {
         startActivity(entidade);
         finish();
     }
-
 }

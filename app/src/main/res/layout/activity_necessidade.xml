@@ -53,4 +53,13 @@
         android:layout_below="@+id/imageView2"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_above="@+id/necessidadeentrada"
+        android:layout_toLeftOf="@+id/necessidade"
+        android:layout_toStartOf="@+id/necessidade"
+        app:srcCompat="@drawable/cross" />
+
 </RelativeLayout>
