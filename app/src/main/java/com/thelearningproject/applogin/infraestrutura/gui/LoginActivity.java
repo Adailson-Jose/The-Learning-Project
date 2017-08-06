@@ -99,7 +99,6 @@ public class LoginActivity extends Activity {
             Pessoa pessoaLogada = negocioPessoa.retornaPessoa(logado.getId());
             sessao.encerraSessao();
 
-            sessao.setUsuario(logado);
             pessoaLogada.setUsuario(logado);
             sessao.setPessoa(pessoaLogada);
             sessao.iniciaSessao();

@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
 
         pessoa.setUsuario(usuario);
         sessao.iniciaSessao();
-        sessao.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
     }

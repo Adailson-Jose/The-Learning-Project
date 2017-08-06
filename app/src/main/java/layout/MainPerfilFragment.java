@@ -138,7 +138,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         pessoa.setUsuario(usuario);
         sessao.iniciaSessao();
-        sessao.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
     }

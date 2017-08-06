@@ -10,9 +10,11 @@ import android.widget.EditText;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class AlterarEmailActivity extends AppCompatActivity {
@@ -54,14 +56,12 @@ public class AlterarEmailActivity extends AppCompatActivity {
         alterarEmail.setText(sessao.getPessoa().getUsuario().getEmail());
     }
 
-    private void executarAlterar(Pessoa pessoa) throws UsuarioException {
+    private void executarAlterar(Usuario usuario) throws UsuarioException {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
-        negocioUsuario.alterarEmailUsuario(pessoa.getUsuario());
-        negocioPessoa.alterarPessoa(pessoa);
-
-        sessao.setUsuario(pessoa.getUsuario());
+        negocioUsuario.alterarEmailUsuario(usuario);
+        Pessoa pessoa = sessao.getPessoa();
+        pessoa.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
         Auxiliar.criarToast(this, "Dados atualizados com sucesso");
@@ -75,15 +75,13 @@ public class AlterarEmailActivity extends AppCompatActivity {
     public void alterar(View view){
         String email = alterarEmail.getText().toString();
 
-        Pessoa pessoa = sessao.getPessoa();
+        Usuario usuario = sessao.getPessoa().getUsuario();
 
-        pessoa.setUsuario(sessao.getUsuario());
-        pessoa.getUsuario().setEmail(email);
-        pessoa.getUsuario().setStatus(com.thelearningproject.applogin.infraestrutura.utils.Status.ATIVADO);
+        usuario.setEmail(email);
 
         try {
-            if(validaAlterar(pessoa)){
-                executarAlterar(pessoa);
+            if(validaAlterar(usuario)){
+                executarAlterar(usuario);
             }
 
         } catch (UsuarioException e){
@@ -91,9 +89,9 @@ public class AlterarEmailActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean validaAlterar(Pessoa pessoa) {
+    private Boolean validaAlterar(Usuario usuario) {
         Boolean validacao = true;
-        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
             alterarEmail.setError("E-mail inválido");
             validacao = false;
         }

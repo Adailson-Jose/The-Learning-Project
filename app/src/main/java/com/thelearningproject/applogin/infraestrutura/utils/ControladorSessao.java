@@ -22,7 +22,6 @@ public class ControladorSessao {
 
     private Perfil perfil;
     private Pessoa pessoa;
-    private Usuario usuario;
 
     private static final String PREFERENCIA = "Sessao", USUARIO_LOGADO = "Logado", ID_USUARIO = "ID_Usuario";
     private boolean sessaoAtiva;
@@ -69,7 +68,7 @@ public class ControladorSessao {
 
     public void salvarSessao(){
         editor.putBoolean(USUARIO_LOGADO,true);
-        editor.putInt(ID_USUARIO,usuario.getId());
+        editor.putInt(ID_USUARIO,pessoa.getUsuario().getId());
         editor.commit();
     }
 
@@ -91,14 +90,6 @@ public class ControladorSessao {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
-    }
-
-    public Usuario getUsuario(){
-        return this.usuario;
-    }
-
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
     }
 
     private boolean verificaSessao() {

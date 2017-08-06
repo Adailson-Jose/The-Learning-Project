@@ -122,11 +122,11 @@ public class PerfilServices {
 
     private void verificaExistencia(int perfil, int materia, tipoConexao tipo) throws UsuarioException{
         if (tipo == tipoConexao.HABILIDADE){
-            if (conexaoHabilidade.verificatupla(perfil,materia)){
+            if (conexaoHabilidade.verificaTupla(perfil,materia)){
                 throw new UsuarioException("Você já cadastrou essa habilidade");
             }
         }else{
-            if (conexaoNecessidade.verificatupla(perfil, materia)) {
+            if (conexaoNecessidade.verificaTupla(perfil, materia)) {
                 throw new UsuarioException("Você já cadastrou essa necessidade");
             }
         }

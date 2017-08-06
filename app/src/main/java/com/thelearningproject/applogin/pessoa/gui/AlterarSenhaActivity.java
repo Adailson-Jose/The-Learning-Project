@@ -12,6 +12,7 @@ import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class AlterarSenhaActivity extends AppCompatActivity {
@@ -51,14 +52,12 @@ public class AlterarSenhaActivity extends AppCompatActivity {
 
     }
 
-    private void executarAlterar(Pessoa pessoa){
+    private void executarAlterar(Usuario usuario){
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
+        negocioUsuario.alterarSenhaUsuario(usuario);
 
-        negocioUsuario.alterarSenhaUsuario(pessoa.getUsuario());
-        negocioPessoa.alterarPessoa(pessoa);
-
-        sessao.setUsuario(pessoa.getUsuario());
+        Pessoa pessoa = sessao.getPessoa();
+        pessoa.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
         Auxiliar.criarToast(this, "Dados atualizados com sucesso");
@@ -72,20 +71,17 @@ public class AlterarSenhaActivity extends AppCompatActivity {
     public void alterar(View view){
         String senha = alterarSenha.getText().toString();
 
-        Pessoa pessoa = sessao.getPessoa();
+        Usuario usuario = sessao.getPessoa().getUsuario();
+        usuario.setSenha(senha);
 
-        pessoa.setUsuario(sessao.getUsuario());
-        pessoa.getUsuario().setSenha(senha);
-        pessoa.getUsuario().setStatus(com.thelearningproject.applogin.infraestrutura.utils.Status.ATIVADO);
-
-        if(validaAlterar(pessoa)){
-            executarAlterar(pessoa);
+        if(validaAlterar(usuario)){
+            executarAlterar(usuario);
         }
     }
 
-    private Boolean validaAlterar(Pessoa pessoa) {
+    private Boolean validaAlterar(Usuario usuario) {
         Boolean validacao = true;
-        if (pessoa.getUsuario().getSenha() == null || pessoa.getUsuario().getSenha().trim().length() == 0) {
+        if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {
             alterarSenha.setError("Senha inválida");
             validacao = false;
         }

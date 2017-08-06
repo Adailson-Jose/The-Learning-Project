@@ -73,8 +73,6 @@ public class AlterarNomeActivity extends AppCompatActivity {
         Pessoa pessoa = sessao.getPessoa();
 
         pessoa.setNome(nome);
-        pessoa.setUsuario(sessao.getUsuario());
-        pessoa.getUsuario().setStatus(com.thelearningproject.applogin.infraestrutura.utils.Status.ATIVADO);
 
         if(validaAlterar(pessoa)){
             executarAlterar(pessoa);

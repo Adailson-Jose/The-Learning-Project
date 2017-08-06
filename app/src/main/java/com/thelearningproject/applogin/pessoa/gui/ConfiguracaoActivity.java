@@ -79,8 +79,8 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
 
     private void desativar(){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-        negocio.deletarUsuario(session.getUsuario());
-        Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário desativado com sucesso");
+        negocio.deletarUsuario(session.getPessoa().getUsuario());
+        Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário deletado com sucesso");
         finish();
         session.encerraSessao();
     }

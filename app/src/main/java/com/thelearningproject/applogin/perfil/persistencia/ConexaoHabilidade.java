@@ -30,7 +30,7 @@ public class ConexaoHabilidade {
         this.banco = BancoHabilidade.getInstancia(context);
     }
 
-    public boolean verificatupla(int perfil, int materia){
+    public boolean verificaTupla(int perfil, int materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)},null,null,null);
         boolean resultado = cursor.moveToFirst();
         cursor.close();

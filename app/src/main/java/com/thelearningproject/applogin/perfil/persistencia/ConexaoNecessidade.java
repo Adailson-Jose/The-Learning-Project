@@ -42,7 +42,7 @@ public class ConexaoNecessidade {
 
     private void updateConexao(int perfil, int materia){
         SQLiteDatabase db = banco.getWritableDatabase();
-        if (verificatupla(perfil, materia)){
+        if (verificaTupla(perfil, materia)){
             ContentValues values = new ContentValues();
             values.put(IDPERFIL, perfil);
             values.put(IDMATERIA, materia);
@@ -58,7 +58,7 @@ public class ConexaoNecessidade {
         db.close();
     }
 
-    public boolean verificatupla(int perfil, int materia){
+    public boolean verificaTupla(int perfil, int materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{Integer.toString(perfil),Integer.toString(materia)},null,null,null);
         boolean resultado = cursor.moveToFirst();
         cursor.close();
