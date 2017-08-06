@@ -74,9 +74,7 @@ public class AlterarEmailActivity extends AppCompatActivity {
 
     public void alterar(View view){
         String email = alterarEmail.getText().toString();
-
         Usuario usuario = sessao.getPessoa().getUsuario();
-
         usuario.setEmail(email);
 
         try {
