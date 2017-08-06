@@ -25,6 +25,7 @@ public class HomeActivity extends AppCompatActivity {
     FragmentManager fm = getSupportFragmentManager();
     private int mSelectedItem;
     private String ultimoFrag;
+    private MenuItem selectedItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +54,9 @@ public class HomeActivity extends AppCompatActivity {
             selectedItem = mBottomNav.getMenu().getItem(0);
         }
         selectFragment(selectedItem);
-
+        fm.popBackStack();
     }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(SELECTED_ITEM, mSelectedItem);
