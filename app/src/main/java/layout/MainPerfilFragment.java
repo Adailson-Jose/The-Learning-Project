@@ -38,7 +38,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private PerfilServices perfilServices = PerfilServices.getInstancia(activity);
     private ListView listViewHabilidades;
     private ListView listViewNecessidades;
-    private ListView listViewConfiguracao;
 
     @Nullable
     @Override
@@ -67,7 +66,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         listViewHabilidades = (ListView) getActivity().findViewById(R.id.listaPerfilHabilidades);
         listViewNecessidades = (ListView) getActivity().findViewById(R.id.listaPerfilNecessidades);
-        listViewConfiguracao = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
+        ListView listViewConfiguracao = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
 
         ArrayAdapter<String> adapterOpcoesHabilidade = new ArrayAdapter<>(
                 activity,
