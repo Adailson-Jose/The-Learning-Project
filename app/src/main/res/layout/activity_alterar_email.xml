@@ -1,64 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="25dp"
     tools:context="com.thelearningproject.applogin.pessoa.gui.AlterarEmailActivity">
 
-    <TextView
-        android:id="@+id/op1"
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/alterarEmail"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginTop="48dp"
-        tools:layout_editor_absoluteY="40dp"
-        tools:layout_editor_absoluteX="126dp"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/Cancelar"
-        android:layout_toEndOf="@+id/Cancelar" />
+        android:layout_marginTop="25dp">
 
     <EditText
         android:id="@+id/emailID"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/email"
-        android:textSize="20sp"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteY="177dp"
-        tools:layout_editor_absoluteX="85dp"
-        android:layout_below="@+id/op1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="105dp" />
+        android:textSize="22sp"
+        android:inputType="textEmailAddress" />
 
-    <Button
-        android:id="@+id/alterarEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/alterar"
-        tools:layout_editor_absoluteY="411dp"
-        tools:layout_editor_absoluteX="263dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginEnd="12dp"
-        android:layout_alignBaseline="@+id/Cancelar"
-        android:layout_alignBottom="@+id/Cancelar"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+    </android.support.design.widget.TextInputLayout>
 
-    <Button
-        android:id="@+id/Cancelar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/cancelar"
-        tools:layout_editor_absoluteY="411dp"
-        tools:layout_editor_absoluteX="38dp"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="61dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

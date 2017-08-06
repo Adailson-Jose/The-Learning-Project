@@ -42,11 +42,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".infraestrutura.gui.BuscaActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
-        </activity>
         <activity android:name=".pessoa.gui.AlterarNomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

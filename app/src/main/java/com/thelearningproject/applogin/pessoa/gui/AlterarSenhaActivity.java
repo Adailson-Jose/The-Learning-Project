@@ -1,17 +1,16 @@
 package com.thelearningproject.applogin.pessoa.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -25,31 +24,25 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alterar_senha);
 
-        Button btAlterar;
-        Button btCancelar;
-
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-
         alterarSenha = (EditText) findViewById(R.id.senhaID);
-        btAlterar = (Button) findViewById(R.id.alterarSenha);
-        btCancelar = (Button) findViewById(R.id.Cancelar);
+        Auxiliar.abrirTeclado(this);
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.salvar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-        btAlterar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alterar(v);
-                Auxiliar.esconderTeclado(AlterarSenhaActivity.this);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-            }
-        });
-        btCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AlterarSenhaActivity.this,ConfiguracaoActivity.class));
-                finish();
-            }
-        });
-
+        if (id == R.id.salvarBtn) {
+            alterar();
+            Auxiliar.esconderTeclado(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void executarAlterar(Usuario usuario){
@@ -60,7 +53,7 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         pessoa.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
-        Auxiliar.criarToast(this, "Dados atualizados com sucesso");
+        Auxiliar.criarToast(this, "Senha atualizada com sucesso");
 
         Intent entidade = new Intent(AlterarSenhaActivity.this, ConfiguracaoActivity.class);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -68,9 +61,8 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         finish();
     }
 
-    public void alterar(View view){
+    public void alterar(){
         String senha = alterarSenha.getText().toString();
-
         Usuario usuario = sessao.getPessoa().getUsuario();
         usuario.setSenha(senha);
 

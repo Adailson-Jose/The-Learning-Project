@@ -1,66 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
+    xmlns:design="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:contexto=".infraestrutura.gui.MainActivity">
+    android:orientation="vertical"
+    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.HomeActivity">
 
-    <TextView
-        android:id="@+id/apresentacaoID"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f1f1f1">
+
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="apresentacao"
-        android:textSize="26sp"
-        android:textStyle="italic"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="93dp" />
-
-    <Button
-        android:id="@+id/configID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/config"
-        android:layout_above="@+id/btnChamar"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/botaoBuscaID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Buscar"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/BotaoInsereHabilidadeID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Inserir habilidade"
-        android:layout_below="@+id/botaoBuscaID"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/btnChamar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Abrir"
-        android:backgroundTint="@android:color/holo_purple"
-        android:textColor="@color/textWhite"
-        android:layout_marginRight="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="13dp" />
-
-    <Button
-        android:id="@+id/BotaoInsereNecessidadeID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:text="Inserir necessidade"
-        android:layout_above="@+id/configID"
-        android:layout_centerHorizontal="true" />
-
-</RelativeLayout>
+        android:layout_gravity="start"
+        design:menu="@menu/bottom_nav_menu" />
+</LinearLayout>

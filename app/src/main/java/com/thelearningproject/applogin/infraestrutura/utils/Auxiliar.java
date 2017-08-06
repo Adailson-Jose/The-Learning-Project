@@ -60,9 +60,13 @@ public class Auxiliar {
         final EditText input = new EditText(activity);
         alert.setView(input);
 
-//        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-//        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+        abrirTeclado(activity);
         return alert.create();
+    }
+
+    public static void abrirTeclado(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
 
 }
