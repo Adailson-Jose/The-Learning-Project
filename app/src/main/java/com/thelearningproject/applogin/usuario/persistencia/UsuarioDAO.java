@@ -13,9 +13,8 @@ import com.thelearningproject.applogin.usuario.dominio.Usuario;
  * Criado por Nícolas on 22/07/2017.
  */
 
-public class UsuarioDAO {
+public final class UsuarioDAO {
     private static UsuarioDAO instancia;
-
     private static final String TABELA = "usuarios";
     private static final String ID = "id";
     private static final String EMAIL = "email";

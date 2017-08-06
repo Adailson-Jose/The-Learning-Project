@@ -1,7 +1,6 @@
 package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
-import android.nfc.Tag;
 import android.util.Log;
 
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
@@ -12,10 +11,10 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Created by Ebony Marques on 18/07/2017.
+ * Criado por Ebony Marques em 18/07/2017.
  */
 
-public class UsuarioServices {
+public final class UsuarioServices {
     private static UsuarioServices instancia;
     private UsuarioDAO persistencia;
 

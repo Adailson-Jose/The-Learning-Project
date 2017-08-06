@@ -56,7 +56,7 @@ public class Auxiliar {
         alert.setTitle(titulo);
         alert.setMessage(mensagem);
         alert.setNeutralButton("Adicionar", (DialogInterface.OnClickListener) activity);
-        //alert.setNegativeButton("Cancelar", (DialogInterface.OnClickListener) activity);
+
         final EditText input = new EditText(activity);
         alert.setView(input);
 

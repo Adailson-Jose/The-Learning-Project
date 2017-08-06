@@ -12,8 +12,7 @@ import java.util.ArrayList;
  * Created by Pichau on 02/08/2017.
  */
 
-public class DadosBuscaDAO {
-
+public final class DadosBuscaDAO {
     private static DadosBuscaDAO instancia;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "dadosbusca";

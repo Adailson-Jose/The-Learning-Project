@@ -12,7 +12,7 @@ import com.thelearningproject.applogin.estudo.dominio.Materia;
  * Criado por Nicollas on 25/07/2017.
  */
 
-public class MateriaDAO {
+public final class MateriaDAO {
     private SQLiteOpenHelper banco;
     private static MateriaDAO sInstance;
     private static final String TABELA = "materias";

@@ -12,9 +12,6 @@ public class Usuario {
     private String senha;
     private Status status;
 
-    public Usuario() {
-    }
-
     public int getId() {
         return id;
     }
@@ -23,8 +20,8 @@ public class Usuario {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setEmail(String novoEmail) {
+        this.email = novoEmail;
     }
 
     public String getSenha() {
@@ -35,16 +32,16 @@ public class Usuario {
         return status;
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public void setStatus(Status novoStatus) {
+        this.status = novoStatus;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setSenha(String novaSenha) {
+        this.senha = novaSenha;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int novoId) {
+        this.id = novoId;
     }
 
 }

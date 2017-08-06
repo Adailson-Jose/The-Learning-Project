@@ -12,19 +12,18 @@ public class Materia {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int novoId) {
+        this.id = novoId;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String novoNome) {
+        this.nome = novoNome;
     }
 
-    @Override
     public boolean equals(Object o){
         boolean r = false;
         if(o instanceof Materia){
@@ -34,9 +33,8 @@ public class Materia {
         return r;
     }
 
-    @Override
     public int hashCode(){
-        return (""+this.getId()).hashCode();
+        return (Integer.toString(this.getId()).hashCode());
     }
 
 }

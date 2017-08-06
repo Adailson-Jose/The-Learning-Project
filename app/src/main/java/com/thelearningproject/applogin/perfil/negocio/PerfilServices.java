@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Criado por Ebony Marques on 26/07/2017.
  */
 
-public class PerfilServices {
+public final class PerfilServices {
     private static PerfilServices instancia;
     private PerfilDAO persistencia;
     private PessoaDAO pessoaDAO;
@@ -75,16 +75,16 @@ public class PerfilServices {
         conexaoHabilidade.insereConexao(perfil.getId(),materia.getId());
     }
 
-    public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
         verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
         conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
     }
 
-    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
         conexaoHabilidade.removerConexao(perfil.getId(),materia.getId());
     }
 
-    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
         conexaoNecessidade.removerConexao(perfil.getId(),materia.getId());
     }
 

@@ -10,10 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Pichau em 26/07/2017.
  */
 
-public class ConexaoNecessidade {
+public final class ConexaoNecessidade {
     private static ConexaoNecessidade sInstance;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "conexaonecessidade";
@@ -38,18 +38,6 @@ public class ConexaoNecessidade {
         values.put(IDMATERIA, materia);
         db.insert(TABELA, null, values);
         db.close();
-    }
-
-    private void updateConexao(int perfil, int materia){
-        SQLiteDatabase db = banco.getWritableDatabase();
-        if (verificaTupla(perfil, materia)){
-            ContentValues values = new ContentValues();
-            values.put(IDPERFIL, perfil);
-            values.put(IDMATERIA, materia);
-            db.update(TABELA,values,IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",
-                    new String[]{String.valueOf(perfil),Integer.toString(materia)});
-            db.close();
-        }
     }
 
     public void removerConexao(int perfil, int materia){

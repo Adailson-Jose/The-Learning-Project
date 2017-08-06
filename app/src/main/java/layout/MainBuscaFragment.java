@@ -29,22 +29,18 @@ public class MainBuscaFragment extends Fragment {
     private FragmentActivity activity;
     private ListView listaUsuarios;
     private EditText entradaBusca;
-    private Button botaoBusca;
     private TextView informacaoResultado;
     private ControladorSessao sessao;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_main_busca, container, false);
-
         activity = getActivity();
 
         sessao = ControladorSessao.getInstancia(activity);
         listaUsuarios = (ListView) view.findViewById(R.id.listViewID);
         entradaBusca = (EditText) view.findViewById(R.id.editTextBuscaID);
-        botaoBusca = (Button) view.findViewById(R.id.botaoBuscaID);
+        Button botaoBusca = (Button) view.findViewById(R.id.botaoBuscaID);
         informacaoResultado = (TextView) view.findViewById(R.id.tv_resultadoID);
 
         botaoBusca.setOnClickListener(new View.OnClickListener() {

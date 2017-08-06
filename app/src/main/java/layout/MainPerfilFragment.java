@@ -113,6 +113,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
             startActivity(entidade2);
         }else{
             String opcao = String.valueOf(parent.getAdapter().getItem(position));
+
             switch (opcao) {
                 case "Configurações":
                     Intent entidade = new Intent(activity, ConfiguracaoActivity.class);

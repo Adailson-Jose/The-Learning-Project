@@ -28,12 +28,12 @@ import layout.MainRecomendacoesFragment;
  */
 
 public class MainActivity extends AppCompatActivity {
-
     private ControladorSessao sessao;
     private static final String SELECTED_ITEM = "arg_selected_item";
-    FragmentManager fm = getSupportFragmentManager();
+    private FragmentManager fm = getSupportFragmentManager();
     private int mSelectedItem;
     private String ultimoFrag;
+    private static final int TRES = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,9 +134,9 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle(text);
         }
     }
-    private void monitorarPilha(FragmentManager fm) {
-        if(fm.getBackStackEntryCount() >= 3){
-            fm.popBackStack();
+    private void monitorarPilha(FragmentManager fragmento) {
+        if(fragmento.getBackStackEntryCount() >= TRES){
+            fragmento.popBackStack();
         }
     }
     private void alterarFragment(String frag, FragmentTransaction ft, Fragment f){

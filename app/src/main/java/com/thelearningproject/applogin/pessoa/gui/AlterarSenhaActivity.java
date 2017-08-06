@@ -16,7 +16,6 @@ import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class AlterarSenhaActivity extends AppCompatActivity {
     private EditText alterarSenha;
-
     private ControladorSessao sessao;
 
     @Override
@@ -28,6 +27,7 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         alterarSenha = (EditText) findViewById(R.id.senhaID);
         Auxiliar.abrirTeclado(this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.salvar_menu, menu);

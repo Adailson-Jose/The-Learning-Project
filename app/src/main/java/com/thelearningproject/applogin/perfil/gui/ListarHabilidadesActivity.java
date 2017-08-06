@@ -50,8 +50,6 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ListarHabilidadesActivity.this, CadastroHabilidadeActivity.class));
-/*                AlertDialog ad = Auxiliar.criarDialogInsercao(ListarHabilidadesActivity.this, "Inserir habilidade", "informe sua hab");
-                ad.show();*/
             }
         });
     }
@@ -101,9 +99,6 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
             case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();
                 break;
-/*            case DialogInterface.BUTTON_NEUTRAL:
-                Auxiliar.criarToast(this, "olaaa");
-                break;*/
         }
     }
 }

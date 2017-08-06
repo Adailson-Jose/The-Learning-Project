@@ -5,10 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Pichau em 26/07/2017.
  */
 
-public class Banco extends SQLiteOpenHelper{
+public final class Banco extends SQLiteOpenHelper{
     private static Banco instancia;
     private static final String NOME_BANCO = "DadosBusca";
     private static final int VERSION = 1;

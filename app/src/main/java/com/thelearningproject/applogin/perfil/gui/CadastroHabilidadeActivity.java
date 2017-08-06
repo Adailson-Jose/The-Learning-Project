@@ -28,6 +28,7 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
         Auxiliar.abrirTeclado(this);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.salvar_menu, menu);

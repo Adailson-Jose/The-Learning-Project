@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Criado por Pichau on 26/07/2017.
  */
 
-public class ConexaoHabilidade {
+public final class ConexaoHabilidade {
     private static ConexaoHabilidade instancia;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "conexaohabilidade";

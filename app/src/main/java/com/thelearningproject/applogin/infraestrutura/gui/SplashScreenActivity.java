@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.thelearningproject.applogin.R;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private static final int DOIS_MIL = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +20,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             public void run() {
                 mostrarLogin();
             }
-        }, 2000);
+        }, DOIS_MIL);
     }
 
     private void mostrarLogin() {

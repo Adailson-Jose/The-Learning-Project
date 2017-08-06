@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * Criado por Pichau on 26/07/2017.
  */
 
-public class BancoHabilidade extends SQLiteOpenHelper{
+public final class BancoHabilidade extends SQLiteOpenHelper{
     private static BancoHabilidade instancia;
     private static final String NOME_BANCO = "ConexaoHabilidade";
     private static final int VERSION = 1;

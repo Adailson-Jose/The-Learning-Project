@@ -18,7 +18,6 @@ import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 public class AlterarEmailActivity extends AppCompatActivity {
     private EditText alterarEmail;
     private Auxiliar auxiliar = new Auxiliar();
-
     private ControladorSessao sessao;
 
     @Override

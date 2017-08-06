@@ -15,7 +15,6 @@ import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 
 public class AlterarNomeActivity extends AppCompatActivity {
     private EditText alterarNome;
-
     private ControladorSessao sessao;
 
     @Override
