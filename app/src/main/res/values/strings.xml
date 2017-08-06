@@ -7,17 +7,17 @@
     <string name="logout">Sair</string>
     <string name="email">E-mail</string>
     <string name="cadastrar">Criar nova conta</string>
-    <string name="texto">Somos uma plataforma de\n aprendizagem mútua.\n\n
-        Aqui, todos são mestres em alguma coisa. Você vai aprender o que\n precisa e ensinar o que sabe.\n\n
-        Vamos começar definindo\n as suas habilidades.</string>
+    <string name="texto">Somos uma plataforma de aprendizagem mútua.\n\n
+        Aqui, todos são mestres em alguma coisa. Você vai aprender o que precisa e ensinar o que sabe.\n\n
+        Vamos começar definindo as suas habilidades.</string>
     <string name="continuar">Continuar</string>
     <string name="finalizar">Finalizar</string>
     <string name="descricao">Descrição</string>
     <string name="habilidades">Habilidades</string>
     <string name="necessidades">Necessidades</string>
-    <string name="dica1">Matemática, português, etc.</string>
-    <string name="dica2">Descreva essa habilidade.</string>
-    <string name="dica3">Onde estuda? O que cursar?</string>
+    <string name="dica1">Chegou a hora de você definir uma habilidade. Escolha aquilo que você mais sabe e gostaria de compartilhar com as pessoas</string>
+    <string name="dica2">Agora diga o que você mais gostaria de aprender atualmente. Com o app, acharemos uma pessoa para te ensinar em segundos!</string>
+    <string name="dica3">Onde estuda? O que cursa?</string>
     <string name="descricaoperfil">Descrição</string>
     <string name="alterar">Alterar</string>
     <string name="excluir">Excluir Conta</string>
@@ -39,6 +39,8 @@
     <string name="copyright">The Learning © Project 2017</string>
     <string name="conta">Conta</string>
     <string name="outrasOpcoes">Outras opções</string>
+    <string name="cadastrarHabilidade">Insira uma habilidade sua</string>
+    <string name="cadastrarNecessidade">Insira uma necessidade sua</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
