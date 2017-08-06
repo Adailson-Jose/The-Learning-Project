@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
@@ -31,7 +32,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
 
         session = ControladorSessao.getInstancia(this.getApplicationContext());
 
-        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Deseja realmente excluir sua conta?");
+        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir Conta", "Deseja realmente excluir sua conta?");
 
         String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome)};
         String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail),getApplicationContext().getString(R.string.alterarSenha)};

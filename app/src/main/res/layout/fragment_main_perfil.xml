@@ -24,7 +24,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/colorSecondary">
+        android:background="@color/colorAccent">
 
         <TextView
             android:id="@+id/nomeUsuarioID"

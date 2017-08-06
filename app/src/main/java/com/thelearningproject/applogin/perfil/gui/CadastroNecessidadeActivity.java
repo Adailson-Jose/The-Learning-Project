@@ -22,7 +22,7 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_necessidade);
-
+        setTitle("Cadastrar nova Necessidade");
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
         Button botaoCadastro = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);

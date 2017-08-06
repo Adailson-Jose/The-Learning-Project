@@ -4,11 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
@@ -26,7 +26,6 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
     private ArrayList<String> lista = new ArrayList<>();
     private PerfilServices perfilNegocio;
     private MateriaServices materiaNegocio;
-    private AlertDialog alertaExcluir;
     private int idposicao;
     private AdapterView adapterView;
 
@@ -43,7 +42,7 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
         sessao = ControladorSessao.getInstancia(ListarHabilidadesActivity.this);
         perfilNegocio = PerfilServices.getInstancia(this);
         materiaNegocio = MateriaServices.getInstancia(this);
-        Button botaoInserir = (Button) findViewById(R.id.btnInserirHabilidade);
+        FloatingActionButton botaoInserir = (FloatingActionButton) findViewById(R.id.btnInserirHabilidade);
 
         listarHabilidades();
 
@@ -51,6 +50,8 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ListarHabilidadesActivity.this, CadastroHabilidadeActivity.class));
+/*                AlertDialog ad = Auxiliar.criarDialogInsercao(ListarHabilidadesActivity.this, "Inserir habilidade", "informe sua hab");
+                ad.show();*/
             }
         });
     }
@@ -80,7 +81,7 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         idposicao = position;
         adapterView = parent;
-        alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarHabilidadesActivity.this, "Deseja remover esta habilidade?");
+        AlertDialog alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarHabilidadesActivity.this, "Remover habilidade" ,"Deseja remover esta habilidade?");
         alertaExcluir.show();
     }
 
@@ -98,8 +99,11 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
                 }
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                alertaExcluir.dismiss();
+                dialog.dismiss();
                 break;
+/*            case DialogInterface.BUTTON_NEUTRAL:
+                Auxiliar.criarToast(this, "olaaa");
+                break;*/
         }
     }
 }

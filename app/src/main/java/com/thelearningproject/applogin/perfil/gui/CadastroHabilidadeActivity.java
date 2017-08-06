@@ -21,6 +21,7 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setTitle("Cadastrar nova Habilidade");
         setContentView(R.layout.activity_cadastro_habilidade);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());

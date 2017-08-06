@@ -4,11 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
@@ -43,7 +43,7 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Ada
         sessao = ControladorSessao.getInstancia(ListarNecessidadesActivity.this);
         perfilNegocio = PerfilServices.getInstancia(this);
         materiaNegocio = MateriaServices.getInstancia(this);
-        Button botaoInserir = (Button) findViewById(R.id.btnInserirNecessidade);
+        FloatingActionButton botaoInserir = (FloatingActionButton) findViewById(R.id.btnInserirNecessidade);
 
         listarNecessidades();
 
@@ -80,7 +80,7 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Ada
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         idposicao = position;
         adapterView = parent;
-        alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarNecessidadesActivity.this, "Deseja remover esta necessidade?");
+        alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarNecessidadesActivity.this, "Remover necessidade", "Deseja remover esta necessidade?");
         alertaExcluir.show();
     }
 
