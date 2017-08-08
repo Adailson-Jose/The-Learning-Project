@@ -14,7 +14,7 @@ public class MateriaServices {
     private MateriaDAO persistencia;
 
     public MateriaServices(Context context){
-        this.persistencia = MateriaDAO.getInstance(context);
+        this.persistencia = MateriaDAO.getInstancia(context);
     }
 
     public static MateriaServices getInstancia(Context context){

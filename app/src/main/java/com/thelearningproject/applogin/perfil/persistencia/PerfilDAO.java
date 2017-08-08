@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 
@@ -15,13 +16,13 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 public final class PerfilDAO {
     private Banco banco;
     private static PerfilDAO instancia;
-    private static final String TABELA = "perfis";
 
-    private static final String ID = "id";
-    private static final String PESSOA = "pessoa";
-    private static final String DESCRICAO = "descricao";
+    private static final String TABELA_PERFIS = "perfis";
+    private static final String ID_PERFIL = "id";
+    private static final String PESSOA_PERFIL = "pessoa";
+    private static final String DESCRICAO_PERFIL = "descricao";
 
-    public static synchronized PerfilDAO getInstance(Context contexto) {
+    public static synchronized PerfilDAO getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new PerfilDAO(contexto.getApplicationContext());
         }
@@ -35,23 +36,23 @@ public final class PerfilDAO {
     public void inserir(Perfil perfil) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
-        valores.put(PESSOA, perfil.getPessoa().getId());
+        valores.put(PESSOA_PERFIL, perfil.getPessoa().getId());
 
-        db.insert(TABELA, null, valores);
+        db.insert(TABELA_PERFIS, null, valores);
         db.close();
     }
 
     public Perfil retornaPerfil(int idPessoa) {
-        String[] colunas = {ID, PESSOA};
-        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, PESSOA + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
+        String[] colunas = {ID_PERFIL, PESSOA_PERFIL};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, PESSOA_PERFIL + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
         Perfil perfil = null;
         Pessoa pessoa;
 
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
             pessoa = new Pessoa();
-            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA)));
-            perfil.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA_PERFIL)));
+            perfil.setId(cursor.getInt(cursor.getColumnIndex(ID_PERFIL)));
             perfil.setPessoa(pessoa);
         }
 
@@ -60,16 +61,16 @@ public final class PerfilDAO {
     }
 
     public Perfil consultar(int id) {
-        String[] colunas = {ID, PESSOA};
-        Cursor cursor = banco.getReadableDatabase().query(TABELA, colunas, ID + " = ?", new String[]{Integer.toString(id)}, null, null, null);
+        String[] colunas = {ID_PERFIL, PESSOA_PERFIL};
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, ID_PERFIL + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Perfil perfil = null;
         Pessoa pessoa;
 
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
             pessoa = new Pessoa();
-            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA)));
-            perfil.setId(cursor.getInt(cursor.getColumnIndex(ID)));
+            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA_PERFIL)));
+            perfil.setId(cursor.getInt(cursor.getColumnIndex(ID_PERFIL)));
             perfil.setPessoa(pessoa);
         }
 
@@ -81,9 +82,9 @@ public final class PerfilDAO {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(DESCRICAO, perfil.getDescricao());
+        values.put(DESCRICAO_PERFIL, perfil.getDescricao());
 
-        db.update(TABELA, values, ID + " = ?",
+        db.update(TABELA_PERFIS, values, ID_PERFIL + " = ?",
                 new String[]{String.valueOf(perfil.getId())});
         db.close();
     }

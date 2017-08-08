@@ -29,9 +29,9 @@ public final class PerfilServices {
     private PerfilServices(Context contexto) {
         this.conexaoHabilidade = ConexaoHabilidade.getInstancia(contexto);
         this.conexaoNecessidade = ConexaoNecessidade.getInstancia(contexto);
-        this.persistencia = PerfilDAO.getInstance(contexto);
+        this.persistencia = PerfilDAO.getInstancia(contexto);
         this.materiaServices = MateriaServices.getInstancia(contexto);
-        this.pessoaDAO = PessoaDAO.getInstance(contexto);
+        this.pessoaDAO = PessoaDAO.getInstancia(contexto);
     }
 
     public static PerfilServices getInstancia(Context contexto) {

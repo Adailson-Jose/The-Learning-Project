@@ -15,7 +15,7 @@ public class PessoaServices {
     private PessoaDAO persistencia;
 
     public PessoaServices(Context contexto) {
-        this.persistencia = PessoaDAO.getInstance(contexto);
+        this.persistencia = PessoaDAO.getInstancia(contexto);
     }
 
     public static PessoaServices getInstancia(Context contexto) {

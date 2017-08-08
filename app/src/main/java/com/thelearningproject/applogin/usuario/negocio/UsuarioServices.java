@@ -2,7 +2,6 @@ package com.thelearningproject.applogin.usuario.negocio;
 
 import android.content.Context;
 import android.util.Log;
-
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
@@ -19,7 +18,7 @@ public final class UsuarioServices {
     private UsuarioDAO persistencia;
 
     private UsuarioServices(Context context){
-        this.persistencia = UsuarioDAO.getInstance(context);
+        this.persistencia = UsuarioDAO.getInstancia(context);
     }
 
     public static UsuarioServices getInstancia(Context context){
