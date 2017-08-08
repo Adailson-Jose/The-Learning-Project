@@ -31,7 +31,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
 
         session = ControladorSessao.getInstancia(this.getApplicationContext());
 
-        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Deseja realmente excluir sua conta?");
+        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir Conta", "Deseja realmente excluir sua conta?");
 
         String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome)};
         String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail),getApplicationContext().getString(R.string.alterarSenha)};
@@ -79,8 +79,8 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
 
     private void desativar(){
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
-        negocio.deletarUsuario(session.getUsuario());
-        Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário desativado com sucesso");
+        negocio.deletarUsuario(session.getPessoa().getUsuario());
+        Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário deletado com sucesso");
         finish();
         session.encerraSessao();
     }

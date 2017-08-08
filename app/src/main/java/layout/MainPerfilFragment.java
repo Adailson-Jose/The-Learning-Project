@@ -38,7 +38,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private PerfilServices perfilServices = PerfilServices.getInstancia(activity);
     private ListView listViewHabilidades;
     private ListView listViewNecessidades;
-    private ListView listViewConfiguracao;
 
     @Nullable
     @Override
@@ -46,7 +45,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         activity = this.getActivity();
         sessao = ControladorSessao.getInstancia(activity);
-        donoConta = (TextView) getActivity().findViewById(R.id.nomeUsuarioID);
+        donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
 
 
         return inflater.inflate(R.layout.fragment_main_perfil, container, false);
@@ -59,7 +58,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         activity = getActivity();
         sessao = ControladorSessao.getInstancia(activity);
 
-        donoConta = (TextView) getActivity().findViewById(R.id.nomeUsuarioID);
+        donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
 
         String[] listaHabilidades = {perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId())};
         String[] listaNecessidades = {perfilServices.retornaStringListaNecessidades(sessao.getPerfil().getId())};
@@ -67,7 +66,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         listViewHabilidades = (ListView) getActivity().findViewById(R.id.listaPerfilHabilidades);
         listViewNecessidades = (ListView) getActivity().findViewById(R.id.listaPerfilNecessidades);
-        listViewConfiguracao = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
+        ListView listViewConfiguracao = (ListView) getActivity().findViewById(R.id.listaPerfilConfiguracoes);
 
         ArrayAdapter<String> adapterOpcoesHabilidade = new ArrayAdapter<>(
                 activity,
@@ -114,6 +113,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
             startActivity(entidade2);
         }else{
             String opcao = String.valueOf(parent.getAdapter().getItem(position));
+
             switch (opcao) {
                 case "Configurações":
                     Intent entidade = new Intent(activity, ConfiguracaoActivity.class);
@@ -138,7 +138,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         pessoa.setUsuario(usuario);
         sessao.iniciaSessao();
-        sessao.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
     }

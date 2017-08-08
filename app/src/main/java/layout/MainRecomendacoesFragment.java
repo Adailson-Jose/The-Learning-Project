@@ -13,17 +13,13 @@ import com.thelearningproject.applogin.R;
  * Criado por Gabriel on 03/08/2017
  */
 public class MainRecomendacoesFragment extends Fragment {
-
-
     public MainRecomendacoesFragment() {
-        // Required empty public constructor
+        // Requer um construtor publico vazio
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_recomendacoes, container, false);
     }
 

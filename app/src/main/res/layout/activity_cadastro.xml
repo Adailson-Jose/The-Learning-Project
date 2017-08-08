@@ -32,7 +32,7 @@
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
 			android:hint="@string/nome"
-			android:inputType="textPersonName"
+			android:inputType="textCapSentences|textPersonName"
 			android:textSize="20sp" />
 
 	</android.support.design.widget.TextInputLayout>

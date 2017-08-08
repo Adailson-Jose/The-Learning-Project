@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Banco extends SQLiteOpenHelper {
     private static Banco instancia;
-    private static final String BANCO = "BDMateria";
+    private static final String BANCO_DADOS = "BDMateria";
     private static final String TABELA = "materias";
     private static final int VERSAO = 2;
     private static final String ID = "id";
@@ -24,7 +24,7 @@ public class Banco extends SQLiteOpenHelper {
     }
 
     public Banco(Context contexto) {
-        super(contexto, BANCO, null, VERSAO);
+        super(contexto, BANCO_DADOS, null, VERSAO);
     }
 
     @Override

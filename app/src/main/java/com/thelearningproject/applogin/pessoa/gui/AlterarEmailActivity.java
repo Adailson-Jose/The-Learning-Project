@@ -1,10 +1,10 @@
 package com.thelearningproject.applogin.pessoa.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.thelearningproject.applogin.R;
@@ -12,59 +12,53 @@ import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
+import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class AlterarEmailActivity extends AppCompatActivity {
     private EditText alterarEmail;
     private Auxiliar auxiliar = new Auxiliar();
-
     private ControladorSessao sessao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alterar_email);
-
-        Button btAlterar;
-        Button btCancelar;
+        setTitle(R.string.alterarEmail);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-
         alterarEmail = (EditText) findViewById(R.id.emailID);
-        btAlterar = (Button) findViewById(R.id.alterarEmail);
-        btCancelar = (Button) findViewById(R.id.Cancelar);
-
-        btAlterar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alterar(v);
-                Auxiliar.esconderTeclado(AlterarEmailActivity.this);
-
-            }
-        });
-        btCancelar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(AlterarEmailActivity.this,ConfiguracaoActivity.class));
-                finish();
-            }
-        });
-
         alterarEmail.setText(sessao.getPessoa().getUsuario().getEmail());
+        alterarEmail.setSelection(alterarEmail.getText().length());
+        Auxiliar.abrirTeclado(this);
     }
 
-    private void executarAlterar(Pessoa pessoa) throws UsuarioException {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.salvar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.salvarBtn) {
+            alterar();
+            Auxiliar.esconderTeclado(AlterarEmailActivity.this);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void executarAlterar(Usuario usuario) throws UsuarioException {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
-        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
-        negocioUsuario.alterarEmailUsuario(pessoa.getUsuario());
-        negocioPessoa.alterarPessoa(pessoa);
-
-        sessao.setUsuario(pessoa.getUsuario());
+        negocioUsuario.alterarEmailUsuario(usuario);
+        Pessoa pessoa = sessao.getPessoa();
+        pessoa.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
-        Auxiliar.criarToast(this, "Dados atualizados com sucesso");
+        Auxiliar.criarToast(this, "E-mail atualizado com sucesso");
 
         Intent entidade = new Intent(AlterarEmailActivity.this, ConfiguracaoActivity.class);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -72,18 +66,14 @@ public class AlterarEmailActivity extends AppCompatActivity {
         finish();
     }
 
-    public void alterar(View view){
+    public void alterar(){
         String email = alterarEmail.getText().toString();
-
-        Pessoa pessoa = sessao.getPessoa();
-
-        pessoa.setUsuario(sessao.getUsuario());
-        pessoa.getUsuario().setEmail(email);
-        pessoa.getUsuario().setStatus(com.thelearningproject.applogin.infraestrutura.utils.Status.ATIVADO);
+        Usuario usuario = sessao.getPessoa().getUsuario();
+        usuario.setEmail(email);
 
         try {
-            if(validaAlterar(pessoa)){
-                executarAlterar(pessoa);
+            if(validaAlterar(usuario)){
+                executarAlterar(usuario);
             }
 
         } catch (UsuarioException e){
@@ -91,9 +81,9 @@ public class AlterarEmailActivity extends AppCompatActivity {
         }
     }
 
-    private Boolean validaAlterar(Pessoa pessoa) {
+    private Boolean validaAlterar(Usuario usuario) {
         Boolean validacao = true;
-        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
             alterarEmail.setError("E-mail inválido");
             validacao = false;
         }

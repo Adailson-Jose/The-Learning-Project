@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class Banco extends SQLiteOpenHelper {
     private static Banco instancia;
-
     private static final String NOME_BANCO = "BDUsuario";
     private static final int VERSION = 11;
     private static final String TABELA = "usuarios";

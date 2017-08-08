@@ -12,7 +12,7 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
  * Criado por Ebony Marques em 26/07/2017.
  */
 
-public class PerfilDAO {
+public final class PerfilDAO {
     private Banco banco;
     private static PerfilDAO instancia;
     private static final String TABELA = "perfis";

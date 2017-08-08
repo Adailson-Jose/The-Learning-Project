@@ -4,17 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.infraestrutura.gui.LoginActivity;
 
 /**
  * Criado por Nicollas on 20/07/2017.
  */
 
-public class ControladorSessao {
+public final class ControladorSessao {
     private static ControladorSessao instancia;
     private SharedPreferences preferencias;
     private Editor editor;
@@ -22,9 +20,10 @@ public class ControladorSessao {
 
     private Perfil perfil;
     private Pessoa pessoa;
-    private Usuario usuario;
 
-    private static final String PREFERENCIA = "Sessao", USUARIO_LOGADO = "Logado", ID_USUARIO = "ID_Usuario";
+    private static final String PREFERENCIA = "Sessao";
+    private static final String USUARIO_LOGADO = "Logado";
+    private static final String ID_USUARIO = "ID_Usuario";
     private boolean sessaoAtiva;
 
     public static synchronized ControladorSessao getInstancia(Context context){
@@ -59,8 +58,8 @@ public class ControladorSessao {
         contexto.startActivity(intent);
     }
 
-    private ControladorSessao(Context contexto){
-        this.contexto = contexto;
+    private ControladorSessao(Context context){
+        this.contexto = context;
         this.sessaoAtiva = false;
         preferencias = this.contexto.getSharedPreferences(PREFERENCIA,Context.MODE_PRIVATE);
         editor = preferencias.edit();
@@ -69,7 +68,7 @@ public class ControladorSessao {
 
     public void salvarSessao(){
         editor.putBoolean(USUARIO_LOGADO,true);
-        editor.putInt(ID_USUARIO,usuario.getId());
+        editor.putInt(ID_USUARIO,pessoa.getUsuario().getId());
         editor.commit();
     }
 
@@ -81,24 +80,16 @@ public class ControladorSessao {
         return perfil;
     }
 
-    public void setPerfil(Perfil perfil) {
-        this.perfil = perfil;
+    public void setPerfil(Perfil novoPerfil) {
+        this.perfil = novoPerfil;
     }
 
     public Pessoa getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
-    }
-
-    public Usuario getUsuario(){
-        return this.usuario;
-    }
-
-    public void setUsuario(Usuario usuario){
-        this.usuario = usuario;
+    public void setPessoa(Pessoa novaPessoa) {
+        this.pessoa = novaPessoa;
     }
 
     private boolean verificaSessao() {

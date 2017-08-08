@@ -1,28 +1,39 @@
 package com.thelearningproject.applogin.infraestrutura.gui;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.view.MenuItem;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
-import com.thelearningproject.applogin.perfil.gui.CadastroHabilidadeActivity;
-import com.thelearningproject.applogin.perfil.gui.CadastroNecessidadeActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.pessoa.gui.ConfiguracaoActivity;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
+import layout.MainBuscaFragment;
+import layout.MainPerfilFragment;
+import layout.MainRecomendacoesFragment;
+
+/**
+ * Criado por gabri on 26/07/2017.
+ */
+
 public class MainActivity extends AppCompatActivity {
     private ControladorSessao sessao;
-    private TextView apresentacao;
-
+    private static final String SELECTED_ITEM = "arg_selected_item";
+    private FragmentManager fm = getSupportFragmentManager();
+    private int mSelectedItem;
+    private String ultimoFrag;
+    private static final int TRES = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +41,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        apresentacao = (TextView) findViewById(R.id.apresentacaoID);
-        Button botaoconfig = (Button) findViewById(R.id.configID);
-        Button botaoBusca = (Button) findViewById(R.id.botaoBuscaID);
-        Button botaoInsereHabilidade = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
-        Button botaoInsereNecessidade = (Button) findViewById(R.id.BotaoInsereNecessidadeID);
-        Button botaoabrir = (Button) findViewById(R.id.btnChamar);
 
         if (sessao.verificaConexao()) {
             resumir();
@@ -48,40 +53,35 @@ public class MainActivity extends AppCompatActivity {
             exibir();
         }
 
-        botaoBusca.setOnClickListener(new View.OnClickListener() {
+        BottomNavigationView mBottomNav = (BottomNavigationView) findViewById(R.id.navigation);
+
+        mBottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BuscaActivity.class));
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                selectFragment(item);
+                return true;
             }
         });
 
-        botaoconfig.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ConfiguracaoActivity.class));
-            }
-        });
+        MenuItem selectedItem;
+        if (savedInstanceState != null) {
+            mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 0);
+            selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
+        } else {
+            MainRecomendacoesFragment frag1 = new MainRecomendacoesFragment();
+            FragmentTransaction ft = fm.beginTransaction();
+            ft.add(R.id.container, frag1);
+            ft.commit();
+            selectedItem = mBottomNav.getMenu().getItem(0);
+        }
+        selectFragment(selectedItem);
+        fm.popBackStack();
+    }
 
-        botaoabrir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, HomeActivity.class));
-            }
-        });
-
-        botaoInsereHabilidade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CadastroHabilidadeActivity.class));
-            }
-        });
-
-        botaoInsereNecessidade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, CadastroNecessidadeActivity.class));
-            }
-        });
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putInt(SELECTED_ITEM, mSelectedItem);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -98,20 +98,63 @@ public class MainActivity extends AppCompatActivity {
 
         pessoa.setUsuario(usuario);
         sessao.iniciaSessao();
-        sessao.setUsuario(usuario);
         sessao.setPessoa(pessoa);
 
     }
-
     private void exibir() {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
         Perfil perfil = negocioperfil.retornaPerfil(sessao.getPessoa().getId());
         perfil.setPessoa(sessao.getPessoa());
         sessao.setPerfil(perfil);
+    }
 
-        String mensagem = "Oi, " + sessao.getPessoa().getNome() + ".";
+    private void selectFragment(MenuItem item) {
+        FragmentTransaction ft = fm.beginTransaction();
 
-        apresentacao.setText(mensagem);
+        switch (item.getItemId()) {
+            case R.id.menu_recomendacoes:
+                alterarFragment("0", ft, getRecomFragment());
+                break;
+            case R.id.menu_buscar:
+                alterarFragment("1", ft, getBuscaFragment());
+                break;
+            case R.id.menu_perfil:
+                alterarFragment("2", ft, getPerfilFragment());
+                break;
+        }
+
+        mSelectedItem = item.getItemId();
+        updateToolbarText(item.getTitle());
+    }
+
+    private void updateToolbarText(CharSequence text) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(text);
+        }
+    }
+    private void monitorarPilha(FragmentManager fragmento) {
+        if(fragmento.getBackStackEntryCount() >= TRES){
+            fragmento.popBackStack();
+        }
+    }
+    private void alterarFragment(String frag, FragmentTransaction ft, Fragment f){
+        if (!frag.equals(this.ultimoFrag)){
+            ft.replace(R.id.container, f, frag);
+            ft.addToBackStack("pilha");
+            monitorarPilha(fm);
+            ft.commit();
+            ultimoFrag = frag;
+        }
+    }
+    private MainPerfilFragment getPerfilFragment(){
+        return new MainPerfilFragment();
+    }
+    private MainBuscaFragment getBuscaFragment(){
+        return new MainBuscaFragment();
+    }
+    private MainRecomendacoesFragment getRecomFragment(){
+        return new MainRecomendacoesFragment();
     }
 }

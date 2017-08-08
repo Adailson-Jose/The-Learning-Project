@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 
 
 public class PerfilAdapter extends ArrayAdapter<Perfil> {
-
     private ArrayList<Perfil> listaPerfil;
     private Context contexto;
 

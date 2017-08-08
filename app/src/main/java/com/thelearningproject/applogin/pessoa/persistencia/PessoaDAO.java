@@ -12,7 +12,7 @@ import com.thelearningproject.applogin.usuario.dominio.Usuario;
  * Criado por Nícolas em 30/07/2017.
  */
 
-public class PessoaDAO {
+public final class PessoaDAO {
     private Banco banco;
     private static PessoaDAO instancia;
     private static final String TABELA = "pessoas";

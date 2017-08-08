@@ -18,7 +18,7 @@ import java.util.ArrayList;
  * Criado por Ebony Marques on 26/07/2017.
  */
 
-public class PerfilServices {
+public final class PerfilServices {
     private static PerfilServices instancia;
     private PerfilDAO persistencia;
     private PessoaDAO pessoaDAO;
@@ -75,16 +75,16 @@ public class PerfilServices {
         conexaoHabilidade.insereConexao(perfil.getId(),materia.getId());
     }
 
-    public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
         verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
         conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
     }
 
-    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
         conexaoHabilidade.removerConexao(perfil.getId(),materia.getId());
     }
 
-    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException{
+    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
         conexaoNecessidade.removerConexao(perfil.getId(),materia.getId());
     }
 
@@ -122,11 +122,11 @@ public class PerfilServices {
 
     private void verificaExistencia(int perfil, int materia, tipoConexao tipo) throws UsuarioException{
         if (tipo == tipoConexao.HABILIDADE){
-            if (conexaoHabilidade.verificatupla(perfil,materia)){
+            if (conexaoHabilidade.verificaTupla(perfil,materia)){
                 throw new UsuarioException("Você já cadastrou essa habilidade");
             }
         }else{
-            if (conexaoNecessidade.verificatupla(perfil, materia)) {
+            if (conexaoNecessidade.verificaTupla(perfil, materia)) {
                 throw new UsuarioException("Você já cadastrou essa necessidade");
             }
         }

@@ -25,7 +25,8 @@ import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 public class LoginActivity extends Activity {
     private ControladorSessao sessao;
     private Auxiliar auxiliar = new Auxiliar();
-    private EditText entradaLogin, entradaSenha;
+    private EditText entradaLogin;
+    private EditText entradaSenha;
     private Switch switchConectado;
 
     @Override
@@ -99,7 +100,6 @@ public class LoginActivity extends Activity {
             Pessoa pessoaLogada = negocioPessoa.retornaPessoa(logado.getId());
             sessao.encerraSessao();
 
-            sessao.setUsuario(logado);
             pessoaLogada.setUsuario(logado);
             sessao.setPessoa(pessoaLogada);
             sessao.iniciaSessao();
@@ -110,7 +110,6 @@ public class LoginActivity extends Activity {
 
             Intent entidade = new Intent(LoginActivity.this, MainActivity.class);
             entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            //finish();
 
             startActivity(entidade);
 

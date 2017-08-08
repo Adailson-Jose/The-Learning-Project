@@ -2,8 +2,8 @@ package com.thelearningproject.applogin.perfil.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.EditText;
 
 import com.thelearningproject.applogin.R;
@@ -22,20 +22,28 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro_habilidade);
+        setTitle("Cadastrar nova habilidade");
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        Button botaoCadastro = (Button) findViewById(R.id.BotaoInsereHabilidadeID);
         entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
+        Auxiliar.abrirTeclado(this);
+    }
 
-        botaoCadastro.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.salvar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
-            @Override
-            public void onClick(View v) {
-                cadastrarMateria();
-            }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
 
-        });
-
+        if (id == R.id.salvarBtn) {
+            cadastrarMateria();
+            Auxiliar.esconderTeclado(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void cadastrarMateria() {

@@ -13,10 +13,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Created by Pichau on 02/08/2017.
+ * Criado por Pichau em 02/08/2017.
  */
 
-public class DadosServices {
+public final class DadosServices {
     private static DadosServices instancia;
     private DadosBuscaDAO dadosDAO;
     private MateriaServices materiaServices;

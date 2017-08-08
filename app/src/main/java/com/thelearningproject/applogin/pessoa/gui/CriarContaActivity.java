@@ -104,7 +104,6 @@ public class CriarContaActivity extends Activity {
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         sessao.setPessoa(pessoa);
-        sessao.setUsuario(pessoa.getUsuario());
         sessao.salvarSessao();
         sessao.iniciaSessao();
 

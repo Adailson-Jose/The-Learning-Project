@@ -15,24 +15,24 @@ public class Pessoa {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int novoId) {
+        this.id = novoId;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNome(String novoNome) {
+        this.nome = novoNome;
     }
 
     public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setUsuario(Usuario novoUsuario) {
+        this.usuario = novoUsuario;
     }
 
 }

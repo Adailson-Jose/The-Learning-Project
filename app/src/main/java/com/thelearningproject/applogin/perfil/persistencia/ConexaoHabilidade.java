@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * Criado por Pichau on 26/07/2017.
  */
 
-public class ConexaoHabilidade {
+public final class ConexaoHabilidade {
     private static ConexaoHabilidade instancia;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "conexaohabilidade";
@@ -30,7 +30,7 @@ public class ConexaoHabilidade {
         this.banco = BancoHabilidade.getInstancia(context);
     }
 
-    public boolean verificatupla(int perfil, int materia){
+    public boolean verificaTupla(int perfil, int materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)},null,null,null);
         boolean resultado = cursor.moveToFirst();
         cursor.close();

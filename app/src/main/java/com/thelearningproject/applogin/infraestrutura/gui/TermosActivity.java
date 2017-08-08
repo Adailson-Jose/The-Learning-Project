@@ -20,7 +20,6 @@ import java.util.regex.Pattern;
 
 public class TermosActivity extends AppCompatActivity {
     private ControladorSessao sessao;
-    private TextView linkLearning;
     private Pattern pTheLearningProject = Pattern.compile(String.valueOf(R.string.copyright));
 
     @Override
@@ -29,7 +28,7 @@ public class TermosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_termos);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        linkLearning = (TextView) findViewById(R.id.theLearnProjectId);
+        TextView linkLearning = (TextView) findViewById(R.id.theLearnProjectId);
 
         Linkify.TransformFilter tf = new Linkify.TransformFilter() {
             @Override

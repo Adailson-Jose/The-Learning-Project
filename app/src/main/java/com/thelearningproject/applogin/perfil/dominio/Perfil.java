@@ -20,24 +20,24 @@ public class Perfil {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int novoId) {
+        this.id = novoId;
     }
 
     public Pessoa getPessoa() {
         return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        this.pessoa = pessoa;
+    public void setPessoa(Pessoa novaPessoa) {
+        this.pessoa = novaPessoa;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setDescricao(String novaDescricao) {
+        this.descricao = novaDescricao;
     }
 
     public ArrayList<Materia> getHabilidades() {
@@ -52,7 +52,6 @@ public class Perfil {
 
     public void addNecessidade(Materia nova) { necessidades.add(nova); }
 
-    @Override
     public boolean equals(Object o){
         boolean r = false;
         if(o instanceof Perfil){
@@ -62,8 +61,7 @@ public class Perfil {
         return r;
     }
 
-    @Override
     public int hashCode(){
-        return (""+this.getId()).hashCode();
+        return (Integer.toString(this.getId()).hashCode());
     }
 }

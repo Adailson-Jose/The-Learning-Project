@@ -10,10 +10,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 26/07/2017.
+ * Criado por Pichau em 26/07/2017.
  */
 
-public class ConexaoNecessidade {
+public final class ConexaoNecessidade {
     private static ConexaoNecessidade sInstance;
     private SQLiteOpenHelper banco;
     private static final String TABELA = "conexaonecessidade";
@@ -40,25 +40,13 @@ public class ConexaoNecessidade {
         db.close();
     }
 
-    private void updateConexao(int perfil, int materia){
-        SQLiteDatabase db = banco.getWritableDatabase();
-        if (verificatupla(perfil, materia)){
-            ContentValues values = new ContentValues();
-            values.put(IDPERFIL, perfil);
-            values.put(IDMATERIA, materia);
-            db.update(TABELA,values,IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",
-                    new String[]{String.valueOf(perfil),Integer.toString(materia)});
-            db.close();
-        }
-    }
-
     public void removerConexao(int perfil, int materia){
         SQLiteDatabase db = banco.getWritableDatabase();
         db.delete(TABELA,IDPERFIL + " = ? AND "+IDMATERIA+ " = ?",new String[]{String.valueOf(perfil),Integer.toString(materia)});
         db.close();
     }
 
-    public boolean verificatupla(int perfil, int materia){
+    public boolean verificaTupla(int perfil, int materia){
         Cursor cursor = banco.getReadableDatabase().query(TABELA,new String[]{IDPERFIL},IDPERFIL + " = ? AND " +IDMATERIA+ " = ?",new String[]{Integer.toString(perfil),Integer.toString(materia)},null,null,null);
         boolean resultado = cursor.moveToFirst();
         cursor.close();
