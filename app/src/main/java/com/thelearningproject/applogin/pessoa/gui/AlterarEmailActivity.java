@@ -33,6 +33,7 @@ public class AlterarEmailActivity extends AppCompatActivity {
         Auxiliar.abrirTeclado(this);
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.salvar_menu, menu);
@@ -45,8 +46,8 @@ public class AlterarEmailActivity extends AppCompatActivity {
 
         if (id == R.id.salvarBtn) {
             alterar();
-            Auxiliar.esconderTeclado(AlterarEmailActivity.this);
         }
+        Auxiliar.esconderTeclado(AlterarEmailActivity.this);
         return super.onOptionsItemSelected(item);
     }
 

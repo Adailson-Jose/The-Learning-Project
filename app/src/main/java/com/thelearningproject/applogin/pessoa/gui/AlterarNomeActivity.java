@@ -41,8 +41,8 @@ public class AlterarNomeActivity extends AppCompatActivity {
 
         if (id == R.id.salvarBtn) {
             alterar();
-            Auxiliar.esconderTeclado(this);
         }
+        Auxiliar.esconderTeclado(this);
         return super.onOptionsItemSelected(item);
     }
 

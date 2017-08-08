@@ -41,8 +41,8 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
 
         if (id == R.id.salvarBtn) {
             cadastrarMateria();
-            Auxiliar.esconderTeclado(this);
         }
+        Auxiliar.esconderTeclado(this);
         return super.onOptionsItemSelected(item);
     }
 

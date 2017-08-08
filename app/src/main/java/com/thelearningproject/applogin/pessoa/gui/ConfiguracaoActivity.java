@@ -93,19 +93,16 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
                 Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarNomeActivity.class);
                 entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade);
-                finish();
                 break;
             case "Alterar E-mail":
                 Intent entidade1 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
                 entidade1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade1);
-                finish();
                 break;
             case "Alterar Senha":
                 Intent entidade2 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
                 entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade2);
-                finish();
                 break;
             case "Excluir Conta":
                 alertExclusao.show();

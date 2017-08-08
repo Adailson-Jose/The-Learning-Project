@@ -8,9 +8,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
@@ -87,6 +89,24 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.pesquisar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.pesquisarBtn) {
+            return false;//aqui nicollas
+        }
+        Auxiliar.esconderTeclado(this);
+        return super.onOptionsItemSelected(item);
     }
 
     private void resumir() {
