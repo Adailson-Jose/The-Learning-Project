@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
@@ -35,9 +36,16 @@ public class MateriaAdapter extends ArrayAdapter<Materia> {
         view = inflater.inflate(R.layout.lista_materia, parent, false);
 
         TextView nomeMateria = (TextView) view.findViewById(R.id.tv_nome_materia);
+        ImageButton botaoExcluir = (ImageButton) view.findViewById(R.id.btnExcluirMateria);
         Materia materia = listaMateria.get(position);
 
         nomeMateria.setText(materia.getNome());
+        botaoExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Auxiliar.criarToast(contexto, "Excluir....");
+            }
+        });
 
         return view;
     }
