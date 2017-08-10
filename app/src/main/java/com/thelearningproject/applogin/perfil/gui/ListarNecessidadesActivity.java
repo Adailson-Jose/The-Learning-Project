@@ -16,14 +16,13 @@ import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
-import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.MateriaAdapter;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
 public class ListarNecessidadesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
     private ControladorSessao sessao;
-    private ArrayList<String> lista = new ArrayList<>();
     private PerfilServices perfilNegocio;
     private MateriaServices materiaNegocio;
     private AlertDialog alertaExcluir;
@@ -56,22 +55,16 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Ada
     }
 
     private void listarNecessidades() {
-        lista.clear();
         ArrayList<Materia> listaMateria = perfilNegocio.listarNecessidade(sessao.getPerfil());
 
         ListView listView1 = (ListView) findViewById(R.id.listaNecessidades);
 
-        ArrayAdapter<String> adapterListaNecessidade = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                lista);
+        ArrayAdapter adaptador = new MateriaAdapter(
+                this, listaMateria);
 
-        listView1.setAdapter(adapterListaNecessidade);
+        listView1.setAdapter(adaptador);
 
-        for (Materia mat : listaMateria) {
-            lista.add(mat.getNome());
-            adapterListaNecessidade.notifyDataSetChanged();
-        }
+        adaptador.notifyDataSetChanged();
 
         listView1.setOnItemClickListener(this);
     }
@@ -88,14 +81,10 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Ada
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                String mat = adapterView.getItemAtPosition(idposicao).toString();
-                try {
-                    perfilNegocio.deletarNecessidade(sessao.getPerfil(), materiaNegocio.consultarNome(mat));
-                    listarNecessidades();
-                    Auxiliar.criarToast(this, "Necessidade removida com sucesso!!!!!!");
-                } catch (UsuarioException e) {
-                    Auxiliar.criarToast(this, e.getMessage());
-                }
+                Materia mat = (Materia) adapterView.getItemAtPosition(idposicao);
+                perfilNegocio.deletarNecessidade(sessao.getPerfil(), materiaNegocio.consultar(mat.getId()));
+                listarNecessidades();
+                Auxiliar.criarToast(this, "Necessidade removida com sucesso!!!!!!");
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 alertaExcluir.dismiss();

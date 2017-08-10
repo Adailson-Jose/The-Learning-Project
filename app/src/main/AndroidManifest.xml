@@ -9,6 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data android:name="android.app.default_searchable"
+            android:value=".infraestrutura.gui.BuscaActivity"/>
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
             android:theme="@style/AppCompat.FullScreen">
@@ -29,8 +31,7 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".perfil.gui.HabilidadeActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            />
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".perfil.gui.NecessidadeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />

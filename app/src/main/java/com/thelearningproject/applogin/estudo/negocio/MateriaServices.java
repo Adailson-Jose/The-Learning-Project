@@ -5,6 +5,8 @@ import android.content.Context;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.persistencia.MateriaDAO;
 
+import java.util.ArrayList;
+
 /**
  * Criado por Nicollas on 26/07/2017.
  */
@@ -13,42 +15,40 @@ public class MateriaServices {
     private static MateriaServices instancia;
     private MateriaDAO persistencia;
 
-    public MateriaServices(Context context){
+    public MateriaServices(Context context) {
         this.persistencia = MateriaDAO.getInstancia(context);
     }
 
-    public static MateriaServices getInstancia(Context context){
-        if(instancia == null){
+    public static MateriaServices getInstancia(Context context) {
+        if (instancia == null) {
             instancia = new MateriaServices(context);
         }
         return instancia;
     }
 
-    private Materia inserirMateria(Materia materia){
+    private Materia inserirMateria(Materia materia) {
         persistencia.inserir(materia);
         return persistencia.consultaNome(materia.getNome());
     }
 
-    public Materia cadastraMateria(Materia materia){
+    public Materia cadastraMateria(Materia materia) {
         Materia novamateria = persistencia.consultaNome(materia.getNome());
-        if (novamateria == null){
+        if (novamateria == null) {
             novamateria = inserirMateria(materia);
         }
         return novamateria;
     }
 
-    public Materia consultar(int id){ return persistencia.consultar(id); }
+    public Materia consultar(int id) {
+        return persistencia.consultar(id);
+    }
 
-    public Materia consultarNome(String nome){
+    public Materia consultarNome(String nome) {
         return persistencia.consultaNome(nome);
     }
 
-    public boolean verificaExistencia(String nome){
-        Boolean flag = false;
-        if(persistencia.consultaNome(nome) != null){
-            flag = true;
-        }
-        return flag;
+    public ArrayList<String> retornaLista(String nome) {
+        return persistencia.retornaListaMaterias(nome);
     }
 
 

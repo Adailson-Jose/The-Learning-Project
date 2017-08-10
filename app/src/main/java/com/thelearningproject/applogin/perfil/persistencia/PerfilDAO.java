@@ -78,7 +78,7 @@ public final class PerfilDAO {
         return perfil;
     }
 
-    public void alterarPerfil(Perfil perfil){
+    public void alterarPerfil(Perfil perfil) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();

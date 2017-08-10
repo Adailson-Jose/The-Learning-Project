@@ -59,7 +59,7 @@ public final class PerfilServices {
         persistencia.alterarPerfil(perfil);
     }
 
-    private Perfil consulta(int id){
+    private Perfil consulta(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
         perfil.setPessoa(pessoa);
@@ -70,76 +70,77 @@ public final class PerfilServices {
         return perfil;
     }
 
-    public void insereHabilidade(Perfil perfil, Materia materia) throws UsuarioException{
-        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.HABILIDADE);
-        conexaoHabilidade.insereConexao(perfil.getId(),materia.getId());
+    public void insereHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
+        verificaExistencia(perfil, materia, tipoConexao.HABILIDADE);
+        conexaoHabilidade.insereConexao(perfil.getId(), materia.getId());
     }
 
     public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
-        verificaExistencia(perfil.getId(),materia.getId(),tipoConexao.NECESSIDADE);
-        conexaoNecessidade.insereConexao(perfil.getId(),materia.getId());
+        verificaExistencia(perfil, materia, tipoConexao.NECESSIDADE);
+        conexaoNecessidade.insereConexao(perfil.getId(), materia.getId());
     }
 
-    public void deletarHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
-        conexaoHabilidade.removerConexao(perfil.getId(),materia.getId());
+    public void deletarHabilidade(Perfil perfil, Materia materia) {
+        conexaoHabilidade.removerConexao(perfil.getId(), materia.getId());
     }
 
-    public void deletarNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
-        conexaoNecessidade.removerConexao(perfil.getId(),materia.getId());
+    public void deletarNecessidade(Perfil perfil, Materia materia) {
+        conexaoNecessidade.removerConexao(perfil.getId(), materia.getId());
     }
 
-    public ArrayList<Perfil> listarPerfil(Materia materia){
+    public ArrayList<Perfil> listarPerfil(Materia materia) {
         ArrayList<Perfil> usuarios = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());
-        for (int id:listaIds){
+        for (int id : listaIds) {
             usuarios.add(consulta(id));
         }
         return usuarios;
     }
 
-    public ArrayList<Materia> listarHabilidade(Perfil perfil){
+    public ArrayList<Materia> listarHabilidade(Perfil perfil) {
         ArrayList<Materia> listaMateria = new ArrayList<>();
         ArrayList<Integer> lista = conexaoHabilidade.retornaMateria(perfil.getId());
 
         if (!lista.isEmpty()) {
-            for(int id:lista){
+            for (int id : lista) {
                 listaMateria.add(materiaServices.consultar(id));
             }
         }
         return listaMateria;
     }
-    public ArrayList<Materia> listarNecessidade(Perfil perfil){
+
+    public ArrayList<Materia> listarNecessidade(Perfil perfil) {
         ArrayList<Materia> listaNecessidade = new ArrayList<>();
         ArrayList<Integer> lista = conexaoNecessidade.retornaMateria(perfil.getId());
 
         if (!lista.isEmpty()) {
-            for(int id:lista){
+            for (int id : lista) {
                 listaNecessidade.add(materiaServices.consultar(id));
             }
         }
         return listaNecessidade;
     }
 
-    private void verificaExistencia(int perfil, int materia, tipoConexao tipo) throws UsuarioException{
-        if (tipo == tipoConexao.HABILIDADE){
-            if (conexaoHabilidade.verificaTupla(perfil,materia)){
+    private void verificaExistencia(Perfil perfil, Materia materia, tipoConexao tipo) throws UsuarioException {
+        if (tipo == tipoConexao.HABILIDADE) {
+            if (perfil.getHabilidades().contains(materia)) {
                 throw new UsuarioException("Você já cadastrou essa habilidade");
             }
-        }else{
-            if (conexaoNecessidade.verificaTupla(perfil, materia)) {
+        } else {
+            if (perfil.getNecessidades().contains(materia)) {
                 throw new UsuarioException("Você já cadastrou essa necessidade");
             }
         }
     }
 
     private void montaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {
-        for(int i:habilidadeId){
+        for (int i : habilidadeId) {
             perfil.addHabilidade(materiaServices.consultar(i));
         }
     }
 
     private void montaListaNecessidades(Perfil perfil, ArrayList<Integer> necessidadeId) {
-        for(int j:necessidadeId){
+        for (int j : necessidadeId) {
             perfil.addNecessidade(materiaServices.consultar(j));
         }
     }
@@ -151,7 +152,7 @@ public final class PerfilServices {
         ArrayList<Materia> lista = perfil.getHabilidades();
 
         String prefix = "";
-        for (Materia mat: lista) {
+        for (Materia mat : lista) {
             sb.append(prefix);
             prefix = ", ";
             sb.append(mat.getNome());
@@ -166,7 +167,7 @@ public final class PerfilServices {
         ArrayList<Materia> lista = perfil.getNecessidades();
 
         String prefix = "";
-        for (Materia mat: lista) {
+        for (Materia mat : lista) {
             sb.append(prefix);
             prefix = ", ";
             sb.append(mat.getNome());

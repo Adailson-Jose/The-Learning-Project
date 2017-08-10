@@ -49,8 +49,8 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String IDPERFIL_BUSCA = PERFIL;
     private static final String MATERIA_BUSCA = MATERIA;
 
-    public static synchronized Banco getInstancia(Context context){
-        if(instancia == null){
+    public static synchronized Banco getInstancia(Context context) {
+        if (instancia == null) {
             instancia = new Banco(context.getApplicationContext());
         }
         return instancia;
@@ -71,7 +71,7 @@ public final class Banco extends SQLiteOpenHelper {
         String dadosBusca = "CREATE TABLE " + TABELA_DADOS_BUSCA + " (" +
                 IDPERFIL_BUSCA + " INTEGER, " +
                 MATERIA_BUSCA + " VARCHAR, " +
-                "PRIMARY KEY(" +IDPERFIL_BUSCA +", "+MATERIA_BUSCA+"))";
+                "PRIMARY KEY(" + IDPERFIL_BUSCA + ", " + MATERIA_BUSCA + "))";
 
         String pessoas = "CREATE TABLE " + TABELA_PESSOAS + "(" +
                 ID_PESSOA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -87,12 +87,12 @@ public final class Banco extends SQLiteOpenHelper {
         String habilidades = "CREATE TABLE " + TABELA_CONEXAO_HABILIDADES + " (" +
                 IDPERFIL_HABILIDADE + " INTEGER, " +
                 IDMATERIA_HABILIDADE + " INTEGER, " +
-                "PRIMARY KEY(" +IDPERFIL_HABILIDADE +", "+IDMATERIA_HABILIDADE+"))";
+                "PRIMARY KEY(" + IDPERFIL_HABILIDADE + ", " + IDMATERIA_HABILIDADE + "))";
 
         String necessidades = "CREATE TABLE " + TABELA_CONEXAO_NECESSIDADES + " (" +
                 IDPERFIL_NECESSIDADE + " INTEGER, " +
                 IDMATERIA_NECESSIDADE + " INTEGER, " +
-                "PRIMARY KEY(" +IDPERFIL_NECESSIDADE +", "+IDMATERIA_NECESSIDADE+"))";
+                "PRIMARY KEY(" + IDPERFIL_NECESSIDADE + ", " + IDMATERIA_NECESSIDADE + "))";
 
         String materias = "CREATE TABLE " + TABELA_MATERIAS + "(" +
                 ID_MATERIA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

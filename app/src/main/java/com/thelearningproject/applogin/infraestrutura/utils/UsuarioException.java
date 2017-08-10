@@ -5,7 +5,7 @@ package com.thelearningproject.applogin.infraestrutura.utils;
  */
 
 public class UsuarioException extends Exception {
-    public UsuarioException(String erro){
+    public UsuarioException(String erro) {
         super(erro);
     }
 }

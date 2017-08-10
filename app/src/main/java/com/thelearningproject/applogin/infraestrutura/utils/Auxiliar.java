@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class Auxiliar {
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        if (activity.getCurrentFocus().getWindowToken() != null) {
+        if (activity.getCurrentFocus() != null && activity.getCurrentFocus().getWindowToken() != null) {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
@@ -31,16 +31,18 @@ public class Auxiliar {
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    public boolean aplicaPattern(String email){
+    public boolean aplicaPattern(String email) {
         Pattern pattern = Pattern.compile("^[A-Z0-9._%-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
         Matcher m = pattern.matcher(email);
 
         return m.matches();
 
     }
+
     public static void criarToast(Context context, String msg) {
-        Toast.makeText(context,msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
+
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo, String mensagem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(titulo);

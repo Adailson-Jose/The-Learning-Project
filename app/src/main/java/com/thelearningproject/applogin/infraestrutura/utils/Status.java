@@ -9,10 +9,11 @@ public enum Status {
 
     private int valor;
 
-    Status(int i){
+    Status(int i) {
         this.valor = i;
     }
-    public int getValor(){
+
+    public int getValor() {
         return this.valor;
     }
 

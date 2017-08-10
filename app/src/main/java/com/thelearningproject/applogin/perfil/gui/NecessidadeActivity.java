@@ -1,8 +1,8 @@
 package com.thelearningproject.applogin.perfil.gui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -39,7 +39,7 @@ public class NecessidadeActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validaNecessidade(Materia materia){
+    private Boolean validaNecessidade(Materia materia) {
         Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
@@ -57,11 +57,11 @@ public class NecessidadeActivity extends AppCompatActivity {
         materia.setNome(necessidade);
 
         try {
-            if(validaNecessidade(materia)) {
+            if (validaNecessidade(materia)) {
                 executarCadastroNecessidade(materia);
             }
 
-        } catch (UsuarioException e){
+        } catch (UsuarioException e) {
             Auxiliar.criarToast(this, e.getMessage());
         }
     }

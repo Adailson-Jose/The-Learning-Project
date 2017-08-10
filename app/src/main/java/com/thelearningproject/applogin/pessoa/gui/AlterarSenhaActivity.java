@@ -45,7 +45,7 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void executarAlterar(Usuario usuario){
+    private void executarAlterar(Usuario usuario) {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
         negocioUsuario.alterarSenhaUsuario(usuario);
 
@@ -61,12 +61,12 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         finish();
     }
 
-    public void alterar(){
+    public void alterar() {
         String senha = alterarSenha.getText().toString();
         Usuario usuario = sessao.getPessoa().getUsuario();
         usuario.setSenha(senha);
 
-        if(validaAlterar(usuario)){
+        if (validaAlterar(usuario)) {
             executarAlterar(usuario);
         }
     }

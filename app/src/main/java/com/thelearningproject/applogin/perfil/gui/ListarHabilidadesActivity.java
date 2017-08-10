@@ -16,14 +16,13 @@ import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
-import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
+import com.thelearningproject.applogin.infraestrutura.utils.MateriaAdapter;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
 public class ListarHabilidadesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
     private ControladorSessao sessao;
-    private ArrayList<String> lista = new ArrayList<>();
     private PerfilServices perfilNegocio;
     private MateriaServices materiaNegocio;
     private int idposicao;
@@ -55,22 +54,15 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
     }
 
     private void listarHabilidades() {
-        lista.clear();
         ArrayList<Materia> listaMateria = perfilNegocio.listarHabilidade(sessao.getPerfil());
 
         ListView listView1 = (ListView) findViewById(R.id.listaHabilidades);
 
-        ArrayAdapter<String> adapterListaHabilidade = new ArrayAdapter<>(
-                this,
-                android.R.layout.simple_list_item_1,
-                lista);
+        ArrayAdapter adaptador = new MateriaAdapter(this, listaMateria);
 
-        listView1.setAdapter(adapterListaHabilidade);
+        listView1.setAdapter(adaptador);
 
-        for (Materia mat : listaMateria) {
-            lista.add(mat.getNome());
-            adapterListaHabilidade.notifyDataSetChanged();
-        }
+        adaptador.notifyDataSetChanged();
 
         listView1.setOnItemClickListener(this);
     }
@@ -79,7 +71,7 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         idposicao = position;
         adapterView = parent;
-        AlertDialog alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarHabilidadesActivity.this, "Remover habilidade" ,"Deseja remover esta habilidade?");
+        AlertDialog alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarHabilidadesActivity.this, "Remover habilidade", "Deseja remover esta habilidade?");
         alertaExcluir.show();
     }
 
@@ -87,14 +79,10 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Adap
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                String mat = adapterView.getItemAtPosition(idposicao).toString();
-                try {
-                    perfilNegocio.deletarHabilidade(sessao.getPerfil(), materiaNegocio.consultarNome(mat));
-                    listarHabilidades();
-                    Auxiliar.criarToast(this, "Habilidade removida com sucesso!!!!");
-                } catch (UsuarioException e) {
-                    Auxiliar.criarToast(this, e.getMessage());
-                }
+                Materia mat = (Materia) adapterView.getItemAtPosition(idposicao);
+                perfilNegocio.deletarHabilidade(sessao.getPerfil(), materiaNegocio.consultar(mat.getId()));
+                listarHabilidades();
+                Auxiliar.criarToast(this, "Habilidade removida com sucesso!!!!");
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
                 dialog.dismiss();

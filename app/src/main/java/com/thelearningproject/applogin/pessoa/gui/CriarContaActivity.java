@@ -8,13 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.infraestrutura.gui.TermosActivity;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
-import com.thelearningproject.applogin.infraestrutura.gui.TermosActivity;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
-import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
@@ -36,16 +36,16 @@ public class CriarContaActivity extends Activity {
         entradaSenha = (EditText) findViewById(R.id.senhaEntradaID);
         Button botaoContinuar = (Button) findViewById(R.id.botaoCadastroID);
 
-        botaoContinuar.setOnClickListener( new View.OnClickListener(){
+        botaoContinuar.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 processoCadastro();
-             }
+            }
         });
     }
 
-    private boolean validaCampos(Pessoa pessoa){
+    private boolean validaCampos(Pessoa pessoa) {
         boolean validacao = true;
 
         if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
@@ -64,7 +64,7 @@ public class CriarContaActivity extends Activity {
         return validacao;
     }
 
-    private void processoCadastro(){
+    private void processoCadastro() {
         String nome = entradaNome.getText().toString();
         String email = entradaEmail.getText().toString();
         String senha = entradaSenha.getText().toString();
@@ -83,12 +83,12 @@ public class CriarContaActivity extends Activity {
                 executarCadastro(pessoa);
             }
 
-        } catch (UsuarioException e){
+        } catch (UsuarioException e) {
             entradaEmail.setError("E-mail já cadastrado");
         }
     }
 
-    private void executarCadastro(Pessoa pessoa) throws UsuarioException{
+    private void executarCadastro(Pessoa pessoa) throws UsuarioException {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
 
@@ -110,7 +110,6 @@ public class CriarContaActivity extends Activity {
         startActivity(entidade);
         finish();
     }
-
 
 
 }

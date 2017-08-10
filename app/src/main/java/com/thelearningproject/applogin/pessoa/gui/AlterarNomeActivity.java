@@ -46,7 +46,7 @@ public class AlterarNomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void executarAlterar(Pessoa pessoa){
+    private void executarAlterar(Pessoa pessoa) {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
 
         negocioPessoa.alterarPessoa(pessoa);
@@ -61,14 +61,14 @@ public class AlterarNomeActivity extends AppCompatActivity {
         finish();
     }
 
-    public void alterar(){
+    public void alterar() {
         String nome = alterarNome.getText().toString();
 
         Pessoa pessoa = sessao.getPessoa();
 
         pessoa.setNome(nome);
 
-        if(validaAlterar(pessoa)){
+        if (validaAlterar(pessoa)) {
             executarAlterar(pessoa);
         }
     }

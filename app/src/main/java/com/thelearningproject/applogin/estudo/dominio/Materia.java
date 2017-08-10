@@ -24,16 +24,16 @@ public class Materia {
         this.nome = novoNome;
     }
 
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         boolean r = false;
-        if(o instanceof Materia){
+        if (o instanceof Materia) {
             Materia that = (Materia) o;
-            r = (this.getId() == that.getId());
+            r = (this.getNome().equals(that.getNome()));
         }
         return r;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return (Integer.toString(this.getId()).hashCode());
     }
 

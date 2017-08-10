@@ -67,17 +67,17 @@ public class AlterarEmailActivity extends AppCompatActivity {
         finish();
     }
 
-    public void alterar(){
+    public void alterar() {
         String email = alterarEmail.getText().toString();
         Usuario usuario = sessao.getPessoa().getUsuario();
         usuario.setEmail(email);
 
         try {
-            if(validaAlterar(usuario)){
+            if (validaAlterar(usuario)) {
                 executarAlterar(usuario);
             }
 
-        } catch (UsuarioException e){
+        } catch (UsuarioException e) {
             alterarEmail.setError("E-mail já cadastrado");
         }
     }

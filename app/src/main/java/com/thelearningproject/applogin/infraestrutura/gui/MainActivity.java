@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
         if (sessao.verificaLogin()) {
             finish();
-
         } else {
             exibir();
         }
@@ -121,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
         sessao.setPessoa(pessoa);
 
     }
+
     private void exibir() {
         PerfilServices negocioperfil = PerfilServices.getInstancia(getBaseContext());
 
@@ -154,13 +154,15 @@ public class MainActivity extends AppCompatActivity {
             actionBar.setTitle(text);
         }
     }
+
     private void monitorarPilha(FragmentManager fragmento) {
-        if(fragmento.getBackStackEntryCount() >= TRES){
+        if (fragmento.getBackStackEntryCount() >= TRES) {
             fragmento.popBackStack();
         }
     }
-    private void alterarFragment(String frag, FragmentTransaction ft, Fragment f){
-        if (!frag.equals(this.ultimoFrag)){
+
+    private void alterarFragment(String frag, FragmentTransaction ft, Fragment f) {
+        if (!frag.equals(this.ultimoFrag)) {
             ft.replace(R.id.container, f, frag);
             ft.addToBackStack("pilha");
             monitorarPilha(fm);
@@ -168,13 +170,16 @@ public class MainActivity extends AppCompatActivity {
             ultimoFrag = frag;
         }
     }
-    private MainPerfilFragment getPerfilFragment(){
+
+    private MainPerfilFragment getPerfilFragment() {
         return new MainPerfilFragment();
     }
-    private MainBuscaFragment getBuscaFragment(){
+
+    private MainBuscaFragment getBuscaFragment() {
         return new MainBuscaFragment();
     }
-    private MainRecomendacoesFragment getRecomFragment(){
+
+    private MainRecomendacoesFragment getRecomFragment() {
         return new MainRecomendacoesFragment();
     }
 }

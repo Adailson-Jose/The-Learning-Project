@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
 
+import java.util.ArrayList;
+
 /**
  * Criado por Nicollas em 25/07/2017.
  */
@@ -21,8 +23,8 @@ public final class MateriaDAO {
     private static final String ID_MATERIA = "id";
     private static final String NOME_MATERIA = "nome";
 
-    public static synchronized MateriaDAO getInstancia(Context context){
-        if(instancia == null){
+    public static synchronized MateriaDAO getInstancia(Context context) {
+        if (instancia == null) {
             instancia = new MateriaDAO(context.getApplicationContext());
         }
         return instancia;
@@ -41,8 +43,8 @@ public final class MateriaDAO {
 
     }
 
-    public Materia consultar(int id){
-        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, null, ID_MATERIA +" = ?", new String[]{Integer.toString(id)},null,null,null);
+    public Materia consultar(int id) {
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, null, ID_MATERIA + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Materia materia = null;
         if (cursor.moveToFirst()) {
             materia = new Materia();
@@ -53,8 +55,8 @@ public final class MateriaDAO {
         return materia;
     }
 
-    public Materia consultaNome(String nome){
-        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, null, "UPPER("+ NOME_MATERIA +") = ?", new String[]{nome.toUpperCase()},null,null,null);
+    public Materia consultaNome(String nome) {
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, null, "UPPER(" + NOME_MATERIA + ") = ?", new String[]{nome.toUpperCase()}, null, null, null);
         Materia materia = null;
         if (cursor.moveToFirst()) {
             materia = new Materia();
@@ -63,5 +65,15 @@ public final class MateriaDAO {
         }
         cursor.close();
         return materia;
+    }
+
+    public ArrayList<String> retornaListaMaterias(String nome) {
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, new String[]{NOME_MATERIA}, "UPPER(" + NOME_MATERIA + ") LIKE ?", new String[]{"%" + nome.toUpperCase() + "%"}, null, null, null);
+        ArrayList<String> listaMateria = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            listaMateria.add(cursor.getString(cursor.getColumnIndex(NOME_MATERIA)));
+        }
+        cursor.close();
+        return listaMateria;
     }
 }

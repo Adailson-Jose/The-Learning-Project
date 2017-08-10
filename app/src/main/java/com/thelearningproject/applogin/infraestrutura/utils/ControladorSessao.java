@@ -4,9 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+
+import com.thelearningproject.applogin.infraestrutura.gui.LoginActivity;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
-import com.thelearningproject.applogin.infraestrutura.gui.LoginActivity;
 
 /**
  * Criado por Nicollas on 20/07/2017.
@@ -26,14 +27,15 @@ public final class ControladorSessao {
     private static final String ID_USUARIO = "ID_Usuario";
     private boolean sessaoAtiva;
 
-    public static synchronized ControladorSessao getInstancia(Context context){
-        if(instancia == null){
+    public static synchronized ControladorSessao getInstancia(Context context) {
+        if (instancia == null) {
             instancia = new ControladorSessao(context.getApplicationContext());
-        } return instancia;
+        }
+        return instancia;
     }
 
-    public boolean verificaLogin(){
-        if(!verificaSessao()){
+    public boolean verificaLogin() {
+        if (!verificaSessao()) {
             Intent intent = new Intent(contexto, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -44,7 +46,7 @@ public final class ControladorSessao {
         return false;
     }
 
-    public void encerraSessao(){
+    public void encerraSessao() {
         editor.clear();
         editor.putBoolean(USUARIO_LOGADO, false);
         editor.commit();
@@ -58,21 +60,21 @@ public final class ControladorSessao {
         contexto.startActivity(intent);
     }
 
-    private ControladorSessao(Context context){
+    private ControladorSessao(Context context) {
         this.contexto = context;
         this.sessaoAtiva = false;
-        preferencias = this.contexto.getSharedPreferences(PREFERENCIA,Context.MODE_PRIVATE);
+        preferencias = this.contexto.getSharedPreferences(PREFERENCIA, Context.MODE_PRIVATE);
         editor = preferencias.edit();
         editor.apply();
     }
 
-    public void salvarSessao(){
-        editor.putBoolean(USUARIO_LOGADO,true);
-        editor.putInt(ID_USUARIO,pessoa.getUsuario().getId());
+    public void salvarSessao() {
+        editor.putBoolean(USUARIO_LOGADO, true);
+        editor.putInt(ID_USUARIO, pessoa.getUsuario().getId());
         editor.commit();
     }
 
-    public void iniciaSessao(){
+    public void iniciaSessao() {
         this.sessaoAtiva = true;
     }
 
@@ -96,7 +98,7 @@ public final class ControladorSessao {
         return this.sessaoAtiva;
     }
 
-    public int retornaIdUsuario(){
+    public int retornaIdUsuario() {
         return preferencias.getInt(ID_USUARIO, 0);
     }
 

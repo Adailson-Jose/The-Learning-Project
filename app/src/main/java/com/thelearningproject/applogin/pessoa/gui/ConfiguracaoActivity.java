@@ -24,7 +24,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
     private AlertDialog alertExclusao;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracao);
         setTitle("Configurações");
@@ -34,7 +34,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir Conta", "Deseja realmente excluir sua conta?");
 
         String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome)};
-        String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail),getApplicationContext().getString(R.string.alterarSenha)};
+        String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail), getApplicationContext().getString(R.string.alterarSenha)};
         String[] listaOpOutras = {getApplicationContext().getString(R.string.excluir)};
 
         ListView listView1 = (ListView) findViewById(R.id.listaConfigPerfil);
@@ -77,7 +77,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         }
     }
 
-    private void desativar(){
+    private void desativar() {
         UsuarioServices negocio = UsuarioServices.getInstancia(getBaseContext());
         negocio.deletarUsuario(session.getPessoa().getUsuario());
         Auxiliar.criarToast(ConfiguracaoActivity.this, "Usuário deletado com sucesso");

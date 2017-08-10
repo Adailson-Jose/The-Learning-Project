@@ -60,7 +60,7 @@ public class LoginActivity extends Activity {
     private boolean validaCampos(Usuario usuario) {
         boolean validacao = true;
 
-        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
+        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0) {
             entradaLogin.setError("Email inválido");
             validacao = false;
         }

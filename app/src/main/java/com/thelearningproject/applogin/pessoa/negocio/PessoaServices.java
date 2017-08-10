@@ -27,22 +27,23 @@ public class PessoaServices {
     }
 
     public void inserirPessoa(Pessoa pessoa) {
-        if(validaAlterarPessoa(pessoa.getUsuario().getId())){
+        if (validaAlterarPessoa(pessoa.getUsuario().getId())) {
             Pessoa pessoaAntiga = retornaPessoa(pessoa.getUsuario().getId());
             pessoaAntiga.setNome(pessoa.getNome());
             alterarPessoa(pessoaAntiga);
-        }else{
+        } else {
             persistencia.inserir(pessoa);
         }
 
     }
-    private boolean validaAlterarPessoa(int usuarioId){
+
+    private boolean validaAlterarPessoa(int usuarioId) {
         Boolean validacao = false;
-        if(retornaPessoa(usuarioId)!= null){
+        if (retornaPessoa(usuarioId) != null) {
             validacao = true;
 
         }
-        return  validacao;
+        return validacao;
     }
 
     public void alterarPessoa(Pessoa pessoa) {
@@ -53,7 +54,7 @@ public class PessoaServices {
         return persistencia.retornaPessoa(idUsuario);
     }
 
-    public Pessoa consulta(int id){
+    public Pessoa consulta(int id) {
         return persistencia.consultar(id);
     }
 

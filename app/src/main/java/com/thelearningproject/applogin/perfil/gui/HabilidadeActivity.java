@@ -38,7 +38,7 @@ public class HabilidadeActivity extends AppCompatActivity {
         });
     }
 
-    private Boolean validaHabilidade(Materia materia){
+    private Boolean validaHabilidade(Materia materia) {
         Boolean validacao = true;
 
         if (materia.getNome() == null || materia.getNome().trim().length() == 0) {
@@ -56,11 +56,11 @@ public class HabilidadeActivity extends AppCompatActivity {
         materia.setNome(habilidade);
 
         try {
-            if(validaHabilidade(materia)) {
+            if (validaHabilidade(materia)) {
                 executarCadastroHabilidade(materia);
             }
 
-        } catch (UsuarioException e){
+        } catch (UsuarioException e) {
             Auxiliar.criarToast(this, e.getMessage());
         }
     }

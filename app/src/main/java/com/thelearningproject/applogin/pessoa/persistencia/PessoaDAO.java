@@ -80,7 +80,7 @@ public final class PessoaDAO {
         return pessoa;
     }
 
-    public void alterarPessoa(Pessoa pessoa){
+    public void alterarPessoa(Pessoa pessoa) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
         ContentValues values = new ContentValues();

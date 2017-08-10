@@ -48,20 +48,24 @@ public class Perfil {
         habilidades.add(nova);
     }
 
-    public ArrayList<Materia> getNecessidades() { return necessidades; }
+    public ArrayList<Materia> getNecessidades() {
+        return necessidades;
+    }
 
-    public void addNecessidade(Materia nova) { necessidades.add(nova); }
+    public void addNecessidade(Materia nova) {
+        necessidades.add(nova);
+    }
 
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         boolean r = false;
-        if(o instanceof Perfil){
+        if (o instanceof Perfil) {
             Perfil that = (Perfil) o;
             r = (this.getId() == that.getId());
         }
         return r;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return (Integer.toString(this.getId()).hashCode());
     }
 }
