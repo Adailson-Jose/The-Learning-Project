@@ -42,14 +42,12 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         ArrayList<Materia> listahabilidades = perfil.getHabilidades();
         ArrayList<Materia> listanecessidades = perfil.getNecessidades();
         String prefix = "";
-        sb1.append("Habilidades: ");
         for (Materia m : listahabilidades) {
             sb1.append(prefix);
             prefix = ", ";
             sb1.append(m.getNome());
         }
         prefix = "";
-        sb2.append("Necessidades: ");
         for (Materia m : listanecessidades) {
             sb2.append(prefix);
             prefix = ", ";

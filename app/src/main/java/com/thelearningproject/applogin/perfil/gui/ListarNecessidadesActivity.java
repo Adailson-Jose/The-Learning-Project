@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -17,17 +16,16 @@ import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.MateriaAdapter;
+import com.thelearningproject.applogin.perfil.dominio.IMateria;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
-public class ListarNecessidadesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener {
+public class ListarNecessidadesActivity extends AppCompatActivity implements DialogInterface.OnClickListener, IMateria {
     private ControladorSessao sessao;
     private PerfilServices perfilNegocio;
     private MateriaServices materiaNegocio;
-    private AlertDialog alertaExcluir;
-    private int idposicao;
-    private AdapterView adapterView;
+    private Materia materiaAtual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,39 +54,30 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Ada
 
     private void listarNecessidades() {
         ArrayList<Materia> listaMateria = perfilNegocio.listarNecessidade(sessao.getPerfil());
-
         ListView listView1 = (ListView) findViewById(R.id.listaNecessidades);
-
-        ArrayAdapter adaptador = new MateriaAdapter(
-                this, listaMateria);
-
+        ArrayAdapter adaptador = new MateriaAdapter(this, listaMateria, this);
         listView1.setAdapter(adaptador);
-
         adaptador.notifyDataSetChanged();
-
-        listView1.setOnItemClickListener(this);
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        idposicao = position;
-        adapterView = parent;
-        alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarNecessidadesActivity.this, "Remover necessidade", "Deseja remover esta necessidade?");
-        alertaExcluir.show();
     }
 
     @Override
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                Materia mat = (Materia) adapterView.getItemAtPosition(idposicao);
-                perfilNegocio.deletarNecessidade(sessao.getPerfil(), materiaNegocio.consultar(mat.getId()));
+                perfilNegocio.deletarNecessidade(sessao.getPerfil(), materiaNegocio.consultar(this.materiaAtual.getId()));
                 listarNecessidades();
-                Auxiliar.criarToast(this, "Necessidade removida com sucesso!!!!!!");
+                Auxiliar.criarToast(this, "Necessidade removida com sucesso");
                 break;
             case DialogInterface.BUTTON_NEGATIVE:
-                alertaExcluir.dismiss();
+                dialog.dismiss();
                 break;
         }
+    }
+
+    @Override
+    public void excluirMateria(Materia mat) {
+        this.materiaAtual = mat;
+        AlertDialog alertaExcluir = Auxiliar.criarDialogConfirmacao(ListarNecessidadesActivity.this, "Remover necessidade", "Deseja remover esta necessidade?");
+        alertaExcluir.show();
     }
 }
