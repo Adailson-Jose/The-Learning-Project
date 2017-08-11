@@ -43,6 +43,7 @@
     <string name="cadastrarNecessidade">Insira uma necessidade sua</string>
     <string name="cadastrarNovaHabilidade">Insira uma nova habilidade</string>
     <string name="cadastrarNovaNecessidade">Insira uma nova necessidade</string>
+    <string name="botaoExcluir">Botão Excluir</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
