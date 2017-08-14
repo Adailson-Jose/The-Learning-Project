@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState != null) {
             mSelectedItem = savedInstanceState.getInt(SELECTED_ITEM, 0);
             selectedItem = mBottomNav.getMenu().findItem(mSelectedItem);
+
         } else {
             MainRecomendacoesFragment frag1 = new MainRecomendacoesFragment();
             FragmentTransaction ft = fm.beginTransaction();
@@ -127,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         Perfil perfil = negocioperfil.retornaPerfil(sessao.getPessoa().getId());
         perfil.setPessoa(sessao.getPessoa());
         sessao.setPerfil(perfil);
+
     }
 
     private void selectFragment(MenuItem item) {
@@ -140,6 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 alterarFragment("1", ft, getBuscaFragment());
                 break;
             case R.id.menu_perfil:
+                Toast.makeText(this, sessao.getPerfil().getDescricao(), Toast.LENGTH_SHORT).show();
                 alterarFragment("2", ft, getPerfilFragment());
                 break;
         }

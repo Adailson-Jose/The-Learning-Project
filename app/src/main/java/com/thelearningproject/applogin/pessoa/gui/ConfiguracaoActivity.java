@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -30,10 +29,9 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         setTitle("Configurações");
 
         session = ControladorSessao.getInstancia(this.getApplicationContext());
+        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir conta", "Realmente deseja excluir sua conta?");
 
-        alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir Conta", "Deseja realmente excluir sua conta?");
-
-        String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome)};
+        String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome), getApplicationContext().getString(R.string.alterarDescricao)};
         String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail), getApplicationContext().getString(R.string.alterarSenha)};
         String[] listaOpOutras = {getApplicationContext().getString(R.string.excluir)};
 
@@ -89,22 +87,27 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         String opcao = String.valueOf(parent.getAdapter().getItem(position));
         switch (opcao) {
-            case "Alterar Nome":
-                Intent entidade = new Intent(ConfiguracaoActivity.this, AlterarNomeActivity.class);
-                entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(entidade);
-                break;
-            case "Alterar E-mail":
-                Intent entidade1 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
+            case "Alterar nome":
+                Intent entidade1 = new Intent(ConfiguracaoActivity.this, AlterarNomeActivity.class);
                 entidade1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade1);
                 break;
-            case "Alterar Senha":
-                Intent entidade2 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
+            case "Alterar descrição":
+                Intent entidade2 = new Intent(ConfiguracaoActivity.this, AlterarDescricaoActivity.class);
                 entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade2);
                 break;
-            case "Excluir Conta":
+            case "Alterar e-mail":
+                Intent entidade3 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
+                entidade3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade3);
+                break;
+            case "Alterar senha":
+                Intent entidade4 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
+                entidade4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade4);
+                break;
+            case "Excluir conta":
                 alertExclusao.show();
                 break;
         }

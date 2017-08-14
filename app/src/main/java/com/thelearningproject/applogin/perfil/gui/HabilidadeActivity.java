@@ -74,6 +74,9 @@ public class HabilidadeActivity extends AppCompatActivity {
         negocioperfil.insereHabilidade(perfil, novaMateria);
         perfil.addHabilidade(novaMateria);
 
+        sessao.getPerfil().setDescricao("Oi. Eu sou bom em " + materia.getNome() + ".");
+        negocioperfil.alterarPerfil(sessao.getPerfil());
+
         Auxiliar.criarToast(this, "Habilidade cadastrada com sucesso");
         Intent entidade = new Intent(HabilidadeActivity.this, NecessidadeActivity.class);
         entidade.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

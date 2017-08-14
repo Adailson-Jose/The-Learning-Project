@@ -10,7 +10,8 @@
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="25dp">
+        android:padding="25dp"
+        android:weightSum="1">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -24,10 +25,11 @@
         <TextView
             android:id="@+id/necessidade"
             style="@style/dicaCadastro"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:text="@string/dica1"
-            android:layout_marginTop="20dp" />
+            android:layout_weight="0.08" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_hab"

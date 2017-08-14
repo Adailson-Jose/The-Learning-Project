@@ -72,7 +72,5 @@ public class TermosActivity extends AppCompatActivity {
         perfil.setPessoa(sessao.getPessoa());
         negocioPerfil.inserirPerfil(perfil);
         sessao.setPerfil(negocioPerfil.retornaPerfil(sessao.getPessoa().getId()));
-
-        Auxiliar.criarToast(this, "Perfil cadastrado com sucesso");
     }
 }

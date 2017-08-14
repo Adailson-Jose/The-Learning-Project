@@ -1,8 +1,8 @@
 package com.thelearningproject.applogin.pessoa.gui;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -10,24 +10,29 @@ import android.widget.EditText;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 
-public class AlterarNomeActivity extends AppCompatActivity {
-    private EditText alterarNome;
+import java.util.ResourceBundle;
+
+public class AlterarDescricaoActivity extends AppCompatActivity {
+    private EditText alterarDescricao;
     private ControladorSessao sessao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_alterar_nome);
+        setContentView(R.layout.activity_alterar_descricao);
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        alterarNome = (EditText) findViewById(R.id.nomeID);
-        alterarNome.setText(sessao.getPessoa().getNome());
-        alterarNome.setSelection(alterarNome.getText().length());
+        alterarDescricao = (EditText) findViewById(R.id.descricaoID);
+        alterarDescricao.setText(sessao.getPerfil().getDescricao());
+        alterarDescricao.setSelection(alterarDescricao.getText().length());
         Auxiliar.abrirTeclado(this);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -46,35 +51,34 @@ public class AlterarNomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void executarAlterar(Pessoa pessoa) {
-        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
+    private void executarAlterar(Perfil perfil) {
+        PerfilServices negocioPerfil = PerfilServices.getInstancia(getApplicationContext());
+        negocioPerfil.alterarPerfil(perfil);
+        sessao.setPerfil(perfil);
 
-        negocioPessoa.alterarPessoa(pessoa);
+        Auxiliar.criarToast(this, "Descrição atualizada com sucesso.");
 
-        sessao.setPessoa(pessoa);
-
-        Auxiliar.criarToast(this, "Nome atualizado com sucesso");
-
-        Intent entidade = new Intent(AlterarNomeActivity.this, ConfiguracaoActivity.class);
+        Intent entidade = new Intent(AlterarDescricaoActivity.this, ConfiguracaoActivity.class);
         entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(entidade);
         finish();
     }
 
     public void alterar() {
-        String nome = alterarNome.getText().toString();
-        Pessoa pessoa = sessao.getPessoa();
-        pessoa.setNome(nome);
+        String descricao = alterarDescricao.getText().toString();
+        Perfil perfil = sessao.getPerfil();
 
-        if (validaAlterar(pessoa)) {
-            executarAlterar(pessoa);
+        perfil.setDescricao(descricao);
+
+        if (validaAlterar(perfil)) {
+            executarAlterar(perfil);
         }
     }
 
-    private Boolean validaAlterar(Pessoa pessoa) {
+    private Boolean validaAlterar(Perfil perfil) {
         Boolean validacao = true;
-        if (pessoa.getNome() == null || pessoa.getNome().trim().length() == 0) {
-            alterarNome.setError("Nome inválido");
+        if (perfil.getDescricao() == null || perfil.getDescricao().trim().length() == 0) {
+            alterarDescricao.setError("Descrição inválida");
             validacao = false;
         }
         return validacao;

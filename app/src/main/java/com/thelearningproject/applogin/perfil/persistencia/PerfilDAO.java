@@ -37,13 +37,14 @@ public final class PerfilDAO {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
         valores.put(PESSOA_PERFIL, perfil.getPessoa().getId());
+        valores.put(DESCRICAO_PERFIL, perfil.getDescricao());
 
         db.insert(TABELA_PERFIS, null, valores);
         db.close();
     }
 
     public Perfil retornaPerfil(int idPessoa) {
-        String[] colunas = {ID_PERFIL, PESSOA_PERFIL};
+        String[] colunas = {ID_PERFIL, PESSOA_PERFIL, DESCRICAO_PERFIL};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, PESSOA_PERFIL + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
         Perfil perfil = null;
         Pessoa pessoa;
@@ -51,8 +52,10 @@ public final class PerfilDAO {
         if (cursor.moveToFirst()) {
             perfil = new Perfil();
             pessoa = new Pessoa();
-            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA_PERFIL)));
+
             perfil.setId(cursor.getInt(cursor.getColumnIndex(ID_PERFIL)));
+            pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA_PERFIL)));
+            perfil.setDescricao(cursor.getString(cursor.getColumnIndex(DESCRICAO_PERFIL)));
             perfil.setPessoa(pessoa);
         }
 
