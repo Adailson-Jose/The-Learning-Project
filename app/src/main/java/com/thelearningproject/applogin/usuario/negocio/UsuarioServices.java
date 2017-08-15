@@ -19,6 +19,8 @@ public final class UsuarioServices {
     private static UsuarioServices instancia;
     private UsuarioDAO persistencia;
 
+    private static final int CONSTANTE_CRIPTOGRAFIA = 0xFF;
+
     private UsuarioServices(Context context) {
         this.persistencia = UsuarioDAO.getInstancia(context);
     }
@@ -114,7 +116,7 @@ public final class UsuarioServices {
 
         StringBuilder hexString = new StringBuilder();
         for (byte b : messageDigest) {
-            hexString.append(String.format("%02X", 0xFF & b));
+            hexString.append(String.format("%02X", CONSTANTE_CRIPTOGRAFIA & b));
         }
         return hexString.toString();
     }

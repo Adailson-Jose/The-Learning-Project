@@ -53,6 +53,7 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
         Materia materia = new Materia();
         materia.setNome(nome);
         materia = materiaServices.cadastraMateria(materia);
+
         try {
             if (validaCadastro(materia)) {
                 perfilServices.insereHabilidade(sessao.getPerfil(), materia);

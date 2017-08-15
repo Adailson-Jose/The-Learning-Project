@@ -31,7 +31,7 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Dial
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_habilidades);
-        setTitle("Minhas Habilidades");
+        setTitle("Minhas habilidades");
     }
 
     @Override

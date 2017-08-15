@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="android.app.default_searchable"
-            android:value=".infraestrutura.gui.BuscaActivity" />
-
+        <meta-data android:name="android.app.default_searchable"
+            android:value=".infraestrutura.gui.BuscaActivity"/>
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
             android:theme="@style/AppCompat.FullScreen">
@@ -80,6 +78,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
+        <activity android:name=".pessoa.gui.AlterarDescricaoActivity"></activity>
         <activity android:name=".pessoa.gui.RecuperarContaActivity" />
         <activity android:name=".pessoa.gui.ConfimaRecuperarActivity"></activity>
     </application>

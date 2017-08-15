@@ -6,7 +6,7 @@
     <string name="login">Entrar</string>
     <string name="logout">Sair</string>
     <string name="email">E-mail</string>
-    <string name="cadastrar">Criar nova conta</string>
+    <string name="cadastrar">Criar conta</string>
     <string name="texto">Somos uma plataforma de aprendizagem mútua.\n\n
         Aqui, todos são mestres em alguma coisa. Você vai aprender o que precisa e ensinar o que sabe.\n\n
         Vamos começar definindo as suas habilidades.</string>
@@ -15,12 +15,11 @@
     <string name="descricao">Descrição</string>
     <string name="habilidades">Habilidades</string>
     <string name="necessidades">Necessidades</string>
-    <string name="dica1">Chegou a hora de você definir uma habilidade. Escolha aquilo que você mais sabe e gostaria de compartilhar com as pessoas</string>
-    <string name="dica2">Agora diga o que você mais gostaria de aprender atualmente. Com o app, acharemos uma pessoa para te ensinar em segundos!</string>
+    <string name="dica1">O que você pode ensinar?</string>
+    <string name="dica2">O que você precisa aprender nesse momento?</string>
     <string name="dica3">Onde estuda? O que cursa?</string>
-    <string name="descricaoperfil">Descrição</string>
     <string name="alterar">Alterar</string>
-    <string name="excluir">Excluir Conta</string>
+    <string name="excluir">Excluir conta</string>
     <string name="voltar">Voltar</string>
     <string name="config">Configurações</string>
     <string name="bottom_nav_title1">Recomendações</string>
@@ -30,19 +29,21 @@
     <string name="sim">Sim</string>
     <string name="nao">Não</string>
     <string name="ok">OK</string>
-    <string name="alterarNome">Alterar Nome</string>
-    <string name="alterarEmail">Alterar E-mail</string>
-    <string name="alterarSenha">Alterar Senha</string>
-    <string name="novaSenha">Nova Senha</string>
-    <string name="confirmarNovaSenha">Confirmar Nova Senha</string>
+    <string name="alterarNome">Alterar nome</string>
+    <string name="alterarDescricao">Alterar descrição</string>
+    <string name="alterarEmail">Alterar e-mail</string>
+    <string name="alterarSenha">Alterar senha</string>
+    <string name="novaSenha">Nova senha</string>
+    <string name="confirmarNovaSenha">Confirmar nova senha</string>
     <string name="cancelar">Cancelar</string>
     <string name="copyright">The Learning © Project 2017</string>
     <string name="conta">Conta</string>
     <string name="outrasOpcoes">Outras opções</string>
-    <string name="cadastrarHabilidade">Insira uma habilidade sua</string>
-    <string name="cadastrarNecessidade">Insira uma necessidade sua</string>
+    <string name="cadastrarHabilidade">Insira uma habilidade</string>
+    <string name="cadastrarNecessidade">Insira uma necessidade</string>
     <string name="cadastrarNovaHabilidade">Insira uma nova habilidade</string>
     <string name="cadastrarNovaNecessidade">Insira uma nova necessidade</string>
+    <string name="botaoExcluir">Botão excluir</string>
     <string name="botaoExcluir">Botão Excluir</string>
     <string name="informativo">Digite o número de telefone vinculado a sua conta</string>
     <string name="titulo">Esqueceu sua senha?</string>

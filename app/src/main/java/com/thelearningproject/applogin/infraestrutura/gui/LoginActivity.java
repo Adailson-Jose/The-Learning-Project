@@ -25,7 +25,6 @@ import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 public class LoginActivity extends Activity {
     private ControladorSessao sessao;
-    private Auxiliar auxiliar = new Auxiliar();
     private EditText entradaLogin;
     private EditText entradaSenha;
     private Switch switchConectado;

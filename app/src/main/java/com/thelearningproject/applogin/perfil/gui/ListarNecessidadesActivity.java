@@ -31,7 +31,7 @@ public class ListarNecessidadesActivity extends AppCompatActivity implements Dia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listar_necessidades);
-        setTitle("Minhas Necessidades");
+        setTitle("Minhas necessidades");
     }
 
     @Override
