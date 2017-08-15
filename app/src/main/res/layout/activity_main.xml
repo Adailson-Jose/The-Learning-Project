@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.HomeActivity">
+    tools:contexto="com.thelearningproject.applogin.infraestrutura.gui.MainActivity">
 
     <FrameLayout
         android:id="@+id/container"

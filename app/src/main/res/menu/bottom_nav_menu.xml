@@ -4,7 +4,6 @@
         android:id="@+id/menu_recomendacoes"
         android:title="@string/bottom_nav_title1"
         android:icon="@drawable/ic_lightbulb_outline_black_24dp"
-
         />
 
     <item
