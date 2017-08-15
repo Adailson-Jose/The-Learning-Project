@@ -24,6 +24,7 @@ public class CriarContaActivity extends Activity {
     private EditText entradaNome;
     private EditText entradaEmail;
     private EditText entradaSenha;
+    private EditText entradaTelefone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class CriarContaActivity extends Activity {
         entradaNome = (EditText) findViewById(R.id.nomeEntradaID);
         entradaEmail = (EditText) findViewById(R.id.emailEntradaID);
         entradaSenha = (EditText) findViewById(R.id.senhaEntradaID);
+        entradaTelefone = (EditText) findViewById(R.id.telefoneEntradaID);
         Button botaoContinuar = (Button) findViewById(R.id.botaoCadastroID);
 
         botaoContinuar.setOnClickListener(new View.OnClickListener() {
@@ -60,6 +62,10 @@ public class CriarContaActivity extends Activity {
             entradaSenha.setError("Senha inválida");
             validacao = false;
         }
+        if (pessoa.getTelefone() == null || pessoa.getTelefone().trim().length() == 0) {
+            entradaTelefone.setError("Telefone inválido");
+            validacao = false;
+        }
 
         return validacao;
     }
@@ -68,6 +74,7 @@ public class CriarContaActivity extends Activity {
         String nome = entradaNome.getText().toString();
         String email = entradaEmail.getText().toString();
         String senha = entradaSenha.getText().toString();
+        String telefone = entradaTelefone.getText().toString();
 
         Usuario usuario = new Usuario();
         usuario.setEmail(email);
@@ -77,6 +84,8 @@ public class CriarContaActivity extends Activity {
         Pessoa pessoa = new Pessoa();
         pessoa.setNome(nome);
         pessoa.setUsuario(usuario);
+        pessoa.setTelefone(telefone);
+
 
         try {
             if (validaCampos(pessoa)) {

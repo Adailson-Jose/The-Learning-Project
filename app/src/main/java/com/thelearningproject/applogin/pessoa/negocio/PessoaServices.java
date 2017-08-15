@@ -50,6 +50,9 @@ public class PessoaServices {
         persistencia.alterarPessoa(pessoa);
     }
 
+    public Pessoa retornaPessoa(String telefone){
+        return  persistencia.retornaPessoa(telefone);
+    }
     public Pessoa retornaPessoa(int idUsuario) {
         return persistencia.retornaPessoa(idUsuario);
     }

@@ -21,6 +21,8 @@ public final class ControladorSessao {
 
     private Perfil perfil;
     private Pessoa pessoa;
+    private String codigo;
+
 
     private static final String PREFERENCIA = "Sessao";
     private static final String USUARIO_LOGADO = "Logado";
@@ -104,5 +106,13 @@ public final class ControladorSessao {
 
     public boolean verificaConexao() {
         return preferencias.getBoolean(USUARIO_LOGADO, false);
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 }

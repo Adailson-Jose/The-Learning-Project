@@ -14,6 +14,7 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.gui.CriarContaActivity;
+import com.thelearningproject.applogin.pessoa.gui.RecuperarContaActivity;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
@@ -38,6 +39,7 @@ public class LoginActivity extends Activity {
         entradaSenha = (EditText) findViewById(R.id.tSenha);
         Button botaoLogin = (Button) findViewById(R.id.btLogin);
         Button botaoCadastro = (Button) findViewById(R.id.cadastroID);
+        Button botaoEsqueci = (Button) findViewById(R.id.btEsqueci) ;
         switchConectado = (Switch) findViewById(R.id.manterSwitch);
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +56,12 @@ public class LoginActivity extends Activity {
             }
         });
 
+        botaoEsqueci.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(LoginActivity.this, RecuperarContaActivity.class));
+            }
+        });
     }
 
     private boolean validaCampos(Usuario usuario) {
@@ -117,6 +125,5 @@ public class LoginActivity extends Activity {
 
         }
     }
-
 
 }

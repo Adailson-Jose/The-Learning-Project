@@ -20,6 +20,7 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String ID_PESSOA = "id";
     private static final String NOME_PESSOA = "nome";
     private static final String USUARIO_PESSOA = "usuario";
+    private static final String TELEFONE_PESSOA = "telefone";
 
     private static final String TABELA_USUARIOS = "usuarios";
     private static final String ID_USUARIO = "id";
@@ -76,7 +77,8 @@ public final class Banco extends SQLiteOpenHelper {
         String pessoas = "CREATE TABLE " + TABELA_PESSOAS + "(" +
                 ID_PESSOA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NOME_PESSOA + " TEXT, " +
-                USUARIO_PESSOA + " INTEGER)";
+                USUARIO_PESSOA + " INTEGER, " +
+                TELEFONE_PESSOA + " TEXT)";
 
         String perfis = "CREATE TABLE " + TABELA_PERFIS + "(" +
                 ID_PERFIL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +

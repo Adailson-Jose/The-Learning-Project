@@ -43,6 +43,14 @@ public class Auxiliar {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
 
+    public static String geraCodigo(){
+        String codigo = "123";
+        return codigo;
+    }
+    public static void enviaSms(String codigo){
+
+    }
+
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo, String mensagem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(titulo);
