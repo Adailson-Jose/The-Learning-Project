@@ -84,7 +84,7 @@ public class AlterarEmailActivity extends AppCompatActivity {
 
     private Boolean validaAlterar(Usuario usuario) {
         Boolean validacao = true;
-        if (usuario.getEmail() == null || usuario.getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
+        if (!auxiliar.aplicaPattern(usuario.getEmail().toUpperCase())) {
             alterarEmail.setError("E-mail inválido");
             validacao = false;
         }

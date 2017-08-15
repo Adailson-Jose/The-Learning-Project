@@ -3,6 +3,7 @@ package com.thelearningproject.applogin.pessoa.gui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,7 +72,7 @@ public class RecuperarContaActivity extends AppCompatActivity {
         pessoa.setUsuario(usuario);
 
         String codigo = Auxiliar.geraCodigo();
-        Auxiliar.enviaSms(codigo);
+        enviaSms(pessoa.getTelefone(),codigo);
         sessao.setCodigo(codigo);
         sessao.setPessoa(pessoa);
         Intent entidade = new Intent(RecuperarContaActivity.this, ConfimaRecuperarActivity.class);
@@ -79,4 +80,8 @@ public class RecuperarContaActivity extends AppCompatActivity {
         startActivity(entidade);
     }
 
+    public void enviaSms(String telefone, String codigo){
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+codigo,null,null);
+    }
 }

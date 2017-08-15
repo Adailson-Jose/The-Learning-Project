@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.thelearningproject.applogin">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="android.app.default_searchable"
-            android:value=".infraestrutura.gui.BuscaActivity"/>
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value=".infraestrutura.gui.BuscaActivity" />
+
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
             android:theme="@style/AppCompat.FullScreen">
@@ -78,9 +82,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.AlterarDescricaoActivity"></activity>
+        <activity android:name=".pessoa.gui.AlterarDescricaoActivity" />
         <activity android:name=".pessoa.gui.RecuperarContaActivity" />
-        <activity android:name=".pessoa.gui.ConfimaRecuperarActivity"></activity>
+        <activity android:name=".pessoa.gui.ConfimaRecuperarActivity" />
+        <activity android:name=".pessoa.gui.AlterarTelefoneActivity"></activity>
     </application>
 
 </manifest>

@@ -31,7 +31,8 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         session = ControladorSessao.getInstancia(this.getApplicationContext());
         alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir conta", "Realmente deseja excluir sua conta?");
 
-        String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome), getApplicationContext().getString(R.string.alterarDescricao)};
+        String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome), getApplicationContext().getString(R.string.alterarDescricao),
+        getApplicationContext().getString(R.string.alterarTelefone)};
         String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail), getApplicationContext().getString(R.string.alterarSenha)};
         String[] listaOpOutras = {getApplicationContext().getString(R.string.excluir)};
 
@@ -97,15 +98,20 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
                 entidade2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade2);
                 break;
-            case "Alterar e-mail":
-                Intent entidade3 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
+            case "Alterar telefone":
+                Intent entidade3 = new Intent(ConfiguracaoActivity.this, AlterarTelefoneActivity.class);
                 entidade3.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade3);
                 break;
-            case "Alterar senha":
-                Intent entidade4 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
+            case "Alterar e-mail":
+                Intent entidade4 = new Intent(ConfiguracaoActivity.this, AlterarEmailActivity.class);
                 entidade4.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(entidade4);
+                break;
+            case "Alterar senha":
+                Intent entidade5 = new Intent(ConfiguracaoActivity.this, AlterarSenhaActivity.class);
+                entidade5.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(entidade5);
                 break;
             case "Excluir conta":
                 alertExclusao.show();

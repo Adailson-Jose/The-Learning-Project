@@ -3,12 +3,12 @@ package com.thelearningproject.applogin.pessoa.gui;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.thelearningproject.applogin.R;
-import com.thelearningproject.applogin.infraestrutura.gui.MainActivity;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 
@@ -29,7 +29,7 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sessao.setCodigo(Auxiliar.geraCodigo());
-                Auxiliar.enviaSms(sessao.getCodigo());
+                enviaSms(sessao.getPessoa().getTelefone(),sessao.getCodigo());
                 recreate();
 
             }
@@ -68,6 +68,10 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
             entradaCodigo.setError("Código não reconhecido");
 
         }
+    }
+    public void enviaSms(String telefone, String codigo){
+        SmsManager smsManager = SmsManager.getDefault();
+        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+codigo,null,null);
     }
 
 }

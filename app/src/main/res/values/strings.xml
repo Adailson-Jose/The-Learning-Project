@@ -48,9 +48,14 @@
     <string name="informativo">Digite o número de telefone vinculado a sua conta</string>
     <string name="titulo">Esqueceu sua senha?</string>
     <string name="telefone">Telefone</string>
+    <string name="alterarTelefone">Alterar telefone</string>
     <string name="dica">Mensagem enviada, pode levar alguns minutos até o recebimento da mesma.</string>
+    <string name="sms">Seu código de recuperação de conta é: </string>
+    <string name="codigoRecebido">Digite o código recebido</string>
+    <string name="enviarCodigo">Enviar novo código</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
 
 </resources>

@@ -54,7 +54,7 @@ public class CriarContaActivity extends Activity {
             entradaNome.setError("Nome inválido");
             validacao = false;
         }
-        if (pessoa.getUsuario().getEmail() == null || pessoa.getUsuario().getEmail().trim().length() == 0 || !auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
+        if (!auxiliar.aplicaPattern(pessoa.getUsuario().getEmail().toUpperCase())) {
             entradaEmail.setError("Email inválido");
             validacao = false;
         }
@@ -62,7 +62,7 @@ public class CriarContaActivity extends Activity {
             entradaSenha.setError("Senha inválida");
             validacao = false;
         }
-        if (pessoa.getTelefone() == null || pessoa.getTelefone().trim().length() == 0) {
+        if (!Auxiliar.telefonePattern(pessoa.getTelefone())) {
             entradaTelefone.setError("Telefone inválido");
             validacao = false;
         }

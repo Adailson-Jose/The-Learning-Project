@@ -39,6 +39,13 @@ public class Auxiliar {
 
     }
 
+    public static boolean telefonePattern(String telefone) {
+        Pattern pattern = Pattern.compile("^((\\+[1-9]{1,3}? ?)?[1-9]{2}? ?)?[9][6-9]\\d{3}-?\\d{4}$");
+        Matcher m = pattern.matcher(telefone);
+
+        return m.matches();
+    }
+
     public static void criarToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
@@ -46,9 +53,6 @@ public class Auxiliar {
     public static String geraCodigo(){
         String codigo = "123";
         return codigo;
-    }
-    public static void enviaSms(String codigo){
-
     }
 
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo, String mensagem) {

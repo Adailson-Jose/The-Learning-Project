@@ -12,14 +12,14 @@
         android:orientation="vertical"
         android:padding="25dp">
 
-        <!--<ImageView
+        <ImageView
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
             android:src="@drawable/logo"
-            android:contentDescription="@string/app_name"/>-->
+            android:contentDescription="@string/app_name"/>
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_email"
@@ -57,18 +57,18 @@
             android:id="@+id/manterSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:text="@string/manterConectado" />
 
         <Button
             android:id="@+id/btLogin"
             style="@style/btn_white"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginTop="5dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/login"
-            android:layout_marginTop="30dp" />
+            android:text="@string/login" />
 
 
         <View style="@style/Divider"/>
@@ -77,18 +77,22 @@
             android:id="@+id/cadastroID"
             style="@style/btn_white"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="34dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@color/textWhite"
             android:background="@drawable/button_stroke"
             android:text="@string/cadastrar"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="10dp" />
 
         <Button
             android:id="@+id/btEsqueci"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/btn_white"
+            android:layout_width="fill_parent"
+            android:layout_height="34dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="Esqueceu sua senha?" />
     </LinearLayout>
 
