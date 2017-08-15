@@ -23,6 +23,7 @@ import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
 
 import layout.MainBuscaFragment;
+import layout.MainInteracoesFragment;
 import layout.MainPerfilFragment;
 import layout.MainRecomendacoesFragment;
 
@@ -146,6 +147,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, sessao.getPerfil().getDescricao(), Toast.LENGTH_SHORT).show();
                 alterarFragment("2", ft, getPerfilFragment());
                 break;
+            case R.id.menu_interacoes:
+                alterarFragment("3", ft, getInteracoesFragment());
         }
 
         mSelectedItem = item.getItemId();
@@ -186,4 +189,6 @@ public class MainActivity extends AppCompatActivity {
     private MainRecomendacoesFragment getRecomFragment() {
         return new MainRecomendacoesFragment();
     }
+
+    private MainInteracoesFragment getInteracoesFragment() { return new MainInteracoesFragment(); }
 }
