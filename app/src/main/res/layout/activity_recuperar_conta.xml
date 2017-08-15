@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="25dp"
+    tools:contexto="com.thelearningproject.applogin.pessoa.gui.RecuperarContaActivity">
+
+    <TextView
+        android:id="@+id/titulo"
+        style="@style/headerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:text="@string/titulo" />
+
+    <TextView
+        android:id="@+id/informativo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="16.5dp"
+        android:text="@string/informativo" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_marginLeft="16.5dp">
+
+        <EditText
+            android:id="@+id/telefoneID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone" />
+
+        <Button
+            android:id="@+id/botaoConfirmaID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/continuar" />
+    </android.support.design.widget.TextInputLayout>
+
+</android.support.design.widget.CoordinatorLayout>

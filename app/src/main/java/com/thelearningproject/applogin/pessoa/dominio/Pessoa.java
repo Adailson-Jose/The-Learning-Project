@@ -10,6 +10,8 @@ public class Pessoa {
     private int id;
     private String nome;
     private Usuario usuario;
+    private String telefone;
+
 
     public int getId() {
         return id;
@@ -31,6 +33,13 @@ public class Pessoa {
         return usuario;
     }
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String novoTelefone) {
+        this.telefone = novoTelefone;
+    }
     public void setUsuario(Usuario novoUsuario) {
         this.usuario = novoUsuario;
     }
