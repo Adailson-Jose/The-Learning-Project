@@ -2,9 +2,14 @@ package com.thelearningproject.applogin.perfil.gui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
@@ -14,9 +19,11 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
+import java.util.ArrayList;
+
 public class CadastroNecessidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
-    private EditText entradaMateria;
+    private AutoCompleteTextView entradaMateria;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +32,23 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
         setTitle("Cadastrar nova necessidade");
 
         sessao = ControladorSessao.getInstancia(this.getApplicationContext());
-        entradaMateria = (EditText) findViewById(R.id.entradaMateriaID);
+        entradaMateria = (AutoCompleteTextView) findViewById(R.id.entradaMateriaID);
+        entradaMateria.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //Metodo obrigatorio do TextWatcher
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                sugerir();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //Metodo obrigatorio do TextWatcher
+            }
+        });
         Auxiliar.abrirTeclado(this);
     }
 
@@ -44,6 +67,24 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
         }
         Auxiliar.esconderTeclado(this);
         return super.onOptionsItemSelected(item);
+    }
+
+    private void sugerir() {
+        String nome = entradaMateria.getText().toString();
+        MateriaServices materiaServices = MateriaServices.getInstancia(this);
+        ArrayList<String> listaMateria = new ArrayList<>();
+        listaMateria.addAll(materiaServices.retornaLista(nome));
+
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.select_dialog_item, materiaServices.retornaLista(nome));
+
+        entradaMateria.setThreshold(1);
+        entradaMateria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                entradaMateria.setText(parent.getAdapter().getItem(position).toString());
+            }
+        });
+        entradaMateria.setAdapter(adapter);
     }
 
     private void cadastrarMateria() {

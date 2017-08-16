@@ -18,6 +18,8 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 /**
  * Criado por Gabriel on 03/08/2017
@@ -44,15 +46,20 @@ public class MainRecomendacoesFragment extends Fragment {
 
     private void listar() {
         PerfilServices perfilServices = PerfilServices.getInstancia(activity);
-        ArrayList<Perfil> listaPerfil = new ArrayList<>();
+        Set<Perfil> listaPerfil = new LinkedHashSet<>();
         for (Materia materia:sessao.getPerfil().getNecessidades()){
+            listaPerfil.addAll(perfilServices.listarPerfil(materia));
+        }
+        for (Materia materia : perfilServices.recomendaMateria(sessao.getPerfil())) {
             listaPerfil.addAll(perfilServices.listarPerfil(materia));
         }
         if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, listaPerfil);
+
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil));
+
 
         adaptador.notifyDataSetChanged();
         listaRecomendados.setAdapter(adaptador);

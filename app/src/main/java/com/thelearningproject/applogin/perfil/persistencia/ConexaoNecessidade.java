@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 
 import java.util.ArrayList;
 
@@ -21,6 +22,7 @@ public final class ConexaoNecessidade {
     private static final String TABELA_CONEXAO_NECESSIDADES = "conexaonecessidade";
     private static final String IDPERFIL_NECESSIDADE = "perfil";
     private static final String IDMATERIA_NECESSIDADE = "materia";
+    private static final String STATUS_CONEXAO = "status";
 
     public static synchronized ConexaoNecessidade getInstancia(Context context) {
         if (instancia == null) {
@@ -38,13 +40,16 @@ public final class ConexaoNecessidade {
         ContentValues values = new ContentValues();
         values.put(IDPERFIL_NECESSIDADE, perfil);
         values.put(IDMATERIA_NECESSIDADE, materia);
+        values.put(STATUS_CONEXAO, Status.ATIVADO.getValor());
         db.insert(TABELA_CONEXAO_NECESSIDADES, null, values);
         db.close();
     }
 
-    public void removerConexao(int perfil, int materia) {
+    public void desativarConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
-        db.delete(TABELA_CONEXAO_NECESSIDADES, IDPERFIL_NECESSIDADE + " = ? AND " + IDMATERIA_NECESSIDADE + " = ?", new String[]{String.valueOf(perfil), Integer.toString(materia)});
+        ContentValues values = new ContentValues();
+        values.put(STATUS_CONEXAO, Status.DESATIVADO.getValor());
+        db.update(TABELA_CONEXAO_NECESSIDADES, values, IDPERFIL_NECESSIDADE + " = ? AND " + IDMATERIA_NECESSIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)});
         db.close();
     }
 
@@ -62,12 +67,14 @@ public final class ConexaoNecessidade {
     }
 
     //Retorna todas as materias buscadas pelo usuario de id = id_perfil
-    public ArrayList<Integer> retornaMateria(int perfil) {
+    public ArrayList<Integer> retornaMateriaAtivas(int perfil) {
         ArrayList<Integer> materias = new ArrayList<>();
-        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDMATERIA_NECESSIDADE}, IDPERFIL_NECESSIDADE + " = ?", new String[]{Integer.toString(perfil)}, null, null, null);
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDMATERIA_NECESSIDADE, STATUS_CONEXAO}, IDPERFIL_NECESSIDADE + " = ?", new String[]{Integer.toString(perfil)}, null, null, null);
 
         while (cursor.moveToNext()) {
-            materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
+            if (cursor.getInt(cursor.getColumnIndex(STATUS_CONEXAO)) == Status.ATIVADO.getValor()) {
+                materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
+            }
         }
         cursor.close();
         return materias;
@@ -75,7 +82,7 @@ public final class ConexaoNecessidade {
 
     public ArrayList<Integer> retornaFrequencia(int materia) {
         String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia;
-        ArrayList<Integer> usuarios = new ArrayList<>();
+        ArrayList<Integer> materias = new ArrayList<>();
 
         Cursor cursor = banco.getReadableDatabase().rawQuery(
                 "SELECT " + IDMATERIA_NECESSIDADE + ", count(" + IDMATERIA_NECESSIDADE + ")" +
@@ -85,10 +92,10 @@ public final class ConexaoNecessidade {
         );
 
         while (cursor.moveToNext()) {
-            usuarios.add(cursor.getInt(cursor.getColumnIndex(IDPERFIL_NECESSIDADE)));
+            materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
         }
         cursor.close();
-        return usuarios;
+        return materias;
     }
 
 

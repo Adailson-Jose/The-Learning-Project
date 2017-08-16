@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
-import com.thelearningproject.applogin.perfil.dominio.IMateria;
+import com.thelearningproject.applogin.perfil.dominio.IExcluiMateria;
+
 import java.util.ArrayList;
 
 /**
@@ -20,9 +22,9 @@ import java.util.ArrayList;
 public class MateriaAdapter extends ArrayAdapter<Materia> {
     private ArrayList<Materia> listaMateria;
     private Context contexto;
-    private IMateria interfaceMateria;
+    private IExcluiMateria interfaceMateria;
 
-    public MateriaAdapter(Context context, ArrayList<Materia> materias, IMateria inter) {
+    public MateriaAdapter(Context context, ArrayList<Materia> materias, IExcluiMateria inter) {
         super(context, 0, materias);
         this.listaMateria = materias;
         this.contexto = context;

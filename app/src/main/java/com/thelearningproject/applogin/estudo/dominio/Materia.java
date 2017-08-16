@@ -37,4 +37,8 @@ public class Materia {
         return (Integer.toString(this.getId()).hashCode());
     }
 
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 }

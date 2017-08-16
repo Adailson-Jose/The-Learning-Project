@@ -14,6 +14,9 @@
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".infraestrutura.gui.BuscaActivity" />
+        <provider
+            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider"
+            android:name="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider" />
 
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
@@ -85,7 +88,22 @@
         <activity android:name=".pessoa.gui.AlterarDescricaoActivity" />
         <activity android:name=".pessoa.gui.RecuperarContaActivity" />
         <activity android:name=".pessoa.gui.ConfimaRecuperarActivity" />
-        <activity android:name=".pessoa.gui.AlterarTelefoneActivity"></activity>
+        <activity android:name=".pessoa.gui.AlterarTelefoneActivity" />
+        <activity
+            android:name=".infraestrutura.gui.BuscaActivity"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/pesquisa" />
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infraestrutura.gui.MainActivity" />
+        </activity>
+
     </application>
 
 </manifest>

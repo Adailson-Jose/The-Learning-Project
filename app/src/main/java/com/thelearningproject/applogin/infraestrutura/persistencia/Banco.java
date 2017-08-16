@@ -15,6 +15,7 @@ public final class Banco extends SQLiteOpenHelper {
 
     private static final String PERFIL = "perfil";
     private static final String MATERIA = "materia";
+    private static final String STATUS = "status";
 
     private static final String TABELA_PESSOAS = "pessoas";
     private static final String ID_PESSOA = "id";
@@ -26,7 +27,7 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String ID_USUARIO = "id";
     private static final String EMAIL_USUARIO = "email";
     private static final String SENHA_USUARIO = "senha";
-    private static final String STATUS_USUARIO = "status";
+    private static final String STATUS_USUARIO = STATUS;
 
     private static final String TABELA_PERFIS = "perfis";
     private static final String ID_PERFIL = "id";
@@ -41,10 +42,12 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String TABELA_CONEXAO_NECESSIDADES = "conexaonecessidade";
     private static final String IDPERFIL_NECESSIDADE = PERFIL;
     private static final String IDMATERIA_NECESSIDADE = MATERIA;
+    private static final String STATUS_CONEXAO_NECESSIDADE = STATUS;
 
     private static final String TABELA_CONEXAO_HABILIDADES = "conexaohabilidade";
     private static final String IDPERFIL_HABILIDADE = PERFIL;
     private static final String IDMATERIA_HABILIDADE = MATERIA;
+    private static final String STATUS_CONEXAO_HABILIDADE = STATUS;
 
     private static final String TABELA_DADOS_BUSCA = "dadosbusca";
     private static final String IDPERFIL_BUSCA = PERFIL;
@@ -89,11 +92,13 @@ public final class Banco extends SQLiteOpenHelper {
         String habilidades = "CREATE TABLE " + TABELA_CONEXAO_HABILIDADES + " (" +
                 IDPERFIL_HABILIDADE + " INTEGER, " +
                 IDMATERIA_HABILIDADE + " INTEGER, " +
+                STATUS_CONEXAO_HABILIDADE + " INTEGER, " +
                 "PRIMARY KEY(" + IDPERFIL_HABILIDADE + ", " + IDMATERIA_HABILIDADE + "))";
 
         String necessidades = "CREATE TABLE " + TABELA_CONEXAO_NECESSIDADES + " (" +
                 IDPERFIL_NECESSIDADE + " INTEGER, " +
                 IDMATERIA_NECESSIDADE + " INTEGER, " +
+                STATUS_CONEXAO_NECESSIDADE + " INTEGER, " +
                 "PRIMARY KEY(" + IDPERFIL_NECESSIDADE + ", " + IDMATERIA_NECESSIDADE + "))";
 
         String materias = "CREATE TABLE " + TABELA_MATERIAS + "(" +

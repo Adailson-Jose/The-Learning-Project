@@ -13,6 +13,9 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.persistencia.PessoaDAO;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Criado por Ebony Marques on 26/07/2017.
@@ -48,8 +51,8 @@ public final class PerfilServices {
 
     public Perfil retornaPerfil(int idPessoa) {
         Perfil perfil = persistencia.retornaPerfil(idPessoa);
-        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
-        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
+        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
         montaListaHabilidades(perfil, habilidadeId);
         montaListaNecessidades(perfil, necessidadeId);
         return perfil;
@@ -63,8 +66,8 @@ public final class PerfilServices {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
         perfil.setPessoa(pessoa);
-        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateria(perfil.getId());
-        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
+        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
         montaListaHabilidades(perfil, habilidadeId);
         montaListaNecessidades(perfil, necessidadeId);
         return perfil;
@@ -81,25 +84,25 @@ public final class PerfilServices {
     }
 
     public void deletarHabilidade(Perfil perfil, Materia materia) {
-        conexaoHabilidade.removerConexao(perfil.getId(), materia.getId());
+        conexaoHabilidade.desativarConexao(perfil.getId(), materia.getId());
     }
 
     public void deletarNecessidade(Perfil perfil, Materia materia) {
-        conexaoNecessidade.removerConexao(perfil.getId(), materia.getId());
+        conexaoNecessidade.desativarConexao(perfil.getId(), materia.getId());
     }
 
     public ArrayList<Perfil> listarPerfil(Materia materia) {
-        ArrayList<Perfil> usuarios = new ArrayList<>();
+        ArrayList<Perfil> perfils = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());
         for (int id : listaIds) {
-            usuarios.add(consulta(id));
+            perfils.add(consulta(id));
         }
-        return usuarios;
+        return perfils;
     }
 
     public ArrayList<Materia> listarHabilidade(Perfil perfil) {
         ArrayList<Materia> listaMateria = new ArrayList<>();
-        ArrayList<Integer> lista = conexaoHabilidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> lista = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
 
         if (!lista.isEmpty()) {
             for (int id : lista) {
@@ -111,7 +114,7 @@ public final class PerfilServices {
 
     public ArrayList<Materia> listarNecessidade(Perfil perfil) {
         ArrayList<Materia> listaNecessidade = new ArrayList<>();
-        ArrayList<Integer> lista = conexaoNecessidade.retornaMateria(perfil.getId());
+        ArrayList<Integer> lista = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
 
         if (!lista.isEmpty()) {
             for (int id : lista) {
@@ -131,6 +134,21 @@ public final class PerfilServices {
                 throw new UsuarioException("Você já cadastrou essa necessidade");
             }
         }
+    }
+
+    public List<Materia> recomendaMateria(Perfil perfil) {
+        List<Materia> materias = new ArrayList<>();
+        Set<Integer> listaAux = new LinkedHashSet<>();
+        for (Materia m : perfil.getNecessidades()) {
+            listaAux.addAll(conexaoNecessidade.retornaFrequencia(m.getId()));
+        }
+        for (int i : listaAux) {
+            materias.add(materiaServices.consultar(i));
+        }
+        materias.removeAll(perfil.getHabilidades());
+        materias.removeAll(perfil.getNecessidades());
+
+        return materias;
     }
 
     private void montaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {

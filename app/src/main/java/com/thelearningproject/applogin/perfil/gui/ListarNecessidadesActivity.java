@@ -16,12 +16,12 @@ import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.MateriaAdapter;
-import com.thelearningproject.applogin.perfil.dominio.IMateria;
+import com.thelearningproject.applogin.perfil.dominio.IExcluiMateria;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
-public class ListarNecessidadesActivity extends AppCompatActivity implements DialogInterface.OnClickListener, IMateria {
+public class ListarNecessidadesActivity extends AppCompatActivity implements DialogInterface.OnClickListener, IExcluiMateria {
     private ControladorSessao sessao;
     private PerfilServices perfilNegocio;
     private MateriaServices materiaNegocio;

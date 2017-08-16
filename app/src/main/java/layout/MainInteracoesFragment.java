@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.thelearningproject.applogin.R;
 
 public class MainInteracoesFragment extends Fragment {
+    @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_interacoes, null);
 

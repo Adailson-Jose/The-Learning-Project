@@ -6,6 +6,6 @@ import com.thelearningproject.applogin.estudo.dominio.Materia;
  * Criado by gabri on 10/08/2017.
  */
 
-public interface IMateria {
+public interface IExcluiMateria {
     void excluirMateria(Materia mat);
 }
