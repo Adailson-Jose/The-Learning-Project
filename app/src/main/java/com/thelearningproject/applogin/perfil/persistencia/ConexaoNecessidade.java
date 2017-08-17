@@ -7,9 +7,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
+import com.thelearningproject.applogin.infraestrutura.utils.FrequenciaMateria;
 import com.thelearningproject.applogin.infraestrutura.utils.Status;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Criado por Pichau em 26/07/2017.
@@ -97,9 +100,9 @@ public final class ConexaoNecessidade {
         return retorno;
     }
 
-    public ArrayList<Integer> retornaFrequencia(int materia) {
-        String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia;
-        ArrayList<Integer> materias = new ArrayList<>();
+    public Set<FrequenciaMateria> retornaFrequencia(int materia, int perfil) {
+        String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia + " AND NOT " + IDPERFIL_NECESSIDADE + " = " + perfil;
+        Set<FrequenciaMateria> frequencias = new HashSet<>();
 
         Cursor cursor = banco.getReadableDatabase().rawQuery(
                 "SELECT " + IDMATERIA_NECESSIDADE + ", count(" + IDMATERIA_NECESSIDADE + ")" +
@@ -109,10 +112,13 @@ public final class ConexaoNecessidade {
         );
 
         while (cursor.moveToNext()) {
-            materias.add(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
+            FrequenciaMateria frequenciaMateria = new FrequenciaMateria();
+            frequenciaMateria.setMateria(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
+            frequenciaMateria.setFrequencia(cursor.getInt(1));
+            frequencias.add(frequenciaMateria);
         }
         cursor.close();
-        return materias;
+        return frequencias;
     }
 
 

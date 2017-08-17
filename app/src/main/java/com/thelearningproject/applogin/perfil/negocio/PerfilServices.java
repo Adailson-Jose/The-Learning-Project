@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
+import com.thelearningproject.applogin.infraestrutura.utils.FrequenciaMateria;
 import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -14,7 +15,9 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.persistencia.PessoaDAO;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -156,12 +159,22 @@ public final class PerfilServices {
 
     public List<Materia> recomendaMateria(Perfil perfil) {
         List<Materia> materias = new ArrayList<>();
-        Set<Integer> listaAux = new LinkedHashSet<>();
+        Set<FrequenciaMateria> listaAux = new HashSet<>();
+        ArrayList<FrequenciaMateria> listaFrequencia = new ArrayList<>();
         for (Materia m : perfil.getNecessidades()) {
-            listaAux.addAll(conexaoNecessidade.retornaFrequencia(m.getId()));
+            listaAux.addAll(conexaoNecessidade.retornaFrequencia(m.getId(), perfil.getId()));
         }
-        for (int i : listaAux) {
-            materias.add(materiaServices.consultar(i));
+        listaFrequencia.addAll(listaAux);
+
+        Collections.sort(listaFrequencia, Collections.reverseOrder(new Comparator<FrequenciaMateria>() {
+            @Override
+            public int compare(FrequenciaMateria o1, FrequenciaMateria o2) {
+                return o1.getFrequencia().compareTo(o2.getFrequencia());
+            }
+        }));
+
+        for (FrequenciaMateria i : listaAux) {
+            materias.add(materiaServices.consultar(i.getMateria()));
         }
         materias.removeAll(perfil.getHabilidades());
         materias.removeAll(perfil.getNecessidades());

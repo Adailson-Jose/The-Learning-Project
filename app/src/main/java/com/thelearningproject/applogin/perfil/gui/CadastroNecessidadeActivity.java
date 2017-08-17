@@ -96,7 +96,7 @@ public class CadastroNecessidadeActivity extends AppCompatActivity {
         Materia novaMateria = materiaServices.cadastraMateria(materia);
         try {
             if (validaCadastro(materia)) {
-                perfilServices.insereNecessidade(sessao.getPerfil(), materia);
+                perfilServices.insereNecessidade(sessao.getPerfil(), novaMateria);
                 sessao.getPerfil().addNecessidade(novaMateria);
                 Auxiliar.criarToast(this, "Necessidade cadastrada com sucesso!");
                 finish();

@@ -53,6 +53,11 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String IDPERFIL_BUSCA = PERFIL;
     private static final String MATERIA_BUSCA = MATERIA;
 
+    private static final String TABELA_COMBINACAO = "combinacaoperfil";
+    private static final String IDPERFIL1_COMBINACAO = "id_perfil1";
+    private static final String IDPERFIL2_COMBINACAO = "id_perfil2";
+    private static final String STATUS_COMBINACAO = STATUS;
+
     public static synchronized Banco getInstancia(Context context) {
         if (instancia == null) {
             instancia = new Banco(context.getApplicationContext());
@@ -105,6 +110,12 @@ public final class Banco extends SQLiteOpenHelper {
                 ID_MATERIA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NOME_MATERIA + " TEXT)";
 
+        String combinacao = "CREATE TABLE " + TABELA_COMBINACAO + "(" +
+                IDPERFIL1_COMBINACAO + " INTEGER, " +
+                IDPERFIL2_COMBINACAO + " INTEGER, " +
+                STATUS_COMBINACAO + " INTEGER, " +
+                "PRIMARY KEY(" + IDPERFIL1_COMBINACAO + ", " + IDPERFIL2_COMBINACAO + "))";
+
         banco.execSQL(usuarios);
         banco.execSQL(dadosBusca);
         banco.execSQL(pessoas);
@@ -112,6 +123,7 @@ public final class Banco extends SQLiteOpenHelper {
         banco.execSQL(habilidades);
         banco.execSQL(necessidades);
         banco.execSQL(materias);
+        banco.execSQL(combinacao);
 
     }
 
@@ -137,6 +149,9 @@ public final class Banco extends SQLiteOpenHelper {
 
         String materias = "DROP TABLE IF EXISTS " + TABELA_MATERIAS;
         banco.execSQL(materias);
+
+        String combinacao = "DROP TABLE IF EXISTS " + TABELA_COMBINACAO;
+        banco.execSQL(combinacao);
 
         onCreate(banco);
     }
