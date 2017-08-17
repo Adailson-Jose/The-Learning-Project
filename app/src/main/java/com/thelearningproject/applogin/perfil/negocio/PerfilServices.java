@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
+import com.thelearningproject.applogin.infraestrutura.utils.Status;
 import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.persistencia.ConexaoHabilidade;
@@ -74,13 +75,19 @@ public final class PerfilServices {
     }
 
     public void insereHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
-        verificaExistencia(perfil, materia, tipoConexao.HABILIDADE);
-        conexaoHabilidade.insereConexao(perfil.getId(), materia.getId());
+        if (!verificaExistencia(perfil, materia, tipoConexao.HABILIDADE)) {
+            conexaoHabilidade.insereConexao(perfil.getId(), materia.getId());
+        } else {
+            conexaoHabilidade.restabeleceConexao(perfil.getId(), materia.getId());
+        }
     }
 
     public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
-        verificaExistencia(perfil, materia, tipoConexao.NECESSIDADE);
-        conexaoNecessidade.insereConexao(perfil.getId(), materia.getId());
+        if (!verificaExistencia(perfil, materia, tipoConexao.NECESSIDADE)) {
+            conexaoNecessidade.insereConexao(perfil.getId(), materia.getId());
+        } else {
+            conexaoNecessidade.restabeleceConexao(perfil.getId(), materia.getId());
+        }
     }
 
     public void deletarHabilidade(Perfil perfil, Materia materia) {
@@ -124,16 +131,27 @@ public final class PerfilServices {
         return listaNecessidade;
     }
 
-    private void verificaExistencia(Perfil perfil, Materia materia, tipoConexao tipo) throws UsuarioException {
+    private boolean verificaExistencia(Perfil perfil, Materia materia, tipoConexao tipo) throws UsuarioException {
+        boolean retorno = false;
         if (tipo == tipoConexao.HABILIDADE) {
             if (perfil.getHabilidades().contains(materia)) {
-                throw new UsuarioException("Você já cadastrou essa habilidade");
+                if (conexaoHabilidade.retornaStatus(perfil.getId(), materia.getId()) == Status.ATIVADO.getValor()) {
+                    throw new UsuarioException("Você já cadastrou essa habilidade");
+                } else {
+                    retorno = true;
+                }
             }
         } else {
             if (perfil.getNecessidades().contains(materia)) {
-                throw new UsuarioException("Você já cadastrou essa necessidade");
+                if (conexaoNecessidade.retornaStatus(perfil.getId(), materia.getId()) == Status.ATIVADO.getValor()) {
+                    throw new UsuarioException("Você já cadastrou essa necessidade");
+                } else {
+                    retorno = true;
+                }
+
             }
         }
+        return retorno;
     }
 
     public List<Materia> recomendaMateria(Perfil perfil) {

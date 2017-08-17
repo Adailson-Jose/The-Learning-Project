@@ -45,6 +45,14 @@ public final class ConexaoNecessidade {
         db.close();
     }
 
+    public void restabeleceConexao(int perfil, int materia) {
+        SQLiteDatabase db = banco.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(STATUS_CONEXAO, Status.ATIVADO.getValor());
+        db.update(TABELA_CONEXAO_NECESSIDADES, values, IDPERFIL_NECESSIDADE + " = ? AND " + IDMATERIA_NECESSIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)});
+        db.close();
+    }
+
     public void desativarConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -78,6 +86,15 @@ public final class ConexaoNecessidade {
         }
         cursor.close();
         return materias;
+    }
+
+    public int retornaStatus(int perfil, int materia) {
+        int retorno = -1;
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{STATUS_CONEXAO}, IDPERFIL_NECESSIDADE + " = ? AND " + IDMATERIA_NECESSIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)}, null, null, null);
+        if (cursor.moveToFirst()) {
+            retorno = cursor.getInt(cursor.getColumnIndex(STATUS_CONEXAO));
+        }
+        return retorno;
     }
 
     public ArrayList<Integer> retornaFrequencia(int materia) {

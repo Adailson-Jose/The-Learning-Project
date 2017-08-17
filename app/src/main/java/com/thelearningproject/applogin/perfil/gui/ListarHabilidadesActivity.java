@@ -64,7 +64,7 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Dial
     public void onClick(DialogInterface dialog, int which) {
         switch (which) {
             case DialogInterface.BUTTON_POSITIVE:
-                perfilNegocio.deletarHabilidade(sessao.getPerfil(), materiaNegocio.consultar(this.materiaAtual.getId()));
+                perfilNegocio.deletarHabilidade(sessao.getPerfil(), this.materiaAtual);
                 listarHabilidades();
                 Auxiliar.criarToast(this, "Habilidade removida com sucesso");
                 break;

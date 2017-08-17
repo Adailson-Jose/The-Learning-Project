@@ -45,6 +45,16 @@ public final class ConexaoHabilidade {
         db.close();
     }
 
+    public void restabeleceConexao(int perfil, int materia) {
+        SQLiteDatabase db = banco.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(STATUS_CONEXAO, Status.ATIVADO.getValor());
+        db.update(TABELA_CONEXAO_HABILIDADES, values, IDPERFIL_HABILIDADE + " = ? AND " + IDMATERIA_HABILIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)});
+        db.close();
+    }
+
+
     public void desativarConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
@@ -76,6 +86,15 @@ public final class ConexaoHabilidade {
         }
         cursor.close();
         return materias;
+    }
+
+    public int retornaStatus(int perfil, int materia) {
+        int retorno = -1;
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_HABILIDADES, new String[]{STATUS_CONEXAO}, IDPERFIL_HABILIDADE + " = ? AND " + IDMATERIA_HABILIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)}, null, null, null);
+        if (cursor.moveToFirst()) {
+            retorno = cursor.getInt(cursor.getColumnIndex(STATUS_CONEXAO));
+        }
+        return retorno;
     }
 
     public ArrayList<Integer> retornaMaterias(int perfil) {

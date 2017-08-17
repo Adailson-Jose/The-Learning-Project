@@ -93,12 +93,12 @@ public class CadastroHabilidadeActivity extends AppCompatActivity {
         PerfilServices perfilServices = PerfilServices.getInstancia(this.getApplicationContext());
         Materia materia = new Materia();
         materia.setNome(nome);
-        materia = materiaServices.cadastraMateria(materia);
+        Materia novaMateria = materiaServices.cadastraMateria(materia);
 
         try {
             if (validaCadastro(materia)) {
-                perfilServices.insereHabilidade(sessao.getPerfil(), materia);
-
+                perfilServices.insereHabilidade(sessao.getPerfil(), novaMateria);
+                sessao.getPerfil().addHabilidade(novaMateria);
                 Auxiliar.criarToast(this, "Habilidade cadastrada com sucesso!");
                 finish();
             }
