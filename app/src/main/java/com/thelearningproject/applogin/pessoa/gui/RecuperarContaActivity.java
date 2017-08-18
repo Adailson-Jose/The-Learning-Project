@@ -45,11 +45,11 @@ public class RecuperarContaActivity extends AppCompatActivity {
     private void processoRecuperacao() {
         try{
             String telefone = entradaTelefone.getText().toString();
-
-            PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
-            Pessoa pessoa = negocioPessoa.retornaPessoa(telefone);
-
+            Pessoa pessoa = new Pessoa();
+            pessoa.setTelefone(telefone);
             if (validaRecuperacao(pessoa)) {
+                PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
+                pessoa = negocioPessoa.retornaPessoa(telefone);
                 executarRecuperacao(pessoa);
             }
         }catch (UsuarioException e){
@@ -59,7 +59,7 @@ public class RecuperarContaActivity extends AppCompatActivity {
     }
     private boolean validaRecuperacao(Pessoa pessoa) {
         boolean validacao = true;
-        if (pessoa.getTelefone() == null || pessoa.getTelefone().trim().length() == 0) {
+        if (!Auxiliar.telefonePattern(pessoa.getTelefone()) || pessoa.getTelefone().trim().length() == 0 || pessoa.getTelefone() == null) {
             entradaTelefone.setError("Telefone inválido");
             validacao = false;
         }
