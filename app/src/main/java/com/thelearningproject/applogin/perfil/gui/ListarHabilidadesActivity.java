@@ -12,7 +12,6 @@ import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
-import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.MateriaAdapter;
@@ -24,7 +23,6 @@ import java.util.ArrayList;
 public class ListarHabilidadesActivity extends AppCompatActivity implements DialogInterface.OnClickListener, IExcluiMateria {
     private ControladorSessao sessao;
     private PerfilServices perfilNegocio;
-    private MateriaServices materiaNegocio;
     private Materia materiaAtual;
 
     @Override
@@ -39,7 +37,6 @@ public class ListarHabilidadesActivity extends AppCompatActivity implements Dial
         super.onResume();
         sessao = ControladorSessao.getInstancia(ListarHabilidadesActivity.this);
         perfilNegocio = PerfilServices.getInstancia(this);
-        materiaNegocio = MateriaServices.getInstancia(this);
         FloatingActionButton botaoInserir = (FloatingActionButton) findViewById(R.id.btnInserirHabilidade);
 
         listarHabilidades();

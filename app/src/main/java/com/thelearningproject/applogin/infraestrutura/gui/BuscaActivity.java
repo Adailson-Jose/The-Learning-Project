@@ -114,7 +114,7 @@ public class BuscaActivity extends AppCompatActivity {
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null);
+        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(this, "Sem Resultados");

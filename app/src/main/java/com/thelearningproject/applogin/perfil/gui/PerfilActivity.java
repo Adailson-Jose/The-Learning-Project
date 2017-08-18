@@ -52,7 +52,5 @@ public class PerfilActivity extends AppCompatActivity {
         lvHabilidades.setAdapter(adapterOpcoesHabilidades);
         lvNecessidades.setAdapter(adapterOpcoesNecessidades);
         lvOpcoes.setAdapter(adapterOpcoesOutras);
-
-        lvOpcoes.setAlpha((float) 0.75);
     }
 }

@@ -14,7 +14,10 @@ import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
+import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -28,10 +31,11 @@ import java.util.Set;
 /**
  * Criado por Gabriel on 03/08/2017
  */
-public class MainRecomendacoesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MainRecomendacoesFragment extends Fragment implements AdapterView.OnItemClickListener, ICriarCombinacao {
     private FragmentActivity activity;
     private ListView listaRecomendados;
     private ControladorSessao sessao;
+    private CombinacaoServices combinacaoServices;
 
     public MainRecomendacoesFragment() {
         // Requer um construtor publico vazio
@@ -43,6 +47,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         View view = inflater.inflate(R.layout.fragment_main_recomendacoes, container, false);
         activity = getActivity();
         sessao = ControladorSessao.getInstancia(activity);
+        combinacaoServices = CombinacaoServices.getInstancia(getContext());
         listaRecomendados = (ListView) view.findViewById(R.id.listViewRecomendaID);
         listaRecomendados.setOnItemClickListener(this);
         listar();
@@ -70,11 +75,17 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             }
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this, this, null);
 
 
         adaptador.notifyDataSetChanged();
         listaRecomendados.setAdapter(adaptador);
+    }
+
+    public void criarCombinacao(Perfil pEstrangeiro) {
+        combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
+        listar();
+        Auxiliar.criarToast(getContext(),"Você fez um match");
     }
 
     @Override

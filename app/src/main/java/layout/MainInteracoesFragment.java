@@ -13,7 +13,9 @@ import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -22,7 +24,7 @@ import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
-public class MainInteracoesFragment extends Fragment implements AdapterView.OnItemClickListener {
+public class MainInteracoesFragment extends Fragment implements AdapterView.OnItemClickListener, IExcluirCombinacao {
     private ListView listaInteracoes;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
@@ -53,7 +55,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         }
 
 
-        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this);
+        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this, null, this);
 
         adaptador.notifyDataSetChanged();
         listaInteracoes.setAdapter(adaptador);
@@ -65,5 +67,15 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         sessao.setPerfilSelecionado(p);
         Intent intent = new Intent(getActivity(), PerfilActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void excluirCombinacao(int i) {
+        Combinacao com = new Combinacao();
+        com.setPerfil1(sessao.getPerfil().getId());
+        com.setPerfil2(i);
+        combinacaoServices.removerCombinacao(sessao.getPerfil(), com);
+        listar();
+        Auxiliar.criarToast(getContext(),"Você desfez o match");
     }
 }

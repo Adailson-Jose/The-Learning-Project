@@ -11,8 +11,11 @@ import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
+import com.thelearningproject.applogin.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
+import com.thelearningproject.applogin.perfil.dominio.IExcluiMateria;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 
 import java.util.ArrayList;
@@ -28,12 +31,16 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private Context contexto;
     private Fragment frag;
     private Perfil perfil;
+    private ICriarCombinacao interfaceCriarComb;
+    private IExcluirCombinacao interfaceExcluirComb;
 
-    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Fragment frag) {
+    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Fragment frag, ICriarCombinacao inter, IExcluirCombinacao inter2) {
         super(context, 0, perfils);
         this.listaPerfil = perfils;
         this.contexto = context;
         this.frag = frag;
+        this.interfaceCriarComb = inter;
+        this.interfaceExcluirComb = inter2;
     }
 
     @Override
@@ -84,19 +91,16 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         btnNovaInteracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                combinacaoServices.inserirCombinacao(sessao.getPerfil(), listaPerfil.get(position));
-                Auxiliar.criarToast(contexto,"Match feito");
+                interfaceCriarComb.criarCombinacao(listaPerfil.get(position));
+//                combinacaoServices.inserirCombinacao(sessao.getPerfil(), );
+//                Auxiliar.criarToast(contexto,"Match feito");
             }
         });
 
         btnDesfazerInteracao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Combinacao com = new Combinacao();
-                com.setPerfil1(sessao.getPerfil().getId());
-                com.setPerfil2(listaPerfil.get(position).getId());
-                combinacaoServices.removerCombinacao(sessao.getPerfil(), com);
-                Auxiliar.criarToast(contexto,"Match desfeito");
+                interfaceExcluirComb.excluirCombinacao(listaPerfil.get(position).getId());
             }
         });
 

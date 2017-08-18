@@ -120,7 +120,7 @@ public class MainBuscaFragment extends Fragment {
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, listaPerfil, null);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, listaPerfil, null,null,null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(activity, "Sem Resultados");
