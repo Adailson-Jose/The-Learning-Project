@@ -38,4 +38,20 @@ public class Combinacao {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        boolean r = false;
+        if (o instanceof Combinacao) {
+            Combinacao that = (Combinacao) o;
+            r = (this.getPerfil1() == that.getPerfil1() && this.getPerfil2() == that.getPerfil2());
+        }
+        return r;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = perfil1;
+        result = 31 * result + perfil2;
+        return result;
+    }
 }

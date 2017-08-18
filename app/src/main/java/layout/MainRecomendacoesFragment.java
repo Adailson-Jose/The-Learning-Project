@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.infraestrutura.gui.MainActivity;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
@@ -63,7 +64,9 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
         }
-
+        for (Combinacao c: sessao.getPerfil().getCombinacoes()){
+            listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+        }
 
         ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this);
 
@@ -75,8 +78,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Perfil p = (Perfil) parent.getAdapter().getItem(position);
-        PerfilActivity perfilActivity = new PerfilActivity(p);
-        Intent intent = new Intent(getActivity(), perfilActivity.getClass());
+        Intent intent = new Intent(getActivity(), PerfilActivity.class);
         intent.putExtra("Perfil", p);
 //        Auxiliar.criarToast(getContext(),String.valueOf(parent.getItemIdAtPosition(position)));
         startActivity(intent);

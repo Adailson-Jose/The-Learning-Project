@@ -12,12 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.gui.PerfilActivity;
+import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
     private ListView listaInteracoes;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
+    private PerfilServices perfilServices;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
 
         sessao = ControladorSessao.getInstancia(getActivity());
         combinacaoServices = CombinacaoServices.getInstancia(getActivity());
+        perfilServices = PerfilServices.getInstancia(getActivity());
         listaInteracoes = (ListView) view.findViewById(R.id.listViewInteracoesID);
         listaInteracoes.setOnItemClickListener(this);
 
@@ -40,10 +44,13 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
     }
 
     private void listar() {
-        ArrayList<Perfil> listaCombinacoes;
-        listaCombinacoes = combinacaoServices.retornaCombinacoesPendentes(sessao.getPerfil());
+        ArrayList<Perfil> perfils = new ArrayList<>();
+        for( Combinacao c: combinacaoServices.retornaCombinacoesPendentes(sessao.getPerfil())){
+            perfils.add(perfilServices.consulta(c.getPerfil2()));
+        }
 
-        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(listaCombinacoes), MainInteracoesFragment.this);
+
+        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this);
 
         adaptador.notifyDataSetChanged();
         listaInteracoes.setAdapter(adaptador);

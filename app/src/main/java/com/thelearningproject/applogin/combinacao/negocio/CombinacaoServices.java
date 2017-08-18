@@ -16,11 +16,9 @@ import java.util.ArrayList;
 public class CombinacaoServices {
     private static CombinacaoServices instancia;
     private CombinacaoDAO persistencia;
-    private PerfilServices perfilServices;
 
     private CombinacaoServices(Context context) {
         this.persistencia = CombinacaoDAO.getInstancia(context);
-        this.perfilServices = PerfilServices.getInstancia(context);
     }
 
     public static CombinacaoServices getInstancia(Context contexto) {
@@ -35,24 +33,16 @@ public class CombinacaoServices {
 
     }
 
-    public ArrayList<Perfil> retornaCombinacoesAtivas(Perfil perfil) {
+    public ArrayList<Combinacao> retornaCombinacoesAtivas(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
-        ArrayList<Perfil> perfis = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 1));
-        for (Combinacao c : combinacoes) {
-            perfis.add(perfilServices.consulta(c.getPerfil2()));
-        }
-        return perfis;
+        return combinacoes;
     }
 
-    public ArrayList<Perfil> retornaCombinacoesPendentes(Perfil perfil) {
+    public ArrayList<Combinacao> retornaCombinacoesPendentes(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
-        ArrayList<Perfil> perfis = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 0));
-        for (Combinacao c : combinacoes) {
-            perfis.add(perfilServices.consulta(c.getPerfil2()));
-        }
-        return perfis;
+        return combinacoes;
     }
 
     public void inserirCombinacao(Perfil perfil1, Perfil perfil2) {
@@ -64,6 +54,8 @@ public class CombinacaoServices {
         combinacao2.setPerfil1(perfil2.getId());
         combinacao2.setPerfil2(perfil1.getId());
         combinacao2.setStatus(0);
+        perfil1.addCombinacoes(combinacao1);
+        perfil2.addCombinacoes(combinacao2);
         persistencia.inserir(combinacao1);
         persistencia.inserir(combinacao2);
     }
@@ -73,7 +65,10 @@ public class CombinacaoServices {
         persistencia.atualizaStatus(combinacao);
     }
 
-    public void removerCombinacao(Combinacao combinacao) {
+    public void removerCombinacao(Perfil perfil, Combinacao combinacao) {
+        ArrayList<Combinacao> combinacaos = perfil.getCombinacoes();
+        combinacaos.remove(combinacao);
+        perfil.setCombinacoes(combinacaos);
         persistencia.removeCombinacao(combinacao);
     }
 

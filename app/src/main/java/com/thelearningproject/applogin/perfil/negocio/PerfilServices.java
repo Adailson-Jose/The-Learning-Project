@@ -2,6 +2,8 @@ package com.thelearningproject.applogin.perfil.negocio;
 
 import android.content.Context;
 
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.FrequenciaMateria;
@@ -30,6 +32,7 @@ public final class PerfilServices {
     private PerfilDAO persistencia;
     private PessoaDAO pessoaDAO;
     private MateriaServices materiaServices;
+    private CombinacaoServices combinacaoServices;
     private ConexaoHabilidade conexaoHabilidade;
     private ConexaoNecessidade conexaoNecessidade;
 
@@ -38,6 +41,7 @@ public final class PerfilServices {
         this.conexaoNecessidade = ConexaoNecessidade.getInstancia(contexto);
         this.persistencia = PerfilDAO.getInstancia(contexto);
         this.materiaServices = MateriaServices.getInstancia(contexto);
+        this.combinacaoServices = CombinacaoServices.getInstancia(contexto);
         this.pessoaDAO = PessoaDAO.getInstancia(contexto);
     }
 
@@ -57,6 +61,8 @@ public final class PerfilServices {
         Perfil perfil = persistencia.retornaPerfil(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
+        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
+        perfil.setCombinacoes(combinacoes);
         montaListaHabilidades(perfil, habilidadeId);
         montaListaNecessidades(perfil, necessidadeId);
         return perfil;
@@ -69,7 +75,9 @@ public final class PerfilServices {
     public Perfil consulta(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
+        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
         perfil.setPessoa(pessoa);
+        perfil.setCombinacoes(combinacoes);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
         montaListaHabilidades(perfil, habilidadeId);

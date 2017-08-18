@@ -1,5 +1,6 @@
 package com.thelearningproject.applogin.perfil.dominio;
 
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 
@@ -16,6 +17,19 @@ public class Perfil implements Serializable {
     private String descricao;
     private ArrayList<Materia> habilidades = new ArrayList<>();
     private ArrayList<Materia> necessidades = new ArrayList<>();
+    private ArrayList<Combinacao> combinacoes = new ArrayList<>();
+
+    public ArrayList<Combinacao> getCombinacoes() {
+        return combinacoes;
+    }
+
+    public void addCombinacoes(Combinacao combinacao) {
+        this.combinacoes.add(combinacao);
+    }
+
+    public void setCombinacoes(ArrayList<Combinacao> lista){
+        this.combinacoes = lista;
+    }
 
     public int getId() {
         return id;

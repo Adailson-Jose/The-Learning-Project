@@ -95,7 +95,7 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
                 Combinacao com = new Combinacao();
                 com.setPerfil1(sessao.getPerfil().getId());
                 com.setPerfil2(listaPerfil.get(position).getId());
-                combinacaoServices.removerCombinacao(com);
+                combinacaoServices.removerCombinacao(sessao.getPerfil(), com);
                 Auxiliar.criarToast(contexto,"Match desfeito");
             }
         });
