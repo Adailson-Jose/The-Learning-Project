@@ -15,6 +15,10 @@
             android:name="android.app.default_searchable"
             android:value=".infraestrutura.gui.BuscaActivity" />
 
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <provider
             android:name=".infraestrutura.utils.RecentProvider"
             android:authorities="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider" />
