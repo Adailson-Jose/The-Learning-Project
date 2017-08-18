@@ -80,9 +80,8 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Perfil p = (Perfil) parent.getAdapter().getItem(position);
+        sessao.setPerfilSelecionado(p);
         Intent intent = new Intent(getActivity(), PerfilActivity.class);
-        intent.putExtra("Perfil", p);
-//        Auxiliar.criarToast(getContext(),String.valueOf(parent.getItemIdAtPosition(position)));
         startActivity(intent);
     }
 }

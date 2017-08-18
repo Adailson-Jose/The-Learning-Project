@@ -14,8 +14,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:contentDescription="@string/nome"
@@ -25,28 +25,19 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:paddingBottom="15dp"
+        android:layout_height="40dp"
         android:background="@color/colorAccent">
-
-        <TextView
-            android:id="@+id/nomeUsuarioID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            style="@style/camposTexto"
-            android:text="@string/nome" />
 
         <TextView
             android:id="@+id/descricaoUsuarioID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="15sp"
             android:textColor="@color/textWhite"
             android:textStyle="italic"
             android:fontFamily="serif"
             android:text="@string/descricao"
-            android:layout_alignParentBottom="true"
+            android:layout_centerVertical="true"
             android:layout_centerHorizontal="true" />
 
 

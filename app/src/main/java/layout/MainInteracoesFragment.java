@@ -37,8 +37,8 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         perfilServices = PerfilServices.getInstancia(getActivity());
         listaInteracoes = (ListView) view.findViewById(R.id.listViewInteracoesID);
         listaInteracoes.setOnItemClickListener(this);
-
         listar();
+
         return view;
     }
 
@@ -61,6 +61,9 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(), PerfilActivity.class));
+        Perfil p = (Perfil) parent.getAdapter().getItem(position);
+        sessao.setPerfilSelecionado(p);
+        Intent intent = new Intent(getActivity(), PerfilActivity.class);
+        startActivity(intent);
     }
 }

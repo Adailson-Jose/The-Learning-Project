@@ -20,6 +20,7 @@ public final class ControladorSessao {
     private Context contexto;
 
     private Perfil perfil;
+    private Perfil perfilSelecionado;
     private Pessoa pessoa;
     private String codigo;
 
@@ -114,5 +115,13 @@ public final class ControladorSessao {
 
     public void setCodigo(String codigo) {
         this.codigo = codigo;
+    }
+
+    public Perfil getPerfilSelecionado() {
+        return perfilSelecionado;
+    }
+
+    public void setPerfilSelecionado(Perfil perfilSelecionado) {
+        this.perfilSelecionado = perfilSelecionado;
     }
 }

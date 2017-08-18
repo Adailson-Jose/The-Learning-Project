@@ -64,7 +64,7 @@ public final class PerfilDAO {
     }
 
     public Perfil consultar(int id) {
-        String[] colunas = {ID_PERFIL, PESSOA_PERFIL};
+        String[] colunas = {ID_PERFIL, PESSOA_PERFIL, DESCRICAO_PERFIL};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, ID_PERFIL + " = ?", new String[]{Integer.toString(id)}, null, null, null);
         Perfil perfil = null;
         Pessoa pessoa;
@@ -74,6 +74,7 @@ public final class PerfilDAO {
             pessoa = new Pessoa();
             pessoa.setId(cursor.getInt(cursor.getColumnIndex(PESSOA_PERFIL)));
             perfil.setId(cursor.getInt(cursor.getColumnIndex(ID_PERFIL)));
+            perfil.setDescricao(cursor.getString(cursor.getColumnIndex(DESCRICAO_PERFIL)));
             perfil.setPessoa(pessoa);
         }
 
