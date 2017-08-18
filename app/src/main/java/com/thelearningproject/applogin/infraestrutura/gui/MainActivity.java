@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity {
                 alterarFragment("1", ft, getBuscaFragment());
                 break;
             case R.id.menu_perfil:
-                Toast.makeText(this, sessao.getPerfil().getDescricao(), Toast.LENGTH_SHORT).show();
                 alterarFragment("2", ft, getPerfilFragment());
                 break;
             case R.id.menu_interacoes:

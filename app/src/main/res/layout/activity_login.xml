@@ -52,6 +52,17 @@
                 android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
+        <Button
+            android:id="@+id/btEsqueci"
+            style="?android:attr/borderlessButtonStyle"
+            android:textColor="@color/textWhite"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:textAllCaps="false"
+            android:textStyle="normal"
+            android:alpha=".75"
+            android:gravity="end"
+            android:text="Esqueceu sua senha?" />
 
         <Switch
             android:id="@+id/manterSwitch"
@@ -64,8 +75,8 @@
             android:id="@+id/btLogin"
             style="@style/btn_white"
             android:layout_width="fill_parent"
-            android:layout_height="34dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:text="@string/login" />
@@ -77,23 +88,13 @@
             android:id="@+id/cadastroID"
             style="@style/btn_white"
             android:layout_width="fill_parent"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textColor="@color/textWhite"
             android:background="@drawable/button_stroke"
             android:text="@string/cadastrar"
             android:layout_marginTop="10dp" />
-
-        <Button
-            android:id="@+id/btEsqueci"
-            style="@style/btn_white"
-            android:layout_width="fill_parent"
-            android:layout_height="34dp"
-            android:layout_marginTop="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="Esqueceu sua senha?" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

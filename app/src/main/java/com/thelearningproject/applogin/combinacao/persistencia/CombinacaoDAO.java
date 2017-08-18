@@ -63,7 +63,7 @@ public class CombinacaoDAO {
 
     public void removeCombinacao(Combinacao combinacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
-        db.delete(TABELA_COMBINACAO, IDPERFIL1_COMBINACAO + " = ? " + IDPERFIL2_COMBINACAO + " = ?", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
+        db.delete(TABELA_COMBINACAO, IDPERFIL1_COMBINACAO + " = ? AND " + IDPERFIL2_COMBINACAO + " = ?", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
         db.close();
     }
 
@@ -71,7 +71,7 @@ public class CombinacaoDAO {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(STATUS_COMBINACAO, combinacao.getStatus());
-        db.update(TABELA_COMBINACAO, values, IDPERFIL1_COMBINACAO + " = ? " + IDPERFIL2_COMBINACAO + " = ?", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
+        db.update(TABELA_COMBINACAO, values, IDPERFIL1_COMBINACAO + " = ? AND " + IDPERFIL2_COMBINACAO + " = ?", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
         db.close();
     }
 

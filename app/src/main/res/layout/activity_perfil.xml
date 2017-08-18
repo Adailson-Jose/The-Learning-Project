@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context="layout.MainPerfilFragment">
+    tools:context="com.thelearningproject.applogin.perfil.gui.PerfilActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="wrap_content"
         android:padding="5dp"
         android:background="@drawable/gradient">
 
@@ -109,7 +109,7 @@
                 style="@style/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/conta" />
+                android:text="@string/outrasOpcoes" />
 
             <View style="@style/DividerBlack"/>
 
@@ -119,7 +119,7 @@
                 android:orientation="horizontal">
 
                 <ListView
-                    android:id="@+id/listaPerfilConfiguracoes"
+                    android:id="@+id/listaPerfilOpcoes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="@color/transparent" />

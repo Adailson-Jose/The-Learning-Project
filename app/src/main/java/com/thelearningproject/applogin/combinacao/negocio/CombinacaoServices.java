@@ -40,7 +40,7 @@ public class CombinacaoServices {
         ArrayList<Perfil> perfis = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 1));
         for (Combinacao c : combinacoes) {
-            perfis.add(perfilServices.retornaPerfil(c.getPerfil2()));
+            perfis.add(perfilServices.consulta(c.getPerfil2()));
         }
         return perfis;
     }
@@ -50,7 +50,7 @@ public class CombinacaoServices {
         ArrayList<Perfil> perfis = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 0));
         for (Combinacao c : combinacoes) {
-            perfis.add(perfilServices.retornaPerfil(c.getPerfil2()));
+            perfis.add(perfilServices.consulta(c.getPerfil2()));
         }
         return perfis;
     }
@@ -61,9 +61,9 @@ public class CombinacaoServices {
         combinacao1.setPerfil1(perfil1.getId());
         combinacao1.setPerfil2(perfil2.getId());
         combinacao1.setStatus(0);
-        combinacao1.setPerfil1(perfil2.getId());
-        combinacao1.setPerfil2(perfil1.getId());
-        combinacao1.setStatus(0);
+        combinacao2.setPerfil1(perfil2.getId());
+        combinacao2.setPerfil2(perfil1.getId());
+        combinacao2.setStatus(0);
         persistencia.inserir(combinacao1);
         persistencia.inserir(combinacao2);
     }

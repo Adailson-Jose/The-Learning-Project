@@ -35,6 +35,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private FragmentActivity activity;
     private ControladorSessao sessao;
     private TextView donoConta;
+    private TextView donoDescricao;
     private PerfilServices perfilServices = PerfilServices.getInstancia(activity);
     private ListView listViewHabilidades;
     private ListView listViewNecessidades;
@@ -46,6 +47,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         activity = this.getActivity();
         sessao = ControladorSessao.getInstancia(activity);
         donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
+        donoDescricao = (TextView) activity.findViewById(R.id.descricaoUsuarioID);
 
 
         return inflater.inflate(R.layout.fragment_main_perfil, container, false);
@@ -59,6 +61,7 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         sessao = ControladorSessao.getInstancia(activity);
 
         donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
+        donoDescricao = (TextView) activity.findViewById(R.id.descricaoUsuarioID);
 
         String[] listaHabilidades = {perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId())};
         String[] listaNecessidades = {perfilServices.retornaStringListaNecessidades(sessao.getPerfil().getId())};
@@ -150,5 +153,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         sessao.setPerfil(perfil);
 
         donoConta.setText(sessao.getPessoa().getNome());
+        donoDescricao.setText(sessao.getPerfil().getDescricao());
     }
 }

@@ -14,9 +14,10 @@
         <meta-data
             android:name="android.app.default_searchable"
             android:value=".infraestrutura.gui.BuscaActivity" />
+
         <provider
-            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider"
-            android:name="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider" />
+            android:name=".infraestrutura.utils.RecentProvider"
+            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider" />
 
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
@@ -86,8 +87,12 @@
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
         <activity android:name=".pessoa.gui.AlterarDescricaoActivity" />
-        <activity android:name=".pessoa.gui.RecuperarContaActivity" />
-        <activity android:name=".pessoa.gui.ConfimaRecuperarActivity" />
+        <activity
+            android:name=".pessoa.gui.RecuperarContaActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity
+            android:name=".pessoa.gui.ConfimaRecuperarActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".pessoa.gui.AlterarTelefoneActivity" />
         <activity
             android:name=".infraestrutura.gui.BuscaActivity"
@@ -103,7 +108,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
-
+        <activity android:name=".perfil.gui.PerfilActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infraestrutura.gui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

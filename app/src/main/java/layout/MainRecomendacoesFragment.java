@@ -1,20 +1,25 @@
 package layout;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
+import com.thelearningproject.applogin.infraestrutura.gui.MainActivity;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.PerfilActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
@@ -24,7 +29,7 @@ import java.util.Set;
 /**
  * Criado por Gabriel on 03/08/2017
  */
-public class MainRecomendacoesFragment extends Fragment {
+public class MainRecomendacoesFragment extends Fragment implements AdapterView.OnItemClickListener {
     private FragmentActivity activity;
     private ListView listaRecomendados;
     private ControladorSessao sessao;
@@ -40,7 +45,9 @@ public class MainRecomendacoesFragment extends Fragment {
         activity = getActivity();
         sessao = ControladorSessao.getInstancia(activity);
         listaRecomendados = (ListView) view.findViewById(R.id.listViewRecomendaID);
+        listaRecomendados.setOnItemClickListener(this);
         listar();
+
         return view;
     }
 
@@ -58,11 +65,20 @@ public class MainRecomendacoesFragment extends Fragment {
         }
 
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil));
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this);
 
 
         adaptador.notifyDataSetChanged();
         listaRecomendados.setAdapter(adaptador);
     }
 
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Perfil p = (Perfil) parent.getAdapter().getItem(position);
+        PerfilActivity perfilActivity = new PerfilActivity(p);
+        Intent intent = new Intent(getActivity(), perfilActivity.getClass());
+        intent.putExtra("Perfil", p);
+//        Auxiliar.criarToast(getContext(),String.valueOf(parent.getItemIdAtPosition(position)));
+        startActivity(intent);
+    }
 }

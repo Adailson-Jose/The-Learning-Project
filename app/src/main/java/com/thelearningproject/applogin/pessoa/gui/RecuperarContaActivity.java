@@ -47,7 +47,6 @@ public class RecuperarContaActivity extends AppCompatActivity {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
         Pessoa pessoa = negocioPessoa.retornaPessoa(telefone);
 
-        Auxiliar.criarToast(this, String.valueOf(validaRecuperacao(pessoa)));
         if (validaRecuperacao(pessoa)) {
             executarRecuperacao(pessoa);
         }

@@ -3,13 +3,14 @@ package com.thelearningproject.applogin.perfil.dominio;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Criado por Ebony Marques on 26/07/2017.
  */
 
-public class Perfil {
+public class Perfil implements Serializable {
     private int id;
     private Pessoa pessoa;
     private String descricao;

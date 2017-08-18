@@ -66,7 +66,7 @@ public final class PerfilServices {
         persistencia.alterarPerfil(perfil);
     }
 
-    private Perfil consulta(int id) {
+    public Perfil consulta(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
         perfil.setPessoa(pessoa);

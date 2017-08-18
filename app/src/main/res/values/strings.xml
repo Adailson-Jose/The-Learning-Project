@@ -45,14 +45,16 @@
     <string name="cadastrarNovaHabilidade">Insira uma nova habilidade</string>
     <string name="cadastrarNovaNecessidade">Insira uma nova necessidade</string>
     <string name="botaoExcluir">Botão excluir</string>
-    <string name="informativo">Digite o número de telefone vinculado a sua conta</string>
-    <string name="titulo">Esqueceu sua senha?</string>
+    <string name="informativo">Digite o número de telefone vinculado\n a sua conta</string>
+    <string name="esqueceuSenhaTitulo">Esqueceu sua senha?</string>
     <string name="telefone">Telefone</string>
     <string name="alterarTelefone">Alterar telefone</string>
-    <string name="dica">Mensagem enviada, pode levar alguns minutos até o recebimento da mesma.</string>
+    <string name="dica">Pode levar alguns minutos até o\nrecebimento da mensagem</string>
     <string name="sms">Seu código de recuperação de conta é: </string>
     <string name="codigoRecebido">Digite o código recebido</string>
     <string name="enviarCodigo">Enviar novo código</string>
+    <string name="mensagemEnviada">Mensagem enviada com sucesso!</string>
+    <string name="iniciarChat">Iniciar Chat</string>
 
 
     <string name="hello_blank_fragment">Hello blank fragment</string>

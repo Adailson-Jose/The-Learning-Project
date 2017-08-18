@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:descendantFocusability="blocksDescendants">
 
     <TextView
         android:id="@+id/tv_perfil"
@@ -54,6 +55,39 @@
         android:textColor="@color/colorAccent"
         android:textSize="16sp"
         android:textStyle="bold" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/criarInteracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@color/colorPrimary"
+            android:padding="15dp"
+            android:src="@drawable/ic_grade_black_24dp"
+            android:layout_alignTop="@+id/desfazerInteracao"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="false"
+            android:onClick="criarInteracao"/>
+
+        <ImageButton
+            android:id="@+id/desfazerInteracao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@color/colorPrimary"
+            android:padding="15dp"
+            android:src="@drawable/ic_star_border_black_24dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:focusable="false"
+            android:layout_marginTop="12dp" />
+    </RelativeLayout>
 
 
 </LinearLayout>
