@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
@@ -41,23 +42,24 @@ public class RecuperarContaActivity extends AppCompatActivity {
 
     }
 
-    private void processoRecuperacao(){
-        String telefone = entradaTelefone.getText().toString();
+    private void processoRecuperacao() {
+        try{
+            String telefone = entradaTelefone.getText().toString();
 
-        PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
-        Pessoa pessoa = negocioPessoa.retornaPessoa(telefone);
+            PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
+            Pessoa pessoa = negocioPessoa.retornaPessoa(telefone);
 
-        if (validaRecuperacao(pessoa)) {
-            executarRecuperacao(pessoa);
+            if (validaRecuperacao(pessoa)) {
+                executarRecuperacao(pessoa);
+            }
+        }catch (UsuarioException e){
+            entradaTelefone.setError(e.getMessage());
         }
 
     }
     private boolean validaRecuperacao(Pessoa pessoa) {
         boolean validacao = true;
-        if(pessoa== null){
-            entradaTelefone.setError("Telefone inexistente");
-            validacao=false;
-        }else if (pessoa.getTelefone() == null || pessoa.getTelefone().trim().length() == 0) {
+        if (pessoa.getTelefone() == null || pessoa.getTelefone().trim().length() == 0) {
             entradaTelefone.setError("Telefone inválido");
             validacao = false;
         }

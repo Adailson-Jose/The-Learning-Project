@@ -93,31 +93,37 @@ public class CriarContaActivity extends Activity {
             }
 
         } catch (UsuarioException e) {
-            entradaEmail.setError("E-mail já cadastrado");
+            entradaEmail.setError(e.getMessage());
         }
     }
+
 
     private void executarCadastro(Pessoa pessoa) throws UsuarioException {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
 
-        negocioUsuario.inserirUsuario(pessoa.getUsuario());
-        int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail());
-        pessoa.getUsuario().setId(usuarioid);
-        negocioPessoa.inserirPessoa(pessoa);
+        if(negocioPessoa.verificaTelefoneExistente(pessoa.getTelefone())){
+            negocioUsuario.inserirUsuario(pessoa.getUsuario());
+            int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail());
+            pessoa.getUsuario().setId(usuarioid);
+            negocioPessoa.inserirPessoa(pessoa);
 
-        int pessoaid = negocioPessoa.retornaPessoa(usuarioid).getId();
-        pessoa.setId(pessoaid);
+            int pessoaid = negocioPessoa.retornaPessoa(usuarioid).getId();
+            pessoa.setId(pessoaid);
 
-        Intent entidade = new Intent(CriarContaActivity.this, TermosActivity.class);
-        entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            Intent entidade = new Intent(CriarContaActivity.this, TermosActivity.class);
+            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
-        sessao.setPessoa(pessoa);
-        sessao.salvarSessao();
-        sessao.iniciaSessao();
+            sessao.setPessoa(pessoa);
+            sessao.salvarSessao();
+            sessao.iniciaSessao();
 
-        startActivity(entidade);
-        finish();
+            startActivity(entidade);
+            finish();
+        }else{
+            entradaTelefone.setError("Telefone já cadastrado");
+        }
+
     }
 
 

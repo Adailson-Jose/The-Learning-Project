@@ -2,6 +2,7 @@ package com.thelearningproject.applogin.pessoa.negocio;
 
 import android.content.Context;
 
+import com.thelearningproject.applogin.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.persistencia.PessoaDAO;
 
@@ -26,15 +27,25 @@ public class PessoaServices {
         return instancia;
     }
 
-    public void inserirPessoa(Pessoa pessoa) {
+    public void inserirPessoa(Pessoa pessoa){
         if (validaAlterarPessoa(pessoa.getUsuario().getId())) {
             Pessoa pessoaAntiga = retornaPessoa(pessoa.getUsuario().getId());
             pessoaAntiga.setNome(pessoa.getNome());
             alterarPessoa(pessoaAntiga);
-        } else {
+        } else{
             persistencia.inserir(pessoa);
         }
 
+    }
+
+    public Boolean verificaTelefoneExistente(String telefone) {
+        Boolean resultado = false;
+
+        if (persistencia.retornaPessoa(telefone)==null) {
+            resultado = true;
+        }
+
+        return resultado;
     }
 
     private boolean validaAlterarPessoa(int usuarioId) {
@@ -50,8 +61,13 @@ public class PessoaServices {
         persistencia.alterarPessoa(pessoa);
     }
 
-    public Pessoa retornaPessoa(String telefone){
-        return  persistencia.retornaPessoa(telefone);
+    public Pessoa retornaPessoa(String telefone) throws UsuarioException {
+        Pessoa pessoa= persistencia.retornaPessoa(telefone);
+        if (pessoa != null){
+            return  pessoa;
+        }else{
+            throw new UsuarioException("Telefone inexistente");
+        }
     }
     public Pessoa retornaPessoa(int idUsuario) {
         return persistencia.retornaPessoa(idUsuario);
