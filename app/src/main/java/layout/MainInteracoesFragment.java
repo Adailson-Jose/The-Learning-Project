@@ -14,7 +14,6 @@ import android.widget.ListView;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
-import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -45,8 +44,12 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
 
     private void listar() {
         ArrayList<Perfil> perfils = new ArrayList<>();
-        for( Combinacao c: combinacaoServices.retornaCombinacoesPendentes(sessao.getPerfil())){
-            perfils.add(perfilServices.consulta(c.getPerfil2()));
+        for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
+            if (c.getPerfil1() == sessao.getPerfil().getId()) {
+                perfils.add(perfilServices.consulta(c.getPerfil2()));
+            } else {
+                perfils.add(perfilServices.consulta(c.getPerfil1()));
+            }
         }
 
 

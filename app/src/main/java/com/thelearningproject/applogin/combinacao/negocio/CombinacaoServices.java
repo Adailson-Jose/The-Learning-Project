@@ -5,7 +5,6 @@ import android.content.Context;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.combinacao.persistencia.CombinacaoDAO;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
-import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
@@ -46,18 +45,12 @@ public class CombinacaoServices {
     }
 
     public void inserirCombinacao(Perfil perfil1, Perfil perfil2) {
-        Combinacao combinacao1 = new Combinacao();
-        Combinacao combinacao2 = new Combinacao();
-        combinacao1.setPerfil1(perfil1.getId());
-        combinacao1.setPerfil2(perfil2.getId());
-        combinacao1.setStatus(0);
-        combinacao2.setPerfil1(perfil2.getId());
-        combinacao2.setPerfil2(perfil1.getId());
-        combinacao2.setStatus(0);
-        perfil1.addCombinacoes(combinacao1);
-        perfil2.addCombinacoes(combinacao2);
-        persistencia.inserir(combinacao1);
-        persistencia.inserir(combinacao2);
+        Combinacao combinacao = new Combinacao();
+        combinacao.setPerfil1(perfil1.getId());
+        combinacao.setPerfil2(perfil2.getId());
+        combinacao.setStatus(0);
+        perfil1.addCombinacoes(combinacao);
+        persistencia.inserir(combinacao);
     }
 
     public void atualizaCombinacao(Combinacao combinacao, int tipo) {

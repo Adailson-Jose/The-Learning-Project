@@ -1,12 +1,11 @@
 package com.thelearningproject.applogin.perfil.gui;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
-import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 public class PerfilActivity extends AppCompatActivity {
     private Perfil perfilAtual;
@@ -19,7 +18,7 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_perfil);
         perfil = (Perfil) getIntent().getSerializableExtra("Perfil");
-        setTitle(perfilAtual.getPessoa().getNome());
+        setTitle(perfil.getPessoa().getNome());
 
         tvNomePerfil = (TextView) findViewById(R.id.nomeUsuarioID);
         tvDescricaoPerfil = (TextView) findViewById(R.id.descricaoUsuarioID);

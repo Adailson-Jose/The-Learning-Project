@@ -15,8 +15,6 @@ import android.widget.ListView;
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
-import com.thelearningproject.applogin.infraestrutura.gui.MainActivity;
-import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -65,7 +63,11 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             listaPerfil.remove(sessao.getPerfil());
         }
         for (Combinacao c: sessao.getPerfil().getCombinacoes()){
-            listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+            if (c.getPerfil1() == sessao.getPerfil().getId()) {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+            } else {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
+            }
         }
 
         ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this);

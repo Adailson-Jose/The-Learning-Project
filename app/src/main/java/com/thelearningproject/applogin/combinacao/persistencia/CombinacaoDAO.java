@@ -46,12 +46,12 @@ public class CombinacaoDAO {
 
     public ArrayList<Combinacao> retornaCombinacoes(int perfil, int tipo) {
         String[] colunas = {IDPERFIL1_COMBINACAO, IDPERFIL2_COMBINACAO, STATUS_COMBINACAO};
-        Cursor cursor = banco.getReadableDatabase().query(TABELA_COMBINACAO, colunas, IDPERFIL1_COMBINACAO + " = ?", new String[]{Integer.toString(perfil)}, null, null, null);
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_COMBINACAO, colunas, IDPERFIL1_COMBINACAO + " = ? OR " + IDPERFIL2_COMBINACAO + " = ?", new String[]{Integer.toString(perfil), Integer.toString(perfil)}, null, null, null);
         ArrayList<Combinacao> listaCombinacao = new ArrayList<>();
         while (cursor.moveToNext()) {
             if (cursor.getInt(cursor.getColumnIndex(STATUS_COMBINACAO)) == tipo) {
                 Combinacao combinacao = new Combinacao();
-                combinacao.setPerfil1(perfil);
+                combinacao.setPerfil1(cursor.getInt(cursor.getColumnIndex(IDPERFIL1_COMBINACAO)));
                 combinacao.setPerfil2(cursor.getInt(cursor.getColumnIndex(IDPERFIL2_COMBINACAO)));
                 combinacao.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS_COMBINACAO)));
                 listaCombinacao.add(combinacao);
@@ -63,7 +63,7 @@ public class CombinacaoDAO {
 
     public void removeCombinacao(Combinacao combinacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
-        db.delete(TABELA_COMBINACAO, IDPERFIL1_COMBINACAO + " = ? AND " + IDPERFIL2_COMBINACAO + " = ?", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
+        db.delete(TABELA_COMBINACAO, "( " + IDPERFIL1_COMBINACAO + " = ? AND " + IDPERFIL2_COMBINACAO + " = ? ) OR ( " + IDPERFIL2_COMBINACAO + " = ? AND " + IDPERFIL1_COMBINACAO + " = ? )", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2()), String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
         db.close();
     }
 
