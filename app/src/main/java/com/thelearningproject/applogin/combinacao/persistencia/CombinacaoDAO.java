@@ -11,10 +11,10 @@ import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 17/08/2017.
+ * Criado por Pichau em 17/08/2017.
  */
 
-public class CombinacaoDAO {
+public final class CombinacaoDAO {
     private Banco banco;
     private static CombinacaoDAO instancia;
 

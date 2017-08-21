@@ -1,7 +1,7 @@
 package com.thelearningproject.applogin.infraestrutura.utils;
 
 /**
- * Created by Pichau on 17/08/2017.
+ * Criado por Pichau em 17/08/2017.
  */
 
 public class FrequenciaMateria {
@@ -17,16 +17,16 @@ public class FrequenciaMateria {
         return materiaID;
     }
 
-    public void setMateria(int materiaID) {
-        this.materiaID = materiaID;
+    public void setMateria(int novo) {
+        this.materiaID = novo;
     }
 
     public Integer getFrequencia() {
         return frequencia;
     }
 
-    public void setFrequencia(Integer frequencia) {
-        this.frequencia += frequencia;
+    public void setFrequencia(Integer novo) {
+        this.frequencia += novo;
 
     }
 

@@ -113,15 +113,15 @@ public final class ControladorSessao {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCodigo(String novo) {
+        this.codigo = novo;
     }
 
     public Perfil getPerfilSelecionado() {
         return perfilSelecionado;
     }
 
-    public void setPerfilSelecionado(Perfil perfilSelecionado) {
-        this.perfilSelecionado = perfilSelecionado;
+    public void setPerfilSelecionado(Perfil novo) {
+        this.perfilSelecionado = novo;
     }
 }

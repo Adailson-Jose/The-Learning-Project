@@ -19,6 +19,8 @@ import java.util.regex.Pattern;
  */
 
 public class Auxiliar {
+    private static final String CODIGO_TESTE = "123";
+
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (activity.getCurrentFocus() != null && activity.getCurrentFocus().getWindowToken() != null) {
@@ -51,8 +53,7 @@ public class Auxiliar {
     }
 
     public static String geraCodigo(){
-        String codigo = "123";
-        return codigo;
+        return CODIGO_TESTE;
     }
 
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo, String mensagem) {

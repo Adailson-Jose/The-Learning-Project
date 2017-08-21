@@ -9,10 +9,10 @@ import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import java.util.ArrayList;
 
 /**
- * Created by Pichau on 17/08/2017.
+ * Criado por Pichau em 17/08/2017.
  */
 
-public class CombinacaoServices {
+public final class CombinacaoServices {
     private static CombinacaoServices instancia;
     private CombinacaoDAO persistencia;
 
@@ -26,10 +26,6 @@ public class CombinacaoServices {
         }
 
         return instancia;
-    }
-
-    public void iniciarChat() {
-
     }
 
     public ArrayList<Combinacao> retornaCombinacoesAtivas(Perfil perfil) {

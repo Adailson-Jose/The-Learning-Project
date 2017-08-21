@@ -15,8 +15,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -26,7 +24,6 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
-
 import layout.MainBuscaFragment;
 import layout.MainInteracoesFragment;
 import layout.MainPerfilFragment;
@@ -92,12 +89,6 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt(SELECTED_ITEM, mSelectedItem);
         super.onSaveInstanceState(outState);
     }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
