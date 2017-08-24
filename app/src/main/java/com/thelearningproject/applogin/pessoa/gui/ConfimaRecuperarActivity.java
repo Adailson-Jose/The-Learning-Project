@@ -15,6 +15,7 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 public class ConfimaRecuperarActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private EditText entradaCodigo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +30,7 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sessao.setCodigo(Auxiliar.geraCodigo());
-                enviaSms(sessao.getPessoa().getTelefone(),sessao.getCodigo());
+                enviaSms(sessao.getPessoa().getTelefone(), sessao.getCodigo());
                 recreate();
 
             }
@@ -42,13 +43,15 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
             }
         });
     }
-    private void processoVerificacao(){
+
+    private void processoVerificacao() {
         String codigo = entradaCodigo.getText().toString();
-        if(validaCodigo(codigo)){
+        if (validaCodigo(codigo)) {
             executaVerificacao(codigo);
         }
     }
-    private boolean validaCodigo(String codigo){
+
+    private boolean validaCodigo(String codigo) {
         boolean validacao = true;
 
         if (codigo == null || codigo.trim().length() == 0) {
@@ -57,21 +60,23 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
         }
         return validacao;
     }
-    private void executaVerificacao(String codigo){
-        if (codigo.equals(String.valueOf(sessao.getCodigo()))){
+
+    private void executaVerificacao(String codigo) {
+        if (codigo.equals(String.valueOf(sessao.getCodigo()))) {
             Intent entidade = new Intent(ConfimaRecuperarActivity.this, AlterarSenhaActivity.class);
             entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             sessao.salvarSessao();
             sessao.iniciaSessao();
             startActivity(entidade);
-        }else{
+        } else {
             entradaCodigo.setError("Código não reconhecido");
 
         }
     }
-    public void enviaSms(String telefone, String codigo){
+
+    public void enviaSms(String telefone, String codigo) {
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+" "+codigo,null,null);
+        smsManager.sendTextMessage(telefone, null, getApplicationContext().getString(R.string.sms) + " " + codigo, null, null);
     }
 
 }

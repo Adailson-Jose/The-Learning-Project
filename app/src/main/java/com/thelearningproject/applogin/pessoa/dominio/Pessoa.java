@@ -40,6 +40,7 @@ public class Pessoa {
     public void setTelefone(String novoTelefone) {
         this.telefone = novoTelefone;
     }
+
     public void setUsuario(Usuario novoUsuario) {
         this.usuario = novoUsuario;
     }

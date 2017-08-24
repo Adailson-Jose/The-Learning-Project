@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
-import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;

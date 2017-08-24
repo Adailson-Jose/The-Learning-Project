@@ -58,5 +58,8 @@
     <string name="notificacoes">Notificações</string>
     <string name="nenhumaRecomendacao">Que pena! Nenhum perfil recomendado :(</string>
     <string name="nenhumaInteracao">Você não interagiu com nenhum usuário ainda.\nO que está esperando? Ache seu novo parceiro de estudo!</string>
+    <string name="pesquisar">Pesquisar</string>
+    <string name="semResultados">Sem resultados</string>
+    <string name="contato">Contato</string>
 
 </resources>

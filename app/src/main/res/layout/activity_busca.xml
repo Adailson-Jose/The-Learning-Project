@@ -12,6 +12,18 @@
         android:gravity="center"
         android:textColor="@color/textBlack" />
 
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textAlignment="center"
+        android:padding="25dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:text="@string/semResultados"
+        android:visibility="gone"
+        />
+
     <ListView
         android:id="@+id/listViewID"
         android:layout_width="match_parent"

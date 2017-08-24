@@ -16,9 +16,9 @@
             android:id="@+id/entradaMateriaID"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:hint="@string/cadastrarNovaHabilidade"
-            android:textSize="22sp"/>
+            android:inputType="text"
+            android:textSize="22sp" />
 
     </android.support.design.widget.TextInputLayout>
 

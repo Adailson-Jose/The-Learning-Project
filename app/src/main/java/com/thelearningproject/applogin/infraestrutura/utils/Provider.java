@@ -16,27 +16,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Pichau on 22/08/2017.
+ * Creado by Pichau on 22/08/2017.
  */
 
 public class Provider extends ContentProvider {
 
     private MateriaDAO materiaDAO;
-    private static final String AUTHORITY = "com.thelearningproject.applogin.infraestrutura.utils.Provider";
+/*    private static final String AUTHORITY = "com.thelearningproject.applogin.infraestrutura.utils.Provider";
     private static final Uri CONTENT_URI = Uri.parse("content://com.thelearningproject.applogin.infraestrutura.utils.Provider/materias");
-//    private static final int MATERIAS = 1;
-//    private static final int MATERIAS_ID = 2;
-//
-//    private static UriMatcher uriMaterias;
-//
-//    static {
-//        uriMaterias = new UriMatcher(UriMatcher.NO_MATCH);
-//
-//        //content://com.thelearningproject.applogin.infraestrutura.utils.Provider/materias
-//        uriMaterias.addURI(AUTHORITY, "materias/", MATERIAS);
-//        //content://com.thelearningproject.applogin.infraestrutura.utils.Provider/materias/2
-//        uriMaterias.addURI(AUTHORITY, "materias/#", MATERIAS_ID);
-//    }
+    private static final int MATERIAS = 1;
+    private static final int MATERIAS_ID = 2;
+
+    private static UriMatcher uriMaterias;
+
+    static {
+        uriMaterias = new UriMatcher(UriMatcher.NO_MATCH);
+
+        //content://com.thelearningproject.applogin.infraestrutura.utils.Provider/materias
+        uriMaterias.addURI(AUTHORITY, "materias/", MATERIAS);
+        //content://com.thelearningproject.applogin.infraestrutura.utils.Provider/materias/2
+        uriMaterias.addURI(AUTHORITY, "materias/#", MATERIAS_ID);
+    }*/
 
     @Override
     public boolean onCreate() {
@@ -51,7 +51,7 @@ public class Provider extends ContentProvider {
         if (selectionArgs != null && selectionArgs.length > 0 && selectionArgs[0].length() > 0) {
             SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
             queryBuilder.setTables("materias");
-            Map<String, String> projectionMap = new HashMap<String, String>();
+            Map<String, String> projectionMap = new HashMap<>();
             projectionMap.put("nome", "nome AS " + SearchManager.SUGGEST_COLUMN_TEXT_1);
             projectionMap.put("id", "id AS " + BaseColumns._ID);
             projectionMap.put("value_data", "nome AS " + SearchManager.SUGGEST_COLUMN_INTENT_DATA_ID);

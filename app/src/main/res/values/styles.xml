@@ -5,7 +5,9 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownMenuBackground</item>
+        <item name="android:dropDownItemStyle">@style/DropDownItem</item>
+
     </style>
 
     <style name="camposTexto">
@@ -74,5 +76,17 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="AutocompleteStyle">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:dropDownListViewStyle">@style/DropDownMenuBackground</item>
+    </style>
+
+    <style name="DropDownMenuBackground">
+        <item name="android:background">@color/textWhite</item>
+    </style>
+
+    <style name="DropDownItem">
+        <item name="android:textColor">@color/textgray</item>
+    </style>
 
 </resources>

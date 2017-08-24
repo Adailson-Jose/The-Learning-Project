@@ -107,7 +107,7 @@
                 style="@style/headerText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/outrasOpcoes" />
+                android:text="@string/contato" />
 
             <View style="@style/DividerBlack" />
 

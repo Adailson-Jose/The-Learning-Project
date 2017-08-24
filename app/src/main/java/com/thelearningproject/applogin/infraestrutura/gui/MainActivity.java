@@ -3,7 +3,6 @@ package com.thelearningproject.applogin.infraestrutura.gui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -16,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
@@ -26,7 +26,7 @@ import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
 import com.thelearningproject.applogin.usuario.dominio.Usuario;
 import com.thelearningproject.applogin.usuario.negocio.UsuarioServices;
-import layout.MainBuscaFragment;
+
 import layout.MainInteracoesFragment;
 import layout.MainPerfilFragment;
 import layout.MainRecomendacoesFragment;
@@ -99,11 +99,8 @@ public class MainActivity extends AppCompatActivity {
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView;
         MenuItem item = menu.findItem(R.id.pesquisarBtn);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            searchView = (SearchView) item.getActionView();
-        } else {
-            searchView = (SearchView) MenuItemCompat.getActionView(item);
-        }
+
+        searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
@@ -152,9 +149,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_recomendacoes:
                 alterarFragment("0", ft, getRecomFragment());
                 break;
-/*            case R.id.menu_buscar:
-                alterarFragment("1", ft, getBuscaFragment());
-                break;*/
             case R.id.menu_perfil:
                 alterarFragment("2", ft, getPerfilFragment());
                 break;
@@ -193,13 +187,11 @@ public class MainActivity extends AppCompatActivity {
         return new MainPerfilFragment();
     }
 
-    private MainBuscaFragment getBuscaFragment() {
-        return new MainBuscaFragment();
-    }
-
     private MainRecomendacoesFragment getRecomFragment() {
         return new MainRecomendacoesFragment();
     }
 
-    private MainInteracoesFragment getInteracoesFragment() { return new MainInteracoesFragment(); }
+    private MainInteracoesFragment getInteracoesFragment() {
+        return new MainInteracoesFragment();
+    }
 }

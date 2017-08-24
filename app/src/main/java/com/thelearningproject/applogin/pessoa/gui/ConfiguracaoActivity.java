@@ -33,7 +33,7 @@ public class ConfiguracaoActivity extends AppCompatActivity implements DialogInt
         alertExclusao = Auxiliar.criarDialogConfirmacao(this, "Excluir conta", "Realmente deseja excluir sua conta?");
 
         String[] listaOpPerfil = {getApplicationContext().getString(R.string.alterarNome), getApplicationContext().getString(R.string.alterarDescricao),
-        getApplicationContext().getString(R.string.alterarTelefone)};
+                getApplicationContext().getString(R.string.alterarTelefone)};
         String[] listaOpConta = {getApplicationContext().getString(R.string.alterarEmail), getApplicationContext().getString(R.string.alterarSenha)};
         String[] listaOpOutras = {getApplicationContext().getString(R.string.excluir)};
 

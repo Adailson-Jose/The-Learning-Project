@@ -85,6 +85,6 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         com.setPerfil2(i);
         combinacaoServices.removerCombinacao(sessao.getPerfil(), com);
         listar();
-        Auxiliar.criarToast(getContext(),"Você desfez o match");
+        Auxiliar.criarToast(getContext(), "Você desfez o match");
     }
 }

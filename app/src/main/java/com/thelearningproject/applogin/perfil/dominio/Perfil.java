@@ -27,7 +27,7 @@ public class Perfil implements Serializable {
         this.combinacoes.add(combinacao);
     }
 
-    public void setCombinacoes(ArrayList<Combinacao> lista){
+    public void setCombinacoes(ArrayList<Combinacao> lista) {
         this.combinacoes = lista;
     }
 

@@ -3,7 +3,6 @@ package com.thelearningproject.applogin.infraestrutura.gui;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -34,12 +33,14 @@ import java.util.ArrayList;
 
 import static android.content.Intent.ACTION_VIEW;
 
-public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,ICriarCombinacao {
+public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, ICriarCombinacao {
     private ListView listaUsuarios;
     private TextView informacaoResultado;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
     private DadosServices dadosServices;
+    private TextView tvSemResultados;
+    private String titulo = "Resultados para \"";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         combinacaoServices = CombinacaoServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
-        setTitle("Resultados para");
+        setTitle(this.titulo);
+        tvSemResultados = (TextView) findViewById(R.id.tv1);
 
         handleSearch(getIntent());
     }
@@ -64,12 +66,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem item = menu.findItem(R.id.pesquisarBtn);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-            searchView = (SearchView) item.getActionView();
-        } else {
-            searchView = (SearchView) MenuItemCompat.getActionView(item);
-        }
 
+        searchView = (SearchView) MenuItemCompat.getActionView(item);
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setIconifiedByDefault(false);
 
@@ -99,10 +97,12 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
             String s = intent.getStringExtra(SearchManager.QUERY);
             dadosServices.cadastraBusca(sessao.getPerfil(), s);
             listar(s);
+            setTitle(titulo + s + "\"");
         } else if (ACTION_VIEW.equalsIgnoreCase(intent.getAction())) {
             String data = intent.getData().getLastPathSegment();
             dadosServices.cadastraBusca(sessao.getPerfil(), data);
             listar(data);
+            setTitle(titulo + data + "\"");
         }
     }
 
@@ -128,7 +128,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
                 informacaoResultado.getHeight();
             }
         }
-        for (Combinacao c: sessao.getPerfil().getCombinacoes()){
+        for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
             if (c.getPerfil1() == sessao.getPerfil().getId()) {
                 listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
             } else {
@@ -144,17 +144,18 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
 
         if (listaPerfil.isEmpty()) {
-            Auxiliar.criarToast(this, "Sem Resultados");//colocar textview no activity
+            tvSemResultados.setVisibility(View.VISIBLE);
             adaptador.clear();
         }
         adaptador.notifyDataSetChanged();
         listaUsuarios.setAdapter(adaptador);
         listaUsuarios.setOnItemClickListener(this);
     }
+
     public void criarCombinacao(Perfil pEstrangeiro) {
         combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
         handleSearch(getIntent());
-        Auxiliar.criarToast(BuscaActivity.this,"Você fez um match");
+        Auxiliar.criarToast(BuscaActivity.this, "Você fez um match");
     }
 
     @Override
@@ -164,6 +165,5 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         Intent intent = new Intent(BuscaActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
-
 
 }

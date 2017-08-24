@@ -65,7 +65,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     private void listar() {
         PerfilServices perfilServices = PerfilServices.getInstancia(activity);
         Set<Perfil> listaPerfil = new LinkedHashSet<>();
-        for (Materia materia:sessao.getPerfil().getNecessidades()){
+        for (Materia materia : sessao.getPerfil().getNecessidades()) {
             listaPerfil.addAll(perfilServices.listarPerfil(materia));
         }
         for (Materia materia : perfilServices.recomendaMateria(sessao.getPerfil())) {
@@ -74,7 +74,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
         }
-        for (Combinacao c: sessao.getPerfil().getCombinacoes()){
+        for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
             if (c.getPerfil1() == sessao.getPerfil().getId()) {
                 listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
             } else {
@@ -98,7 +98,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     public void criarCombinacao(Perfil pEstrangeiro) {
         combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
         listar();
-        Auxiliar.criarToast(getContext(),"Você fez um match");
+        Auxiliar.criarToast(getContext(), "Você fez um match");
     }
 
     @Override

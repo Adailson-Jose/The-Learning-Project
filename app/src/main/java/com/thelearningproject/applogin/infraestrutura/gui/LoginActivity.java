@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
         entradaSenha = (EditText) findViewById(R.id.tSenha);
         Button botaoLogin = (Button) findViewById(R.id.btLogin);
         Button botaoCadastro = (Button) findViewById(R.id.cadastroID);
-        Button botaoEsqueci = (Button) findViewById(R.id.btEsqueci) ;
+        Button botaoEsqueci = (Button) findViewById(R.id.btEsqueci);
         switchConectado = (Switch) findViewById(R.id.manterSwitch);
 
         botaoLogin.setOnClickListener(new View.OnClickListener() {

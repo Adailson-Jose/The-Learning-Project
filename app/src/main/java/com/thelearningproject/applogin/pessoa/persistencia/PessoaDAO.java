@@ -109,7 +109,7 @@ public final class PessoaDAO {
 
         ContentValues values = new ContentValues();
         values.put(NOME_PESSOA, pessoa.getNome());
-        values.put(TELEFONE_PESSOA,pessoa.getTelefone());
+        values.put(TELEFONE_PESSOA, pessoa.getTelefone());
 
         db.update(TABELA_PESSOAS, values, ID_PESSOA + " = ?",
                 new String[]{String.valueOf(pessoa.getId())});

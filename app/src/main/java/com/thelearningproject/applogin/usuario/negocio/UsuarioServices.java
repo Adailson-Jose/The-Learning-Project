@@ -121,10 +121,6 @@ public final class UsuarioServices {
         return hexString.toString();
     }
 
-    public Usuario retornaUsuario(String email) {
-        return persistencia.retornaUsuarioPorEmail(email);
-    }
-
     private void usuarioAtivo(Usuario usuario) throws UsuarioException {
         if (usuario != null && Status.DESATIVADO.equals(usuario.getStatus())) {
             throw new UsuarioException("Usuário ou senha incorretos");

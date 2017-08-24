@@ -43,7 +43,7 @@ public class RecuperarContaActivity extends AppCompatActivity {
     }
 
     private void processoRecuperacao() {
-        try{
+        try {
             String telefone = entradaTelefone.getText().toString();
             Pessoa pessoa = new Pessoa();
             pessoa.setTelefone(telefone);
@@ -52,11 +52,12 @@ public class RecuperarContaActivity extends AppCompatActivity {
                 pessoa = negocioPessoa.retornaPessoa(telefone);
                 executarRecuperacao(pessoa);
             }
-        }catch (UsuarioException e){
+        } catch (UsuarioException e) {
             entradaTelefone.setError(e.getMessage());
         }
 
     }
+
     private boolean validaRecuperacao(Pessoa pessoa) {
         boolean validacao = true;
         if (!Auxiliar.telefonePattern(pessoa.getTelefone()) || pessoa.getTelefone().trim().length() == 0 || pessoa.getTelefone() == null) {
@@ -67,13 +68,13 @@ public class RecuperarContaActivity extends AppCompatActivity {
         return validacao;
     }
 
-    private void executarRecuperacao(Pessoa pessoa){
+    private void executarRecuperacao(Pessoa pessoa) {
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
         Usuario usuario = negocioUsuario.consulta(pessoa.getUsuario().getId());
         pessoa.setUsuario(usuario);
 
         String codigo = Auxiliar.geraCodigo();
-        enviaSms(pessoa.getTelefone(),codigo);
+        enviaSms(pessoa.getTelefone(), codigo);
         sessao.setCodigo(codigo);
         sessao.setPessoa(pessoa);
         Intent entidade = new Intent(RecuperarContaActivity.this, ConfimaRecuperarActivity.class);
@@ -81,8 +82,8 @@ public class RecuperarContaActivity extends AppCompatActivity {
         startActivity(entidade);
     }
 
-    public void enviaSms(String telefone, String codigo){
+    public void enviaSms(String telefone, String codigo) {
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+" "+codigo,null,null);
+        smsManager.sendTextMessage(telefone, null, getApplicationContext().getString(R.string.sms) + " " + codigo, null, null);
     }
 }

@@ -27,12 +27,12 @@ public class PessoaServices {
         return instancia;
     }
 
-    public void inserirPessoa(Pessoa pessoa){
+    public void inserirPessoa(Pessoa pessoa) {
         if (validaAlterarPessoa(pessoa.getUsuario().getId())) {
             Pessoa pessoaAntiga = retornaPessoa(pessoa.getUsuario().getId());
             pessoaAntiga.setNome(pessoa.getNome());
             alterarPessoa(pessoaAntiga);
-        } else{
+        } else {
             persistencia.inserir(pessoa);
         }
 
@@ -41,7 +41,7 @@ public class PessoaServices {
     public Boolean verificaTelefoneExistente(String telefone) {
         Boolean resultado = false;
 
-        if (persistencia.retornaPessoa(telefone)==null) {
+        if (persistencia.retornaPessoa(telefone) == null) {
             resultado = true;
         }
 
@@ -62,13 +62,14 @@ public class PessoaServices {
     }
 
     public Pessoa retornaPessoa(String telefone) throws UsuarioException {
-        Pessoa pessoa= persistencia.retornaPessoa(telefone);
-        if (pessoa != null){
-            return  pessoa;
-        }else{
+        Pessoa pessoa = persistencia.retornaPessoa(telefone);
+        if (pessoa != null) {
+            return pessoa;
+        } else {
             throw new UsuarioException("Telefone inexistente");
         }
     }
+
     public Pessoa retornaPessoa(int idUsuario) {
         return persistencia.retornaPessoa(idUsuario);
     }

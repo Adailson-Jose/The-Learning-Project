@@ -18,8 +18,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="@string/telefone"
-            android:textSize="22sp"
-            android:inputType="phone" />
+            android:inputType="phone"
+            android:textSize="22sp" />
 
     </android.support.design.widget.TextInputLayout>
 

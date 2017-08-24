@@ -102,7 +102,7 @@ public class CriarContaActivity extends Activity {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
         UsuarioServices negocioUsuario = UsuarioServices.getInstancia(getBaseContext());
 
-        if(negocioPessoa.verificaTelefoneExistente(pessoa.getTelefone())){
+        if (negocioPessoa.verificaTelefoneExistente(pessoa.getTelefone())) {
             negocioUsuario.inserirUsuario(pessoa.getUsuario());
             int usuarioid = negocioUsuario.retornaUsuarioID(pessoa.getUsuario().getEmail());
             pessoa.getUsuario().setId(usuarioid);
@@ -120,7 +120,7 @@ public class CriarContaActivity extends Activity {
 
             startActivity(entidade);
             finish();
-        }else{
+        } else {
             entradaTelefone.setError("Telefone já cadastrado");
         }
 
