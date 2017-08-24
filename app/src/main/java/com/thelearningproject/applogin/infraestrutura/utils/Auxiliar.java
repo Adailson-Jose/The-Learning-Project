@@ -42,7 +42,7 @@ public class Auxiliar {
     }
 
     public static boolean telefonePattern(String telefone) {
-        Pattern pattern = Pattern.compile("^((\\+[1-9]{1,3}? ?)?[1-9]{2}? ?)?[9][6-9]\\d{3}-?\\d{4}$");
+        Pattern pattern = Pattern.compile("^(\\+[1-9]{1,3}(-?| ))?((([1-9]{2}(-?| ))?[9][1-9]\\d{3}(-?| )\\d{4})|([1-9]{3}(-?| )\\d{3}(-?| )\\d{4}))$");
         Matcher m = pattern.matcher(telefone);
 
         return m.matches();
