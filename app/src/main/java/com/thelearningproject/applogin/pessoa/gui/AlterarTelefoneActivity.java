@@ -49,7 +49,6 @@ public class AlterarTelefoneActivity extends AppCompatActivity {
 
     private void executarAlterar(Pessoa pessoa) {
         PessoaServices negocioPessoa = PessoaServices.getInstancia(getBaseContext());
-
         negocioPessoa.alterarPessoa(pessoa);
 
         sessao.setPessoa(pessoa);
