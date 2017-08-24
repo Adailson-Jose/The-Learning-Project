@@ -61,5 +61,6 @@
     <string name="pesquisar">Pesquisar</string>
     <string name="semResultados">Sem resultados</string>
     <string name="contato">Contato</string>
+    <string name="salvar">Salvar</string>
 
 </resources>

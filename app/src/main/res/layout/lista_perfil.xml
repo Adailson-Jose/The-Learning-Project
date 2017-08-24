@@ -19,7 +19,6 @@
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/criarInteracao"
             android:layout_toStartOf="@+id/criarInteracao"
-            android:text="Luciano Trigueiro"
             android:textColor="@color/textBlack"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -102,27 +101,27 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="end"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
+
         <ImageButton
             android:id="@+id/recusarMatchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginRight="20dp"
-            android:focusable="false"
             android:background="@color/colorError"
+            android:focusable="false"
+            android:padding="10dp"
             android:src="@drawable/ic_delete_black_24dp"
-            android:tint="@color/textWhite"/>
+            android:tint="@color/textWhite" />
 
         <ImageButton
             android:id="@+id/aceitarMatchBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:focusable="false"
             android:background="@color/colorAccent"
-            android:src="@drawable/ic_check_white_24dp"/>
+            android:focusable="false"
+            android:padding="10dp"
+            android:src="@drawable/ic_check_white_24dp" />
 
     </LinearLayout>
 

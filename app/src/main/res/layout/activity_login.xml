@@ -16,10 +16,10 @@
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_email"
@@ -31,9 +31,9 @@
                 android:id="@+id/tLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="@string/email"
-                android:textSize="20sp"/>
+                android:inputType="textEmailAddress"
+                android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -47,22 +47,23 @@
                 android:id="@+id/tSenha"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:hint="@string/senha"
+                android:inputType="textPassword"
                 android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
+
         <Button
             android:id="@+id/btEsqueci"
             style="?android:attr/borderlessButtonStyle"
-            android:textColor="@color/textWhite"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
-            android:textAllCaps="false"
-            android:textStyle="normal"
             android:alpha=".75"
             android:gravity="end"
-            android:text="Esqueceu sua senha?" />
+            android:text="@string/esqueceuSenhaTitulo"
+            android:textAllCaps="false"
+            android:textColor="@color/textWhite"
+            android:textStyle="normal" />
 
         <Switch
             android:id="@+id/manterSwitch"
@@ -82,19 +83,19 @@
             android:text="@string/login" />
 
 
-        <View style="@style/Divider"/>
+        <View style="@style/Divider" />
 
         <Button
             android:id="@+id/cadastroID"
             style="@style/btn_white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_stroke"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:textColor="@color/textWhite"
-            android:background="@drawable/button_stroke"
             android:text="@string/cadastrar"
-            android:layout_marginTop="10dp" />
+            android:textColor="@color/textWhite" />
     </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

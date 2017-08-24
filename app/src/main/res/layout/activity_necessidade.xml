@@ -16,18 +16,18 @@
             android:id="@+id/imageView2"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="fitXY"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitXY"
+            android:src="@drawable/logo" />
 
         <TextView
             android:id="@+id/necessidade"
             style="@style/dicaCadastro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dica2"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:text="@string/dica2" />
 
         <android.support.design.widget.TextInputLayout
             android:id="@+id/input_layout_nec"
@@ -40,10 +40,10 @@
                 android:id="@+id/necessidadeentrada"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/cadastrarNecessidade"
                 android:inputType="text"
                 android:textColor="@color/textWhite"
-                android:hint="@string/cadastrarNecessidade"
-                android:textSize="20sp"/>
+                android:textSize="20sp" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -52,10 +52,10 @@
             style="@style/btn_white"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="@string/continuar"
-            android:layout_marginTop="30dp" />
+            android:text="@string/continuar" />
 
     </LinearLayout>
 

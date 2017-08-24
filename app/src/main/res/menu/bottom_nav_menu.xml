@@ -2,25 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_recomendacoes"
-        android:title="@string/bottom_nav_title1"
         android:icon="@drawable/ic_lightbulb_outline_black_24dp"
-        />
-
-    <!--item
-        android:id="@+id/menu_buscar"
-        android:title="@string/bottom_nav_title2"
-        android:icon="@drawable/ic_search_black_24dp"
-        />-->
+        android:title="@string/bottom_nav_title1" />
 
     <item
         android:id="@+id/menu_interacoes"
-        android:title="@string/bottom_nav_title4"
         android:icon="@drawable/ic_grade_black_24dp"
-        />
+        android:title="@string/bottom_nav_title4" />
 
     <item
         android:id="@+id/menu_perfil"
-        android:title="@string/bottom_nav_title3"
         android:icon="@drawable/ic_person_black_24dp"
-        />
+        android:title="@string/bottom_nav_title3" />
 </menu>
