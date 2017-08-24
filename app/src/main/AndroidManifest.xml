@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.thelearningproject.applogin">
+    package="com.thelearningproject">
 
     <uses-permission android:name="android.permission.SEND_SMS" />
 
@@ -16,12 +16,12 @@
             android:value="@integer/google_play_services_version" />
 
         <provider
-            android:name=".infraestrutura.utils.Provider"
-            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.Provider"
+            android:name="com.thelearningproject.infraestrutura.utils.Provider"
+            android:authorities="com.thelearningproject.infraestrutura.utils.Provider"
             android:syncable="false" />
 
         <activity
-            android:name=".infraestrutura.gui.SplashScreenActivity"
+            android:name="com.thelearningproject.infraestrutura.gui.SplashScreenActivity"
             android:theme="@style/AppCompat.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,77 +30,77 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".infraestrutura.gui.LoginActivity"
+            android:name="com.thelearningproject.infraestrutura.gui.LoginActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".pessoa.gui.CriarContaActivity"
+            android:name="com.thelearningproject.pessoa.gui.CriarContaActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".infraestrutura.gui.TermosActivity"
+            android:name="com.thelearningproject.infraestrutura.gui.TermosActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".perfil.gui.HabilidadeActivity"
+            android:name="com.thelearningproject.perfil.gui.HabilidadeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".perfil.gui.NecessidadeActivity"
+            android:name="com.thelearningproject.perfil.gui.NecessidadeActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".infraestrutura.gui.MainActivity"
+            android:name="com.thelearningproject.infraestrutura.gui.MainActivity"
             android:windowSoftInputMode="stateHidden">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value=".infraestrutura.gui.BuscaActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.ConfiguracaoActivity">
+        <activity android:name="com.thelearningproject.pessoa.gui.ConfiguracaoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.AlterarNomeActivity">
+        <activity android:name="com.thelearningproject.pessoa.gui.AlterarNomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".pessoa.gui.ConfiguracaoActivity" />
+                android:value="com.thelearningproject.pessoa.gui.ConfiguracaoActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.AlterarEmailActivity">
+        <activity android:name="com.thelearningproject.pessoa.gui.AlterarEmailActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".pessoa.gui.ConfiguracaoActivity" />
+                android:value="com.thelearningproject.pessoa.gui.ConfiguracaoActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.AlterarSenhaActivity">
+        <activity android:name="com.thelearningproject.pessoa.gui.AlterarSenhaActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".pessoa.gui.ConfiguracaoActivity" />
+                android:value="com.thelearningproject.pessoa.gui.ConfiguracaoActivity" />
         </activity>
-        <activity android:name=".perfil.gui.CadastroNecessidadeActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.CadastroNecessidadeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".perfil.gui.ListarNecessidadesActivity" />
+                android:value="com.thelearningproject.perfil.gui.ListarNecessidadesActivity" />
         </activity>
-        <activity android:name=".perfil.gui.CadastroHabilidadeActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.CadastroHabilidadeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".perfil.gui.ListarHabilidadesActivity" />
+                android:value="com.thelearningproject.perfil.gui.ListarHabilidadesActivity" />
         </activity>
-        <activity android:name=".perfil.gui.ListarHabilidadesActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.ListarHabilidadesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".perfil.gui.ListarNecessidadesActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.ListarNecessidadesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".pessoa.gui.AlterarDescricaoActivity" />
+        <activity android:name="com.thelearningproject.pessoa.gui.AlterarDescricaoActivity" />
         <activity
-            android:name=".pessoa.gui.RecuperarContaActivity"
+            android:name="com.thelearningproject.pessoa.gui.RecuperarContaActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".pessoa.gui.ConfimaRecuperarActivity"
+            android:name="com.thelearningproject.pessoa.gui.ConfimaRecuperarActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <activity android:name=".pessoa.gui.AlterarTelefoneActivity" />
+        <activity android:name="com.thelearningproject.pessoa.gui.AlterarTelefoneActivity" />
         <activity
-            android:name=".infraestrutura.gui.BuscaActivity"
+            android:name="com.thelearningproject.infraestrutura.gui.BuscaActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -113,17 +113,17 @@
                 android:resource="@xml/pesquisa" />
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".perfil.gui.PerfilActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.PerfilActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
-        <activity android:name=".perfil.gui.NotificacoesActivity">
+        <activity android:name="com.thelearningproject.perfil.gui.NotificacoesActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".infraestrutura.gui.MainActivity" />
+                android:value="com.thelearningproject.infraestrutura.gui.MainActivity" />
         </activity>
     </application>
 

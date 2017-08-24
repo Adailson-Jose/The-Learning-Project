@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.thelearningproject.applogin.infraestrutura.gui.BuscaActivity">
+    tools:context="com.thelearningproject.infraestrutura.gui.BuscaActivity">
 
     <TextView
         android:id="@+id/tv_resultadoID"

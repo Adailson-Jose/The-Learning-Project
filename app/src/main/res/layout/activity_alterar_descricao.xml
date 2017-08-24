@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="25dp"
-    tools:context="com.thelearningproject.applogin.pessoa.gui.AlterarDescricaoActivity">
+    tools:context="com.thelearningproject.pessoa.gui.AlterarDescricaoActivity">
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_nome"

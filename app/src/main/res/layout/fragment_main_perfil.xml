@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context="layout.MainPerfilFragment">
+    tools:context="com.thelearningproject.perfil.gui.MainPerfilFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:background="@drawable/gradient"
         android:padding="5dp">
 
@@ -73,7 +73,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <Button
                     android:id="@+id/btnHabilidade"
@@ -81,8 +83,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:gravity="start"
-                    android:onClick="chamaActHabilidades"
-                    android:padding="16dp"
+                    android:padding="8dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
@@ -102,7 +103,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <Button
                     android:id="@+id/btnNecessidade"
@@ -110,7 +113,7 @@
                     android:layout_height="wrap_content"
                     android:background="@color/transparent"
                     android:gravity="start"
-                    android:padding="16dp"
+                    android:padding="8dp"
                     android:textAllCaps="false"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"

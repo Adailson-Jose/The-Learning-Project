@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.thelearningproject.applogin.perfil.gui.ListarHabilidadesActivity">
+    tools:context="com.thelearningproject.perfil.gui.ListarHabilidadesActivity">
 
     <ListView
         android:id="@+id/listaNecessidades"

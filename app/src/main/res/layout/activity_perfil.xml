@@ -4,13 +4,13 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_light"
     android:orientation="vertical"
-    tools:context="com.thelearningproject.applogin.perfil.gui.PerfilActivity">
+    tools:context="com.thelearningproject.perfil.gui.PerfilActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/gradient"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -40,7 +40,6 @@
             android:textSize="15sp"
             android:textStyle="italic" />
 
-
     </RelativeLayout>
 
     <ScrollView
@@ -64,14 +63,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <TextView
                     android:id="@+id/stringHabilidades"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="16dp"
+                    android:padding="8dp"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -89,14 +90,16 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp">
 
                 <TextView
                     android:id="@+id/stringNecessidade"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:padding="16dp"
+                    android:padding="8dp"
                     android:textColor="@color/colorAccent"
                     android:textSize="16sp"
                     android:textStyle="bold" />
@@ -120,8 +123,6 @@
                     android:id="@+id/listaPerfilOpcoes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:alpha=".7"
-                    android:clickable="false"
                     android:divider="@color/transparent" />
             </LinearLayout>
 
