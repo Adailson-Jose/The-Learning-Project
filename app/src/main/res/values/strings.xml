@@ -56,5 +56,7 @@
     <string name="mensagemEnviada">Mensagem enviada com sucesso!</string>
     <string name="iniciarChat">Iniciar Chat</string>
     <string name="notificacoes">Notificações</string>
+    <string name="nenhumaRecomendacao">Que pena! Nenhum perfil recomendado :(</string>
+    <string name="nenhumaInteracao">Você não interagiu com nenhum usuário ainda.\nO que está esperando? Ache seu novo parceiro de estudo!</string>
 
 </resources>

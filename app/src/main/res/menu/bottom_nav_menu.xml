@@ -6,11 +6,11 @@
         android:icon="@drawable/ic_lightbulb_outline_black_24dp"
         />
 
-    <item
+    <!--item
         android:id="@+id/menu_buscar"
         android:title="@string/bottom_nav_title2"
         android:icon="@drawable/ic_search_black_24dp"
-        />
+        />-->
 
     <item
         android:id="@+id/menu_interacoes"

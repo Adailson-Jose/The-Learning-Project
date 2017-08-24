@@ -4,6 +4,17 @@
     android:layout_height="match_parent"
     tools:context="layout.MainRecomendacoesFragment">
 
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:padding="25dp"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
+        android:textSize="20sp"
+        android:text="@string/nenhumaRecomendacao"/>
+
     <ListView
         android:id="@+id/listViewRecomendaID"
         android:layout_width="match_parent"

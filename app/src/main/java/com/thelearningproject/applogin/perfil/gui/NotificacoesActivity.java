@@ -10,6 +10,7 @@ import android.widget.ListView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -33,7 +34,7 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
 
         listaInteracoes = (ListView) findViewById(R.id.listViewNotifyID);
         listaInteracoes.setOnItemClickListener(this);
-
+        listar();
     }
 
     @Override
@@ -55,7 +56,8 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
                 perfils.add(perfilServices.consulta(c.getPerfil1()));
             }
         }
-        ArrayAdapter adaptador = new PerfilAdapter(this, new ArrayList<>(perfils), null, null, null);
+
+        ArrayAdapter adaptador = new PerfilAdapter(this, new ArrayList<>(perfils), NotificacoesActivity.this, null, null);
 
         adaptador.notifyDataSetChanged();
         listaInteracoes.setAdapter(adaptador);

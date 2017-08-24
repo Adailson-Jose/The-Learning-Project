@@ -136,7 +136,7 @@ public class MainBuscaFragment extends Fragment implements AdapterView.OnItemCli
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), null, this, null);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainBuscaFragment.this, this, null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(activity, "Sem Resultados");

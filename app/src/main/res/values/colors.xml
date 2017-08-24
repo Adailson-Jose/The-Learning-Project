@@ -8,4 +8,6 @@
     <color name="textgray">#757575</color>
     <color name="textWhite">#fff</color>
     <color name="transparent">#00000000</color>
+    <color name="colorError">#B80C09</color>
+    <color name="colorWarning">#F2C14E</color>
 </resources>

@@ -2,12 +2,10 @@ package com.thelearningproject.applogin.infraestrutura.utils;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +15,7 @@ import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
 import com.thelearningproject.applogin.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.NotificacoesActivity;
 
 import java.util.ArrayList;
 
@@ -25,15 +24,15 @@ import layout.MainInteracoesFragment;
 public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private ArrayList<Perfil> listaPerfil;
     private Context contexto;
-    private Fragment fragmento;
+    private Object tela;
     private ICriarCombinacao interfaceCriarComb;
     private IExcluirCombinacao interfaceExcluirComb;
 
-    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Fragment frag, ICriarCombinacao inter, IExcluirCombinacao inter2) {
+    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Object obj, ICriarCombinacao inter, IExcluirCombinacao inter2) {
         super(context, 0, perfils);
         this.listaPerfil = perfils;
         this.contexto = context;
-        this.fragmento = frag;
+        this.tela = obj;
         this.interfaceCriarComb = inter;
         this.interfaceExcluirComb = inter2;
     }
@@ -51,18 +50,21 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
 
         ImageButton btnNovaInteracao = (ImageButton) view.findViewById(R.id.criarInteracao);
         ImageButton btnDesfazerInteracao = (ImageButton) view.findViewById(R.id.desfazerInteracao);
-        Button btnAceitarMatch = (Button) view.findViewById(R.id.aceitarMatchBtn);
-        Button btnRecusarMatch = (Button) view.findViewById(R.id.recusarMatchBtn);
+        ImageButton btnAceitarMatch = (ImageButton) view.findViewById(R.id.aceitarMatchBtn);
+        ImageButton btnRecusarMatch = (ImageButton) view.findViewById(R.id.recusarMatchBtn);
 
-        if (this.fragmento == null) {
-            btnDesfazerInteracao.setVisibility(View.INVISIBLE);
-        } else if (this.fragmento instanceof MainInteracoesFragment) {
-            btnNovaInteracao.setVisibility(View.INVISIBLE);
-        } else {
-            btnNovaInteracao.setVisibility(View.INVISIBLE);
-            btnDesfazerInteracao.setVisibility(View.INVISIBLE);
+        if (this.tela instanceof NotificacoesActivity) {
+            btnNovaInteracao.setVisibility(View.GONE);
+            btnDesfazerInteracao.setVisibility(View.GONE);
             LinearLayout ly = (LinearLayout) view.findViewById(R.id.botoesAcao);
             ly.setVisibility(View.VISIBLE);
+
+        } else if (this.tela instanceof MainInteracoesFragment) {
+            btnNovaInteracao.setVisibility(View.GONE);
+            btnDesfazerInteracao.setVisibility(View.VISIBLE);
+        } else {
+            btnDesfazerInteracao.setVisibility(View.GONE);
+            btnNovaInteracao.setVisibility(View.VISIBLE);
         }
 
         Perfil perfil = listaPerfil.get(position);

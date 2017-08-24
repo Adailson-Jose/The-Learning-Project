@@ -152,9 +152,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.menu_recomendacoes:
                 alterarFragment("0", ft, getRecomFragment());
                 break;
-            case R.id.menu_buscar:
+/*            case R.id.menu_buscar:
                 alterarFragment("1", ft, getBuscaFragment());
-                break;
+                break;*/
             case R.id.menu_perfil:
                 alterarFragment("2", ft, getPerfilFragment());
                 break;

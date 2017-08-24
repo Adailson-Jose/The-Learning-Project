@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
@@ -28,6 +29,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 /**
  * Criado por Gabriel on 03/08/2017
  */
@@ -36,6 +40,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     private ListView listaRecomendados;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
+    private TextView tvMensagem;
 
     public MainRecomendacoesFragment() {
         // Requer um construtor publico vazio
@@ -50,6 +55,8 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         combinacaoServices = CombinacaoServices.getInstancia(getContext());
         listaRecomendados = (ListView) view.findViewById(R.id.listViewRecomendaID);
         listaRecomendados.setOnItemClickListener(this);
+
+        tvMensagem = (TextView) view.findViewById(R.id.tv1);
         listar();
 
         return view;
@@ -75,7 +82,13 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             }
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), null, this, null);
+        if (listaPerfil.size() > 0) {
+            tvMensagem.setVisibility(GONE);
+        } else {
+            tvMensagem.setVisibility(VISIBLE);
+        }
+
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this, this, null);
 
 
         adaptador.notifyDataSetChanged();

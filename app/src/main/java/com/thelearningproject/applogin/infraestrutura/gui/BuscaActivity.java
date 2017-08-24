@@ -32,6 +32,8 @@ import com.thelearningproject.applogin.registrobusca.negocio.DadosServices;
 
 import java.util.ArrayList;
 
+import static android.content.Intent.ACTION_VIEW;
+
 public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,ICriarCombinacao {
     private ListView listaUsuarios;
     private TextView informacaoResultado;
@@ -48,6 +50,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         combinacaoServices = CombinacaoServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
+        setTitle("Resultados para");
 
         handleSearch(getIntent());
     }
@@ -56,6 +59,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
     public boolean onCreateOptionsMenu(Menu menu) {
         SearchView searchView;
         getMenuInflater().inflate(R.menu.pesquisar_menu, menu);
+        MenuItem not = menu.findItem(R.id.notificacoesBtn);
+        not.setVisible(false);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         MenuItem item = menu.findItem(R.id.pesquisarBtn);
@@ -76,7 +81,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         int id = item.getItemId();
 
         if (id == R.id.pesquisarBtn) {
-            return false;//aqui nicollas
+            return false;
         }
         Auxiliar.esconderTeclado(this);
         return super.onOptionsItemSelected(item);
@@ -94,7 +99,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
             String s = intent.getStringExtra(SearchManager.QUERY);
             dadosServices.cadastraBusca(sessao.getPerfil(), s);
             listar(s);
-        } else if (intent.ACTION_VIEW.equalsIgnoreCase(intent.getAction())) {
+        } else if (ACTION_VIEW.equalsIgnoreCase(intent.getAction())) {
             String data = intent.getData().getLastPathSegment();
             dadosServices.cadastraBusca(sessao.getPerfil(), data);
             listar(data);
@@ -139,7 +144,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
 
         if (listaPerfil.isEmpty()) {
-            Auxiliar.criarToast(this, "Sem Resultados");
+            Auxiliar.criarToast(this, "Sem Resultados");//colocar textview no activity
             adaptador.clear();
         }
         adaptador.notifyDataSetChanged();

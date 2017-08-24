@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
@@ -24,11 +25,15 @@ import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class MainInteracoesFragment extends Fragment implements AdapterView.OnItemClickListener, IExcluirCombinacao {
     private ListView listaInteracoes;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
     private PerfilServices perfilServices;
+    private TextView tvMensagem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,6 +44,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         perfilServices = PerfilServices.getInstancia(getActivity());
         listaInteracoes = (ListView) view.findViewById(R.id.listViewInteracoesID);
         listaInteracoes.setOnItemClickListener(this);
+        tvMensagem = (TextView) view.findViewById(R.id.tv1);
         listar();
 
         return view;
@@ -52,6 +58,11 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
             } else {
                 perfils.add(perfilServices.consulta(c.getPerfil1()));
             }
+        }
+        if (perfils.size() > 0) {
+            tvMensagem.setVisibility(GONE);
+        } else {
+            tvMensagem.setVisibility(VISIBLE);
         }
         ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this, null, this);
 
