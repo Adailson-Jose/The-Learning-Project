@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:padding="5dp"
-        android:background="@drawable/gradient">
+        android:background="@drawable/gradient"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -26,28 +26,28 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:paddingBottom="15dp"
-        android:background="@color/colorAccent">
+        android:background="@color/colorAccent"
+        android:paddingBottom="15dp">
 
         <TextView
             android:id="@+id/nomeUsuarioID"
+            style="@style/camposTexto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            style="@style/camposTexto"
             android:text="@string/nome" />
 
         <TextView
             android:id="@+id/descricaoUsuarioID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:textColor="@color/textWhite"
-            android:textStyle="italic"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
             android:fontFamily="serif"
             android:text="@string/descricao"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+            android:textColor="@color/textWhite"
+            android:textSize="14sp"
+            android:textStyle="italic" />
 
 
     </RelativeLayout>
@@ -68,18 +68,25 @@
                 android:layout_height="wrap_content"
                 android:text="@string/habilidades" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ListView
-                    android:id="@+id/listaPerfilHabilidades"
+                <Button
+                    android:id="@+id/btnHabilidade"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:divider="@color/transparent" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:onClick="chamaActHabilidades"
+                    android:padding="16dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -90,18 +97,24 @@
                 android:layout_height="wrap_content"
                 android:text="@string/necessidades" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ListView
-                    android:id="@+id/listaPerfilNecessidades"
+                <Button
+                    android:id="@+id/btnNecessidade"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:divider="@color/transparent" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/transparent"
+                    android:gravity="start"
+                    android:padding="16dp"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -111,7 +124,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/conta" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"

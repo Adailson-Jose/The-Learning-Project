@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
@@ -24,29 +25,21 @@ public class PerfilActivity extends AppCompatActivity {
         TextView tvDescricaoPerfil = (TextView) findViewById(R.id.descricaoUsuarioID);
         tvDescricaoPerfil.setText(perfilAtual.getDescricao());
 
-        String[] listaHabilidades = {perfilServices.retornaStringListaHabilidades(perfilAtual.getId())};
-        String[] listaNecessidades = {perfilServices.retornaStringListaNecessidades(perfilAtual.getId())};
+        TextView tvStrHabilidades = (TextView) findViewById(R.id.stringHabilidades);
+        tvStrHabilidades.setText(perfilServices.retornaStringListaHabilidades(perfilAtual.getId()));
+
+        TextView tvStrNecessidades = (TextView) findViewById(R.id.stringNecessidade);
+        tvStrNecessidades.setText(perfilServices.retornaStringListaNecessidades(perfilAtual.getId()));
+
         String[] listaOpcoes = {getString(R.string.iniciarChat)};
 
-        ListView lvHabilidades = (ListView) findViewById(R.id.listaPerfilHabilidades);
-        ListView lvNecessidades = (ListView) findViewById(R.id.listaPerfilNecessidades);
         ListView lvOpcoes = (ListView) findViewById(R.id.listaPerfilOpcoes);
 
-        ArrayAdapter<String> adapterOpcoesHabilidades = new ArrayAdapter<>(
-                PerfilActivity.this,
-                android.R.layout.simple_list_item_1,
-                listaHabilidades);
-        ArrayAdapter<String> adapterOpcoesNecessidades = new ArrayAdapter<>(
-                PerfilActivity.this,
-                android.R.layout.simple_list_item_1,
-                listaNecessidades);
         ArrayAdapter<String> adapterOpcoesOutras = new ArrayAdapter<>(
                 PerfilActivity.this,
                 android.R.layout.simple_list_item_1,
                 listaOpcoes);
 
-        lvHabilidades.setAdapter(adapterOpcoesHabilidades);
-        lvNecessidades.setAdapter(adapterOpcoesNecessidades);
         lvOpcoes.setAdapter(adapterOpcoesOutras);
     }
 }

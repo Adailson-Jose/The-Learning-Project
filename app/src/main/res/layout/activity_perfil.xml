@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:background="@drawable/gradient">
+        android:background="@drawable/gradient"
+        android:padding="5dp">
 
         <ImageView
             android:id="@+id/imageView"
@@ -32,13 +32,13 @@
             android:id="@+id/descricaoUsuarioID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="15sp"
-            android:textColor="@color/textWhite"
-            android:textStyle="italic"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
             android:fontFamily="serif"
             android:text="@string/descricao"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:textColor="@color/textWhite"
+            android:textSize="15sp"
+            android:textStyle="italic" />
 
 
     </RelativeLayout>
@@ -59,19 +59,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/habilidades" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ListView
-                    android:id="@+id/listaPerfilHabilidades"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:divider="@color/transparent" />
-
+                <TextView
+                    android:id="@+id/stringHabilidades"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -81,18 +84,22 @@
                 android:layout_height="wrap_content"
                 android:text="@string/necessidades" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <ListView
-                    android:id="@+id/listaPerfilNecessidades"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:divider="@color/transparent" />
+                <TextView
+                    android:id="@+id/stringNecessidade"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <TextView
@@ -102,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/outrasOpcoes" />
 
-            <View style="@style/DividerBlack"/>
+            <View style="@style/DividerBlack" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -113,9 +120,9 @@
                     android:id="@+id/listaPerfilOpcoes"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:divider="@color/transparent"
+                    android:alpha=".7"
                     android:clickable="false"
-                    android:alpha=".7"/>
+                    android:divider="@color/transparent" />
             </LinearLayout>
 
         </LinearLayout>
