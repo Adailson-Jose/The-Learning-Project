@@ -68,11 +68,24 @@ public final class MateriaDAO {
         return materia;
     }
 
-    public ArrayList<String> retornaListaMaterias(String nome) {
+    public ArrayList<String> retornaMateriasNome(String nome) {
         Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, new String[]{NOME_MATERIA}, "UPPER(" + NOME_MATERIA + ") LIKE ?", new String[]{"%" + nome.toUpperCase() + "%"}, null, null, null);
         ArrayList<String> listaMateria = new ArrayList<>();
         while (cursor.moveToNext()) {
             listaMateria.add(cursor.getString(cursor.getColumnIndex(NOME_MATERIA)));
+        }
+        cursor.close();
+        return listaMateria;
+    }
+
+    public ArrayList<Materia> retornaTodasMaterias() {
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_MATERIAS, null, null, null, null, null, ID_MATERIA + " ASC");
+        ArrayList<Materia> listaMateria = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Materia m = new Materia();
+            m.setId(cursor.getInt(cursor.getColumnIndex(ID_MATERIA)));
+            m.setNome(cursor.getString(cursor.getColumnIndex(NOME_MATERIA)));
+            listaMateria.add(m);
         }
         cursor.close();
         return listaMateria;

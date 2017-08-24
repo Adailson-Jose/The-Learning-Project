@@ -1,16 +1,17 @@
 package com.thelearningproject.infraestrutura.utils;
 
-/**
- * Criado por Pichau em 17/08/2017.
- */
+import java.util.ArrayList;
 
 public class FrequenciaMateria {
 
     private int materiaID;
+    private ArrayList perfisID;
     private Integer frequencia;
+
 
     public FrequenciaMateria() {
         this.frequencia = 0;
+        perfisID = new ArrayList();
     }
 
     public int getMateria() {
@@ -28,6 +29,19 @@ public class FrequenciaMateria {
     public void setFrequencia(Integer novo) {
         this.frequencia += novo;
 
+    }
+
+
+    public ArrayList getPerfisID() {
+        return perfisID;
+    }
+
+    public void setPerfisID(ArrayList perfisID) {
+        this.perfisID = perfisID;
+    }
+
+    public void addPerfil(int perfilid) {
+        this.perfisID.add(perfilid);
     }
 
     @Override

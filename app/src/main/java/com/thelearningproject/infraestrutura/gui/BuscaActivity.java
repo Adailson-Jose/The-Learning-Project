@@ -141,7 +141,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
+        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null);
 
         if (listaPerfil.isEmpty()) {
             tvSemResultados.setVisibility(View.VISIBLE);

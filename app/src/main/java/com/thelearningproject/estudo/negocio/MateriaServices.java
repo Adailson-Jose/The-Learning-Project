@@ -48,7 +48,7 @@ public class MateriaServices {
     }
 
     public ArrayList<String> retornaLista(String nome) {
-        return persistencia.retornaListaMaterias(nome);
+        return persistencia.retornaMateriasNome(nome);
     }
 
 
