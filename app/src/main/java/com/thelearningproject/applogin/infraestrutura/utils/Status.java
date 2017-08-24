@@ -5,7 +5,7 @@ package com.thelearningproject.applogin.infraestrutura.utils;
  */
 
 public enum Status {
-    ATIVADO(0), DESATIVADO(1);
+    ATIVADO(0), DESATIVADO(1), PENDENTE(2);
 
     private int valor;
 

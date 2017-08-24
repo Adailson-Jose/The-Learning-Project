@@ -120,6 +120,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".infraestrutura.gui.MainActivity" />
         </activity>
+        <activity android:name=".perfil.gui.NotificacoesActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".infraestrutura.gui.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

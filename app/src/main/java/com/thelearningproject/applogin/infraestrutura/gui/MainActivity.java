@@ -2,6 +2,7 @@ package com.thelearningproject.applogin.infraestrutura.gui;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.NotificacoesActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.pessoa.dominio.Pessoa;
 import com.thelearningproject.applogin.pessoa.negocio.PessoaServices;
@@ -111,7 +113,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.pesquisarBtn) {
-            return false;//aqui nicollas
+            return false;
+        } else if (id == R.id.notificacoesBtn) {
+            Intent entidade = new Intent(this, NotificacoesActivity.class);
+            entidade.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(entidade);
         }
         Auxiliar.esconderTeclado(this);
         return super.onOptionsItemSelected(item);

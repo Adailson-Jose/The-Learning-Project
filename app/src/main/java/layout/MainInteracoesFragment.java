@@ -53,8 +53,6 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
                 perfils.add(perfilServices.consulta(c.getPerfil1()));
             }
         }
-
-
         ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this, null, this);
 
         adaptador.notifyDataSetChanged();

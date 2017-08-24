@@ -31,7 +31,7 @@ public class PerfilActivity extends AppCompatActivity {
         TextView tvStrNecessidades = (TextView) findViewById(R.id.stringNecessidade);
         tvStrNecessidades.setText(perfilServices.retornaStringListaNecessidades(perfilAtual.getId()));
 
-        String[] listaOpcoes = {getString(R.string.iniciarChat)};
+        String[] listaOpcoes = {perfilAtual.getPessoa().getTelefone()};
 
         ListView lvOpcoes = (ListView) findViewById(R.id.listaPerfilOpcoes);
 

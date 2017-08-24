@@ -55,9 +55,6 @@
     <string name="enviarCodigo">Enviar novo código</string>
     <string name="mensagemEnviada">Mensagem enviada com sucesso!</string>
     <string name="iniciarChat">Iniciar Chat</string>
-
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="notificacoes">Notificações</string>
 
 </resources>

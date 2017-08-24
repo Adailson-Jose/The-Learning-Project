@@ -7,18 +7,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import com.thelearningproject.applogin.R;
 import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
 import com.thelearningproject.applogin.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+
 import java.util.ArrayList;
 
-import layout.MainBuscaFragment;
 import layout.MainInteracoesFragment;
-import layout.MainRecomendacoesFragment;
 
 public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private ArrayList<Perfil> listaPerfil;
@@ -49,11 +51,18 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
 
         ImageButton btnNovaInteracao = (ImageButton) view.findViewById(R.id.criarInteracao);
         ImageButton btnDesfazerInteracao = (ImageButton) view.findViewById(R.id.desfazerInteracao);
+        Button btnAceitarMatch = (Button) view.findViewById(R.id.aceitarMatchBtn);
+        Button btnRecusarMatch = (Button) view.findViewById(R.id.recusarMatchBtn);
 
         if (this.fragmento == null) {
             btnDesfazerInteracao.setVisibility(View.INVISIBLE);
         } else if (this.fragmento instanceof MainInteracoesFragment) {
             btnNovaInteracao.setVisibility(View.INVISIBLE);
+        } else {
+            btnNovaInteracao.setVisibility(View.INVISIBLE);
+            btnDesfazerInteracao.setVisibility(View.INVISIBLE);
+            LinearLayout ly = (LinearLayout) view.findViewById(R.id.botoesAcao);
+            ly.setVisibility(View.VISIBLE);
         }
 
         Perfil perfil = listaPerfil.get(position);
@@ -88,6 +97,20 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
             @Override
             public void onClick(View v) {
                 interfaceExcluirComb.excluirCombinacao(listaPerfil.get(position).getId());
+            }
+        });
+
+        btnAceitarMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Auxiliar.criarToast(getContext(), "Vou aceitar");
+            }
+        });
+
+        btnRecusarMatch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Auxiliar.criarToast(getContext(), "Vou recusar");
             }
         });
 
