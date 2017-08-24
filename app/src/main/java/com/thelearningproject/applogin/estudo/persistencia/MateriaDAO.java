@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteQueryBuilder;
 
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.infraestrutura.persistencia.Banco;
@@ -76,4 +77,12 @@ public final class MateriaDAO {
         cursor.close();
         return listaMateria;
     }
+
+    //Metodo retorna um cursor, objeto da persistencia pois o searchview exige um CursorAdapter, para utilizar a tabela pela persistencia,
+    // passamos o cursor para a classe Provide, e ela os utiliza para criar as sugestões do SearchView
+    public Cursor queryCursorLista(SQLiteQueryBuilder queryBuilder, String[] projection, String selecion, String[] selectionArgs, String orderBy) {
+        Cursor cursor = queryBuilder.query(banco.getReadableDatabase(), projection, selecion, selectionArgs, null, null, orderBy);
+        return cursor;
+    }
+
 }

@@ -12,16 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <meta-data
-            android:name="android.app.default_searchable"
-            android:value=".infraestrutura.gui.BuscaActivity" />
-
-        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
         <provider
-            android:name=".infraestrutura.utils.RecentProvider"
-            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.RecentProvider" />
+            android:name=".infraestrutura.utils.Provider"
+            android:authorities="com.thelearningproject.applogin.infraestrutura.utils.Provider"
+            android:syncable="false" />
 
         <activity
             android:name=".infraestrutura.gui.SplashScreenActivity"
@@ -49,7 +46,11 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".infraestrutura.gui.MainActivity"
-            android:windowSoftInputMode="stateHidden" />
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".infraestrutura.gui.BuscaActivity" />
+        </activity>
         <activity android:name=".pessoa.gui.ConfiguracaoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -104,7 +105,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+            </intent-filter>
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/pesquisa" />

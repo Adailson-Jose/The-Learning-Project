@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.SearchRecentSuggestions;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -26,7 +25,6 @@ import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
-import com.thelearningproject.applogin.infraestrutura.utils.RecentProvider;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import com.thelearningproject.applogin.perfil.gui.PerfilActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
@@ -39,12 +37,14 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
     private TextView informacaoResultado;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
+    private DadosServices dadosServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
         sessao = ControladorSessao.getInstancia(this);
+        dadosServices = DadosServices.getInstancia(this);
         combinacaoServices = CombinacaoServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
@@ -54,10 +54,10 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        SearchView searchView;
         getMenuInflater().inflate(R.menu.pesquisar_menu, menu);
 
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView;
         MenuItem item = menu.findItem(R.id.pesquisarBtn);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
             searchView = (SearchView) item.getActionView();
@@ -66,6 +66,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         }
 
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setIconifiedByDefault(false);
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -87,13 +89,18 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void handleSearch(Intent intent) {
+
         if (Intent.ACTION_SEARCH.equalsIgnoreCase(intent.getAction())) {
             String s = intent.getStringExtra(SearchManager.QUERY);
-            SearchRecentSuggestions searchRecentSuggestions = new SearchRecentSuggestions(this, RecentProvider.AUTHORITY, RecentProvider.MODE);
-            searchRecentSuggestions.saveRecentQuery(s, null);
+            dadosServices.cadastraBusca(sessao.getPerfil(), s);
             listar(s);
+        } else if (intent.ACTION_VIEW.equalsIgnoreCase(intent.getAction())) {
+            String data = intent.getData().getLastPathSegment();
+            dadosServices.cadastraBusca(sessao.getPerfil(), data);
+            listar(data);
         }
     }
+
 
     private void listar(String entrada) {
         Auxiliar.esconderTeclado(this);
@@ -129,7 +136,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null);
+        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(this, "Sem Resultados");
