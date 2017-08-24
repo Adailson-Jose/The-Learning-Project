@@ -71,7 +71,7 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
     }
     public void enviaSms(String telefone, String codigo){
         SmsManager smsManager = SmsManager.getDefault();
-        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+codigo,null,null);
+        smsManager.sendTextMessage(telefone,null,getApplicationContext().getString(R.string.sms)+" "+codigo,null,null);
     }
 
 }

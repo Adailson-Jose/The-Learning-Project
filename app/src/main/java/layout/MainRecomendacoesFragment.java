@@ -75,7 +75,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             }
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this, this, null);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), null, this, null);
 
 
         adaptador.notifyDataSetChanged();

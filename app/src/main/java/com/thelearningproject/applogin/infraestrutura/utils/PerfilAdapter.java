@@ -15,6 +15,8 @@ import com.thelearningproject.applogin.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
 import java.util.ArrayList;
+
+import layout.MainBuscaFragment;
 import layout.MainInteracoesFragment;
 import layout.MainRecomendacoesFragment;
 
@@ -48,7 +50,7 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         ImageButton btnNovaInteracao = (ImageButton) view.findViewById(R.id.criarInteracao);
         ImageButton btnDesfazerInteracao = (ImageButton) view.findViewById(R.id.desfazerInteracao);
 
-        if (this.fragmento instanceof MainRecomendacoesFragment) {
+        if (this.fragmento == null) {
             btnDesfazerInteracao.setVisibility(View.INVISIBLE);
         } else if (this.fragmento instanceof MainInteracoesFragment) {
             btnNovaInteracao.setVisibility(View.INVISIBLE);

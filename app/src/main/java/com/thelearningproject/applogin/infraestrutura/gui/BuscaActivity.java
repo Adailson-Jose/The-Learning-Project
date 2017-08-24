@@ -11,11 +11,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
+import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
@@ -23,21 +28,24 @@ import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.infraestrutura.utils.RecentProvider;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.PerfilActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.registrobusca.negocio.DadosServices;
 
 import java.util.ArrayList;
 
-public class BuscaActivity extends AppCompatActivity {
+public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,ICriarCombinacao {
     private ListView listaUsuarios;
     private TextView informacaoResultado;
     private ControladorSessao sessao;
+    private CombinacaoServices combinacaoServices;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
         sessao = ControladorSessao.getInstancia(this);
+        combinacaoServices = CombinacaoServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
 
@@ -108,13 +116,20 @@ public class BuscaActivity extends AppCompatActivity {
                 informacaoResultado.getHeight();
             }
         }
+        for (Combinacao c: sessao.getPerfil().getCombinacoes()){
+            if (c.getPerfil1() == sessao.getPerfil().getId()) {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+            } else {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
+            }
+        }
 
         //remove o perfil do usuario ativo da lista de busca
         if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, null, null);
+        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(this, "Sem Resultados");
@@ -122,6 +137,20 @@ public class BuscaActivity extends AppCompatActivity {
         }
         adaptador.notifyDataSetChanged();
         listaUsuarios.setAdapter(adaptador);
+        listaUsuarios.setOnItemClickListener(this);
+    }
+    public void criarCombinacao(Perfil pEstrangeiro) {
+        combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
+        handleSearch(getIntent());
+        Auxiliar.criarToast(BuscaActivity.this,"Você fez um match");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Perfil p = (Perfil) parent.getAdapter().getItem(position);
+        sessao.setPerfilSelecionado(p);
+        Intent intent = new Intent(BuscaActivity.this, PerfilActivity.class);
+        startActivity(intent);
     }
 
 

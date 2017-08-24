@@ -1,6 +1,7 @@
 package layout;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -17,23 +18,30 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.thelearningproject.applogin.R;
+import com.thelearningproject.applogin.combinacao.dominio.Combinacao;
+import com.thelearningproject.applogin.combinacao.dominio.ICriarCombinacao;
+import com.thelearningproject.applogin.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.applogin.estudo.dominio.Materia;
 import com.thelearningproject.applogin.estudo.negocio.MateriaServices;
 import com.thelearningproject.applogin.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.applogin.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.applogin.infraestrutura.utils.PerfilAdapter;
 import com.thelearningproject.applogin.perfil.dominio.Perfil;
+import com.thelearningproject.applogin.perfil.gui.PerfilActivity;
 import com.thelearningproject.applogin.perfil.negocio.PerfilServices;
 import com.thelearningproject.applogin.registrobusca.negocio.DadosServices;
 
 import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
-public class MainBuscaFragment extends Fragment {
+public class MainBuscaFragment extends Fragment implements AdapterView.OnItemClickListener,ICriarCombinacao{
     private FragmentActivity activity;
     private ListView listaUsuarios;
     private AutoCompleteTextView entradaBusca;
     private TextView informacaoResultado;
     private ControladorSessao sessao;
+    private CombinacaoServices combinacaoServices;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,6 +49,7 @@ public class MainBuscaFragment extends Fragment {
         activity = getActivity();
 
         sessao = ControladorSessao.getInstancia(activity);
+        combinacaoServices = CombinacaoServices.getInstancia(getContext());
         listaUsuarios = (ListView) view.findViewById(R.id.listViewID);
         entradaBusca = (AutoCompleteTextView) view.findViewById(R.id.autoBuscaID);
         informacaoResultado = (TextView) view.findViewById(R.id.tv_resultadoID);
@@ -103,15 +112,22 @@ public class MainBuscaFragment extends Fragment {
 
         dadosServices.cadastraBusca(sessao.getPerfil(), nome);
         Materia materia = materiaServices.consultarNome(nome);
-        ArrayList<Perfil> listaPerfil = new ArrayList<>();
+        Set<Perfil> listaPerfil = new LinkedHashSet<>();
         if (materia != null) {
-            listaPerfil = perfilServices.listarPerfil(materia);
+            listaPerfil.addAll(perfilServices.listarPerfil(materia));
         }
         if (listaPerfil.isEmpty()) {
-            listaPerfil = dadosServices.recomendaMateria(sessao.getPerfil(), nome);
+            listaPerfil.addAll(dadosServices.recomendaMateria(sessao.getPerfil(), nome));
             if (!listaPerfil.isEmpty()) {
                 informacaoResultado.setText("Sem resultados para " + nome + "\nMas estes usuarios podem lhe ajudar com algo relacionado:");
                 informacaoResultado.getHeight();
+            }
+        }
+        for (Combinacao c: sessao.getPerfil().getCombinacoes()){
+            if (c.getPerfil1() == sessao.getPerfil().getId()) {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+            } else {
+                listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
             }
         }
 
@@ -120,7 +136,7 @@ public class MainBuscaFragment extends Fragment {
             listaPerfil.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, listaPerfil, null,null,null);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), null, this, null);
 
         if (listaPerfil.isEmpty()) {
             Auxiliar.criarToast(activity, "Sem Resultados");
@@ -128,6 +144,20 @@ public class MainBuscaFragment extends Fragment {
         }
         adaptador.notifyDataSetChanged();
         listaUsuarios.setAdapter(adaptador);
+        listaUsuarios.setOnItemClickListener(this);
+    }
+    public void criarCombinacao(Perfil pEstrangeiro) {
+        combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
+        listar();
+        Auxiliar.criarToast(getContext(),"Você fez um match");
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Perfil p = (Perfil) parent.getAdapter().getItem(position);
+        sessao.setPerfilSelecionado(p);
+        Intent intent = new Intent(getActivity(), PerfilActivity.class);
+        startActivity(intent);
     }
 
 }

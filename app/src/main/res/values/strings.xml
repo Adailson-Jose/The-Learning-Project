@@ -50,7 +50,7 @@
     <string name="telefone">Telefone</string>
     <string name="alterarTelefone">Alterar telefone</string>
     <string name="dica">Pode levar alguns minutos até o\nrecebimento da mensagem</string>
-    <string name="sms">Seu código de recuperação de conta é: </string>
+    <string name="sms">Seu código de recuperação de conta é:</string>
     <string name="codigoRecebido">Digite o código recebido</string>
     <string name="enviarCodigo">Enviar novo código</string>
     <string name="mensagemEnviada">Mensagem enviada com sucesso!</string>
