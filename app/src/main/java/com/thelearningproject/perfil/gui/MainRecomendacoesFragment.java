@@ -101,7 +101,6 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
 
     public void criarCombinacao(Perfil pEstrangeiro) {
         combinacaoServices.requererCombinacao(sessao.getPerfil(), pEstrangeiro);
-        Auxiliar.criarToast(getContext(), sessao.getPerfil().getCombinacoes().toString());
         listar();
         Auxiliar.criarToast(getContext(), "Você fez um match");
     }
