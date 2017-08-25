@@ -125,6 +125,196 @@ public final class Banco extends SQLiteOpenHelper {
         banco.execSQL(materias);
         banco.execSQL(combinacao);
 
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (1, 'luciano@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (2, 'gabriel@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (3, 'heitor@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (4, 'nicollas@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (5, 'nicolas@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (6, 'ebony@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (7, 'renata@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (8, 'marilia@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (9, 'tracer@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (10, 'andressa@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (11, 'larissa@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+        banco.execSQL("INSERT INTO USUARIOS (ID, EMAIL, SENHA, STATUS)\n" +
+                "VALUES (12, 'mariana@email.com.br',\n" +
+                "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
+
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (1, 'Luciano Trigueiro', 1, '81987860852')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (2, 'Gabriel Lourenço', 2, '81996716745')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (3, 'Heitor Augusto', 3, '81999267720')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (4, 'Nicollas Bastos', 4, '81991311564')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (5, 'Nícolas Moura', 5, '81996906155')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (6, 'Ebony Marques', 6, '81983695032')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (7, 'Renata Albuquerque', 7, '81987860853')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (8, 'Marília Andrade', 8, '81996716746')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (9, 'Tracer Augusto', 9, '81999267721')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (10, 'Andressa Luna', 11, '81991311565')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (11, 'Larissa Gondim', 10, '81996906156')");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+                "VALUES (12, 'Mariana Brito', 12, '81983695033')");
+
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (1, 'matematica')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (2, 'portugues')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (3, 'ciencias')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (4, 'ingles')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (5, 'geografia')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (6, 'historia')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (7, 'biologia')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (8, 'quimica')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (9, 'literatura')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (10, 'programacao')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (11, 'robotica')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (12, 'alemao')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (13, 'espanhol')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (14, 'fisica')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (15, 'gramatica')");
+        banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
+                "VALUES (16, 'redacao')");
+
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (1, 1, 'Aenean nec tempor metus, vel')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (2, 2, 'Nulla ultricies aliquam quam, vitae')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (3, 3, 'Aliquam diam libero, maximus et')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (4, 4, 'Duis pretium egestas diam, at')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (5, 5, 'Cras fringilla, ante ac pharetra')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (6, 6, 'Cras suscipit ipsum eget massa')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (7, 7, 'Sed scelerisque, ex vitae accumsan')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (8, 8, 'Quisque et euismod ligula, sit')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (9, 9, 'Donec a lorem sed purus')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (10, 10, 'Donec non diam pellentesque, varius')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (11, 11, 'Praesent semper congue dignissim. Nulla')");
+        banco.execSQL("INSERT INTO PERFIS (ID, PESSOA, DESCRICAO)\n" +
+                "VALUES (12, 12, 'Suspendisse non mattis mi. Duis')");
+
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (2, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (3, 3, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (4, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (5, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (6, 6, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (7, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (8, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (9, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (10, 5, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (11, 6, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (12, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (4, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (5, 5, 0)");
+
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 3, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (2, 3, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (3, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (5, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (6, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (7, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (8, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (9, 3, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (10, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (11, 5, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (12, 6, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (2, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 4, 0)");
+
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (1, 7, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (2, 8, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (3, 9, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (4, 10, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (5, 11, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (6, 12, 0)");
     }
 
     @Override
