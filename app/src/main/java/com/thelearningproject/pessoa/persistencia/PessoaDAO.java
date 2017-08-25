@@ -22,6 +22,7 @@ public final class PessoaDAO {
     private static final String NOME_PESSOA = "nome";
     private static final String USUARIO_PESSOA = "usuario";
     private static final String TELEFONE_PESSOA = "telefone";
+//    private static final String FOTO_PESSOA = "foto";
 
     public static synchronized PessoaDAO getInstancia(Context contexto) {
         if (instancia == null) {

@@ -22,6 +22,7 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String NOME_PESSOA = "nome";
     private static final String USUARIO_PESSOA = "usuario";
     private static final String TELEFONE_PESSOA = "telefone";
+    private static final String FOTO_PESSOA = "foto";
 
     private static final String TABELA_USUARIOS = "usuarios";
     private static final String ID_USUARIO = "id";
@@ -85,7 +86,8 @@ public final class Banco extends SQLiteOpenHelper {
                 ID_PESSOA + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 NOME_PESSOA + " TEXT, " +
                 USUARIO_PESSOA + " INTEGER, " +
-                TELEFONE_PESSOA + " TEXT)";
+                TELEFONE_PESSOA + " TEXT," +
+                FOTO_PESSOA + " INTEGER)";
 
         String perfis = "CREATE TABLE " + TABELA_PERFIS + "(" +
                 ID_PERFIL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -160,30 +162,55 @@ public final class Banco extends SQLiteOpenHelper {
                 "VALUES (12, 'mariana@email.com.br',\n" +
                 "'6B86B273FF34FCE19D6B804EFF5A3F5747ADA4EAA22F1D49C01E52DDB7875B4B', 0)");
 
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (1, 'Luciano Trigueiro', 1, '81987860852')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (2, 'Gabriel Lourenço', 2, '81996716745')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (3, 'Heitor Augusto', 3, '81999267720')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (4, 'Nicollas Bastos', 4, '81991311564')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (5, 'Nícolas Moura', 5, '81996906155')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (6, 'Ebony Marques', 6, '81983695032')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (7, 'Renata Albuquerque', 7, '81987860853')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (8, 'Marília Andrade', 8, '81996716746')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (9, 'Tracer Augusto', 9, '81999267721')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (10, 'Andressa Luna', 11, '81991311565')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (11, 'Larissa Gondim', 10, '81996906156')");
-        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (12, 'Mariana Brito', 12, '81983695033')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (1, 'Luciano Trigueiro', 1, '81987860852')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (2, 'Gabriel Lourenço', 2, '81996716745')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (3, 'Heitor Augusto', 3, '81999267720')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (4, 'Nicollas Bastos', 4, '81991311564')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (5, 'Nícolas Moura', 5, '81996906155')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (6, 'Ebony Marques', 6, '81983695032')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (7, 'Renata Albuquerque', 7, '81987860853')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (8, 'Marília Andrade', 8, '81996716746')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (9, 'Tracer Augusto', 9, '81999267721')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (10, 'Andressa Luna', 11, '81991311565')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (11, 'Larissa Gondim', 10, '81996906156')");
+//        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
+//                "VALUES (12, 'Mariana Brito', 12, '81983695033')");
+
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (1, 'Luciano Trigueiro', 1, '81987860852', 2130837644)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (2, 'Gabriel Lourenço', 2, '81996716745', 2130837625)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (3, 'Heitor Augusto', 3, '81999267720', 2130837627)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (4, 'Nicollas Bastos', 4, '81991311564', 2130837649)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (5, 'Nícolas Moura', 5, '81996906155', 2130837648)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (6, 'Ebony Marques', 6, '81983695032', 2130837624)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (7, 'Renata Albuquerque', 7, '81987860853', 2130837662)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (8, 'Marília Andrade', 8, '81996716746', 2130837646)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (9, 'Tracer Augusto', 9, '81999267721', 2130837663)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (10, 'Andressa Luna', 10, '81991311565', 2130837587)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (11, 'Larissa Gondim', 11, '81996906156', 2130837642)");
+        banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE, FOTO)\n" +
+                "VALUES (12, 'Mariana Brito', 12, '81983695033', 2130837645)");
 
         banco.execSQL("INSERT INTO MATERIAS (ID, NOME)\n" +
                 "VALUES (1, 'matematica')");
