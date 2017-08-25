@@ -248,13 +248,19 @@ public final class Banco extends SQLiteOpenHelper {
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (1, 1, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (2, 2, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (3, 3, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (4, 1, 0)");
+                "VALUES (4, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (4, 4, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (5, 2, 0)");
+        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (5, 5, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (6, 6, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
@@ -269,19 +275,19 @@ public final class Banco extends SQLiteOpenHelper {
                 "VALUES (11, 6, 0)");
         banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (12, 1, 0)");
-        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (1, 2, 0)");
-        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (4, 4, 0)");
-        banco.execSQL("INSERT INTO CONEXAOHABILIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (5, 5, 0)");
 
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (1, 3, 0)");
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (1, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (2, 1, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (2, 3, 0)");
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (3, 4, 0)");
+        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
+                "VALUES (4, 1, 0)");
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (5, 4, 0)");
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
@@ -298,10 +304,6 @@ public final class Banco extends SQLiteOpenHelper {
                 "VALUES (11, 5, 0)");
         banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
                 "VALUES (12, 6, 0)");
-        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (2, 1, 0)");
-        banco.execSQL("INSERT INTO CONEXAONECESSIDADE (PERFIL, MATERIA, STATUS)\n" +
-                "VALUES (1, 4, 0)");
 
         banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
                 "VALUES (1, 7, 0)");
