@@ -117,6 +117,15 @@ public final class PerfilServices {
         return perfils;
     }
 
+    public ArrayList<Perfil> listarPerfil2(Materia materia) {
+        ArrayList<Perfil> perfils = new ArrayList<>();
+        ArrayList<Integer> listaIds = conexaoNecessidade.retornaUsuarios(materia.getId());
+        for (int id : listaIds) {
+            perfils.add(consulta(id));
+        }
+        return perfils;
+    }
+
     public ArrayList<Materia> listarHabilidade(Perfil perfil) {
         ArrayList<Materia> listaMateria = new ArrayList<>();
         ArrayList<Integer> lista = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());

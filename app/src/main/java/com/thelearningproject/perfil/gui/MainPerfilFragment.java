@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,6 +25,8 @@ import com.thelearningproject.pessoa.gui.ConfiguracaoActivity;
 import com.thelearningproject.pessoa.negocio.PessoaServices;
 import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
+
+import java.util.regex.Pattern;
 
 
 /**
@@ -46,7 +49,6 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
         donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
         donoDescricao = (TextView) activity.findViewById(R.id.descricaoUsuarioID);
 
-
         return inflater.inflate(R.layout.fragment_main_perfil, container, false);
     }
 
@@ -59,6 +61,13 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
 
         donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
         donoDescricao = (TextView) activity.findViewById(R.id.descricaoUsuarioID);
+
+        ImageView img = (ImageView) activity.findViewById(R.id.fotoID);
+        String dir = "@drawable/";
+        String[] n = sessao.getPessoa().getNome().split(Pattern.quote(" "));
+        String nomeImagem = n[0].toLowerCase();
+        int res = activity.getResources().getIdentifier(dir+nomeImagem, "drawable", getActivity().getPackageName());
+        img.setImageResource(res);
 
         Button btnHabilidades = (Button) activity.findViewById(R.id.btnHabilidade);
         btnHabilidades.setText(perfilServices.retornaStringListaHabilidades(sessao.getPerfil().getId()));

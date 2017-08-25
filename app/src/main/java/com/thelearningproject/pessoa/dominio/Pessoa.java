@@ -11,7 +11,6 @@ public class Pessoa {
     private String nome;
     private Usuario usuario;
     private String telefone;
-    private int foto;
 
 
     public int getId() {
@@ -44,10 +43,6 @@ public class Pessoa {
 
     public void setUsuario(Usuario novoUsuario) {
         this.usuario = novoUsuario;
-    }
-
-    public int getFoto() {
-        return foto;
     }
 
 }

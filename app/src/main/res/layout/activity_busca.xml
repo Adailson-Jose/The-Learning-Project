@@ -16,17 +16,48 @@
         android:id="@+id/tv1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textAlignment="center"
-        android:padding="25dp"
         android:gravity="center"
-        android:textSize="20sp"
+        android:padding="25dp"
         android:text="@string/semResultados"
-        android:visibility="gone"
-        />
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
-    <ListView
-        android:id="@+id/listViewID"
+    <LinearLayout
+        android:id="@+id/perfisAprender"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView1"
+            style="@style/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estes usuários querem ensinar" />
+
+        <View style="@style/DividerBlack" />
+
+        <ListView
+            android:id="@+id/listViewID1"
+            android:layout_width="match_parent"
+            android:layout_height="220dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            style="@style/headerText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Estes usuarios querem aprender" />
+
+        <View style="@style/DividerBlack" />
+
+        <ListView
+            android:id="@+id/listViewID2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
 
 </RelativeLayout>

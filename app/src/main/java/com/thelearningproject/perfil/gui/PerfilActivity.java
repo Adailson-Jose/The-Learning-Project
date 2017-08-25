@@ -3,6 +3,7 @@ package com.thelearningproject.perfil.gui;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -11,6 +12,8 @@ import com.thelearningproject.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.negocio.PerfilServices;
+
+import java.util.regex.Pattern;
 
 public class PerfilActivity extends AppCompatActivity {
 
@@ -26,10 +29,11 @@ public class PerfilActivity extends AppCompatActivity {
         TextView tvDescricaoPerfil = (TextView) findViewById(R.id.descricaoUsuarioID);
         tvDescricaoPerfil.setText(perfilAtual.getDescricao());
 
-/*        ImageView img = (ImageView) findViewById(R.id.imageView); TODO SUBSTITUIR AQUI....
-        img.setImageResource(perfilAtual.getPessoa().getIdFoto();*/
-
-        Auxiliar.criarToast(this, String.valueOf(R.drawable.renata));
+        String[] n = perfilAtual.getPessoa().getNome().split(Pattern.quote(" "));
+        String nomeImagem = n[0].toLowerCase();
+        int res = getResources().getIdentifier(nomeImagem, "drawable", this.getPackageName());
+        ImageView img = (ImageView) findViewById(R.id.imageView);
+        img.setImageResource(res);
 
         TextView tvStrHabilidades = (TextView) findViewById(R.id.stringHabilidades);
         tvStrHabilidades.setText(perfilServices.retornaStringListaHabilidades(perfilAtual.getId()));

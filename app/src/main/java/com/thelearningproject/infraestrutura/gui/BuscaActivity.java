@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -34,7 +35,8 @@ import java.util.ArrayList;
 import static android.content.Intent.ACTION_VIEW;
 
 public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, ICriarCombinacao {
-    private ListView listaUsuarios;
+    private ListView listaUsuariosEnsinar;
+    private ListView listaUsuariosAprender;
     private TextView informacaoResultado;
     private ControladorSessao sessao;
     private CombinacaoServices combinacaoServices;
@@ -48,8 +50,9 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_busca);
         sessao = ControladorSessao.getInstancia(this);
         combinacaoServices = CombinacaoServices.getInstancia(this);
+        listaUsuariosEnsinar = (ListView) findViewById(R.id.listViewID1);
+        listaUsuariosAprender = (ListView) findViewById(R.id.listViewID2);
         dadosServices = DadosServices.getInstancia(this);
-        listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
         setTitle(this.titulo);
         tvSemResultados = (TextView) findViewById(R.id.tv1);
@@ -118,10 +121,12 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         dadosServices.cadastraBusca(sessao.getPerfil(), entrada);
         Materia materia = materiaServices.consultarNome(entrada);
         ArrayList<Perfil> listaPerfil = new ArrayList<>();
+        ArrayList<Perfil> listaPerfil2 = new ArrayList<>();
         if (materia != null) {
             listaPerfil = perfilServices.listarPerfil(materia);
+            listaPerfil2 = perfilServices.listarPerfil2(materia);
         }
-        if (listaPerfil.isEmpty()) {
+        if (listaPerfil.isEmpty() && listaPerfil2.isEmpty()) {
             listaPerfil = dadosServices.recomendaMateria(sessao.getPerfil(), entrada);
             if (!listaPerfil.isEmpty()) {
                 informacaoResultado.setText("Sem resultados para " + entrada + "\nMas estes usuarios podem lhe ajudar com algo relacionado:");
@@ -131,25 +136,36 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
             if (c.getPerfil1() == sessao.getPerfil().getId()) {
                 listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+                listaPerfil2.remove(perfilServices.consulta(c.getPerfil2()));
             } else {
                 listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
+                listaPerfil2.remove(perfilServices.consulta(c.getPerfil1()));
             }
         }
 
         //remove o perfil do usuario ativo da lista de busca
-        if (listaPerfil.contains(sessao.getPerfil())) {
+        if (listaPerfil.contains(sessao.getPerfil()) && listaPerfil2.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
+            listaPerfil2.remove(sessao.getPerfil());
         }
 
         ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null);
+        ArrayAdapter adaptador2 = new PerfilAdapter(this, listaPerfil2, null, this, null);
 
-        if (listaPerfil.isEmpty()) {
+        if (listaPerfil.isEmpty() && listaPerfil2.isEmpty()) {
             tvSemResultados.setVisibility(View.VISIBLE);
+            LinearLayout linearLayout = (LinearLayout) findViewById(R.id.perfisAprender);
+            linearLayout.setVisibility(View.GONE);
             adaptador.clear();
+            adaptador2.clear();
         }
         adaptador.notifyDataSetChanged();
-        listaUsuarios.setAdapter(adaptador);
-        listaUsuarios.setOnItemClickListener(this);
+        listaUsuariosEnsinar.setAdapter(adaptador);
+        listaUsuariosEnsinar.setOnItemClickListener(this);
+
+        adaptador2.notifyDataSetChanged();
+        listaUsuariosAprender.setAdapter(adaptador2);
+        listaUsuariosAprender.setOnItemClickListener(this);
     }
 
     public void criarCombinacao(Perfil pEstrangeiro) {
