@@ -16,6 +16,7 @@ import com.thelearningproject.R;
 import com.thelearningproject.combinacao.dominio.Combinacao;
 import com.thelearningproject.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.combinacao.negocio.CombinacaoServices;
+import com.thelearningproject.combinacao.negocio.StatusCombinacao;
 import com.thelearningproject.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.infraestrutura.utils.PerfilAdapter;
@@ -49,13 +50,17 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         return view;
     }
 
+    @Override
+    public void onResume() {
+        listar();
+        super.onResume();
+    }
+
     private void listar() {
         ArrayList<Perfil> perfils = new ArrayList<>();
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
-            if (c.getPerfil1() == sessao.getPerfil().getId()) {
-                perfils.add(perfilServices.consulta(c.getPerfil2()));
-            } else {
-                perfils.add(perfilServices.consulta(c.getPerfil1()));
+            if (c.getStatus() == StatusCombinacao.ATIVADO.getValor()){
+                perfils.add(perfilServices.consultar(c.getPerfil2()));
             }
         }
         if (perfils.size() > 0) {
@@ -63,7 +68,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
         } else {
             tvMensagem.setVisibility(VISIBLE);
         }
-        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this, null, this);
+        ArrayAdapter adaptador = new PerfilAdapter(getActivity(), new ArrayList<>(perfils), MainInteracoesFragment.this, null, this, null, null);
 
         adaptador.notifyDataSetChanged();
         listaInteracoes.setAdapter(adaptador);

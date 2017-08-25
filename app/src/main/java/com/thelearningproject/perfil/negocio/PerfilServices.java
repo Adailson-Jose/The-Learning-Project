@@ -71,10 +71,22 @@ public final class PerfilServices {
         persistencia.alterarPerfil(perfil);
     }
 
-    public Perfil consulta(int id) {
+    public Perfil consultaPendentes(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
         ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
+        perfil.setPessoa(pessoa);
+        perfil.setCombinacoes(combinacoes);
+        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
+        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
+        montaListaHabilidades(perfil, habilidadeId);
+        montaListaNecessidades(perfil, necessidadeId);
+        return perfil;
+    }
+    public Perfil consultar(int id) {
+        Perfil perfil = persistencia.consultar(id);
+        Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
+        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoes(perfil);
         perfil.setPessoa(pessoa);
         perfil.setCombinacoes(combinacoes);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
@@ -112,7 +124,7 @@ public final class PerfilServices {
         ArrayList<Perfil> perfils = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());
         for (int id : listaIds) {
-            perfils.add(consulta(id));
+            perfils.add(consultar(id));
         }
         return perfils;
     }
@@ -121,7 +133,7 @@ public final class PerfilServices {
         ArrayList<Perfil> perfils = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoNecessidade.retornaUsuarios(materia.getId());
         for (int id : listaIds) {
-            perfils.add(consulta(id));
+            perfils.add(consultar(id));
         }
         return perfils;
     }
@@ -186,7 +198,7 @@ public final class PerfilServices {
     }
 
     public String retornaStringListaHabilidades(int id) {
-        Perfil perfil = this.consulta(id);
+        Perfil perfil = this.consultar(id);
         StringBuilder sb = new StringBuilder();
 
         ArrayList<Materia> lista = perfil.getHabilidades();
@@ -201,7 +213,7 @@ public final class PerfilServices {
     }
 
     public String retornaStringListaNecessidades(int id) {
-        Perfil perfil = this.consulta(id);
+        Perfil perfil = this.consultar(id);
         StringBuilder sb = new StringBuilder();
 
         ArrayList<Materia> lista = perfil.getNecessidades();

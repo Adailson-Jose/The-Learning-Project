@@ -169,13 +169,13 @@ public final class Banco extends SQLiteOpenHelper {
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (4, 'Nicollas Bastos', 4, '81991311564')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (5, 'Nícolas Moura', 5, '81996906155')");
+                "VALUES (5, 'Nicolas Moura', 5, '81996906155')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (6, 'Ebony Marques', 6, '81983695032')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (7, 'Renata Albuquerque', 7, '81987860853')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (8, 'Marília Andrade', 8, '81996716746')");
+                "VALUES (8, 'Marilia Andrade', 8, '81996716746')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (9, 'Tracer Augusto', 9, '81999267721')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +

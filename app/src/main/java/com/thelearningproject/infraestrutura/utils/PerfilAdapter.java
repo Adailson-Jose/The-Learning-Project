@@ -11,8 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.thelearningproject.R;
+import com.thelearningproject.combinacao.dominio.IAceitarCombinacao;
 import com.thelearningproject.combinacao.dominio.ICriarCombinacao;
 import com.thelearningproject.combinacao.dominio.IExcluirCombinacao;
+import com.thelearningproject.combinacao.dominio.IRecusarCombinacao;
 import com.thelearningproject.estudo.dominio.Materia;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.gui.MainInteracoesFragment;
@@ -26,14 +28,18 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private Object tela;
     private ICriarCombinacao interfaceCriarComb;
     private IExcluirCombinacao interfaceExcluirComb;
+    private IAceitarCombinacao interfaceAceitarComb;
+    private IRecusarCombinacao interfaceRecusarComb;
 
-    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Object obj, ICriarCombinacao inter, IExcluirCombinacao inter2) {
+    public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Object obj, ICriarCombinacao inter, IExcluirCombinacao inter2, IAceitarCombinacao inter3, IRecusarCombinacao inter4) {
         super(context, 0, perfils);
         this.listaPerfil = perfils;
         this.contexto = context;
         this.tela = obj;
         this.interfaceCriarComb = inter;
         this.interfaceExcluirComb = inter2;
+        this.interfaceAceitarComb = inter3;
+        this.interfaceRecusarComb = inter4;
     }
 
     @NonNull
@@ -106,14 +112,14 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         btnAceitarMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auxiliar.criarToast(getContext(), "Vou aceitar");
+                interfaceAceitarComb.aceitarCombinacao(listaPerfil.get(position).getId());
             }
         });
 
         btnRecusarMatch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Auxiliar.criarToast(getContext(), "Vou recusar");
+                interfaceRecusarComb.recusarCombinacao(listaPerfil.get(position).getId());
             }
         });
 

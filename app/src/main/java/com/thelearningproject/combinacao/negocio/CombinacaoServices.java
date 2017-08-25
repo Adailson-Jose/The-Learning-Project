@@ -28,29 +28,49 @@ public final class CombinacaoServices {
         return instancia;
     }
 
+    public  ArrayList<Combinacao> retornaCombinacoes(Perfil perfil){
+        ArrayList<Combinacao> combinacoes = new ArrayList<>();
+        combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.ATIVADO.getValor()));
+        return combinacoes;
+    }
+
     public ArrayList<Combinacao> retornaCombinacoesAtivas(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
-        combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 1));
+        combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.ATIVADO.getValor()));
         return combinacoes;
     }
 
     public ArrayList<Combinacao> retornaCombinacoesPendentes(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
-        combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId(), 0));
+        combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.PENDENTE.getValor()));
         return combinacoes;
     }
 
-    public void inserirCombinacao(Perfil perfil1, Perfil perfil2) {
-        Combinacao combinacao = new Combinacao();
-        combinacao.setPerfil1(perfil1.getId());
-        combinacao.setPerfil2(perfil2.getId());
-        combinacao.setStatus(0);
-        perfil1.addCombinacoes(combinacao);
-        persistencia.inserir(combinacao);
+    public ArrayList<Combinacao> retornaCombinacoesSolicitadas(Perfil perfil) {
+        ArrayList<Combinacao> combinacoes = new ArrayList<>();
+        combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.SOLICITADO.getValor()));
+        return combinacoes;
     }
 
-    public void atualizaCombinacao(Combinacao combinacao, int tipo) {
-        combinacao.setStatus(tipo);
+    public void requererCombinacao(Perfil perfil1, Perfil perfil2) {
+        Combinacao combinacao = new Combinacao();
+        Combinacao combinacao1 = new Combinacao();
+        combinacao.setPerfil1(perfil1.getId());
+        combinacao.setPerfil2(perfil2.getId());
+        combinacao.setStatus(StatusCombinacao.PENDENTE.getValor());
+        combinacao1.setPerfil1(perfil2.getId());
+        combinacao1.setPerfil2(perfil1.getId());
+        combinacao1.setStatus(StatusCombinacao.SOLICITADO.getValor());
+        perfil1.addCombinacoes(combinacao);
+        perfil2.addCombinacoes(combinacao1);
+        persistencia.inserir(combinacao);
+        persistencia.inserir(combinacao1);
+    }
+
+    public void atualizaCombinacao(Combinacao combinacao, int tipo, Perfil perfil) {
+        ArrayList<Combinacao> combinacaos = perfil.getCombinacoes();
+        combinacaos.get(combinacaos.indexOf(combinacao)).setStatus(tipo);
+        perfil.setCombinacoes(combinacaos);
         persistencia.atualizaStatus(combinacao);
     }
 

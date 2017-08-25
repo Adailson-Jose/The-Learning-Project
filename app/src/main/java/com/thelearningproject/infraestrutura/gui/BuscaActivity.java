@@ -135,11 +135,11 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         }
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
             if (c.getPerfil1() == sessao.getPerfil().getId()) {
-                listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
-                listaPerfil2.remove(perfilServices.consulta(c.getPerfil2()));
+                listaPerfil2.remove(perfilServices.consultar(c.getPerfil2()));
+                listaPerfil.remove(perfilServices.consultar(c.getPerfil2()));
             } else {
-                listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
-                listaPerfil2.remove(perfilServices.consulta(c.getPerfil1()));
+                listaPerfil2.remove(perfilServices.consultar(c.getPerfil1()));
+                listaPerfil.remove(perfilServices.consultar(c.getPerfil1()));
             }
         }
 
@@ -149,8 +149,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
             listaPerfil2.remove(sessao.getPerfil());
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null);
-        ArrayAdapter adaptador2 = new PerfilAdapter(this, listaPerfil2, null, this, null);
+        ArrayAdapter adaptador = new PerfilAdapter(this, listaPerfil, null, this, null, null, null);
+        ArrayAdapter adaptador2 = new PerfilAdapter(this, listaPerfil2, null, this, null, null, null);
 
         if (listaPerfil.isEmpty() && listaPerfil2.isEmpty()) {
             tvSemResultados.setVisibility(View.VISIBLE);
@@ -169,7 +169,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
     public void criarCombinacao(Perfil pEstrangeiro) {
-        combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
+        combinacaoServices.requererCombinacao(sessao.getPerfil(), pEstrangeiro);
         handleSearch(getIntent());
         Auxiliar.criarToast(BuscaActivity.this, "Você fez um match");
     }

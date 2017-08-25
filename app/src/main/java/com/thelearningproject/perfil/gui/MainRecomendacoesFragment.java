@@ -61,6 +61,12 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         return view;
     }
 
+    @Override
+    public void onResume() {
+        listar();
+        super.onResume();
+    }
+
     private void listar() {
         PerfilServices perfilServices = PerfilServices.getInstancia(activity);
         Set<Perfil> listaPerfil = new LinkedHashSet<>();
@@ -77,9 +83,9 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         }
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
             if (c.getPerfil1() == sessao.getPerfil().getId()) {
-                listaPerfil.remove(perfilServices.consulta(c.getPerfil2()));
+                listaPerfil.remove(perfilServices.consultar(c.getPerfil2()));
             } else {
-                listaPerfil.remove(perfilServices.consulta(c.getPerfil1()));
+                listaPerfil.remove(perfilServices.consultar(c.getPerfil1()));
             }
         }
 
@@ -89,7 +95,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             tvMensagem.setVisibility(VISIBLE);
         }
 
-        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this, this, null);
+        ArrayAdapter adaptador = new PerfilAdapter(activity, new ArrayList<>(listaPerfil), MainRecomendacoesFragment.this, this, null, null, null);
 
 
         adaptador.notifyDataSetChanged();
@@ -97,7 +103,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     }
 
     public void criarCombinacao(Perfil pEstrangeiro) {
-        combinacaoServices.inserirCombinacao(sessao.getPerfil(), pEstrangeiro);
+        combinacaoServices.requererCombinacao(sessao.getPerfil(), pEstrangeiro);
         listar();
         Auxiliar.criarToast(getContext(), "Você fez um match");
     }
