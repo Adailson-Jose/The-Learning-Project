@@ -64,6 +64,13 @@ public final class CombinacaoDAO {
         String[] colunas = {IDPERFIL1_COMBINACAO, IDPERFIL2_COMBINACAO, STATUS_COMBINACAO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_COMBINACAO, colunas, IDPERFIL1_COMBINACAO + " = ? ", new String[]{Integer.toString(perfil)}, null, null, null);
         ArrayList<Combinacao> listaCombinacao = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            Combinacao combinacao = new Combinacao();
+            combinacao.setPerfil1(cursor.getInt(cursor.getColumnIndex(IDPERFIL1_COMBINACAO)));
+            combinacao.setPerfil2(cursor.getInt(cursor.getColumnIndex(IDPERFIL2_COMBINACAO)));
+            combinacao.setStatus(cursor.getInt(cursor.getColumnIndex(STATUS_COMBINACAO)));
+            listaCombinacao.add(combinacao);
+        }
         cursor.close();
         return listaCombinacao;
     }

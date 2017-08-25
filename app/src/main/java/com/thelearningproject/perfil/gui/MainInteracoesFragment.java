@@ -63,7 +63,7 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
                 perfils.add(perfilServices.consultar(c.getPerfil2()));
             }
         }
-        if (perfils.size() > 0) {
+        if (!perfils.isEmpty()) {
             tvMensagem.setVisibility(GONE);
         } else {
             tvMensagem.setVisibility(VISIBLE);
@@ -84,11 +84,22 @@ public class MainInteracoesFragment extends Fragment implements AdapterView.OnIt
 
     @Override
     public void excluirCombinacao(int i) {
-        Combinacao com = new Combinacao();
-        com.setPerfil1(sessao.getPerfil().getId());
-        com.setPerfil2(i);
-        combinacaoServices.removerCombinacao(sessao.getPerfil(), com);
+        for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
+            if (c.getPerfil2() == i) {
+                combinacaoServices.removerCombinacao(sessao.getPerfil(), c);
+                sessao.getPerfil().getCombinacoes().remove(c);
+                break;
+            }
+        }
+        Perfil perfil2 = perfilServices.consultar(i);
+        for (Combinacao c : perfil2.getCombinacoes()) {
+            if (c.getPerfil2() == sessao.getPerfil().getId()) {
+                combinacaoServices.removerCombinacao(perfil2, c);
+                sessao.getPerfil().getCombinacoes().remove(c);
+                break;
+            }
+        }
         listar();
-        Auxiliar.criarToast(getContext(), "Você desfez o match");
+        Auxiliar.criarToast(getContext(), "Você recusou a solicitação");
     }
 }

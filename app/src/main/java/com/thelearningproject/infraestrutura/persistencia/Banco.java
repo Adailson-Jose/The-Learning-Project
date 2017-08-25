@@ -68,6 +68,8 @@ public final class Banco extends SQLiteOpenHelper {
         super(context, NOME_BANCO, null, VERSION);
     }
 
+    //Metodo onCreate extenso apenas para população do banco de forma direta, por motivos de teste
+
     @Override
     public void onCreate(SQLiteDatabase banco) {
         String usuarios = "CREATE TABLE " + TABELA_USUARIOS + "(" +
@@ -179,9 +181,9 @@ public final class Banco extends SQLiteOpenHelper {
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (9, 'Tracer Augusto', 9, '81999267721')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (10, 'Andressa Luna', 11, '81991311565')");
+                "VALUES (10, 'Andressa Luna', 10, '81991311565')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
-                "VALUES (11, 'Larissa Gondim', 10, '81996906156')");
+                "VALUES (11, 'Larissa Gondim', 11, '81996906156')");
         banco.execSQL("INSERT INTO PESSOAS (ID, NOME, USUARIO, TELEFONE)\n" +
                 "VALUES (12, 'Mariana Brito', 12, '81983695033')");
 
@@ -315,6 +317,18 @@ public final class Banco extends SQLiteOpenHelper {
                 "VALUES (5, 11, 0)");
         banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
                 "VALUES (6, 12, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (7, 1, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (8, 2, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (9, 3, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (10, 4, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (11, 5, 0)");
+        banco.execSQL("INSERT INTO COMBINACAOPERFIL (ID_PERFIL1, ID_PERFIL2, STATUS)\n" +
+                "VALUES (12, 6, 0)");
     }
 
     @Override

@@ -38,13 +38,14 @@ public class MainPerfilFragment extends Fragment implements AdapterView.OnItemCl
     private ControladorSessao sessao;
     private TextView donoConta;
     private TextView donoDescricao;
-    private PerfilServices perfilServices = PerfilServices.getInstancia(activity);
+    private PerfilServices perfilServices;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         activity = this.getActivity();
+        perfilServices = PerfilServices.getInstancia(activity);
         sessao = ControladorSessao.getInstancia(activity);
         donoConta = (TextView) activity.findViewById(R.id.nomeUsuarioID);
         donoDescricao = (TextView) activity.findViewById(R.id.descricaoUsuarioID);

@@ -57,14 +57,6 @@ public class VetorMateria {
 
     }
 
-    @Override
-    public String toString() {
-        return "VetorMateria{" +
-                "materiaID=" + materiaID +
-                ", arrayCombinacao=" + arrayCombinacao +
-                '}';
-    }
-
     public int hashCode() {
         return (Integer.toString(this.getMateria()).hashCode());
     }

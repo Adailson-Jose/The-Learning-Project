@@ -60,7 +60,7 @@ public final class PerfilServices {
         Perfil perfil = persistencia.retornaPerfilPorPessoa(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
-        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
+        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoes(perfil);
         perfil.setCombinacoes(combinacoes);
         montaListaHabilidades(perfil, habilidadeId);
         montaListaNecessidades(perfil, necessidadeId);
@@ -71,18 +71,6 @@ public final class PerfilServices {
         persistencia.alterarPerfil(perfil);
     }
 
-    public Perfil consultaPendentes(int id) {
-        Perfil perfil = persistencia.consultar(id);
-        Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
-        ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
-        perfil.setPessoa(pessoa);
-        perfil.setCombinacoes(combinacoes);
-        ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
-        ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
-        montaListaHabilidades(perfil, habilidadeId);
-        montaListaNecessidades(perfil, necessidadeId);
-        return perfil;
-    }
     public Perfil consultar(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());

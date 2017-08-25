@@ -82,11 +82,8 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             listaPerfil.remove(sessao.getPerfil());
         }
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
-            if (c.getPerfil1() == sessao.getPerfil().getId()) {
-                listaPerfil.remove(perfilServices.consultar(c.getPerfil2()));
-            } else {
-                listaPerfil.remove(perfilServices.consultar(c.getPerfil1()));
-            }
+            listaPerfil.remove(perfilServices.consultar(c.getPerfil2()));
+
         }
 
         if (!listaPerfil.isEmpty()) {
@@ -104,6 +101,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
 
     public void criarCombinacao(Perfil pEstrangeiro) {
         combinacaoServices.requererCombinacao(sessao.getPerfil(), pEstrangeiro);
+        Auxiliar.criarToast(getContext(), sessao.getPerfil().getCombinacoes().toString());
         listar();
         Auxiliar.criarToast(getContext(), "Você fez um match");
     }

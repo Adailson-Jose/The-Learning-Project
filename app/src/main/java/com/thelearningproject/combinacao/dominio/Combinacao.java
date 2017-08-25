@@ -51,4 +51,13 @@ public class Combinacao {
         result = TRINTA_E_UM * result + perfil2;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Combinacao{" +
+                "perfil1=" + perfil1 +
+                ", perfil2=" + perfil2 +
+                ", status=" + status +
+                '}';
+    }
 }

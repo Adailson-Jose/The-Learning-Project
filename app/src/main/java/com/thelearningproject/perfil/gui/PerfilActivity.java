@@ -8,7 +8,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.thelearningproject.R;
-import com.thelearningproject.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.negocio.PerfilServices;

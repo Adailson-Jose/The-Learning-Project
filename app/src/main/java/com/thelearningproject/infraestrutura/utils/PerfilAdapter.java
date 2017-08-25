@@ -58,6 +58,8 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         ImageButton btnAceitarMatch = (ImageButton) view.findViewById(R.id.aceitarMatchBtn);
         ImageButton btnRecusarMatch = (ImageButton) view.findViewById(R.id.recusarMatchBtn);
 
+        Perfil perfil = listaPerfil.get(position);
+
         if (this.tela instanceof NotificacoesActivity) {
             btnNovaInteracao.setVisibility(View.GONE);
             btnDesfazerInteracao.setVisibility(View.GONE);
@@ -68,13 +70,14 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
             btnNovaInteracao.setVisibility(View.GONE);
             btnDesfazerInteracao.setVisibility(View.VISIBLE);
         } else if (this.tela instanceof NotificacoesActivity){
-            //TODO colocar comportamento dos botoes aqui
+            btnAceitarMatch.setVisibility(View.VISIBLE);
+            btnRecusarMatch.setVisibility(View.VISIBLE);
         } else {
             btnDesfazerInteracao.setVisibility(View.GONE);
             btnNovaInteracao.setVisibility(View.VISIBLE);
         }
 
-        Perfil perfil = listaPerfil.get(position);
+
         StringBuilder sb1 = new StringBuilder();
         StringBuilder sb2 = new StringBuilder();
         ArrayList<Materia> listahabilidades = perfil.getHabilidades();

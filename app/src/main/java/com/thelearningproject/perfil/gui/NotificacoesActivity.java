@@ -56,12 +56,8 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
     private void listar() {
         ArrayList<Perfil> perfils = new ArrayList<>();
         for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
-            if (c.getStatus() == StatusCombinacao.PENDENTE.getValor()){
-                if (c.getPerfil1() == sessao.getPerfil().getId()) {
-                    perfils.add(perfilServices.consultaPendentes(c.getPerfil2()));
-                } else {
-                    perfils.add(perfilServices.consultaPendentes(c.getPerfil1()));
-                }
+            if (c.getStatus() == StatusCombinacao.SOLICITADO.getValor()) {
+                perfils.add(perfilServices.consultar(c.getPerfil2()));
             }
         }
 
@@ -76,6 +72,7 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
             if (c.getPerfil2() == i){
                 combinacaoServices.atualizaCombinacao(c, StatusCombinacao.ATIVADO.getValor(), sessao.getPerfil());
                 sessao.getPerfil().getCombinacoes().remove(c);
+                break;
             }
         }
         Perfil perfil2 = perfilServices.consultar(i);
@@ -83,6 +80,7 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
             if (c.getPerfil2() == sessao.getPerfil().getId()) {
                 combinacaoServices.atualizaCombinacao(c, StatusCombinacao.ATIVADO.getValor(), perfil2);
                 sessao.getPerfil().getCombinacoes().remove(c);
+                break;
             }
         }
 
@@ -91,10 +89,23 @@ public class NotificacoesActivity extends AppCompatActivity implements AdapterVi
     }
     @Override
     public void recusarCombinacao(int i) {
-        Combinacao com = new Combinacao();
-        com.setPerfil1(sessao.getPerfil().getId());
-        com.setPerfil2(i);
-        combinacaoServices.removerCombinacao(sessao.getPerfil(),com);
+        for (Combinacao c : sessao.getPerfil().getCombinacoes()) {
+            if (c.getPerfil2() == i) {
+                combinacaoServices.removerCombinacao(sessao.getPerfil(), c);
+                sessao.getPerfil().getCombinacoes().remove(c);
+                break;
+            }
+        }
+        Perfil perfil2 = perfilServices.consultar(i);
+        for (Combinacao c : perfil2.getCombinacoes()) {
+            if (c.getPerfil2() == sessao.getPerfil().getId()) {
+                combinacaoServices.removerCombinacao(perfil2, c);
+                sessao.getPerfil().getCombinacoes().remove(c);
+                break;
+            }
+        }
+
+
         listar();
         Auxiliar.criarToast(this, "Você recusou o match");
     }

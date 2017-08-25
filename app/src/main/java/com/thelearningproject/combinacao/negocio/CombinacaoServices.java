@@ -30,7 +30,7 @@ public final class CombinacaoServices {
 
     public  ArrayList<Combinacao> retornaCombinacoes(Perfil perfil){
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
-        combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.ATIVADO.getValor()));
+        combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId()));
         return combinacoes;
     }
 
