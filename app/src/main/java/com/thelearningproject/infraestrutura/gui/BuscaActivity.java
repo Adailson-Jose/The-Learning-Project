@@ -48,6 +48,7 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_busca);
         sessao = ControladorSessao.getInstancia(this);
         combinacaoServices = CombinacaoServices.getInstancia(this);
+        dadosServices = DadosServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
         setTitle(this.titulo);
@@ -113,7 +114,6 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
 
         MateriaServices materiaServices = MateriaServices.getInstancia(this);
         PerfilServices perfilServices = PerfilServices.getInstancia(this);
-        DadosServices dadosServices = DadosServices.getInstancia(this);
 
         dadosServices.cadastraBusca(sessao.getPerfil(), entrada);
         Materia materia = materiaServices.consultarNome(entrada);
