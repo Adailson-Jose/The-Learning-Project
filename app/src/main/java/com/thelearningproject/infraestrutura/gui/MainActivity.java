@@ -20,16 +20,15 @@ import com.thelearningproject.R;
 import com.thelearningproject.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.perfil.dominio.Perfil;
+import com.thelearningproject.perfil.gui.MainInteracoesFragment;
+import com.thelearningproject.perfil.gui.MainPerfilFragment;
+import com.thelearningproject.perfil.gui.MainRecomendacoesFragment;
 import com.thelearningproject.perfil.gui.NotificacoesActivity;
 import com.thelearningproject.perfil.negocio.PerfilServices;
 import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.pessoa.negocio.PessoaServices;
 import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
-
-import com.thelearningproject.perfil.gui.MainInteracoesFragment;
-import com.thelearningproject.perfil.gui.MainPerfilFragment;
-import com.thelearningproject.perfil.gui.MainRecomendacoesFragment;
 
 /**
  * Criado por gabri on 26/07/2017.

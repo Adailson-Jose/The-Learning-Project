@@ -47,7 +47,6 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_busca);
         sessao = ControladorSessao.getInstancia(this);
-        dadosServices = DadosServices.getInstancia(this);
         combinacaoServices = CombinacaoServices.getInstancia(this);
         listaUsuarios = (ListView) findViewById(R.id.listViewID);
         informacaoResultado = (TextView) findViewById(R.id.tv_resultadoID);
@@ -88,7 +87,8 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
     @Override
     protected void onNewIntent(Intent intent) {
         setIntent(intent);
-        handleSearch(intent);
+        startActivity(intent);
+        finish();
     }
 
     public void handleSearch(Intent intent) {

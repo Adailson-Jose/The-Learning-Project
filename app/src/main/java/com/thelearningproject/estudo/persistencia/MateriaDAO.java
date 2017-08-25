@@ -94,8 +94,8 @@ public final class MateriaDAO {
     //Metodo retorna um cursor, objeto da persistencia pois o searchview exige um CursorAdapter, para utilizar a tabela pela persistencia,
     // passamos o cursor para a classe Provide, e ela os utiliza para criar as sugestões do SearchView
     public Cursor queryCursorLista(SQLiteQueryBuilder queryBuilder, String[] projection, String selecion, String[] selectionArgs, String orderBy) {
-        Cursor cursor = queryBuilder.query(banco.getReadableDatabase(), projection, selecion, selectionArgs, null, null, orderBy);
-        return cursor;
+
+        return queryBuilder.query(banco.getReadableDatabase(), projection, selecion, selectionArgs, null, null, orderBy);
     }
 
 }

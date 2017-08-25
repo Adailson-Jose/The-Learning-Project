@@ -43,7 +43,7 @@ public final class PerfilDAO {
         db.close();
     }
 
-    public Perfil retornaPerfil(int idPessoa) {
+    public Perfil retornaPerfilPorPessoa(int idPessoa) {
         String[] colunas = {ID_PERFIL, PESSOA_PERFIL, DESCRICAO_PERFIL};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, PESSOA_PERFIL + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
         Perfil perfil = null;

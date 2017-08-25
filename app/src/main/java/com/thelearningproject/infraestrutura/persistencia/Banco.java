@@ -33,7 +33,6 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String ID_PERFIL = "id";
     private static final String PESSOA_PERFIL = "pessoa";
     private static final String DESCRICAO_PERFIL = "descricao";
-    private static final String HABILIDADES_PERFIL = "habilidade";
 
     private static final String TABELA_MATERIAS = "materias";
     private static final String ID_MATERIA = "id";
@@ -91,8 +90,7 @@ public final class Banco extends SQLiteOpenHelper {
         String perfis = "CREATE TABLE " + TABELA_PERFIS + "(" +
                 ID_PERFIL + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 PESSOA_PERFIL + " INTEGER, " +
-                DESCRICAO_PERFIL + " TEXT, " +
-                HABILIDADES_PERFIL + " INTEGER)";
+                DESCRICAO_PERFIL + " TEXT)";
 
         String habilidades = "CREATE TABLE " + TABELA_CONEXAO_HABILIDADES + " (" +
                 IDPERFIL_HABILIDADE + " INTEGER, " +

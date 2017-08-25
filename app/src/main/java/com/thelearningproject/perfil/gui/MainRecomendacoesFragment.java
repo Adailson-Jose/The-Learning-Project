@@ -67,8 +67,10 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
         for (Materia materia : sessao.getPerfil().getNecessidades()) {
             listaPerfil.addAll(perfilServices.listarPerfil(materia));
         }
-        for (Materia materia : perfilServices.recomendaMateria(sessao.getPerfil())) {
-            listaPerfil.addAll(perfilServices.listarPerfil(materia));
+        for (Materia materia : sessao.getPerfil().getNecessidades()) {
+            for (Materia materia2 : perfilServices.recomendador(materia)) {
+                listaPerfil.addAll(perfilServices.listarPerfil(materia2));
+            }
         }
         if (listaPerfil.contains(sessao.getPerfil())) {
             listaPerfil.remove(sessao.getPerfil());
@@ -81,7 +83,7 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
             }
         }
 
-        if (listaPerfil.size() > 0) {
+        if (!listaPerfil.isEmpty()) {
             tvMensagem.setVisibility(GONE);
         } else {
             tvMensagem.setVisibility(VISIBLE);

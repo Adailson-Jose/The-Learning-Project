@@ -16,27 +16,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Creado by Pichau on 22/08/2017.
+ * Classe que permite acesso ao bando de materias para uso de sugestões de digitação na SearchView, é utilizada aqui quebra de arquitetura,
+ * porém é uma necessidade do android para a recomendação do searchview utilizar uma tabela do tipo cursor,
+ * possivel alteração e solução disso em próximas atualizações
+ *
  */
+
 
 public class Provider extends ContentProvider {
 
     private MateriaDAO materiaDAO;
-/*    private static final String AUTHORITY = "com.thelearningproject.infraestrutura.utils.Provider";
-    private static final Uri CONTENT_URI = Uri.parse("content://com.thelearningproject.infraestrutura.utils.Provider/materias");
-    private static final int MATERIAS = 1;
-    private static final int MATERIAS_ID = 2;
-
-    private static UriMatcher uriMaterias;
-
-    static {
-        uriMaterias = new UriMatcher(UriMatcher.NO_MATCH);
-
-        //content://com.thelearningproject.infraestrutura.utils.Provider/materias
-        uriMaterias.addURI(AUTHORITY, "materias/", MATERIAS);
-        //content://com.thelearningproject.infraestrutura.utils.Provider/materias/2
-        uriMaterias.addURI(AUTHORITY, "materias/#", MATERIAS_ID);
-    }*/
 
     @Override
     public boolean onCreate() {

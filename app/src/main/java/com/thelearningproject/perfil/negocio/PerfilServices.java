@@ -6,9 +6,10 @@ import com.thelearningproject.combinacao.dominio.Combinacao;
 import com.thelearningproject.combinacao.negocio.CombinacaoServices;
 import com.thelearningproject.estudo.dominio.Materia;
 import com.thelearningproject.estudo.negocio.MateriaServices;
-import com.thelearningproject.infraestrutura.utils.FrequenciaMateria;
+import com.thelearningproject.infraestrutura.utils.PesoRecomendacao;
 import com.thelearningproject.infraestrutura.utils.Status;
 import com.thelearningproject.infraestrutura.utils.UsuarioException;
+import com.thelearningproject.infraestrutura.utils.VetorMateria;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.persistencia.ConexaoHabilidade;
 import com.thelearningproject.perfil.persistencia.ConexaoNecessidade;
@@ -19,9 +20,7 @@ import com.thelearningproject.pessoa.persistencia.PessoaDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Iterator;
 
 /**
  * Criado por Ebony Marques on 26/07/2017.
@@ -58,7 +57,7 @@ public final class PerfilServices {
     }
 
     public Perfil retornaPerfil(int idPessoa) {
-        Perfil perfil = persistencia.retornaPerfil(idPessoa);
+        Perfil perfil = persistencia.retornaPerfilPorPessoa(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
         ArrayList<Integer> necessidadeId = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
         ArrayList<Combinacao> combinacoes = combinacaoServices.retornaCombinacoesPendentes(perfil);
@@ -165,31 +164,6 @@ public final class PerfilServices {
         return retorno;
     }
 
-    public List<Materia> recomendaMateria(Perfil perfil) {
-        List<Materia> materias = new ArrayList<>();
-        Set<FrequenciaMateria> listaAux = new HashSet<>();
-        ArrayList<FrequenciaMateria> listaFrequencia = new ArrayList<>();
-        for (Materia m : perfil.getNecessidades()) {
-            listaAux.addAll(conexaoNecessidade.retornaFrequencia(m.getId(), perfil.getId()));
-        }
-        listaFrequencia.addAll(listaAux);
-
-        Collections.sort(listaFrequencia, Collections.reverseOrder(new Comparator<FrequenciaMateria>() {
-            @Override
-            public int compare(FrequenciaMateria o1, FrequenciaMateria o2) {
-                return o1.getFrequencia().compareTo(o2.getFrequencia());
-            }
-        }));
-
-        for (FrequenciaMateria i : listaAux) {
-            materias.add(materiaServices.consultar(i.getMateria()));
-        }
-        materias.removeAll(perfil.getHabilidades());
-        materias.removeAll(perfil.getNecessidades());
-
-        return materias;
-    }
-
     private void montaListaHabilidades(Perfil perfil, ArrayList<Integer> habilidadeId) {
         for (int i : habilidadeId) {
             perfil.addHabilidade(materiaServices.consultar(i));
@@ -230,6 +204,85 @@ public final class PerfilServices {
             sb.append(mat.getNome());
         }
         return sb.toString();
+    }
+
+    public ArrayList<Materia> recomendador(Materia materia) {
+        ArrayList<PesoRecomendacao> recomendacaoValores = retornaVetorSimilaridade(materia.getId());
+        ArrayList<Materia> materias = new ArrayList<>();
+        Iterator iter = recomendacaoValores.iterator();
+        while (iter.hasNext()) {
+            PesoRecomendacao valor = (PesoRecomendacao) iter.next();
+            if (valor.getValor().equals(0.0)) {
+                iter.remove();
+            }
+        }
+        Collections.sort(recomendacaoValores, new Comparator<PesoRecomendacao>() {
+            @Override
+            public int compare(PesoRecomendacao o1, PesoRecomendacao o2) {
+                return o1.compareTo(o2);
+            }
+        });
+        for (PesoRecomendacao pesos : recomendacaoValores) {
+            materias.add(materiaServices.consultar(pesos.getMateriaId2()));
+        }
+        return materias;
+    }
+
+
+    private ArrayList<PesoRecomendacao> retornaVetorSimilaridade(int materiaId) {
+        ArrayList<VetorMateria> materias = new ArrayList<>();
+        ArrayList<PesoRecomendacao> cusines = new ArrayList<>();
+        ArrayList<Integer> listaUsuarios = conexaoNecessidade.retornaUsuarios(materiaId);
+        materias.addAll(conexaoNecessidade.retornaFrequencia(materiaId));
+        VetorMateria materiaAtiva = null;
+
+        for (VetorMateria vetorMateria : materias) {
+            vetorMateria.setArrayCombinacao(transformaVetor(vetorMateria, listaUsuarios));
+            if (vetorMateria.getMateria() == materiaId) {
+                materiaAtiva = vetorMateria;
+            }
+        }
+        for (VetorMateria vetorMateria : materias) {
+            if (!vetorMateria.equals(materiaAtiva)) {
+                PesoRecomendacao recomendacaoValor = new PesoRecomendacao();
+                recomendacaoValor.setMateriaId1(materiaId);
+                recomendacaoValor.setMateriaId2(vetorMateria.getMateria());
+                recomendacaoValor.setValor(retornaCusineSimilaridade(materiaAtiva.getArrayCombinacao(), vetorMateria.getArrayCombinacao()));
+                if (!cusines.contains(recomendacaoValor)) {
+                    cusines.add(recomendacaoValor);
+                }
+            }
+        }
+        return cusines;
+    }
+
+    private Integer[] transformaVetor(VetorMateria freq, ArrayList<Integer> lista) {
+        Integer[] listaPerfil = new Integer[lista.size()];
+        listaPerfil = lista.toArray(listaPerfil);
+        for (int i = 0; i < listaPerfil.length; i++) {
+            if (!freq.getPerfisID().contains(listaPerfil[i])) {
+                listaPerfil[i] = 0;
+            }
+        }
+        for (int i = 0; i < listaPerfil.length; i++) {
+            if (listaPerfil[i] > 0) {
+                listaPerfil[i] = 1;
+            }
+        }
+
+        return listaPerfil;
+    }
+
+    private Double retornaCusineSimilaridade(Integer[] vectorA, Integer[] vectorB) {
+        double produto = 0.0;
+        double normaA = 0.0;
+        double normaB = 0.0;
+        for (int i = 0; i < vectorA.length; i++) {
+            produto += vectorA[i] * vectorB[i];
+            normaA += Math.pow(vectorA[i], 2);
+            normaB += Math.pow(vectorB[i], 2);
+        }
+        return produto / (Math.sqrt(normaA) * Math.sqrt(normaB));
     }
 
 }

@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.thelearningproject.infraestrutura.persistencia.Banco;
-import com.thelearningproject.infraestrutura.utils.FrequenciaMateria;
 import com.thelearningproject.infraestrutura.utils.Status;
+import com.thelearningproject.infraestrutura.utils.VetorMateria;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -68,8 +68,7 @@ public final class ConexaoNecessidade {
     //Retorna todos os usuarios que buscaram a matéria de id = materia
     public ArrayList<Integer> retornaUsuarios(int materia) {
         ArrayList<Integer> usuarios = new ArrayList<>();
-        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDPERFIL_NECESSIDADE}, IDMATERIA_NECESSIDADE + " = ?", new String[]{Integer.toString(materia)}, null, null, null);
-
+        Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDPERFIL_NECESSIDADE}, IDMATERIA_NECESSIDADE + " = ?", new String[]{Integer.toString(materia)}, null, null, IDPERFIL_NECESSIDADE + " ASC");
         while (cursor.moveToNext()) {
             usuarios.add(cursor.getInt(cursor.getColumnIndex(IDPERFIL_NECESSIDADE)));
         }
@@ -100,22 +99,22 @@ public final class ConexaoNecessidade {
         return retorno;
     }
 
-    public Set<FrequenciaMateria> retornaFrequencia(int materia, int perfil) {
-        String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia + " AND NOT " + IDPERFIL_NECESSIDADE + " = " + perfil;
-        Set<FrequenciaMateria> frequencias = new HashSet<>();
+    public Set<VetorMateria> retornaFrequencia(int materia) {
+        String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia;
+        Set<VetorMateria> frequencias = new HashSet<>();
 
         Cursor cursor = banco.getReadableDatabase().rawQuery(
-                "SELECT " + IDMATERIA_NECESSIDADE + ", count(" + IDMATERIA_NECESSIDADE + ")" +
+                "SELECT " + IDMATERIA_NECESSIDADE + ", group_concat(" + IDPERFIL_NECESSIDADE + ")" +
                         " FROM " + TABELA_CONEXAO_NECESSIDADES +
                         " WHERE " + IDPERFIL_NECESSIDADE + " IN (" + subtabela + ")" +
                         " GROUP BY " + IDMATERIA_NECESSIDADE + " ORDER BY count(" + IDMATERIA_NECESSIDADE + ") DESC", null
         );
 
         while (cursor.moveToNext()) {
-            FrequenciaMateria frequenciaMateria = new FrequenciaMateria();
-            frequenciaMateria.setMateria(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
-            frequenciaMateria.setFrequencia(cursor.getInt(1));
-            frequencias.add(frequenciaMateria);
+            VetorMateria vetorMateria = new VetorMateria();
+            vetorMateria.setMateria(cursor.getInt(cursor.getColumnIndex(IDMATERIA_NECESSIDADE)));
+            vetorMateria.setPerfisID(cursor.getString(1));
+            frequencias.add(vetorMateria);
         }
         cursor.close();
         return frequencias;

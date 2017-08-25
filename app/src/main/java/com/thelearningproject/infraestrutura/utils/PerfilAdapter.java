@@ -15,11 +15,10 @@ import com.thelearningproject.combinacao.dominio.ICriarCombinacao;
 import com.thelearningproject.combinacao.dominio.IExcluirCombinacao;
 import com.thelearningproject.estudo.dominio.Materia;
 import com.thelearningproject.perfil.dominio.Perfil;
+import com.thelearningproject.perfil.gui.MainInteracoesFragment;
 import com.thelearningproject.perfil.gui.NotificacoesActivity;
 
 import java.util.ArrayList;
-
-import com.thelearningproject.perfil.gui.MainInteracoesFragment;
 
 public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private ArrayList<Perfil> listaPerfil;
