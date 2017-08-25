@@ -61,6 +61,8 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
         } else if (this.tela instanceof MainInteracoesFragment) {
             btnNovaInteracao.setVisibility(View.GONE);
             btnDesfazerInteracao.setVisibility(View.VISIBLE);
+        } else if (this.tela instanceof NotificacoesActivity){
+            //TODO colocar comportamento dos botoes aqui
         } else {
             btnDesfazerInteracao.setVisibility(View.GONE);
             btnNovaInteracao.setVisibility(View.VISIBLE);
