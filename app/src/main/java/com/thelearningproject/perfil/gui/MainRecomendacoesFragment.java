@@ -32,7 +32,7 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 /**
- * Criado por Gabriel on 03/08/2017
+ * The type Main recomendacoes fragment.
  */
 public class MainRecomendacoesFragment extends Fragment implements AdapterView.OnItemClickListener, ICriarCombinacao {
     private FragmentActivity activity;
@@ -41,6 +41,9 @@ public class MainRecomendacoesFragment extends Fragment implements AdapterView.O
     private CombinacaoServices combinacaoServices;
     private TextView tvMensagem;
 
+    /**
+     * Instantiates a new Main recomendacoes fragment.
+     */
     public MainRecomendacoesFragment() {
         // Requer um construtor publico vazio
     }

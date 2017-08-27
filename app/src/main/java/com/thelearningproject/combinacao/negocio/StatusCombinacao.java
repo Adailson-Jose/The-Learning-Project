@@ -1,11 +1,19 @@
 package com.thelearningproject.combinacao.negocio;
 
 /**
- * Created by Heitor on 25/08/2017.
+ * The enum Status combinacao.
  */
-
 public enum StatusCombinacao {
-    ATIVADO(0),PENDENTE(1),SOLICITADO(2);
+    /**
+     * Ativado status combinacao.
+     */
+    ATIVADO(0), /**
+     * Pendente status combinacao.
+     */
+    PENDENTE(1), /**
+     * Solicitado status combinacao.
+     */
+    SOLICITADO(2);
 
     private int valor;
 
@@ -13,6 +21,11 @@ public enum StatusCombinacao {
         this.valor = i;
     }
 
+    /**
+     * Gets valor.
+     *
+     * @return the valor
+     */
     public int getValor() {
         return this.valor;
     }

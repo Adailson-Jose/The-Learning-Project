@@ -1,9 +1,14 @@
 package com.thelearningproject.perfil.negocio;
 
 /**
- * Criado por Pichau on 02/08/2017.
+ * The enum Tipo conexao.
  */
-
 public enum tipoConexao {
-    HABILIDADE, NECESSIDADE
+    /**
+     * Habilidade tipo conexao.
+     */
+    HABILIDADE, /**
+     * Necessidade tipo conexao.
+     */
+    NECESSIDADE
 }

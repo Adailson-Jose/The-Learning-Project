@@ -17,6 +17,9 @@ import com.thelearningproject.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.negocio.PerfilServices;
 
+/**
+ * The type Necessidade activity.
+ */
 public class NecessidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private EditText entradaNecessidade;

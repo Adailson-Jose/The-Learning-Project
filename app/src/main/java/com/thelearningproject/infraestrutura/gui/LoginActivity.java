@@ -20,9 +20,8 @@ import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
 /**
- * Criado por Ebony Marques em 17/07/2017.
+ * The type Login activity.
  */
-
 public class LoginActivity extends Activity {
     private ControladorSessao sessao;
     private EditText entradaLogin;

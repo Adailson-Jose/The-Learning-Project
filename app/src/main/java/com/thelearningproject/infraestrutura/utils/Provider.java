@@ -19,7 +19,6 @@ import java.util.Map;
  * Classe que permite acesso ao bando de materias para uso de sugestões de digitação na SearchView, é utilizada aqui quebra de arquitetura,
  * porém é uma necessidade do android para a recomendação do searchview utilizar uma tabela do tipo cursor,
  * possivel alteração e solução disso em próximas atualizações
- *
  */
 
 

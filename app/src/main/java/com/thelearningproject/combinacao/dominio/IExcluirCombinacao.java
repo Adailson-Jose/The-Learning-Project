@@ -1,9 +1,13 @@
 package com.thelearningproject.combinacao.dominio;
 
 /**
- * Creado by gabri on 18/08/2017.
+ * The interface Excluir combinacao.
  */
-
 public interface IExcluirCombinacao {
+    /**
+     * Excluir combinacao.
+     *
+     * @param i the
+     */
     void excluirCombinacao(int i);
 }

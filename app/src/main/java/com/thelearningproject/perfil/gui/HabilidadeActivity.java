@@ -16,6 +16,9 @@ import com.thelearningproject.infraestrutura.utils.UsuarioException;
 import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.perfil.negocio.PerfilServices;
 
+/**
+ * The type Habilidade activity.
+ */
 public class HabilidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private EditText entradaHabilidade;

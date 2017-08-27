@@ -20,6 +20,9 @@ import com.thelearningproject.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
+/**
+ * The type Listar habilidades activity.
+ */
 public class ListarHabilidadesActivity extends AppCompatActivity implements DialogInterface.OnClickListener, IExcluiMateria {
     private ControladorSessao sessao;
     private PerfilServices perfilNegocio;

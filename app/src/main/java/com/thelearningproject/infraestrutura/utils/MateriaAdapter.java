@@ -16,14 +16,20 @@ import com.thelearningproject.perfil.dominio.IExcluiMateria;
 import java.util.ArrayList;
 
 /**
- * Criado por Pichau em 09/08/2017.
+ * The type Materia adapter.
  */
-
 public class MateriaAdapter extends ArrayAdapter<Materia> {
     private ArrayList<Materia> listaMateria;
     private Context contexto;
     private IExcluiMateria interfaceMateria;
 
+    /**
+     * Instantiates a new Materia adapter.
+     *
+     * @param context  the context
+     * @param materias the materias
+     * @param inter    the inter
+     */
     public MateriaAdapter(Context context, ArrayList<Materia> materias, IExcluiMateria inter) {
         super(context, 0, materias);
         this.listaMateria = materias;

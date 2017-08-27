@@ -1,10 +1,14 @@
 package com.thelearningproject.infraestrutura.utils;
 
 /**
- * Creado by Pichau on 20/07/2017.
+ * The type Usuario exception.
  */
-
 public class UsuarioException extends Exception {
+    /**
+     * Instantiates a new Usuario exception.
+     *
+     * @param erro the erro
+     */
     public UsuarioException(String erro) {
         super(erro);
     }

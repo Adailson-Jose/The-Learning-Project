@@ -23,9 +23,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 /**
- * Criado por Ebony Marques on 26/07/2017.
+ * The type Perfil services.
  */
-
 public final class PerfilServices {
     private static PerfilServices instancia;
     private PerfilDAO persistencia;
@@ -44,6 +43,12 @@ public final class PerfilServices {
         this.pessoaDAO = PessoaDAO.getInstancia(contexto);
     }
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static PerfilServices getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new PerfilServices(contexto);
@@ -52,10 +57,21 @@ public final class PerfilServices {
         return instancia;
     }
 
+    /**
+     * Inserir perfil.
+     *
+     * @param perfil the perfil
+     */
     public void inserirPerfil(Perfil perfil) {
         persistencia.inserir(perfil);
     }
 
+    /**
+     * Retorna perfil perfil.
+     *
+     * @param idPessoa the id pessoa
+     * @return the perfil
+     */
     public Perfil retornaPerfil(int idPessoa) {
         Perfil perfil = persistencia.retornaPerfilPorPessoa(idPessoa);
         ArrayList<Integer> habilidadeId = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
@@ -67,10 +83,21 @@ public final class PerfilServices {
         return perfil;
     }
 
+    /**
+     * Alterar perfil.
+     *
+     * @param perfil the perfil
+     */
     public void alterarPerfil(Perfil perfil) {
         persistencia.alterarPerfil(perfil);
     }
 
+    /**
+     * Consultar perfil.
+     *
+     * @param id the id
+     * @return the perfil
+     */
     public Perfil consultar(int id) {
         Perfil perfil = persistencia.consultar(id);
         Pessoa pessoa = pessoaDAO.consultar(perfil.getPessoa().getId());
@@ -84,6 +111,13 @@ public final class PerfilServices {
         return perfil;
     }
 
+    /**
+     * Insere habilidade.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     * @throws UsuarioException the usuario exception
+     */
     public void insereHabilidade(Perfil perfil, Materia materia) throws UsuarioException {
         if (!verificaExistencia(perfil, materia, tipoConexao.HABILIDADE)) {
             conexaoHabilidade.insereConexao(perfil.getId(), materia.getId());
@@ -92,6 +126,13 @@ public final class PerfilServices {
         }
     }
 
+    /**
+     * Insere necessidade.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     * @throws UsuarioException the usuario exception
+     */
     public void insereNecessidade(Perfil perfil, Materia materia) throws UsuarioException {
         if (!verificaExistencia(perfil, materia, tipoConexao.NECESSIDADE)) {
             conexaoNecessidade.insereConexao(perfil.getId(), materia.getId());
@@ -100,14 +141,32 @@ public final class PerfilServices {
         }
     }
 
+    /**
+     * Deletar habilidade.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void deletarHabilidade(Perfil perfil, Materia materia) {
         conexaoHabilidade.desativarConexao(perfil.getId(), materia.getId());
     }
 
+    /**
+     * Deletar necessidade.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void deletarNecessidade(Perfil perfil, Materia materia) {
         conexaoNecessidade.desativarConexao(perfil.getId(), materia.getId());
     }
 
+    /**
+     * Listar perfil array list.
+     *
+     * @param materia the materia
+     * @return the array list
+     */
     public ArrayList<Perfil> listarPerfil(Materia materia) {
         ArrayList<Perfil> perfils = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoHabilidade.retornaUsuarios(materia.getId());
@@ -117,6 +176,12 @@ public final class PerfilServices {
         return perfils;
     }
 
+    /**
+     * Listar perfil 2 array list.
+     *
+     * @param materia the materia
+     * @return the array list
+     */
     public ArrayList<Perfil> listarPerfil2(Materia materia) {
         ArrayList<Perfil> perfils = new ArrayList<>();
         ArrayList<Integer> listaIds = conexaoNecessidade.retornaUsuarios(materia.getId());
@@ -126,6 +191,12 @@ public final class PerfilServices {
         return perfils;
     }
 
+    /**
+     * Listar habilidade array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Materia> listarHabilidade(Perfil perfil) {
         ArrayList<Materia> listaMateria = new ArrayList<>();
         ArrayList<Integer> lista = conexaoHabilidade.retornaMateriaAtivas(perfil.getId());
@@ -138,6 +209,12 @@ public final class PerfilServices {
         return listaMateria;
     }
 
+    /**
+     * Listar necessidade array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Materia> listarNecessidade(Perfil perfil) {
         ArrayList<Materia> listaNecessidade = new ArrayList<>();
         ArrayList<Integer> lista = conexaoNecessidade.retornaMateriaAtivas(perfil.getId());
@@ -185,6 +262,12 @@ public final class PerfilServices {
         }
     }
 
+    /**
+     * Retorna string lista habilidades string.
+     *
+     * @param id the id
+     * @return the string
+     */
     public String retornaStringListaHabilidades(int id) {
         Perfil perfil = this.consultar(id);
         StringBuilder sb = new StringBuilder();
@@ -200,6 +283,12 @@ public final class PerfilServices {
         return sb.toString();
     }
 
+    /**
+     * Retorna string lista necessidades string.
+     *
+     * @param id the id
+     * @return the string
+     */
     public String retornaStringListaNecessidades(int id) {
         Perfil perfil = this.consultar(id);
         StringBuilder sb = new StringBuilder();
@@ -215,6 +304,12 @@ public final class PerfilServices {
         return sb.toString();
     }
 
+    /**
+     * Recomendador array list.
+     *
+     * @param materia the materia
+     * @return the array list
+     */
     public ArrayList<Materia> recomendador(Materia materia) {
         ArrayList<PesoRecomendacao> recomendacaoValores = retornaVetorSimilaridade(materia.getId());
         ArrayList<Materia> materias = new ArrayList<>();

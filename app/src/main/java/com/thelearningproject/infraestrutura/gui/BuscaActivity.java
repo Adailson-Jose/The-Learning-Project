@@ -34,6 +34,9 @@ import java.util.ArrayList;
 
 import static android.content.Intent.ACTION_VIEW;
 
+/**
+ * The type Busca activity.
+ */
 public class BuscaActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, ICriarCombinacao {
     private ListView listaUsuariosEnsinar;
     private ListView listaUsuariosAprender;
@@ -95,6 +98,11 @@ public class BuscaActivity extends AppCompatActivity implements AdapterView.OnIt
         finish();
     }
 
+    /**
+     * Handle search.
+     *
+     * @param intent the intent
+     */
     public void handleSearch(Intent intent) {
 
         if (Intent.ACTION_SEARCH.equalsIgnoreCase(intent.getAction())) {

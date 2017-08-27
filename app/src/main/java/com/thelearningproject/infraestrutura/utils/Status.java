@@ -1,11 +1,21 @@
 package com.thelearningproject.infraestrutura.utils;
 
 /**
- * Criado por Nícolas on 27/07/2017.
+ * The enum Status.
  */
-
 public enum Status {
-    ATIVADO(0), DESATIVADO(1), PENDENTE(2);
+    /**
+     * Ativado status.
+     */
+    ATIVADO(0),
+    /**
+     * Desativado status.
+     */
+    DESATIVADO(1),
+    /**
+     * Pendente status.
+     */
+    PENDENTE(2);
 
     private int valor;
 
@@ -13,6 +23,11 @@ public enum Status {
         this.valor = i;
     }
 
+    /**
+     * Gets valor.
+     *
+     * @return the valor
+     */
     public int getValor() {
         return this.valor;
     }

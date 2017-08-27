@@ -14,6 +14,9 @@ import com.thelearningproject.perfil.negocio.PerfilServices;
 
 import java.util.regex.Pattern;
 
+/**
+ * The type Perfil activity.
+ */
 public class PerfilActivity extends AppCompatActivity {
 
     @Override

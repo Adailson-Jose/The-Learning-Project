@@ -17,6 +17,9 @@ import com.thelearningproject.perfil.negocio.PerfilServices;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * The type Termos activity.
+ */
 public class TermosActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private Pattern pTheLearningProject = Pattern.compile(String.valueOf(R.string.copyright));

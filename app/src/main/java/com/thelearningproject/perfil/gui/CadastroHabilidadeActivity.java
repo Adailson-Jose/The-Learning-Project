@@ -21,6 +21,9 @@ import com.thelearningproject.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
+/**
+ * The type Cadastro habilidade activity.
+ */
 public class CadastroHabilidadeActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private AutoCompleteTextView entradaMateria;

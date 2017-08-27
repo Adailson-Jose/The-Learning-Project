@@ -30,9 +30,8 @@ import java.util.regex.Pattern;
 
 
 /**
- * Createdd by gabri on 02/08/2017.
+ * The type Main perfil fragment.
  */
-
 public class MainPerfilFragment extends Fragment implements AdapterView.OnItemClickListener {
     private FragmentActivity activity;
     private ControladorSessao sessao;

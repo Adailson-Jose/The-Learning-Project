@@ -31,9 +31,8 @@ import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
 /**
- * Criado por gabri on 26/07/2017.
+ * The type Main activity.
  */
-
 public class MainActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private static final String SELECTED_ITEM = "arg_selected_item";

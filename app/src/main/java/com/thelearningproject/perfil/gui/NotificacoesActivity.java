@@ -22,6 +22,9 @@ import com.thelearningproject.perfil.negocio.PerfilServices;
 
 import java.util.ArrayList;
 
+/**
+ * The type Notificacoes activity.
+ */
 public class NotificacoesActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, IAceitarCombinacao, IRecusarCombinacao {
     private ListView listaInteracoes;
     private ControladorSessao sessao;

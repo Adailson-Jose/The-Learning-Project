@@ -3,9 +3,13 @@ package com.thelearningproject.perfil.dominio;
 import com.thelearningproject.estudo.dominio.Materia;
 
 /**
- * Criado by gabri on 10/08/2017.
+ * The interface Exclui materia.
  */
-
 public interface IExcluiMateria {
+    /**
+     * Excluir materia.
+     *
+     * @param mat the mat
+     */
     void excluirMateria(Materia mat);
 }

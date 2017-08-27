@@ -3,9 +3,13 @@ package com.thelearningproject.combinacao.dominio;
 import com.thelearningproject.perfil.dominio.Perfil;
 
 /**
- * Creado by gabri on 18/08/2017.
+ * The interface Criar combinacao.
  */
-
 public interface ICriarCombinacao {
+    /**
+     * Criar combinacao.
+     *
+     * @param p the p
+     */
     void criarCombinacao(Perfil p);
 }

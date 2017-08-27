@@ -1,35 +1,64 @@
 package com.thelearningproject.combinacao.dominio;
 
 /**
- * Criado por Pichau em 17/08/2017.
+ * The type Combinacao.
  */
-
 public class Combinacao {
     private int perfil1;
     private int perfil2;
     private int status;
     private static final int TRINTA_E_UM = 31;
 
+    /**
+     * Gets status.
+     *
+     * @return the status
+     */
     public int getStatus() {
         return status;
     }
 
+    /**
+     * Sets status.
+     *
+     * @param novo the novo
+     */
     public void setStatus(int novo) {
         this.status = novo;
     }
 
+    /**
+     * Gets perfil 1.
+     *
+     * @return the perfil 1
+     */
     public int getPerfil1() {
         return perfil1;
     }
 
+    /**
+     * Sets perfil 1.
+     *
+     * @param novo the novo
+     */
     public void setPerfil1(int novo) {
         this.perfil1 = novo;
     }
 
+    /**
+     * Gets perfil 2.
+     *
+     * @return the perfil 2
+     */
     public int getPerfil2() {
         return perfil2;
     }
 
+    /**
+     * Sets perfil 2.
+     *
+     * @param novo the novo
+     */
     public void setPerfil2(int novo) {
         this.perfil2 = novo;
     }

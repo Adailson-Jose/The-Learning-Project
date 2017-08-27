@@ -9,9 +9,8 @@ import com.thelearningproject.perfil.dominio.Perfil;
 import java.util.ArrayList;
 
 /**
- * Criado por Pichau em 17/08/2017.
+ * The type Combinacao services.
  */
-
 public final class CombinacaoServices {
     private static CombinacaoServices instancia;
     private CombinacaoDAO persistencia;
@@ -20,6 +19,12 @@ public final class CombinacaoServices {
         this.persistencia = CombinacaoDAO.getInstancia(context);
     }
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static CombinacaoServices getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new CombinacaoServices(contexto);
@@ -28,30 +33,60 @@ public final class CombinacaoServices {
         return instancia;
     }
 
+    /**
+     * Retorna combinacoes array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public  ArrayList<Combinacao> retornaCombinacoes(Perfil perfil){
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoes(perfil.getId()));
         return combinacoes;
     }
 
+    /**
+     * Retorna combinacoes ativas array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Combinacao> retornaCombinacoesAtivas(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.ATIVADO.getValor()));
         return combinacoes;
     }
 
+    /**
+     * Retorna combinacoes pendentes array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Combinacao> retornaCombinacoesPendentes(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.PENDENTE.getValor()));
         return combinacoes;
     }
 
+    /**
+     * Retorna combinacoes solicitadas array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Combinacao> retornaCombinacoesSolicitadas(Perfil perfil) {
         ArrayList<Combinacao> combinacoes = new ArrayList<>();
         combinacoes.addAll(persistencia.retornaCombinacoesTipo(perfil.getId(), StatusCombinacao.SOLICITADO.getValor()));
         return combinacoes;
     }
 
+    /**
+     * Requerer combinacao.
+     *
+     * @param perfil1 the perfil 1
+     * @param perfil2 the perfil 2
+     */
     public void requererCombinacao(Perfil perfil1, Perfil perfil2) {
         Combinacao combinacao = new Combinacao();
         Combinacao combinacao1 = new Combinacao();
@@ -67,6 +102,13 @@ public final class CombinacaoServices {
         persistencia.inserir(combinacao1);
     }
 
+    /**
+     * Atualiza combinacao.
+     *
+     * @param combinacao the combinacao
+     * @param tipo       the tipo
+     * @param perfil     the perfil
+     */
     public void atualizaCombinacao(Combinacao combinacao, int tipo, Perfil perfil) {
         ArrayList<Combinacao> combinacaos = perfil.getCombinacoes();
         combinacaos.get(combinacaos.indexOf(combinacao)).setStatus(tipo);
@@ -74,6 +116,12 @@ public final class CombinacaoServices {
         persistencia.atualizaStatus(combinacao);
     }
 
+    /**
+     * Remover combinacao.
+     *
+     * @param perfil     the perfil
+     * @param combinacao the combinacao
+     */
     public void removerCombinacao(Perfil perfil, Combinacao combinacao) {
         ArrayList<Combinacao> combinacaos = perfil.getCombinacoes();
         combinacaos.remove(combinacao);

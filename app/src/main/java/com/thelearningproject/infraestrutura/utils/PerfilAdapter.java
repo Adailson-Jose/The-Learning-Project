@@ -22,6 +22,9 @@ import com.thelearningproject.perfil.gui.NotificacoesActivity;
 
 import java.util.ArrayList;
 
+/**
+ * The type Perfil adapter.
+ */
 public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private ArrayList<Perfil> listaPerfil;
     private Context contexto;
@@ -31,6 +34,17 @@ public class PerfilAdapter extends ArrayAdapter<Perfil> {
     private IAceitarCombinacao interfaceAceitarComb;
     private IRecusarCombinacao interfaceRecusarComb;
 
+    /**
+     * Instantiates a new Perfil adapter.
+     *
+     * @param context the context
+     * @param perfils the perfils
+     * @param obj     the obj
+     * @param inter   the inter
+     * @param inter2  the inter 2
+     * @param inter3  the inter 3
+     * @param inter4  the inter 4
+     */
     public PerfilAdapter(Context context, ArrayList<Perfil> perfils, Object obj, ICriarCombinacao inter, IExcluirCombinacao inter2, IAceitarCombinacao inter3, IRecusarCombinacao inter4) {
         super(context, 0, perfils);
         this.listaPerfil = perfils;

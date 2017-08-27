@@ -13,18 +13,29 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Criado por Gabriel on 27/07/2017.
+ * The type Auxiliar.
  */
-
 public class Auxiliar {
     private static final String CODIGO_TESTE = "123";
 
+    /**
+     * Esconder teclado.
+     *
+     * @param activity the activity
+     */
     public static void esconderTeclado(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         if (activity.getCurrentFocus() != null && activity.getCurrentFocus().getWindowToken() != null) {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         }
     }
+
+    /**
+     * Aplica pattern boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
 /*    public static void esconderTecladoFragment(Context context, View view) {
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
@@ -37,6 +48,12 @@ public class Auxiliar {
 
     }
 
+    /**
+     * Telefone pattern boolean.
+     *
+     * @param telefone the telefone
+     * @return the boolean
+     */
     public static boolean telefonePattern(String telefone) {
         Pattern pattern = Pattern.compile("^(\\+[1-9]{1,3}(-?| ))?((([1-9]{2}(-?| ))?[9][1-9]\\d{3}(-?| )\\d{4})|([1-9]{3}(-?| )\\d{3}(-?| )\\d{4}))$");
         Matcher m = pattern.matcher(telefone);
@@ -44,14 +61,33 @@ public class Auxiliar {
         return m.matches();
     }
 
+    /**
+     * Criar toast.
+     *
+     * @param context the context
+     * @param msg     the msg
+     */
     public static void criarToast(Context context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Gera codigo string.
+     *
+     * @return the string
+     */
     public static String geraCodigo() {
         return CODIGO_TESTE;
     }
 
+    /**
+     * Criar dialog confirmacao alert dialog.
+     *
+     * @param activity the activity
+     * @param titulo   the titulo
+     * @param mensagem the mensagem
+     * @return the alert dialog
+     */
     public static AlertDialog criarDialogConfirmacao(Activity activity, String titulo, String mensagem) {
         AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle(titulo);
@@ -62,6 +98,11 @@ public class Auxiliar {
         return alert.create();
     }
 
+    /**
+     * Abrir teclado.
+     *
+     * @param activity the activity
+     */
     public static void abrirTeclado(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);

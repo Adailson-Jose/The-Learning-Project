@@ -28,6 +28,9 @@ import java.util.ArrayList;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
+/**
+ * The type Main interacoes fragment.
+ */
 public class MainInteracoesFragment extends Fragment implements AdapterView.OnItemClickListener, IExcluirCombinacao {
     private ListView listaInteracoes;
     private ControladorSessao sessao;

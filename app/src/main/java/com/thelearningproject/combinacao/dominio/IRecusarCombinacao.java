@@ -1,9 +1,13 @@
 package com.thelearningproject.combinacao.dominio;
 
 /**
- * Created by Heitor on 24/08/2017.
+ * The interface Recusar combinacao.
  */
-
 public interface IRecusarCombinacao {
+    /**
+     * Recusar combinacao.
+     *
+     * @param i the
+     */
     void recusarCombinacao(int i);
 }

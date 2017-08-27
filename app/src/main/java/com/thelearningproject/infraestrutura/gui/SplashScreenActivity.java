@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.thelearningproject.R;
 
+/**
+ * The type Splash screen activity.
+ */
 public class SplashScreenActivity extends AppCompatActivity {
     private static final int DOIS_MIL = 2000;
 
