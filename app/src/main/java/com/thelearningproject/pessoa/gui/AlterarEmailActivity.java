@@ -15,6 +15,9 @@ import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
+/**
+ * The type Alterar email activity.
+ */
 public class AlterarEmailActivity extends AppCompatActivity {
     private EditText alterarEmail;
     private Auxiliar auxiliar = new Auxiliar();
@@ -67,6 +70,9 @@ public class AlterarEmailActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Alterar.
+     */
     public void alterar() {
         String email = alterarEmail.getText().toString();
         Usuario usuario = sessao.getPessoa().getUsuario();

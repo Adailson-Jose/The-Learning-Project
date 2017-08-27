@@ -11,9 +11,8 @@ import com.thelearningproject.infraestrutura.persistencia.Banco;
 import java.util.ArrayList;
 
 /**
- * Criado por Pichau em 02/08/2017.
+ * The type Dados busca dao.
  */
-
 public final class DadosBuscaDAO {
     private static DadosBuscaDAO instancia;
     private SQLiteOpenHelper banco;
@@ -22,6 +21,12 @@ public final class DadosBuscaDAO {
     private static final String IDPERFIL_BUSCA = "perfil";
     private static final String MATERIA_BUSCA = "materia";
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static synchronized DadosBuscaDAO getInstancia(Context context) {
         if (instancia == null) {
             instancia = new DadosBuscaDAO(context.getApplicationContext());
@@ -33,6 +38,12 @@ public final class DadosBuscaDAO {
         this.banco = Banco.getInstancia(context);
     }
 
+    /**
+     * Insere busca.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void insereBusca(int perfil, String materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -42,6 +53,13 @@ public final class DadosBuscaDAO {
         db.close();
     }
 
+    /**
+     * Verifica existencia boolean.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     * @return the boolean
+     */
     public boolean verificaExistencia(int perfil, String materia) {
         Cursor cursor = banco.getReadableDatabase().query(TABELA_DADOS_BUSCA, new String[]{IDPERFIL_BUSCA}, IDPERFIL_BUSCA + " = ? AND " + MATERIA_BUSCA + " = ?", new String[]{String.valueOf(perfil), materia}, null, null, null);
         boolean resultado = cursor.moveToFirst();
@@ -49,6 +67,13 @@ public final class DadosBuscaDAO {
         return resultado;
     }
 
+    /**
+     * Retorna frequencia array list.
+     *
+     * @param perfil  the perfil
+     * @param entrada the entrada
+     * @return the array list
+     */
     public ArrayList<String> retornaFrequencia(int perfil, String entrada) {
         String subtabela = "SELECT " + IDPERFIL_BUSCA + " FROM " + TABELA_DADOS_BUSCA + " WHERE " + MATERIA_BUSCA + " = ? AND NOT " + IDPERFIL_BUSCA + " = ?";
         ArrayList<String> usuarios = new ArrayList<>();

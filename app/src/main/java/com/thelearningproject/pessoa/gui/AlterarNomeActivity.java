@@ -13,6 +13,9 @@ import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.pessoa.negocio.PessoaServices;
 
+/**
+ * The type Alterar nome activity.
+ */
 public class AlterarNomeActivity extends AppCompatActivity {
     private EditText alterarNome;
     private ControladorSessao sessao;
@@ -61,6 +64,9 @@ public class AlterarNomeActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Alterar.
+     */
     public void alterar() {
         String nome = alterarNome.getText().toString();
         Pessoa pessoa = sessao.getPessoa();

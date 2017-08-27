@@ -10,9 +10,8 @@ import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.usuario.dominio.Usuario;
 
 /**
- * Criado por Nícolas em 30/07/2017.
+ * The type Pessoa dao.
  */
-
 public final class PessoaDAO {
     private Banco banco;
     private static PessoaDAO instancia;
@@ -22,8 +21,13 @@ public final class PessoaDAO {
     private static final String NOME_PESSOA = "nome";
     private static final String USUARIO_PESSOA = "usuario";
     private static final String TELEFONE_PESSOA = "telefone";
-//    private static final String FOTO_PESSOA = "foto";
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static synchronized PessoaDAO getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new PessoaDAO(contexto.getApplicationContext());
@@ -35,6 +39,11 @@ public final class PessoaDAO {
         banco = Banco.getInstancia(contexto);
     }
 
+    /**
+     * Inserir.
+     *
+     * @param pessoa the pessoa
+     */
     public void inserir(Pessoa pessoa) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -46,6 +55,12 @@ public final class PessoaDAO {
         db.close();
     }
 
+    /**
+     * Retorna pessoa pessoa.
+     *
+     * @param idUsuario the id usuario
+     * @return the pessoa
+     */
     public Pessoa retornaPessoa(int idUsuario) {
         String[] colunas = {ID_PESSOA, NOME_PESSOA, USUARIO_PESSOA, TELEFONE_PESSOA};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PESSOAS, colunas, USUARIO_PESSOA + " = ?", new String[]{Integer.toString(idUsuario)}, null, null, null);
@@ -66,6 +81,12 @@ public final class PessoaDAO {
         return pessoa;
     }
 
+    /**
+     * Consultar pessoa.
+     *
+     * @param id the id
+     * @return the pessoa
+     */
     public Pessoa consultar(int id) {
         String[] colunas = {ID_PESSOA, NOME_PESSOA, USUARIO_PESSOA, TELEFONE_PESSOA};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PESSOAS, colunas, ID_PESSOA + " = ?", new String[]{Integer.toString(id)}, null, null, null);
@@ -85,6 +106,12 @@ public final class PessoaDAO {
         return pessoa;
     }
 
+    /**
+     * Retorna pessoa pessoa.
+     *
+     * @param telefone the telefone
+     * @return the pessoa
+     */
     public Pessoa retornaPessoa(String telefone) {
         String[] colunas = {ID_PESSOA, NOME_PESSOA, USUARIO_PESSOA, TELEFONE_PESSOA};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PESSOAS, colunas, TELEFONE_PESSOA + " = ?", new String[]{telefone}, null, null, null);
@@ -105,6 +132,11 @@ public final class PessoaDAO {
         return pessoa;
     }
 
+    /**
+     * Alterar pessoa.
+     *
+     * @param pessoa the pessoa
+     */
     public void alterarPessoa(Pessoa pessoa) {
         SQLiteDatabase db = banco.getWritableDatabase();
 

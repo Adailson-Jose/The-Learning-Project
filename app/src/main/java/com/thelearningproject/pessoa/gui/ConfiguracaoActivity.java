@@ -16,9 +16,8 @@ import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
 /**
- * Criado por Heitor em 25/07/2017.
+ * The type Configuracao activity.
  */
-
 public class ConfiguracaoActivity extends AppCompatActivity implements DialogInterface.OnClickListener, AdapterView.OnItemClickListener {
     private ControladorSessao session;
     private AlertDialog alertExclusao;

@@ -1,25 +1,44 @@
 package com.thelearningproject.estudo.dominio;
 
 /**
- * Criado por Ebony Marques on 26/07/2017.
+ * The type Materia.
  */
-
 public class Materia {
     private int id;
     private String nome;
 
+    /**
+     * Gets id.
+     *
+     * @return the id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id.
+     *
+     * @param novoId the novo id
+     */
     public void setId(int novoId) {
         this.id = novoId;
     }
 
+    /**
+     * Gets nome.
+     *
+     * @return the nome
+     */
     public String getNome() {
         return nome;
     }
 
+    /**
+     * Sets nome.
+     *
+     * @param novoNome the novo nome
+     */
     public void setNome(String novoNome) {
         this.nome = novoNome;
     }

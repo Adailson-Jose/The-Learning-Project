@@ -13,6 +13,9 @@ import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.pessoa.negocio.PessoaServices;
 
+/**
+ * The type Alterar telefone activity.
+ */
 public class AlterarTelefoneActivity extends AppCompatActivity {
     private EditText alterarTelefone;
     private ControladorSessao sessao;
@@ -61,6 +64,9 @@ public class AlterarTelefoneActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Alterar.
+     */
     public void alterar() {
         String telefone = alterarTelefone.getText().toString();
         Pessoa pessoa = sessao.getPessoa();

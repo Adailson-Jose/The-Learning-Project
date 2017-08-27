@@ -18,6 +18,9 @@ import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
 
+/**
+ * The type Recuperar conta activity.
+ */
 public class RecuperarContaActivity extends AppCompatActivity {
     private EditText entradaTelefone;
     private ControladorSessao sessao;
@@ -82,6 +85,12 @@ public class RecuperarContaActivity extends AppCompatActivity {
         startActivity(entidade);
     }
 
+    /**
+     * Envia sms.
+     *
+     * @param telefone the telefone
+     * @param codigo   the codigo
+     */
     public void enviaSms(String telefone, String codigo) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(telefone, null, getApplicationContext().getString(R.string.sms) + " " + codigo, null, null);

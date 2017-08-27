@@ -5,9 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 /**
- * Criado por Ebony Marques on 17/07/2017.
+ * The type Banco.
  */
-
 public final class Banco extends SQLiteOpenHelper {
     private static Banco instancia;
     private static final String NOME_BANCO = "dados";
@@ -57,6 +56,12 @@ public final class Banco extends SQLiteOpenHelper {
     private static final String IDPERFIL2_COMBINACAO = "id_perfil2";
     private static final String STATUS_COMBINACAO = STATUS;
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static synchronized Banco getInstancia(Context context) {
         if (instancia == null) {
             instancia = new Banco(context.getApplicationContext());

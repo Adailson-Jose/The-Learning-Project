@@ -11,9 +11,8 @@ import com.thelearningproject.infraestrutura.utils.Status;
 import com.thelearningproject.usuario.dominio.Usuario;
 
 /**
- * Criado por Nícolas em 22/07/2017.
+ * The type Usuario dao.
  */
-
 public final class UsuarioDAO {
     private static UsuarioDAO instancia;
     private SQLiteOpenHelper banco;
@@ -25,6 +24,12 @@ public final class UsuarioDAO {
     private static final String SENHA_USUARIO = "senha";
     private static final String STATUS_USUARIO = "status";
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static synchronized UsuarioDAO getInstancia(Context context) {
         if (instancia == null) {
             instancia = new UsuarioDAO(context.getApplicationContext());
@@ -36,6 +41,11 @@ public final class UsuarioDAO {
         this.banco = Banco.getInstancia(context);
     }
 
+    /**
+     * Inserir.
+     *
+     * @param usuario the usuario
+     */
     public void inserir(Usuario usuario) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -47,6 +57,12 @@ public final class UsuarioDAO {
 
     }
 
+    /**
+     * Consulta usuario email boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
     public Boolean consultaUsuarioEmail(String email) {
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, null, "email = ?", new String[]{email}, null, null, null);
         boolean resultado = cursor.moveToFirst();
@@ -54,6 +70,13 @@ public final class UsuarioDAO {
         return resultado;
     }
 
+    /**
+     * Consulta usuario email status boolean.
+     *
+     * @param email  the email
+     * @param status the status
+     * @return the boolean
+     */
     public Boolean consultaUsuarioEmailStatus(String email, String status) {
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, null, "email = ? AND status = ?", new String[]{email, status}, null, null, null);
         boolean resultado = cursor.moveToFirst();
@@ -61,6 +84,12 @@ public final class UsuarioDAO {
         return resultado;
     }
 
+    /**
+     * Retorna usuario por email usuario.
+     *
+     * @param email the email
+     * @return the usuario
+     */
     public Usuario retornaUsuarioPorEmail(String email) {
         String[] colunas = {ID_USUARIO, EMAIL_USUARIO, STATUS_USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, colunas, "email = ?", new String[]{email}, null, null, null);
@@ -77,6 +106,12 @@ public final class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Retorna usuario id int.
+     *
+     * @param email the email
+     * @return the int
+     */
     public int retornaUsuarioID(String email) {
         String[] colunas = {ID_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, STATUS_USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, colunas, "email = ? ", new String[]{email}, null, null, null);
@@ -91,6 +126,13 @@ public final class UsuarioDAO {
         return id;
     }
 
+    /**
+     * Retorna usuario usuario.
+     *
+     * @param email the email
+     * @param senha the senha
+     * @return the usuario
+     */
     public Usuario retornaUsuario(String email, String senha) {
         String[] colunas = {ID_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, STATUS_USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, colunas, "email = ? AND senha = ?", new String[]{email, senha}, null, null, null);
@@ -108,13 +150,24 @@ public final class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Deleta usuario.
+     *
+     * @param usuario the usuario
+     */
     public void deletaUsuario(Usuario usuario) {
         usuario.setStatus(Status.DESATIVADO);
         alterarUsuario(usuario);
 
     }
 
-    //diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
+    /**
+     * Pesquisar usuario usuario.
+     *
+     * @param codigo the codigo
+     * @return the usuario
+     */
+//diferente da função retorna usuario essa aqui é so uma busca por id e não uma validação email e senha
     public Usuario pesquisarUsuario(int codigo) {
         String[] colunas = {ID_USUARIO, EMAIL_USUARIO, SENHA_USUARIO, STATUS_USUARIO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_USUARIOS, colunas, ID_USUARIO + " = ?",
@@ -132,6 +185,11 @@ public final class UsuarioDAO {
         return usuario;
     }
 
+    /**
+     * Alterar usuario.
+     *
+     * @param usuario the usuario
+     */
     public void alterarUsuario(Usuario usuario) {
         SQLiteDatabase db = banco.getWritableDatabase();
 

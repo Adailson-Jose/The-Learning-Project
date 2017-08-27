@@ -12,9 +12,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- * Criado por Ebony Marques em 18/07/2017.
+ * The type Usuario services.
  */
-
 public final class UsuarioServices {
     private static UsuarioServices instancia;
     private UsuarioDAO persistencia;
@@ -25,6 +24,12 @@ public final class UsuarioServices {
         this.persistencia = UsuarioDAO.getInstancia(context);
     }
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static UsuarioServices getInstancia(Context context) {
         if (instancia == null) {
             instancia = new UsuarioServices(context);
@@ -53,20 +58,45 @@ public final class UsuarioServices {
         return resultado;
     }
 
+    /**
+     * Consulta usuario.
+     *
+     * @param id the id
+     * @return the usuario
+     */
     public Usuario consulta(int id) {
         return persistencia.pesquisarUsuario(id);
     }
 
+    /**
+     * Logar usuario.
+     *
+     * @param usuario the usuario
+     * @return the usuario
+     * @throws UsuarioException the usuario exception
+     */
     public Usuario logar(Usuario usuario) throws UsuarioException {
         Usuario logado = persistencia.retornaUsuario(usuario.getEmail(), retornaSenhaCriptografada(usuario.getSenha()));
         usuarioAtivo(logado);
         return logado;
     }
 
+    /**
+     * Retorna usuario id int.
+     *
+     * @param email the email
+     * @return the int
+     */
     public int retornaUsuarioID(String email) {
         return persistencia.retornaUsuarioID(email);
     }
 
+    /**
+     * Inserir usuario.
+     *
+     * @param usuario the usuario
+     * @throws UsuarioException the usuario exception
+     */
     public void inserirUsuario(Usuario usuario) throws UsuarioException {
         usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
 
@@ -84,6 +114,12 @@ public final class UsuarioServices {
 
     }
 
+    /**
+     * Alterar email usuario.
+     *
+     * @param usuario the usuario
+     * @throws UsuarioException the usuario exception
+     */
     public void alterarEmailUsuario(Usuario usuario) throws UsuarioException {
         if (verificaEmailExistente(usuario.getEmail())) {
             throw new UsuarioException("E-mail já cadastrado");
@@ -91,11 +127,21 @@ public final class UsuarioServices {
         persistencia.alterarUsuario(usuario);
     }
 
+    /**
+     * Alterar senha usuario.
+     *
+     * @param usuario the usuario
+     */
     public void alterarSenhaUsuario(Usuario usuario) {
         usuario.setSenha(retornaSenhaCriptografada(usuario.getSenha()));
         persistencia.alterarUsuario(usuario);
     }
 
+    /**
+     * Deletar usuario.
+     *
+     * @param usuario the usuario
+     */
     public void deletarUsuario(Usuario usuario) {
         persistencia.deletaUsuario(usuario);
     }

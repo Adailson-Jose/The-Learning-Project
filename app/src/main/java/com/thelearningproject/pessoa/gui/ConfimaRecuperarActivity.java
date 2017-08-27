@@ -12,6 +12,9 @@ import com.thelearningproject.R;
 import com.thelearningproject.infraestrutura.utils.Auxiliar;
 import com.thelearningproject.infraestrutura.utils.ControladorSessao;
 
+/**
+ * The type Confima recuperar activity.
+ */
 public class ConfimaRecuperarActivity extends AppCompatActivity {
     private ControladorSessao sessao;
     private EditText entradaCodigo;
@@ -74,6 +77,12 @@ public class ConfimaRecuperarActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Envia sms.
+     *
+     * @param telefone the telefone
+     * @param codigo   the codigo
+     */
     public void enviaSms(String telefone, String codigo) {
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(telefone, null, getApplicationContext().getString(R.string.sms) + " " + codigo, null, null);

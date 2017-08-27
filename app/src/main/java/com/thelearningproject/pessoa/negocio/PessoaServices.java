@@ -8,17 +8,27 @@ import com.thelearningproject.pessoa.persistencia.PessoaDAO;
 
 
 /**
- * Criado por Nícolas on 30/07/2017.
+ * The type Pessoa services.
  */
-
 public class PessoaServices {
     private static PessoaServices instancia;
     private PessoaDAO persistencia;
 
+    /**
+     * Instantiates a new Pessoa services.
+     *
+     * @param contexto the contexto
+     */
     public PessoaServices(Context contexto) {
         this.persistencia = PessoaDAO.getInstancia(contexto);
     }
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static PessoaServices getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new PessoaServices(contexto);
@@ -27,6 +37,11 @@ public class PessoaServices {
         return instancia;
     }
 
+    /**
+     * Inserir pessoa.
+     *
+     * @param pessoa the pessoa
+     */
     public void inserirPessoa(Pessoa pessoa) {
         if (validaAlterarPessoa(pessoa.getUsuario().getId())) {
             Pessoa pessoaAntiga = retornaPessoa(pessoa.getUsuario().getId());
@@ -38,6 +53,12 @@ public class PessoaServices {
 
     }
 
+    /**
+     * Verifica telefone existente boolean.
+     *
+     * @param telefone the telefone
+     * @return the boolean
+     */
     public Boolean verificaTelefoneExistente(String telefone) {
         Boolean resultado = false;
 
@@ -57,10 +78,22 @@ public class PessoaServices {
         return validacao;
     }
 
+    /**
+     * Alterar pessoa.
+     *
+     * @param pessoa the pessoa
+     */
     public void alterarPessoa(Pessoa pessoa) {
         persistencia.alterarPessoa(pessoa);
     }
 
+    /**
+     * Retorna pessoa pessoa.
+     *
+     * @param telefone the telefone
+     * @return the pessoa
+     * @throws UsuarioException the usuario exception
+     */
     public Pessoa retornaPessoa(String telefone) throws UsuarioException {
         Pessoa pessoa = persistencia.retornaPessoa(telefone);
         if (pessoa != null) {
@@ -70,10 +103,22 @@ public class PessoaServices {
         }
     }
 
+    /**
+     * Retorna pessoa pessoa.
+     *
+     * @param idUsuario the id usuario
+     * @return the pessoa
+     */
     public Pessoa retornaPessoa(int idUsuario) {
         return persistencia.retornaPessoa(idUsuario);
     }
 
+    /**
+     * Consulta pessoa.
+     *
+     * @param id the id
+     * @return the pessoa
+     */
     public Pessoa consulta(int id) {
         return persistencia.consultar(id);
     }

@@ -18,6 +18,9 @@ import com.thelearningproject.pessoa.negocio.PessoaServices;
 import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
+/**
+ * The type Criar conta activity.
+ */
 public class CriarContaActivity extends Activity {
     private ControladorSessao sessao;
     private Auxiliar auxiliar = new Auxiliar();

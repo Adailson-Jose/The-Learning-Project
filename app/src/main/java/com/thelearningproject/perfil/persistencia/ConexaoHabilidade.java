@@ -12,9 +12,8 @@ import com.thelearningproject.infraestrutura.utils.Status;
 import java.util.ArrayList;
 
 /**
- * Criado por Pichau on 26/07/2017.
+ * The type Conexao habilidade.
  */
-
 public final class ConexaoHabilidade {
     private static ConexaoHabilidade instancia;
     private SQLiteOpenHelper banco;
@@ -24,6 +23,12 @@ public final class ConexaoHabilidade {
     private static final String IDMATERIA_HABILIDADE = "materia";
     private static final String STATUS_CONEXAO = "status";
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static synchronized ConexaoHabilidade getInstancia(Context context) {
         if (instancia == null) {
             instancia = new ConexaoHabilidade(context.getApplicationContext());
@@ -35,6 +40,12 @@ public final class ConexaoHabilidade {
         this.banco = Banco.getInstancia(context);
     }
 
+    /**
+     * Insere conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void insereConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -45,6 +56,12 @@ public final class ConexaoHabilidade {
         db.close();
     }
 
+    /**
+     * Restabelece conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void restabeleceConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
@@ -55,6 +72,12 @@ public final class ConexaoHabilidade {
     }
 
 
+    /**
+     * Desativar conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void desativarConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
@@ -64,6 +87,12 @@ public final class ConexaoHabilidade {
         db.close();
     }
 
+    /**
+     * Retorna usuarios array list.
+     *
+     * @param materia the materia
+     * @return the array list
+     */
     public ArrayList<Integer> retornaUsuarios(int materia) {
         ArrayList<Integer> usuarios = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_HABILIDADES, new String[]{IDPERFIL_HABILIDADE, STATUS_CONEXAO}, IDMATERIA_HABILIDADE + " = ?", new String[]{String.valueOf(materia)}, null, null, null);
@@ -76,6 +105,12 @@ public final class ConexaoHabilidade {
         return usuarios;
     }
 
+    /**
+     * Retorna materia ativas array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Integer> retornaMateriaAtivas(int perfil) {
         ArrayList<Integer> materias = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_HABILIDADES, new String[]{IDMATERIA_HABILIDADE, STATUS_CONEXAO}, IDPERFIL_HABILIDADE + " = ?", new String[]{String.valueOf(perfil)}, null, null, null);
@@ -88,6 +123,13 @@ public final class ConexaoHabilidade {
         return materias;
     }
 
+    /**
+     * Retorna status int.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     * @return the int
+     */
     public int retornaStatus(int perfil, int materia) {
         int retorno = -1;
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_HABILIDADES, new String[]{STATUS_CONEXAO}, IDPERFIL_HABILIDADE + " = ? AND " + IDMATERIA_HABILIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)}, null, null, null);
@@ -97,6 +139,12 @@ public final class ConexaoHabilidade {
         return retorno;
     }
 
+    /**
+     * Retorna materias array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Integer> retornaMaterias(int perfil) {
         ArrayList<Integer> materias = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_HABILIDADES, new String[]{IDMATERIA_HABILIDADE}, IDPERFIL_HABILIDADE + " = ?", new String[]{String.valueOf(perfil)}, null, null, null);

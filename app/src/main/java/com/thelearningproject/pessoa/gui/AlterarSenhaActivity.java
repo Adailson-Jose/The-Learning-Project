@@ -14,6 +14,9 @@ import com.thelearningproject.pessoa.dominio.Pessoa;
 import com.thelearningproject.usuario.dominio.Usuario;
 import com.thelearningproject.usuario.negocio.UsuarioServices;
 
+/**
+ * The type Alterar senha activity.
+ */
 public class AlterarSenhaActivity extends AppCompatActivity {
     private EditText alterarSenha;
     private ControladorSessao sessao;
@@ -61,6 +64,9 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         finish();
     }
 
+    /**
+     * Alterar.
+     */
     public void alterar() {
         String senha = alterarSenha.getText().toString();
         Usuario usuario = sessao.getPessoa().getUsuario();
@@ -71,6 +77,11 @@ public class AlterarSenhaActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Valida usuario
+     * @param usuario
+     * @return validacao
+     */
     private Boolean validaAlterar(Usuario usuario) {
         Boolean validacao = true;
         if (usuario.getSenha() == null || usuario.getSenha().trim().length() == 0) {

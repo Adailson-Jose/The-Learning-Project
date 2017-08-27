@@ -15,9 +15,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Criado por Pichau em 26/07/2017.
+ * The type Conexao necessidade.
  */
-
 public final class ConexaoNecessidade {
     private static ConexaoNecessidade instancia;
     private SQLiteOpenHelper banco;
@@ -27,6 +26,12 @@ public final class ConexaoNecessidade {
     private static final String IDMATERIA_NECESSIDADE = "materia";
     private static final String STATUS_CONEXAO = "status";
 
+    /**
+     * Gets instancia.
+     *
+     * @param context the context
+     * @return the instancia
+     */
     public static synchronized ConexaoNecessidade getInstancia(Context context) {
         if (instancia == null) {
             instancia = new ConexaoNecessidade(context.getApplicationContext());
@@ -38,6 +43,12 @@ public final class ConexaoNecessidade {
         this.banco = Banco.getInstancia(context);
     }
 
+    /**
+     * Insere conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void insereConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -48,6 +59,12 @@ public final class ConexaoNecessidade {
         db.close();
     }
 
+    /**
+     * Restabelece conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void restabeleceConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -56,6 +73,12 @@ public final class ConexaoNecessidade {
         db.close();
     }
 
+    /**
+     * Desativar conexao.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     */
     public void desativarConexao(int perfil, int materia) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -65,7 +88,13 @@ public final class ConexaoNecessidade {
     }
 
 
-    //Retorna todos os usuarios que buscaram a matéria de id = materia
+    /**
+     * Retorna usuarios array list.
+     *
+     * @param materia the materia
+     * @return the array list
+     */
+//Retorna todos os usuarios que buscaram a matéria de id = materia
     public ArrayList<Integer> retornaUsuarios(int materia) {
         ArrayList<Integer> usuarios = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDPERFIL_NECESSIDADE}, IDMATERIA_NECESSIDADE + " = ?", new String[]{Integer.toString(materia)}, null, null, IDPERFIL_NECESSIDADE + " ASC");
@@ -76,7 +105,13 @@ public final class ConexaoNecessidade {
         return usuarios;
     }
 
-    //Retorna todas as materias buscadas pelo usuario de id = id_perfil
+    /**
+     * Retorna materia ativas array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
+//Retorna todas as materias buscadas pelo usuario de id = id_perfil
     public ArrayList<Integer> retornaMateriaAtivas(int perfil) {
         ArrayList<Integer> materias = new ArrayList<>();
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{IDMATERIA_NECESSIDADE, STATUS_CONEXAO}, IDPERFIL_NECESSIDADE + " = ?", new String[]{Integer.toString(perfil)}, null, null, null);
@@ -90,6 +125,13 @@ public final class ConexaoNecessidade {
         return materias;
     }
 
+    /**
+     * Retorna status int.
+     *
+     * @param perfil  the perfil
+     * @param materia the materia
+     * @return the int
+     */
     public int retornaStatus(int perfil, int materia) {
         int retorno = -1;
         Cursor cursor = banco.getReadableDatabase().query(TABELA_CONEXAO_NECESSIDADES, new String[]{STATUS_CONEXAO}, IDPERFIL_NECESSIDADE + " = ? AND " + IDMATERIA_NECESSIDADE + " = ?", new String[]{String.valueOf(perfil), String.valueOf(materia)}, null, null, null);
@@ -99,6 +141,12 @@ public final class ConexaoNecessidade {
         return retorno;
     }
 
+    /**
+     * Retorna frequencia set.
+     *
+     * @param materia the materia
+     * @return the set
+     */
     public Set<VetorMateria> retornaFrequencia(int materia) {
         String subtabela = "SELECT " + IDPERFIL_NECESSIDADE + " FROM " + TABELA_CONEXAO_NECESSIDADES + " WHERE " + IDMATERIA_NECESSIDADE + " = " + materia;
         Set<VetorMateria> frequencias = new HashSet<>();

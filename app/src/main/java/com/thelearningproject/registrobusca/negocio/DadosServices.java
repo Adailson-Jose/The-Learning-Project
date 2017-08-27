@@ -13,15 +13,20 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Criado por Pichau em 02/08/2017.
+ * The type Dados services.
  */
-
 public final class DadosServices {
     private static DadosServices instancia;
     private DadosBuscaDAO dadosDAO;
     private MateriaServices materiaServices;
     private PerfilServices perfilServices;
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static DadosServices getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new DadosServices(contexto);
@@ -35,12 +40,25 @@ public final class DadosServices {
         this.perfilServices = PerfilServices.getInstancia(context);
     }
 
+    /**
+     * Cadastra busca.
+     *
+     * @param perfil  the perfil
+     * @param entrada the entrada
+     */
     public void cadastraBusca(Perfil perfil, String entrada) {
         if (!dadosDAO.verificaExistencia(perfil.getId(), entrada)) {
             dadosDAO.insereBusca(perfil.getId(), entrada);
         }
     }
 
+    /**
+     * Recomenda materia array list.
+     *
+     * @param perfil  the perfil
+     * @param entrada the entrada
+     * @return the array list
+     */
     public ArrayList<Perfil> recomendaMateria(Perfil perfil, String entrada) {
         ArrayList<String> buscas = dadosDAO.retornaFrequencia(perfil.getId(), entrada);
         ArrayList<Materia> materias = new ArrayList<>();

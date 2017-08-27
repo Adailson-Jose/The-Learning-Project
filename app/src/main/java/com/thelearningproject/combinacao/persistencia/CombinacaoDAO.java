@@ -11,9 +11,8 @@ import com.thelearningproject.infraestrutura.persistencia.Banco;
 import java.util.ArrayList;
 
 /**
- * Criado por Pichau em 17/08/2017.
+ * The type Combinacao dao.
  */
-
 public final class CombinacaoDAO {
     private Banco banco;
     private static CombinacaoDAO instancia;
@@ -23,6 +22,12 @@ public final class CombinacaoDAO {
     private static final String IDPERFIL2_COMBINACAO = "id_perfil2";
     private static final String STATUS_COMBINACAO = "status";
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static synchronized CombinacaoDAO getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new CombinacaoDAO(contexto.getApplicationContext());
@@ -34,6 +39,11 @@ public final class CombinacaoDAO {
         banco = Banco.getInstancia(contexto);
     }
 
+    /**
+     * Inserir.
+     *
+     * @param combinacao the combinacao
+     */
     public void inserir(Combinacao combinacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -44,6 +54,13 @@ public final class CombinacaoDAO {
         db.close();
     }
 
+    /**
+     * Retorna combinacoes tipo array list.
+     *
+     * @param perfil the perfil
+     * @param tipo   the tipo
+     * @return the array list
+     */
     public ArrayList<Combinacao> retornaCombinacoesTipo(int perfil, int tipo) {
         String[] colunas = {IDPERFIL1_COMBINACAO, IDPERFIL2_COMBINACAO, STATUS_COMBINACAO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_COMBINACAO, colunas, IDPERFIL1_COMBINACAO + " = ? ", new String[]{Integer.toString(perfil)}, null, null, null);
@@ -60,6 +77,13 @@ public final class CombinacaoDAO {
         cursor.close();
         return listaCombinacao;
     }
+
+    /**
+     * Retorna combinacoes array list.
+     *
+     * @param perfil the perfil
+     * @return the array list
+     */
     public ArrayList<Combinacao> retornaCombinacoes(int perfil) {
         String[] colunas = {IDPERFIL1_COMBINACAO, IDPERFIL2_COMBINACAO, STATUS_COMBINACAO};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_COMBINACAO, colunas, IDPERFIL1_COMBINACAO + " = ? ", new String[]{Integer.toString(perfil)}, null, null, null);
@@ -75,12 +99,22 @@ public final class CombinacaoDAO {
         return listaCombinacao;
     }
 
+    /**
+     * Remove combinacao.
+     *
+     * @param combinacao the combinacao
+     */
     public void removeCombinacao(Combinacao combinacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
         db.delete(TABELA_COMBINACAO, "( " + IDPERFIL1_COMBINACAO + " = ? AND " + IDPERFIL2_COMBINACAO + " = ? )", new String[]{String.valueOf(combinacao.getPerfil1()), String.valueOf(combinacao.getPerfil2())});
         db.close();
     }
 
+    /**
+     * Atualiza status.
+     *
+     * @param combinacao the combinacao
+     */
     public void atualizaStatus(Combinacao combinacao) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();

@@ -10,9 +10,8 @@ import com.thelearningproject.perfil.dominio.Perfil;
 import com.thelearningproject.pessoa.dominio.Pessoa;
 
 /**
- * Criado por Ebony Marques em 26/07/2017.
+ * The type Perfil dao.
  */
-
 public final class PerfilDAO {
     private Banco banco;
     private static PerfilDAO instancia;
@@ -22,6 +21,12 @@ public final class PerfilDAO {
     private static final String PESSOA_PERFIL = "pessoa";
     private static final String DESCRICAO_PERFIL = "descricao";
 
+    /**
+     * Gets instancia.
+     *
+     * @param contexto the contexto
+     * @return the instancia
+     */
     public static synchronized PerfilDAO getInstancia(Context contexto) {
         if (instancia == null) {
             instancia = new PerfilDAO(contexto.getApplicationContext());
@@ -33,6 +38,11 @@ public final class PerfilDAO {
         banco = Banco.getInstancia(contexto);
     }
 
+    /**
+     * Inserir.
+     *
+     * @param perfil the perfil
+     */
     public void inserir(Perfil perfil) {
         SQLiteDatabase db = banco.getWritableDatabase();
         ContentValues valores = new ContentValues();
@@ -43,6 +53,12 @@ public final class PerfilDAO {
         db.close();
     }
 
+    /**
+     * Retorna perfil por pessoa perfil.
+     *
+     * @param idPessoa the id pessoa
+     * @return the perfil
+     */
     public Perfil retornaPerfilPorPessoa(int idPessoa) {
         String[] colunas = {ID_PERFIL, PESSOA_PERFIL, DESCRICAO_PERFIL};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, PESSOA_PERFIL + " = ?", new String[]{Integer.toString(idPessoa)}, null, null, null);
@@ -63,6 +79,12 @@ public final class PerfilDAO {
         return perfil;
     }
 
+    /**
+     * Consultar perfil.
+     *
+     * @param id the id
+     * @return the perfil
+     */
     public Perfil consultar(int id) {
         String[] colunas = {ID_PERFIL, PESSOA_PERFIL, DESCRICAO_PERFIL};
         Cursor cursor = banco.getReadableDatabase().query(TABELA_PERFIS, colunas, ID_PERFIL + " = ?", new String[]{Integer.toString(id)}, null, null, null);
@@ -82,6 +104,11 @@ public final class PerfilDAO {
         return perfil;
     }
 
+    /**
+     * Alterar perfil.
+     *
+     * @param perfil the perfil
+     */
     public void alterarPerfil(Perfil perfil) {
         SQLiteDatabase db = banco.getWritableDatabase();
 
