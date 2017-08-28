@@ -34,7 +34,7 @@
             style="@style/headerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estes usuários querem ensinar" />
+            android:text="@string/usuariosQueremEnsinar" />
 
         <View style="@style/DividerBlack" />
 
@@ -48,7 +48,7 @@
             style="@style/headerText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Estes usuarios querem aprender" />
+            android:text="@string/usuariosQueremAprender" />
 
         <View style="@style/DividerBlack" />
 

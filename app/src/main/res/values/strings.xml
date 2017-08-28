@@ -62,5 +62,7 @@
     <string name="semResultados">Sem resultados</string>
     <string name="contato">Contato</string>
     <string name="salvar">Salvar</string>
+    <string name="usuariosQueremAprender">Estes usuários querem aprender</string>
+    <string name="usuariosQueremEnsinar">Estes usuários querem ensinar</string>
 
 </resources>
